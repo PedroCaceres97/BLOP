@@ -2,10 +2,11 @@
 #define __BLOP_SHOW_LIST_IMPLEMENTATION__
 #include <blop/blop.h>
 #include <blop/list.h>
+#include <blop/utils.h>
 
 BlopList  BlopNewList() {
     BlopList list = blop_alloc(struct _BlopList_t, 1);
-    return_verbose_if(list == NULL, "Failed to allocate BlopList")
+    return_verbose_if(list == NULL, NULL, "Failed to allocate BlopList")
     list->head = NULL;
     list->tail = NULL;
     list->size = 0;
@@ -21,7 +22,7 @@ int       BlopFreeList(BlopList list) {
 
 BlopNode  BlopNewNode() {
     BlopNode node = blop_alloc(struct _BlopNode_t, 1);
-    return_verbose_if(node == NULL, "Failed to allocate BlopNode")
+    return_verbose_if(node == NULL, NULL, "Failed to allocate BlopNode")
     node->heap = NULL;
     node->stack = 0;
     node->next = NULL;
@@ -30,9 +31,9 @@ BlopNode  BlopNewNode() {
     return node;
 }
 BlopNode  BlopCopyNode(BlopNode node) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
     BlopNode copy = blop_alloc(struct _BlopNode_t, 1);
-    return_verbose_if(copy == NULL, "Failed to allocate BlopNode")
+    return_verbose_if(copy == NULL, NULL, "Failed to allocate BlopNode")
     copy->heap = node->heap;
     copy->stack = node->stack;
     copy->next = NULL;
@@ -43,7 +44,7 @@ BlopNode  BlopCopyNode(BlopNode node) {
 int       BlopFreeNode(BlopNode node) {
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
 
-    blop_free(node);
+    return_verbose_if(blop_free(node) != BlopSuccess, BlopLogicalException, "Failed to free BlopNode");
     return BlopSuccess;
 }
 
@@ -85,7 +86,7 @@ int       BlopListSetTail(BlopList list, BlopNode tail) {
 }
 
 void*     BlopNodeGetHeap(BlopNode node) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
 
     return node->heap;
 }
@@ -95,22 +96,22 @@ long long BlopNodeGetStack(BlopNode node) {
     return node->stack;
 }
 BlopNode  BlopNodeGetNext(BlopNode node) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
 
     return node->next;
 }
 BlopNode  BlopNodeGetPrev(BlopNode node) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
 
     return node->prev;
 }
 BlopNode  BlopListGetHead(BlopList list) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
 
     return list->head;
 }
 BlopNode  BlopListGetTail(BlopList list) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
 
     return list->tail;
 }

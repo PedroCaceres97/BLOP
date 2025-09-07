@@ -8,8 +8,8 @@
 #include <stdbool.h>
 
 typedef enum {
-    BlopNullException       = -1
-    BlopSuccess             =  0
+    BlopNullException       = -1,
+    BlopSuccess             =  0,
     BlopLogicalException    =  1
 } BlopErrorCode;
 
@@ -22,7 +22,7 @@ typedef void (*PFN_BlopErrorCallback)(const char* file, uint32_t line, const cha
 #ifdef __BLOP_DEFAULT_CALLBACKS__
 
 #define blop_free(ptr)                   __blop_free((void*)ptr)
-#define blop_free_if(ptr, cnd) if (cnd) {__blop_free((void*)ptr)}
+#define blop_free_if(ptr, cnd) if (cnd) {__blop_free((void*)ptr);}
 #define blop_alloc(type, count)   (type*)__blop_alloc(sizeof(type) * count)
 #define blop_realloc(type, size)  (type*)__blop_realloc(size)
 #define blop_error(message)              __blop_error(__FILE__, __LINE__, __FUNCTION__, message)

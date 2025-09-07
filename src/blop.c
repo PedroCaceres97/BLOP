@@ -1,4 +1,4 @@
-#define __BLOP_DEFAULTS_CALLBACKS__
+#define __BLOP_DEFAULT_CALLBACKS__
 #include <blop/blop.h>
 #include <blop/utils.h>
 
@@ -25,7 +25,7 @@ void* __df_blop_alloc(size_t size) {
 };
 void* __df_blop_realloc(void* ptr, size_t size) {
     if (size == 0) {
-        blop_free(ptr);
+        __blop_free(ptr);
         return NULL;
     }
 

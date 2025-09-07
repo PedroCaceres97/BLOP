@@ -1,5 +1,6 @@
 #define __BLOP_DEFAULT_CALLBACKS__
 #include <blop/blop.h>
+#include <blop/utils.h>
 
 #define ptr_idx(ptr, idx, size) (void*)(((uint8_t*)ptr) + (idx * size))
 

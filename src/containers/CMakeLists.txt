@@ -1,0 +1,1 @@
+target_sources(blop PRIVATE list.c)

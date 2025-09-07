@@ -12,7 +12,6 @@
 #define return_verbose(value, message) blop_error(message); return value;
 #define return_verbose_if(cnd, value, message) if (cnd) {blop_error(message); return value;}
 
-
 // Mathematical Macros
 #define distance(x, y) (ternary(x > y, x - y, y - x))
 

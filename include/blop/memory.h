@@ -1,32 +1,48 @@
 #ifndef __BLOP_MEMORY_H__
 #define __BLOP_MEMORY_H__
 
-#include <stdint.h>
-#include <stdlib.h>
-
-#include "../Blop.h"
+#include <blop/blop.h>
 
 typedef struct _BlopPool_t* BlopPool;
 
-BlopPool    BlopNewPool();
-int         BlopFreePool(BlopPool pool);
+#ifdef __BLOP_SHOW_MEMORY_IMPLEMENTATION__
 
-void        BlopFree(void* ptr);
-void        BlopEmpty(BlopPool pool);
-void*       BlopAlloc(BlopPool pool, size_t size);
-void*       BlopRealloc(BlopPool pool, void* ptr, size_t size);
-void*       BlopDuplicate(BlopPool pool, void* ptr, size_t size);
+#define __BLOP_SHOW_LIST_IMPLEMENTATION__
+#include <blop/list.h>
 
-void        BlopPoolPrint(BlopPool pool);
+struct _BlopPool_t {
+    size_t              total;
+    const char*         alias;
+    BlopList            list;
+};
+
+struct _BlopPtrHeader_t {
+    long                magic;
+    struct _BlopNode_t  node;
+    struct _BlopPool_t* pool;
+    size_t              size;
+    const char*         alias;
+};
+
+#endif // __BLOP_SHOW_MEMORY_IMPLEMENTATION__
+
+BlopPool    BlopNewPool     ();
+int         BlopFreePool    (BlopPool pool);
+
+int         BlopFree        (void* ptr);
+int         BlopEmpty       (BlopPool pool);
+void*       BlopAlloc       (BlopPool pool, size_t size);
+void*       BlopRealloc     (BlopPool pool, void* ptr, size_t size);
+void*       BlopDuplicate   (BlopPool pool, void* ptr, size_t size);
+
+int         BlopPoolPrint   (BlopPool pool);
 
 size_t      BlopGetPtrSize  (void* ptr);
 const char* BlopGetPtrAlias (void* ptr);
-void        BlopSetPtrAlias (void* ptr, const char* alias);
+int         BlopSetPtrAlias (void* ptr, const char* alias);
 
 size_t      BlopGetPoolSize (BlopPool pool);
 const char* BlopGetPoolAlias(BlopPool pool);
-void        BlopSetPoolAlias(BlopPool pool, const char* alias);
-
-void        BlopMemoryErrorCallback(PFN_BlopErrorCallback callback);
+int         BlopSetPoolAlias(BlopPool pool, const char* alias);
 
 #endif // __BLOP_MEMORY_H__

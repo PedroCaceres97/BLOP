@@ -13,7 +13,15 @@
 #define return_verbose_if(cnd, value, message) if (cnd) {blop_error(message); return value;}
 
 // Mathematical Macros
+#define min(x, y) ((x > y) ? y : x)
+#define max(x, y) ((x > y) ? x : y)
+
 #define distance(x, y) (ternary(x > y, x - y, y - x))
+#define add_difference(var, x, y) if (x > y) {var += x - y;} else {var -= y - x;}
+
+// Pointer arithmetic
+#define ptr_add(ptr, value) (void*)((uint8_t*)ptr + value)
+#define ptr_sub(ptr, value) (void*)((uint8_t*)ptr - value)
 
 const char* BlopUtilsPathLast(const char* path);
 

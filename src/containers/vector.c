@@ -2,8 +2,6 @@
 #include <blop/blop.h>
 #include <blop/utils.h>
 
-#define ptr_idx(ptr, idx, size) (void*)(((uint8_t*)ptr) + (idx * size))
-
 struct _BlopVector_t {
     size_t size;        // Logical elements count
     size_t capacity;    // Allocated elements count

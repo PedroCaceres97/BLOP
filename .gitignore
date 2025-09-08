@@ -57,3 +57,4 @@ dkms.conf
 # Custom Project Files & Directories
 build
 install
+.clangd

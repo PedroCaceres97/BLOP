@@ -21,3 +21,8 @@ Yet, BLOP has survived countless rewrites, refactors, and total project failures
 BLOP is eternal.
 BLOP is inevitable.
 BLOP… just works.
+
+[Windows .clangd]
+
+CompileFlags:
+  Add: [-IC:\Dev\BLOP\include]

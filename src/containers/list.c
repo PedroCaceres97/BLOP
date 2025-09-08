@@ -5,10 +5,10 @@
 #include <blop/utils.h>
 
 BlopList  BlopNewList() {
-    BlopList list = blop_alloc(struct _BlopList_t, 1);
+    BlopList list = blop_calloc(struct _BlopList_t, 1);
     return_verbose_if(list == NULL, NULL, "Failed to allocate BlopList")
-    list->head = NULL;
-    list->tail = NULL;
+    list->front = NULL;
+    list->back = NULL;
     list->size = 0;
     return list;
 }
@@ -21,7 +21,7 @@ int       BlopFreeList(BlopList list) {
 }
 
 BlopNode  BlopNewNode() {
-    BlopNode node = blop_alloc(struct _BlopNode_t, 1);
+    BlopNode node = blop_calloc(struct _BlopNode_t, 1);
     return_verbose_if(node == NULL, NULL, "Failed to allocate BlopNode")
     node->heap = NULL;
     node->stack = 0;
@@ -32,7 +32,7 @@ BlopNode  BlopNewNode() {
 }
 BlopNode  BlopCopyNode(BlopNode node) {
     return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
-    BlopNode copy = blop_alloc(struct _BlopNode_t, 1);
+    BlopNode copy = blop_calloc(struct _BlopNode_t, 1);
     return_verbose_if(copy == NULL, NULL, "Failed to allocate BlopNode")
     copy->heap = node->heap;
     copy->stack = node->stack;
@@ -60,30 +60,6 @@ int       BlopNodeSetStack(BlopNode node, long long stack) {
     node->stack = stack;
     return BlopSuccess;
 }
-int       BlopNodeSetNext(BlopNode node, BlopNode next) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
-
-    node->next = next;
-    return BlopSuccess;
-}
-int       BlopNodeSetPrev(BlopNode node, BlopNode prev) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr") 
-
-    node->prev = prev;
-    return BlopSuccess;
-}
-int       BlopListSetHead(BlopList list, BlopNode head) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
-
-    list->head = head;
-    return BlopSuccess;
-}
-int       BlopListSetTail(BlopList list, BlopNode tail) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
-
-    list->tail = tail;
-    return BlopSuccess;
-}
 
 void*     BlopNodeGetHeap(BlopNode node) {
     return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
@@ -91,7 +67,7 @@ void*     BlopNodeGetHeap(BlopNode node) {
     return node->heap;
 }
 long long BlopNodeGetStack(BlopNode node) {
-    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    return_verbose_if(node == NULL, -1, "BlopNode cant be a NULL ptr")
 
     return node->stack;
 }
@@ -105,32 +81,37 @@ BlopNode  BlopNodeGetPrev(BlopNode node) {
 
     return node->prev;
 }
-BlopNode  BlopListGetHead(BlopList list) {
+BlopNode  BlopListGetFront(BlopList list) {
     return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
 
-    return list->head;
+    return list->front;
 }
-BlopNode  BlopListGetTail(BlopList list) {
+BlopNode  BlopListGetBack(BlopList list) {
     return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
 
-    return list->tail;
+    return list->back;
+}
+size_t    BlopListGetSize(BlopList list) {
+    return_verbose_if(list == NULL, -1, "BlopList cant be a NULL ptr") 
+
+    return list->size;
 }
 BlopNode  BlopListGetNode(BlopList list, size_t index) {
     return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
     return_verbose_if(list->size == 0, NULL, "BlopList must have at least one element") 
     return_verbose_if(index >= list->size, NULL, "Index is out of bounds")
 
-    if (index == 0) return list->head;
-    if (index == list->size - 1) return list->tail;
+    if (index == 0) return list->front;
+    if (index == list->size - 1) return list->back;
 
     if (index < list->size / 2) {
-        BlopNode current = list->head->next;
+        BlopNode current = list->front->next;
         for (int i = 1; i < index; i++) {
             current = current->next;
         }
         return current;
     } else {
-        BlopNode current = list->tail->prev;
+        BlopNode current = list->back->prev;
         for (int i = list->size - 2; i > index; i--) {
             current = current->prev;
         }
@@ -141,15 +122,15 @@ BlopNode  BlopListGetNode(BlopList list, size_t index) {
 int       BlopListClear(BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr")
 
-    BlopNode current = list->head;
+    BlopNode current = list->front;
     while (current) {
         BlopNode next = current->next;
         current->list = NULL;
-        blop_free_if(current, deallocate);
+        blop_free_if(deallocate, current);
         current = next;
     }
-    list->head = NULL;
-    list->tail = NULL;
+    list->front = NULL;
+    list->back = NULL;
     list->size = 0;
     return BlopSuccess;
 }
@@ -160,21 +141,21 @@ int       BlopListErase(BlopList list, BlopNode node, int deallocate) {
 
     list->size--;
     if (list->size == 0) {
-        list->head = NULL;
-        list->tail = NULL;
-    } else if (node == list->head) {
-        list->head = list->head->next;
-        list->head->prev = NULL;
-    } else if (node == list->tail) {
-        list->tail = list->tail->prev;
-        list->tail->next = NULL;
+        list->front = NULL;
+        list->back = NULL;
+    } else if (node == list->front) {
+        list->front = list->front->next;
+        list->front->prev = NULL;
+    } else if (node == list->back) {
+        list->back = list->back->prev;
+        list->back->next = NULL;
     } else {
         node->prev->next = node->next;
         node->next->prev = node->prev;
     }
 
     node->list = NULL;
-    blop_free_if(node, deallocate)
+    blop_free_if(deallocate, node)
     return BlopSuccess;
 }
 int       BlopListPopBack(BlopList list, int deallocate) {
@@ -182,17 +163,17 @@ int       BlopListPopBack(BlopList list, int deallocate) {
     return_verbose_if(list->size == 0, BlopLogicalException, "BlopList its empty")
 
     list->size--;
-    struct _BlopNode_t* back = list->tail;
+    struct _BlopNode_t* back = list->back;
     if (list->size == 0) {
-        list->head = NULL;
-        list->tail = NULL;
+        list->front = NULL;
+        list->back = NULL;
     } else {
-        list->tail = list->tail->prev;
-        list->tail->next = NULL;
+        list->back = list->back->prev;
+        list->back->next = NULL;
     }
 
     back->list = NULL;
-    blop_free_if(back, deallocate)
+    blop_free_if(deallocate, back)
     return BlopSuccess;
 }
 int       BlopListPopFront(BlopList list, int deallocate) {
@@ -200,17 +181,17 @@ int       BlopListPopFront(BlopList list, int deallocate) {
     return_verbose_if(list->size == 0, BlopLogicalException, "BlopList its empty")
 
     list->size--;
-    struct _BlopNode_t* front = list->head;
+    struct _BlopNode_t* front = list->front;
     if (list->size == 0) {
-        list->head = NULL;
-        list->tail = NULL;
+        list->front = NULL;
+        list->back = NULL;
     } else {
-        list->head = list->head->next;
-        list->head->prev = NULL;
+        list->front = list->front->next;
+        list->front->prev = NULL;
     }
 
     front->list = NULL;
-    blop_free_if(front, deallocate)
+    blop_free_if(deallocate, front)
     return BlopSuccess;
 }
 
@@ -224,13 +205,13 @@ int       BlopListPushBack(BlopList list, BlopNode node) {
     node->next = NULL;
 
     if (list->size == 1) {
-        list->head = node;
-        list->tail = node;
-        list->head->prev = NULL;
+        list->front = node;
+        list->back = node;
+        list->front->prev = NULL;
     } else {
-        node->prev = list->tail;
-        list->tail->next = node;
-        list->tail = node;
+        node->prev = list->back;
+        list->back->next = node;
+        list->back = node;
     }
 
     return BlopSuccess;
@@ -245,13 +226,13 @@ int       BlopListPushFront(BlopList list, BlopNode node) {
     node->prev = NULL;
 
     if (list->size == 1) {
-        list->head = node;
-        list->tail = node;
-        list->head->next = NULL;
+        list->front = node;
+        list->back = node;
+        list->front->next = NULL;
     } else {
-        node->next = list->head;
-        list->head->prev = node;
-        list->head = node;
+        node->next = list->front;
+        list->front->prev = node;
+        list->front = node;
     }
 
     return BlopSuccess;
@@ -268,8 +249,8 @@ int       BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node) {
     node->prev = pivot;
     node->next = pivot->next;
     
-    if (pivot == list->tail) {
-        list->tail = node;
+    if (pivot == list->back) {
+        list->back = node;
     } else {
         pivot->next->prev = node;
     }
@@ -289,8 +270,8 @@ int       BlopListInsertPrev(BlopList list, BlopNode pivot, BlopNode node) {
     node->next = pivot;
     node->prev = pivot->prev;
     
-    if (pivot == list->head) {
-        list->head = node;
+    if (pivot == list->front) {
+        list->front = node;
     } else {
         pivot->prev->next = node;
     }

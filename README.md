@@ -22,7 +22,10 @@ BLOP is eternal.
 BLOP is inevitable.
 BLOP… just works.
 
-[Windows .clangd]
+[.clangd]
 
 CompileFlags:
   Add: [-IC:\Dev\BLOP\include]
+
+CompileFlags:
+  Add: [-IC:\Users\Maximo\Desktop\BLOP\include]

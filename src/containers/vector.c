@@ -1,151 +1,120 @@
 #define __BLOP_DEFAULT_CALLBACKS__
+#define __BLOP_SHOW_VECTOR_IMPLEMENTATION__
 #include <blop/blop.h>
 #include <blop/utils.h>
+#include <blop/vector.h>
 
-struct _BlopVector_t {
-    size_t size;        // Logical elements count
-    size_t capacity;    // Allocated elements count
-    size_t element;     // Size of each element
-    size_t last_resize; // Last logical elements count
-
-    void* data;         // Memory
-    uint8_t scalator;   // Factor of grown
-};
-
-static void blop_get(BlopVector vector, size_t idx, void* buffer) {
-    memcpy(buffer, ptr_idx(vector->data, idx, vector->element), vector->element);
+static void vector_get          (BlopVector vector, size_t idx, void* buffer) {
+    memcpy(buffer, ptr_add(vector->data, idx * vector->element), vector->element);
 }
-static void blop_set(BlopVector vector, size_t idx, void* buffer) {
-    memcpy(ptr_idx(vector->data, idx, vector->element), buffer, vector->element);
+static void vector_set          (BlopVector vector, size_t idx, void* buffer) {
+    memcpy(ptr_add(vector->data, idx * vector->element), buffer, vector->element);
 }
-static void blop_realloc(BlopVector vector, size_t size) {
-    vector->last_resize = vector->size;
-    vector->size = size;
-    vector->capacity = vector->size * vector->scalator;
-    vector->data = __blop_realloc(vector->data, vector->capacity * vector->element);
+static void vector_realloc      (BlopVector vector, size_t size) {
+    if (vector->size == size) return;
+
+    vector->min         = ternary(vector->size > size, (vector->size * 2) / 3, size / 2);
+    vector->size        = size;
+    vector->capacity    = vector->size * vector->scalator;
+    vector->data        = blop_realloc(void, vector->data, vector->capacity * vector->element);
 }
 
-void BlopFreeVector(BlopVector vector) {
-    if (vector == NULL) {
-        blop_error("NULL pointer exception");
-        return;
-    }
-    if (vector->data != NULL) {
-        __blop_free(vector->data);
-    }
-    __blop_free(vector);
-}
-BlopVector BlopNewVector(uint8_t scalator, void* init_data, size_t init_count, size_t element) {
-    if (element == 0) {
-        blop_error("Element size is 0");
-        return NULL;
-    }
-    if (scalator < 2) scalator = 2;
+BlopVector  BlopNewVector       (void* init, size_t initc, size_t element, uint8_t scalator) {
+    return_verbose_if(element == 0, NULL, "A BlopVector cannot have elements of size 0. Remember that the element parameter specifies the size in bytes of each element.");
 
-    BlopVector vector = __blop_alloc(sizeof(struct _BlopVector_t));
-    vector->element = element;
-    vector->scalator = scalator;
-    vector->size = init_count;
-    vector->last_resize = 0;
-    vector->capacity = 0;
-    vector->data = NULL;
+    scalator = ternary(scalator < 2, 2, scalator);
 
-    size_t initial_size = (init_count) ? scalator : init_count * scalator;
-    vector->data = __blop_alloc(initial_size * element);
+    BlopVector vector   = blop_calloc(_BlopVector_t, 1);
+    vector->element     = element;
+    vector->scalator    = scalator;
+    vector->size        = initc;
+    vector->capacity    = ternary(initc > 0, initc * scalator, 10);
+    vector->data        = blop_alloc(void, vector->capacity * element);
     
-    if (init_data) {
-        memcpy(vector->data, init_data, init_count * element);
+    if (init != NULL && initc > 0) {
+        memcpy(vector->data, init, initc * element);
     }
 
     return vector;
 }
+int         BlopFreeVector      (BlopVector vector, int keep_data) {
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
 
-void BlopVectorResize(BlopVector vector, size_t size, void* data) {
-    if (size == vector->size) {
-        return;
-    }
+    blop_free_if(vector->data != NULL && !keep_data, vector->data);
+    blop_free(vector);
+}
 
-    if (size > vector->capacity || size < (vector->last_resize / vector->scalator)) {
-        size_t old_size = vector->size;
-        blop_realloc(vector, size);
+int         BlopVectorResize    (BlopVector vector, size_t size, void* init) {
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
+    return_if(size == vector->size, BlopSuccess);
 
-        if (old_size < vector->size) {
-            for (size_t i = vector->size - old_size; i > 0; i--) {
-                blop_set(vector, vector->size - i, data);
+    if (size > vector->capacity || size < vector->min) {
+        size_t old = vector->size;
+        vector_realloc(vector, size);
+
+        if (old < vector->size && init != NULL) {
+            for (size_t i = vector->size - old; i > 0; i--) {
+                vector_set(vector, vector->size - i, init);
             }
         }
     }
+
+    return BlopSuccess;
 }
-void* BlopVectorData(BlopVector vector) {
-    if (vector == NULL) {
-        blop_error("NULL pointer exception");
-        return NULL;
-    }
+void*       BlopVectorData      (BlopVector vector) {
+    return_verbose_if(vector == NULL, NULL, "BlopVector cant be a null ptr");
 
     return vector->data;
-}
-size_t BlopVectorSize(BlopVector vector) { 
-    if (vector == NULL) {
-        blop_error("NULL pointer exception");
-        return -1;
-    }
+}   
+size_t      BlopVectorSize      (BlopVector vector) {
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
 
     return vector->size;
 }
 
-int BlopVectorSet(BlopVector vector, size_t idx, void* data) { 
-    if (idx >= vector->size) {
-        blop_error("Bound exceptions, idx is greater or equal to vector->size");
-        return false;
-    }
+int         BlopVectorSet       (BlopVector vector, size_t idx, void* buffer) {
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr, what value do you expect to set?");
+    return_verbose_if(vector->size == 0, BlopIndexException, "BlopVector is empty");
+    return_verbose_if(idx >= vector->size, BlopIndexException, "Bound exceptions, idx is greater or equal to vector->size");
 
-    if (data == NULL) {
-        blop_error("NULL pointer exception");
-        return false;
-    }
-
-    blop_set(vector, idx, data);
+    vector_set(vector, idx, buffer);
     return true;
 }
-int BlopVectorGet(BlopVector vector, size_t idx, void* data) { 
-    if (idx >= vector->size) {
-        blop_error("Bound exceptions, idx is greater or equal to vector->size");
-        return false;
-    }
+int         BlopVectorGet       (BlopVector vector, size_t idx, void* buffer) { 
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr, where do you expect to recieve the data?");
+    return_verbose_if(vector->size == 0, BlopIndexException, "BlopVector is empty");
+    return_verbose_if(idx >= vector->size, BlopIndexException, "Bound exceptions, idx is greater or equal to vector->size");
 
-    if (data == NULL) {
-        blop_error("NULL pointer exception");
-        return false;
-    }
-
-    blop_get(vector, idx, data);
+    vector_get(vector, idx, buffer);
     return true;
 }
 
-void BlopVectorPopBack(BlopVector vector, void* data) {
-    if (vector->size == 0) {
-        return;
-    }
+int         BlopVectorPopBack   (BlopVector vector, void* buffer) {
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
+    return_verbose_if(vector->size == 0, BlopIndexException, "BlopVector is empty");
 
-    if (data) {
-        blop_get(vector, vector->size - 1, data);
-    }
     vector->size--;
+    if (buffer != NULL) {
+        vector_get(vector, vector->size, buffer);
+    }
 
-    if (vector->size < (vector->last_resize / vector->scalator)) {
-        blop_realloc(vector, vector->size);
+    if (vector->size < vector->min) {
+        vector_realloc(vector, vector->size);
     }
+
+    return BlopSuccess;
 }
-void BlopVectorPushBack(BlopVector vector, void* data) { 
-    if (data == NULL) {
-        blop_error("NULL pointer exception");
-        return;
-    }
+int         BlopVectorPushBack  (BlopVector vector, void* buffer) { 
+    return_verbose_if(vector == NULL, BlopNullException, "BlopVector cant be a null ptr");
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr, what value do you expect to push?");
 
     if (vector->size == vector->capacity) {
-        blop_realloc(vector, vector->size);
+        vector_realloc(vector, vector->size);
     }
 
-    blop_set(vector, vector->size, data);
+    vector_set(vector, vector->size, buffer);
     vector->size++;
+    return BlopSuccess;
 }

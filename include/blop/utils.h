@@ -8,10 +8,6 @@
 
 #define asign_if(cnd, var, value) if (cnd) {var = value;}
 
-#define return_if(cnd, value) if (cnd) { return value; } 
-#define return_verbose(value, message) blop_error(message); return value;
-#define return_verbose_if(cnd, value, message) if (cnd) {blop_error(message); return value;}
-
 // Mathematical Macros
 #define min(x, y) ((x > y) ? y : x)
 #define max(x, y) ((x > y) ? x : y)

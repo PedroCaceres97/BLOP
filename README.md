@@ -22,6 +22,9 @@ BLOP is eternal.
 BLOP is inevitable.
 BLOP… just works.
 
+[cmake]
+cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX "C:\Users\Maximo\Desktop\BLOP\install"
+
 [.clangd]
 
 CompileFlags:

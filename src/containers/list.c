@@ -160,7 +160,7 @@ int       BlopListErase(BlopList list, BlopNode node, int deallocate) {
 }
 int       BlopListPopBack(BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
-    return_verbose_if(list->size == 0, BlopLogicalException, "BlopList its empty")
+    return_verbose_if(list->size == 0, BlopIndexException, "BlopList its empty")
 
     list->size--;
     struct _BlopNode_t* back = list->back;
@@ -178,7 +178,7 @@ int       BlopListPopBack(BlopList list, int deallocate) {
 }
 int       BlopListPopFront(BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
-    return_verbose_if(list->size == 0, BlopLogicalException, "BlopList its empty")
+    return_verbose_if(list->size == 0, BlopIndexException, "BlopList its empty")
 
     list->size--;
     struct _BlopNode_t* front = list->front;

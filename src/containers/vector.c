@@ -24,7 +24,7 @@ BlopVector  BlopNewVector       (void* init, size_t initc, size_t element, uint8
 
     scalator = ternary(scalator < 2, 2, scalator);
 
-    BlopVector vector   = blop_calloc(_BlopVector_t, 1);
+    BlopVector vector   = blop_calloc(struct _BlopVector_t, 1);
     vector->element     = element;
     vector->scalator    = scalator;
     vector->size        = initc;

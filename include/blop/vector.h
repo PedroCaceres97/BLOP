@@ -9,7 +9,7 @@ typedef struct _BlopVector_t* BlopVector;
 
 struct _BlopVector_t {
     size_t min;         // Minimum size of the vector before shrinking
-    size_t count;       // Number of elements in the vector
+    size_t size;       // Number of elements in the vector
     size_t capacity;    // Allocated capacity of the vector
     size_t element;     // Size of each element in bytes
 

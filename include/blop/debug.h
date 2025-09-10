@@ -11,11 +11,11 @@ typedef struct _BlopDebugPool_t* BlopDebugPool;
 #include <blop/list.h>
 
 struct _BlopDebugPool_t {
-    BlopList            list;
     size_t              total;
+    struct _BlopList_t  list;
     const char*         alias;
     const char*         file;
-    const char*         line;
+    uint32_t            line;
     const char*         function;
 };
 
@@ -26,24 +26,25 @@ struct _BlopDebugPtrHeader_t {
     size_t                      size;
     const char*                 alias;
     const char*                 file;
-    const char*                 line;
+    uint32_t                    line;
     const char*                 function;
 };
 
 #endif // __BLOP_SHOW_DEBUG_IMPLEMENTATION__
 
-BlopPool    __BlopNewDebugPool     (const char* alias, const char* file, const char* line, const char* funtion);
-int         __BlopFreeDebugPool    (BlopPool pool);
+BlopResult    __BlopNewDebugPool     (BlopDebugPool* buffer, int mute, const char* alias, const char* file, uint32_t line, const char* function);
+BlopResult    __BlopFreeDebugPool    (BlopDebugPool pool, int mute);
 
-int         __BlopDebugFree        (BlopDebugPool pool, void* ptr);
-int         __BlopDebugEmpty       (BlopDebugPool pool);
-void*       __BlopDebugAlloc       (BlopDebugPool pool, size_t size);
-void*       __BlopDebugRealloc     (BlopDebugPool pool, void* ptr, size_t size);
-void*       __BlopDebugDuplicate   (BlopDebugPool pool, void* ptr, size_t size);
+BlopResult    __BlopDebugFree        (BlopDebugPool pool, void* ptr, int mute);
+BlopResult    __BlopDebugAlloc       (BlopDebugPool pool, void** buffer, size_t size, int mute, const char* alias, const char* file, uint32_t line, const char* function);
+BlopResult    __BlopDebugRealloc     (BlopDebugPool pool, void** buffer, void* ptr, size_t size, int mute, const char* alias, const char* file, uint32_t line, const char* function);
+BlopResult    __BlopDebugDuplicate   (BlopDebugPool pool, void** buffer, void* ptr, size_t size, int mute, const char* alias, const char* file, uint32_t line, const char* function);
+BlopResult    __BlopDebugPoolClean   (BlopDebugPool pool, int mute, int verbose);
 
-int         __BlopDebugPoolPrint   (BlopDebugPool pool);
+BlopResult    __BlopDebugPtrGetSize  (BlopDebugPool pool, void* ptr, size_t* buffer);
+BlopResult    __BlopDebugPoolGetTotal(BlopDebugPool pool, size_t* buffer);
+BlopResult    __BlopDebugPoolGetCount(BlopDebugPool pool, size_t* buffer);
 
-size_t      __BlopGetDebugPtrSize  (void* ptr);
-size_t      __BlopGetDebugPoolSize (BlopDebugPool pool);
+BlopResult    __BlopDebugPoolPrint   (BlopDebugPool pool);
 
 #endif // __BLOP_DEBUG_H__

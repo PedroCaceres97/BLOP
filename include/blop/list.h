@@ -25,35 +25,35 @@ struct _BlopList_t {
 
 #endif // __BLOP_SHOW_LIST_IMPLEMENTATION__
 
-BlopList  BlopNewList       ();
-int       BlopFreeList      (BlopList list);
+BlopResult BlopNewList       (BlopList* buffer);
+BlopResult BlopFreeList      (BlopList list);
 
-BlopNode  BlopNewNode       ();
-BlopNode  BlopCopyNode      (BlopNode node);
-int       BlopFreeNode      (BlopNode node);
-
-// The stack parameter lets you store a value by copying it instead of having a ptr
-int       BlopNodeSetStack  (BlopNode node, long long stack);
-int       BlopNodeSetHeap   (BlopNode node, void* heap);
+BlopResult BlopNewNode       (BlopNode* buffer);
+BlopResult BlopCopyNode      (BlopNode node, BlopNode* buffer);
+BlopResult BlopFreeNode      (BlopNode node);
 
 // The stack parameter lets you store a value by copying it instead of having a ptr
-long long BlopNodeGetStack  (BlopNode node);
-void*     BlopNodeGetHeap   (BlopNode node);
-BlopNode  BlopNodeGetNext   (BlopNode node);
-BlopNode  BlopNodeGetPrev   (BlopNode node);
-BlopNode  BlopListGetFront  (BlopList list);
-BlopNode  BlopListGetBack   (BlopList list);
-size_t    BlopListGetSize   (BlopList list);
-BlopNode  BlopListGetNode   (BlopList list, size_t index);
+BlopResult BlopNodeSetStack  (BlopNode node, long long stack);
+BlopResult BlopNodeSetHeap   (BlopNode node, void* heap);
 
-int       BlopListClear     (BlopList list, int deallocate);
-int       BlopListErase     (BlopList list, BlopNode node, int deallocate);
-int       BlopListPopBack   (BlopList list, int deallocate);
-int       BlopListPopFront  (BlopList list, int deallocate);
+// The stack parameter lets you store a value by copying it instead of having a ptr
+BlopResult BlopNodeGetStack  (BlopNode node, long long* buffer);
+BlopResult BlopNodeGetHeap   (BlopNode node, void** buffer);
+BlopResult BlopNodeGetNext   (BlopNode node, BlopNode* buffer);
+BlopResult BlopNodeGetPrev   (BlopNode node, BlopNode* buffer);
+BlopResult BlopListGetFront  (BlopList list, BlopNode* buffer);
+BlopResult BlopListGetBack   (BlopList list, BlopNode* buffer);
+BlopResult BlopListGetSize   (BlopList list, size_t* buffer);
+BlopResult BlopListGetNode   (BlopList list, BlopNode* buffer, size_t index);
 
-int       BlopListPushBack  (BlopList list, BlopNode node);
-int       BlopListPushFront (BlopList list, BlopNode node);
-int       BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node);
-int       BlopListInsertPrev(BlopList list, BlopNode pivot, BlopNode node);
+BlopResult BlopListClear     (BlopList list, int deallocate);
+BlopResult BlopListErase     (BlopList list, BlopNode node, int deallocate);
+BlopResult BlopListPopBack   (BlopList list, int deallocate);
+BlopResult BlopListPopFront  (BlopList list, int deallocate);
+
+BlopResult BlopListPushBack  (BlopList list, BlopNode node);
+BlopResult BlopListPushFront (BlopList list, BlopNode node);
+BlopResult BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node);
+BlopResult BlopListInsertPrev(BlopList list, BlopNode pivot, BlopNode node);
 
 #endif // __BLOP_LIST_H__

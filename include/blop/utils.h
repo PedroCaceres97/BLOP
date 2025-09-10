@@ -4,20 +4,19 @@
 #include <blop/blop.h>
 
 // Conditional Macros
-#define ternary(cnd, x, y) ((cnd) ? (x) : (y))
-
-#define asign_if(cnd, var, value) if (cnd) {var = value;}
+#define blop_ternary(cnd, x, y) ((cnd) ? (x) : (y))
+#define blop_asign_if(cnd, var, value) if (cnd) {var = value;}
 
 // Mathematical Macros
-#define min(x, y) ((x > y) ? y : x)
-#define max(x, y) ((x > y) ? x : y)
+#define blop_min(x, y) ((x > y) ? y : x)
+#define blop_max(x, y) ((x > y) ? x : y)
 
-#define distance(x, y) (ternary(x > y, x - y, y - x))
-#define add_difference(var, x, y) if (x > y) {var += x - y;} else {var -= y - x;}
+#define blop_distance(x, y) (blop_ternary(x > y, x - y, y - x))
+#define blop_add_difference(var, x, y) if (x > y) {var += x - y;} else {var -= y - x;}
 
 // Pointer arithmetic
-#define ptr_add(ptr, value) (void*)((uint8_t*)ptr + value)
-#define ptr_sub(ptr, value) (void*)((uint8_t*)ptr - value)
+#define blop_ptr_add(ptr, value) (void*)((uint8_t*)ptr + value)
+#define blop_ptr_sub(ptr, value) (void*)((uint8_t*)ptr - value)
 
 const char* BlopUtilsPathLast(const char* path);
 

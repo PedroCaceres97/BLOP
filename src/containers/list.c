@@ -4,122 +4,144 @@
 #include <blop/list.h>
 #include <blop/utils.h>
 
-BlopList  BlopNewList() {
-    BlopList list = blop_calloc(struct _BlopList_t, 1);
-    return_verbose_if(list == NULL, NULL, "Failed to allocate BlopList")
-    list->front = NULL;
-    list->back = NULL;
-    list->size = 0;
-    return list;
+BlopResult BlopNewList       (BlopList* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    *buffer = blop_calloc(struct _BlopList_t, 1);
+    return_verbose_if(*buffer == NULL, BlopAllocationFailed, "Failed to allocate BlopList")
+    *buffer->front = NULL;
+    *buffer->back = NULL;
+    *buffer->size = 0;
+    return BlopSuccess;
 }
-int       BlopFreeList(BlopList list) {
+BlopResult BlopFreeList      (BlopList list) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr")
-    return_verbose_if(list->size > 0, BlopLogicalException, "To free a BlopList it must be empty")
+    return_verbose_if(list->size > 0, BlopNonEmptyStructure, "To free a BlopList it must be empty")
 
     blop_free(list);
     return BlopSuccess;
 }
 
-BlopNode  BlopNewNode() {
-    BlopNode node = blop_calloc(struct _BlopNode_t, 1);
-    return_verbose_if(node == NULL, NULL, "Failed to allocate BlopNode")
-    node->heap = NULL;
-    node->stack = 0;
-    node->next = NULL;
-    node->prev = NULL;
-    node->list = NULL;
-    return node;
+BlopResult BlopNewNode       (BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    *buffer = blop_calloc(struct _BlopNode_t, 1);
+    return_verbose_if(node == NULL, BlopAllocationFailed, "Failed to allocate BlopNode")
+    *buffer->heap = NULL;
+    *buffer->stack = 0;
+    *buffer->next = NULL;
+    *buffer->prev = NULL;
+    *buffer->list = NULL;
+    return BlopSuccess;
 }
-BlopNode  BlopCopyNode(BlopNode node) {
-    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
-    BlopNode copy = blop_calloc(struct _BlopNode_t, 1);
-    return_verbose_if(copy == NULL, NULL, "Failed to allocate BlopNode")
-    copy->heap = node->heap;
-    copy->stack = node->stack;
-    copy->next = NULL;
-    copy->prev = NULL;
-    copy->list = NULL;
-    return copy;
+BlopResult BlopCopyNode      (BlopNode node, BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    *buffer = blop_calloc(struct _BlopNode_t, 1);
+    return_verbose_if(*buffer == NULL, BlopAllocationFailed, "Failed to allocate BlopNode")
+    *buffer->heap = node->heap;
+    *buffer->stack = node->stack;
+    *buffer->next = NULL;
+    *buffer->prev = NULL;
+    *buffer->list = NULL;
+    return BlopSuccess;
 }
-int       BlopFreeNode(BlopNode node) {
+BlopResult BlopFreeNode      (BlopNode node) {
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
 
-    return_verbose_if(blop_free(node) != BlopSuccess, BlopLogicalException, "Failed to free BlopNode");
+    return_verbose_if(blop_free(node) != BlopSuccess, BlopDeallocationFailed, "Failed to free BlopNode");
     return BlopSuccess;
 }
 
-int       BlopNodeSetHeap(BlopNode node, void* heap) {
+// The stack parameter lets you store a value by copying it instead of having a ptr
+BlopResult BlopNodeSetStack  (BlopNode node, long long stack) {
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
 
     node->heap = heap;
     return BlopSuccess;
 }
-int       BlopNodeSetStack(BlopNode node, long long stack) {
+BlopResult BlopNodeSetHeap   (BlopNode node, void* heap) {
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
 
     node->stack = stack;
     return BlopSuccess;
 }
 
-void*     BlopNodeGetHeap(BlopNode node) {
-    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
-
-    return node->heap;
+// The stack parameter lets you store a value by copying it instead of having a ptr
+BlopResult BlopNodeGetStack  (BlopNode node, long long* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    *buffer = node->stack;
+    return BlopSuccess;
 }
-long long BlopNodeGetStack(BlopNode node) {
-    return_verbose_if(node == NULL, -1, "BlopNode cant be a NULL ptr")
-
-    return node->stack;
+BlopResult BlopNodeGetHeap   (BlopNode node, void** buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    *buffer = node->heap;
+    return BlopSuccess;
 }
-BlopNode  BlopNodeGetNext(BlopNode node) {
-    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
-
-    return node->next;
+BlopResult BlopNodeGetNext   (BlopNode node, BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    *buffer = node->next;
+    return BlopSuccess;
 }
-BlopNode  BlopNodeGetPrev(BlopNode node) {
-    return_verbose_if(node == NULL, NULL, "BlopNode cant be a NULL ptr")
-
-    return node->prev;
+BlopResult BlopNodeGetPrev   (BlopNode node, BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
+    *buffer = node->prev;
+    return BlopSuccess;
 }
-BlopNode  BlopListGetFront(BlopList list) {
-    return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
-
-    return list->front;
+BlopResult BlopListGetFront  (BlopList list, BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    *buffer = list->front;
+    return BlopSuccess;
 }
-BlopNode  BlopListGetBack(BlopList list) {
-    return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
-
-    return list->back;
+BlopResult BlopListGetBack   (BlopList list, BlopNode* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    *buffer = list->back;
+    return BlopSuccess;
 }
-size_t    BlopListGetSize(BlopList list) {
-    return_verbose_if(list == NULL, -1, "BlopList cant be a NULL ptr") 
-
-    return list->size;
+BlopResult BlopListGetSize   (BlopList list, size_t* buffer) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    *buffer = list->size;
+    return BlopSuccess;
 }
-BlopNode  BlopListGetNode(BlopList list, size_t index) {
-    return_verbose_if(list == NULL, NULL, "BlopList cant be a NULL ptr") 
-    return_verbose_if(list->size == 0, NULL, "BlopList must have at least one element") 
-    return_verbose_if(index >= list->size, NULL, "Index is out of bounds")
+BlopResult BlopListGetNode   (BlopList list, BlopNode* buffer, size_t index) {
+    return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")
+    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+    return_verbose_if(list->size == 0, BlopIndexException, "BlopList must have at least one element") 
+    return_verbose_if(index >= list->size, BlopIndexException, "Index is out of bounds")
 
-    if (index == 0) return list->front;
-    if (index == list->size - 1) return list->back;
+    if (index == 0) {
+        *buffer = list->front;
+        return BlopSuccess;
+    }
+    if (index == list->size - 1) {
+        *buffer = list->back;
+        return BlopSuccess;
+    }
 
+    BlopNode current = NULL;
     if (index < list->size / 2) {
-        BlopNode current = list->front->next;
+        current = list->front->next;
         for (int i = 1; i < index; i++) {
             current = current->next;
         }
-        return current;
     } else {
-        BlopNode current = list->back->prev;
+        current = list->back->prev;
         for (int i = list->size - 2; i > index; i--) {
             current = current->prev;
         }
-        return current;
+
     }
+
+    *buffer = current;
+    return BlopSuccess;
 }
 
-int       BlopListClear(BlopList list, int deallocate) {
+BlopResult BlopListClear     (BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr")
 
     BlopNode current = list->front;
@@ -134,10 +156,10 @@ int       BlopListClear(BlopList list, int deallocate) {
     list->size = 0;
     return BlopSuccess;
 }
-int       BlopListErase(BlopList list, BlopNode node, int deallocate) {
+BlopResult BlopListErase     (BlopList list, BlopNode node, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
-    return_verbose_if(node->list != list, BlopLogicalException, "BlopNode does not belong to the given BlopList")
+    return_verbose_if(node->list != list, BlopWrongSignature, "BlopNode does not belong to the given BlopList")
 
     list->size--;
     if (list->size == 0) {
@@ -158,12 +180,12 @@ int       BlopListErase(BlopList list, BlopNode node, int deallocate) {
     blop_free_if(deallocate, node)
     return BlopSuccess;
 }
-int       BlopListPopBack(BlopList list, int deallocate) {
+BlopResult BlopListPopBack   (BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(list->size == 0, BlopIndexException, "BlopList its empty")
 
     list->size--;
-    struct _BlopNode_t* back = list->back;
+    BlopNode* back = list->back;
     if (list->size == 0) {
         list->front = NULL;
         list->back = NULL;
@@ -176,12 +198,12 @@ int       BlopListPopBack(BlopList list, int deallocate) {
     blop_free_if(deallocate, back)
     return BlopSuccess;
 }
-int       BlopListPopFront(BlopList list, int deallocate) {
+BlopResult BlopListPopFront  (BlopList list, int deallocate) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(list->size == 0, BlopIndexException, "BlopList its empty")
 
     list->size--;
-    struct _BlopNode_t* front = list->front;
+    BlopNode* front = list->front;
     if (list->size == 0) {
         list->front = NULL;
         list->back = NULL;
@@ -195,10 +217,10 @@ int       BlopListPopFront(BlopList list, int deallocate) {
     return BlopSuccess;
 }
 
-int       BlopListPushBack(BlopList list, BlopNode node) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr")
+BlopResult BlopListPushBack  (BlopList list, BlopNode node) {
+    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
-    return_verbose_if(node->list != NULL, BlopLogicalException, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
+    return_verbose_if(node->list != NULL, BlopWrongSignature, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
 
     list->size++;
     node->list = list;
@@ -216,10 +238,10 @@ int       BlopListPushBack(BlopList list, BlopNode node) {
 
     return BlopSuccess;
 }
-int       BlopListPushFront(BlopList list, BlopNode node) {
+BlopResult BlopListPushFront (BlopList list, BlopNode node) {
     return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(node == NULL, BlopNullException, "BlopNode cant be a NULL ptr")
-    return_verbose_if(node->list != NULL, BlopLogicalException, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
+    return_verbose_if(node->list != NULL, BlopWrongSignature, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
 
     list->size++;
     node->list = list;
@@ -237,12 +259,12 @@ int       BlopListPushFront(BlopList list, BlopNode node) {
 
     return BlopSuccess;
 }
-int       BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+BlopResult BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node) {
+    return_verbose_if(list == NULL,  BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(pivot == NULL, BlopNullException, "BlopNode (pivot) cant be a NULL ptr") 
-    return_verbose_if(node == NULL, BlopLogicalException, "BlopNode (node) cant be a NULL ptr") 
-    return_verbose_if(node->list != NULL, BlopLogicalException, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
-    return_verbose_if(pivot->list != list, BlopLogicalException, "The pivot BlopNode does not belong to the given BlopList")
+    return_verbose_if(node == NULL,  BlopNulllException, "BlopNode (node) cant be a NULL ptr") 
+    return_verbose_if(node->list != NULL,  BlopWrongSignature, "The given BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
+    return_verbose_if(pivot->list != list, BlopWrongSignature, "The pivot BlopNode does not belong to the given BlopList")
 
     list->size++;
     node->list = list;
@@ -258,12 +280,12 @@ int       BlopListInsertNext(BlopList list, BlopNode pivot, BlopNode node) {
     pivot->next = node;
     return BlopSuccess;
 }
-int       BlopListInsertPrev(BlopList list, BlopNode pivot, BlopNode node) {
-    return_verbose_if(list == NULL, BlopNullException, "BlopList cant be a NULL ptr") 
+BlopResult BlopListInsertPrev(BlopList list, BlopNode pivot, BlopNode node) {
+    return_verbose_if(list == NULL,  BlopNullException, "BlopList cant be a NULL ptr") 
     return_verbose_if(pivot == NULL, BlopNullException, "BlopNode (pivot) cant be a NULL ptr") 
-    return_verbose_if(node == NULL, BlopLogicalException, "BlopNode (node) cant be a NULL ptr") 
-    return_verbose_if(node->list != NULL, BlopLogicalException, "The give BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
-    return_verbose_if(pivot->list != list, BlopLogicalException, "The pivot BlopNode does not belong to the given BlopList")
+    return_verbose_if(node == NULL,  BlopNullException, "BlopNode (node) cant be a NULL ptr") 
+    return_verbose_if(node->list != NULL,  BlopWrongSignature, "The given BlopNode already belongs to a list, use BlopCopyNode to allocate a new BlopNode ready to insert into another list")
+    return_verbose_if(pivot->list != list, BlopWrongSignature, "The pivot BlopNode does not belong to the given BlopList")
 
     list->size++;
     node->list = list;

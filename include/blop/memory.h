@@ -12,8 +12,7 @@ typedef struct _BlopPool_t* BlopPool;
 
 struct _BlopPool_t {
     size_t              total;
-    const char*         alias;
-    BlopList            list;
+    struct _BlopList_t  list;
 };
 
 struct _BlopPtrHeader_t {
@@ -21,28 +20,23 @@ struct _BlopPtrHeader_t {
     struct _BlopNode_t  node;
     struct _BlopPool_t* pool;
     size_t              size;
-    const char*         alias;
 };
 
 #endif // __BLOP_SHOW_MEMORY_IMPLEMENTATION__
 
-BlopPool    BlopNewPool     ();
-int         BlopFreePool    (BlopPool pool);
+BlopResult    BlopNewPool     (BlopPool* buffer);
+BlopResult    BlopFreePool    (BlopPool pool);
 
-int         BlopFree        (void* ptr);
-int         BlopEmpty       (BlopPool pool);
-void*       BlopAlloc       (BlopPool pool, size_t size);
-void*       BlopRealloc     (BlopPool pool, void* ptr, size_t size);
-void*       BlopDuplicate   (BlopPool pool, void* ptr, size_t size);
+BlopResult    BlopFree        (void* ptr);
+BlopResult    BlopAlloc       (BlopPool pool, void** buffer, size_t size);
+BlopResult    BlopRealloc     (BlopPool pool, void** buffer, void* ptr, size_t size);
+BlopResult    BlopDuplicate   (BlopPool pool, void** buffer, void* ptr, size_t size);
+BlopResult    BlopPoolClean   (BlopPool pool);
 
-int         BlopPoolPrint   (BlopPool pool);
+BlopResult    BlopPtrGetSize  (void* ptr, size_t* buffer);
+BlopResult    BlopPoolGetTotal(BlopPool pool, size_t* buffer);
+BlopResult    BlopPoolGetCount(BlopPool pool, size_t* buffer);
 
-size_t      BlopGetPtrSize  (void* ptr);
-const char* BlopGetPtrAlias (void* ptr);
-int         BlopSetPtrAlias (void* ptr, const char* alias);
-
-size_t      BlopGetPoolSize (BlopPool pool);
-const char* BlopGetPoolAlias(BlopPool pool);
-int         BlopSetPoolAlias(BlopPool pool, const char* alias);
+BlopResult    BlopPoolPrint   (BlopPool pool);
 
 #endif // __BLOP_MEMORY_H__

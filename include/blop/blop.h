@@ -8,22 +8,29 @@
 #include <stdbool.h>
 
 typedef enum {
-    BlopNullException       = -1,
-    BlopSuccess             =  0,
-    BlopLogicalException    =  1,
-    BlopIndexException      =  2,
-} BlopErrorCode;
+    BlopSuccess           = 0,      
+    BlopNullException        , 
+    BlopLogicalException     , 
+    BlopIndexException       , 
+    BlopAllocationlFailed    , 
+    BlopDeallocationlFailed  , 
+    BlopLoopedCallback       ,
+    BlopWrongSignature       ,
+    BlopNonEmptyStructure    ,
+    BlopNoAllocation         ,
+} BlopResult;
 
-typedef int  (*PFN_BlopFreeCallback)(void* ptr);
-typedef void*(*PFN_BlopAllocCallback)(size_t size);
-typedef void*(*PFN_BlopReallocCallback)(void* ptr, size_t size);
+typedef BlopResult  (*PFN_BlopFreeCallback)(void* ptr);
+typedef void*       (*PFN_BlopAllocCallback)(size_t size);
+typedef void*       (*PFN_BlopReallocCallback)(void* ptr, size_t size);
 
-typedef void (*PFN_BlopErrorCallback)(const char* file, uint32_t line, const char* function, const char* message);
+typedef void        (*PFN_BlopLogCallback)(const char* file, uint32_t line, const char* function, const char* message);
 
-int BlopSetFreeCallback   (PFN_BlopFreeCallback callback);
-int BlopSetAllocCallback  (PFN_BlopAllocCallback callback);
-int BlopSetReallocCallback(PFN_BlopReallocCallback callback);
-int BlopSetErrorCallback  (PFN_BlopErrorCallback callback);
+BlopResult BlopSetFreeCallback   (PFN_BlopFreeCallback callback);
+BlopResult BlopSetAllocCallback  (PFN_BlopAllocCallback callback);
+BlopResult BlopSetReallocCallback(PFN_BlopReallocCallback callback);
+BlopResult BlopSetErrorCallback  (PFN_BlopLogCallback callback);
+BlopResult BlopSetDebugCallback  (PFN_BlopLogCallback callback);
 
 #ifdef __BLOP_DEFAULT_CALLBACKS__
 
@@ -33,15 +40,19 @@ int BlopSetErrorCallback  (PFN_BlopErrorCallback callback);
 #define blop_calloc(type, count)      (type*)__blop_alloc(sizeof(type) * count)
 #define blop_realloc(type, ptr, size) (type*)__blop_realloc(ptr, size)
 #define blop_error(message)                  __blop_error(__FILE__, __LINE__, __FUNCTION__, message)
+#define blop_debug(message)                  __blop_debug(__FILE__, __LINE__, __FUNCTION__, message)
+#define blop_debug_if(cnd, message) if (cnd) { blop_debug(message); }
 
-#define return_if(cnd, value) if (cnd) { return value; } 
-#define return_verbose(value, message) blop_error(message); return value;
-#define return_verbose_if(cnd, value, message) if (cnd) {blop_error(message); return value;}
+
+#define return_if(cnd, value)                   if (cnd) {                      return value; } 
+#define return_verbose(value, message)                     blop_error(message); return value;
+#define return_verbose_if(cnd, value, message)  if (cnd) { blop_error(message); return value; }
 
 extern PFN_BlopFreeCallback     __blop_free; 
 extern PFN_BlopAllocCallback    __blop_alloc;
 extern PFN_BlopReallocCallback  __blop_realloc;
 extern PFN_BlopErrorCallback    __blop_error;
+extern PFN_BlopDebugCallback    __blop_debug;
 
 #endif // __BLOP_DEFAULT_CALLBACKS__
 

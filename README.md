@@ -32,3 +32,6 @@ CompileFlags:
 
 CompileFlags:
   Add: [-IC:\Users\Maximo\Desktop\BLOP\include]
+
+CompileFlags:
+  Add: [-ID:\Pedro\BLOP\include]

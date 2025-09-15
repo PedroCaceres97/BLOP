@@ -4,16 +4,19 @@
 #include <blop/utils.h>
 
 BlopResult    BlopNewPool     (BlopPool* buffer) {
-    *buffer = blop_alloc(sizeof(struct _BlopPool_t), 1);
+    *buffer = blop_alloc(struct _BlopPool_t, sizeof(struct _BlopPool_t));
     return_verbose_if(*buffer == NULL, BlopAllocationFailed, "Failed to allocate BlopPool")
-    *buffer->total =  0;
-    *buffer->list  = {0};
+    BlopPool pool = *buffer;
+    pool->total =  0;
+    pool->list.size = 0;
+    pool->list.front = NULL;
+    pool->list.back  = NULL;
     return BlopSuccess;
 }
 BlopResult    BlopFreePool    (BlopPool pool) {
     return_verbose_if(pool == NULL, BlopNullException, "BlopPool cant be a null ptr")
     return_verbose_if(pool->total > 0, BlopNonEmptyStructure, "A BlopPool must be empty (all allocated ptr were freed) to avoid memory leaks")
-    return_verbose_if(pool->list->size > 0, BlopNonEmptyStructure, "The fuck is going on")
+    return_verbose_if(pool->list.size > 0, BlopNonEmptyStructure, "The fuck is going on")
 
     blop_free(pool);
     return BlopSuccess;

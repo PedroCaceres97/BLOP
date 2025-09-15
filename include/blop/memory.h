@@ -24,19 +24,19 @@ struct _BlopPtrHeader_t {
 
 #endif // __BLOP_SHOW_MEMORY_IMPLEMENTATION__
 
-BlopResult    BlopNewPool     (BlopPool* buffer);
-BlopResult    BlopFreePool    (BlopPool pool);
+BlopResult BlopNewPool          (BlopPool* buffer);
+BlopResult BlopFreePool         (BlopPool pool);
 
-BlopResult    BlopFree        (void* ptr);
-BlopResult    BlopAlloc       (BlopPool pool, void** buffer, size_t size);
-BlopResult    BlopRealloc     (BlopPool pool, void** buffer, void* ptr, size_t size);
-BlopResult    BlopDuplicate   (BlopPool pool, void** buffer, void* ptr, size_t size);
-BlopResult    BlopPoolClean   (BlopPool pool);
+BlopResult BlopPoolFree         (BlopPool pool, void* ptr);
+BlopResult BlopPoolAlloc        (BlopPool pool, void** buffer, size_t size);
+BlopResult BlopPoolRealloc      (BlopPool pool, void** buffer, void* ptr, size_t size);
+BlopResult BlopPoolDuplicate    (BlopPool pool, void** buffer, void* ptr, size_t size);
+BlopResult BlopPoolClean        (BlopPool pool);
 
-BlopResult    BlopPtrGetSize  (void* ptr, size_t* buffer);
-BlopResult    BlopPoolGetTotal(BlopPool pool, size_t* buffer);
-BlopResult    BlopPoolGetCount(BlopPool pool, size_t* buffer);
+BlopResult BlopPoolPtrGetSize   (void* ptr, size_t* buffer);
+BlopResult BlopPoolGetTotal     (BlopPool pool, size_t* buffer);
+BlopResult BlopPoolGetCount     (BlopPool pool, size_t* buffer);
 
-BlopResult    BlopPoolPrint   (BlopPool pool);
+BlopResult BlopPoolPrint        (BlopPool pool);
 
 #endif // __BLOP_MEMORY_H__

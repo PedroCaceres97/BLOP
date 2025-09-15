@@ -13,7 +13,7 @@ PFN_BlopFreeCallback     __blop_free    = __df_blop_free;
 PFN_BlopAllocCallback    __blop_alloc   = __df_blop_alloc;
 PFN_BlopReallocCallback  __blop_realloc = __df_blop_realloc;
 PFN_BlopLogCallback      __blop_error   = __df_blop_error;
-PFN_BlopLogCallback      __blop_error   = __df_blop_debug;
+PFN_BlopLogCallback      __blop_debug   = __df_blop_debug;
 
 BlopResult __df_blop_free(void* ptr) {
     return_if(ptr == NULL, BlopNullException)
@@ -43,28 +43,25 @@ void       __df_blop_debug(const char* file, uint32_t line, const char* function
 
 BlopResult BlopSetFreeCallback   (PFN_BlopFreeCallback callback) {
     return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    return_verbose_if(callback == BlopFree, BlopLoopedCallback, "BlopFree cant be used as a callback for itself")
     __blop_free = callback;
     return BlopSuccess;
 }
 BlopResult BlopSetAllocCallback  (PFN_BlopAllocCallback callback) {
     return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    return_verbose_if(callback == BlopAlloc, BlopLoopedCallback "BlopAlloc cant be used as a callback for itself")
     __blop_alloc = callback;
     return BlopSuccess;
 }
 BlopResult BlopSetReallocCallback(PFN_BlopReallocCallback callback) {
     return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    return_verbose_if(callback == BlopRealloc, BlopLoopedCallback, "BlopRealloc cant be used as a callback for itself")
     __blop_realloc = callback;
     return BlopSuccess;
 }
-BlopResult BlopSetErrorCallback  (PFN_BlopErrorCallback callback) {
+BlopResult BlopSetErrorCallback  (PFN_BlopLogCallback callback) {
     return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
     __blop_error = callback;
     return BlopSuccess;
 }
-BlopResult BlopSetDebugCallback  (PFN_BlopDebugCallback callback) {
+BlopResult BlopSetDebugCallback  (PFN_BlopLogCallback callback) {
     return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
     __blop_debug = callback;
     return BlopSuccess;

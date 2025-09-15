@@ -6,13 +6,13 @@ const char* BlopUtilsPathLast(const char* path) {
     last = strrchr(path, '\\');
     if (last != NULL) {
         path = strrchr(last, '\\');
-        return ternary(path, last, path != NULL);
+        return blop_ternary(path != NULL, path, last);
     }
 
     last = strrchr(path, '/');
     if (last != NULL) {
         path = strrchr(last, '/');
-        return ternary(path, last, path != NULL);
+        return blop_ternary(path != NULL, path, last);
     }
 
     return path;

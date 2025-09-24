@@ -10,33 +10,67 @@ typedef struct _BlopPool_t* BlopPool;
 #define __BLOP_SHOW_LIST_IMPLEMENTATION__
 #include <blop/list.h>
 
-struct _BlopPool_t {
+struct _BmmPool_t {
     size_t              total;
     struct _BlopList_t  list;
 };
 
-struct _BlopPtrHeader_t {
+struct _BmmPtrHeader_t {
     long                magic;
     struct _BlopNode_t  node;
-    struct _BlopPool_t* pool;
+    struct _BmmPool_t*  pool;
     size_t              size;
+};
+
+struct _BdmmPool_t {
+    size_t              total;
+    struct _BlopList_t  list;
+    const char*         alias;
+    const char*         file;
+    uint32_t            line;
+    const char*         function;
+};
+
+struct _BdmmPtrHeader_t {
+    long                        magic;
+    struct _BlopNode_t          node;
+    struct _BdmmPool_t*         pool;
+    size_t                      size;
+    const char*                 alias;
+    const char*                 file;
+    uint32_t                    line;
+    const char*                 function;
 };
 
 #endif // __BLOP_SHOW_MEMORY_IMPLEMENTATION__
 
-BlopResult BlopNewPool          (BlopPool* buffer);
-BlopResult BlopFreePool         (BlopPool pool);
+BlopPool        BlopCreatePool(BlopApplication app);
+void            BlopDestroyPool(BlopPool pool);
+size_t          BlopPoolCount(BlopPool pool);
+size_t          BlopPoolTotal(BlopPool pool);
+void            BlopPoolPrint(BlopPool pool);
+void            BlopPoolClean(BlopPool pool);
 
-BlopResult BlopPoolFree         (BlopPool pool, void* ptr);
-BlopResult BlopPoolAlloc        (BlopPool pool, void** buffer, size_t size);
-BlopResult BlopPoolRealloc      (BlopPool pool, void** buffer, void* ptr, size_t size);
-BlopResult BlopPoolDuplicate    (BlopPool pool, void** buffer, void* ptr, size_t size);
-BlopResult BlopPoolClean        (BlopPool pool);
+void*           BlopAlloc(BlopPool pool, size_t size);
+void*           BlopRealloc(BlopPool pool, void* ptr, size_t size);
+void*           BlopDuplicate(BlopPool pool, void* ptr, size_t size);
+void            BlopFree(void* ptr);
 
-BlopResult BlopPoolPtrGetSize   (void* ptr, size_t* buffer);
-BlopResult BlopPoolGetTotal     (BlopPool pool, size_t* buffer);
-BlopResult BlopPoolGetCount     (BlopPool pool, size_t* buffer);
+#define BlopCreateDebugPool(app, alias)    __BlopCreateDebugPool(app, alias, __FILE__, __LINE__, __FUNCTION__)
+#define BlopDebugAlloc(pool, size, alias)    __BlopDebugAlloc(pool, size, alias, __FILE__, __LINE__, __FUNCTION__)
+#define BlopDebugRealloc(pool, ptr, size, alias) __BlopDebugRealloc(pool, ptr, size, alias, __FILE__, __LINE__, __FUNCTION__)
+#define BlopDebugDuplicate(pool, ptr, size, alias) __BlopDebugDuplicate(pool, ptr, size, alias, __FILE__, __LINE__, __FUNCTION__)
 
-BlopResult BlopPoolPrint        (BlopPool pool);
+BlopPool      __BlopCreateDebugPool(BlopApplication app, const char* alias, const char* file, uint32_t line, const char* function);
+void            BlopDestroyDebugPool(BlopPool pool);
+size_t          BlopDebugPoolCount(BlopPool pool);
+size_t          BlopDebugPoolTotal(BlopPool pool);
+void            BlopDebugPoolPrint(BlopPool pool);
+void            BlopDebugPoolClean(BlopPool pool);
+
+void*         __BlopDebugAlloc(BlopPool pool, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void*         __BlopDebugRealloc(BlopPool pool, void* ptr, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void*         __BlopDebugDuplicate(BlopPool pool, void* ptr, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void            BlopDebugFree(void* ptr);
 
 #endif // __BLOP_MEMORY_H__

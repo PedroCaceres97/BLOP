@@ -1,68 +1,104 @@
+#define __BLOP_SHOW_APPLICATION_IMPLEMENTATION__
 #define __BLOP_DEFAULT_CALLBACKS__
 #include <blop/blop.h>
 #include <blop/utils.h>
-#include <blop/memory.h>
 
-static BlopResult __df_blop_free(void* ptr);
-static void*      __df_blop_alloc(size_t size);
-static void*      __df_blop_realloc(void* ptr, size_t size);
-static void       __df_blop_error(const char* file, uint32_t line, const char* function, const char* message);
-static void       __df_blop_debug(const char* file, uint32_t line, const char* function, const char* message);
-
-PFN_BlopFreeCallback     __blop_free    = __df_blop_free; 
-PFN_BlopAllocCallback    __blop_alloc   = __df_blop_alloc;
-PFN_BlopReallocCallback  __blop_realloc = __df_blop_realloc;
-PFN_BlopLogCallback      __blop_error   = __df_blop_error;
-PFN_BlopLogCallback      __blop_debug   = __df_blop_debug;
-
-BlopResult __df_blop_free(void* ptr) {
-    return_if(ptr == NULL, BlopNullException)
-
-    free(ptr);
-    return BlopSuccess;
-}
-void*      __df_blop_alloc(size_t size) {
-    return_if(size == 0, NULL)
-
-    return calloc(1, size);
+static const char* error_strings[] = {
+    "Success"                   ,      
+    "Null Pointer Exception"    , 
+    "Allocation Failed"         , 
+    "Deallocation Failed"       , 
+    "Index Exception"           , 
+    "Wrong Signature"           ,
+    "Non Empty Structure"       ,
 };
-void*      __df_blop_realloc(void* ptr, size_t size) {
-    if (size == 0) {
-        __blop_free(ptr);
+
+BlopApplication BlopCreateApplication(int exit_on_error) {
+    BlopApplication app = bm_calloc(struct _BlopApplication_t, 1);
+    app->exit_on_error = exit_on_error;
+    app->error = BlopSuccess;
+    app->pools.size = 0;
+    app->pools.front = NULL;
+    app->pools.back  = NULL;
+    app->debug_pools.size = 0;
+    app->debug_pools.front = NULL;
+    app->debug_pools.back  = NULL;
+    return app;
+}
+int             BlopDestroyApplication(BlopApplication app);
+BlopError       BlopGetLastError(BlopApplication app) {
+    return app->error;
+}
+const char*     BlopGetErrorString(BlopError error) {
+    if (error < BlopSuccess || error > BlopNonEmptyStructure) {
+        return "Unknown Error";
+    }
+
+    return error_strings[error];
+}
+
+BlopPool        BlopCreatePool(BlopApplication app) {
+    if (app == NULL) {
         return NULL;
     }
 
-    return realloc(ptr, size);
-};
-void       __df_blop_error(const char* file, uint32_t line, const char* function, const char* message) {
-    printf("\n[BLOP ERROR REPORT]\nfile: %s:%u\nfunction: %s\nmessage: %s\n\n", BlopUtilsPathLast(file), line, function, message);
+    BlopPool pool = bm_calloc(struct _BlopPool_t, 1);
+    pool->total = 0;
+    pool->list.size = 0;
+    pool->list.front = NULL;
+    pool->list.back  = NULL;
+    pool->app = app;
+
+    if (pool == NULL) {
+        app->error = BlopAllocationFailed;
+        if (app->exit_on_error) {
+            fprintf(stderr, "BLOP: Unable to allocate memory for Pool\n");
+            exit(EXIT_FAILURE);
+        }
+        return NULL;
+    }
+
+    if (BlopListPushBack(&app->pools, pool) != BlopSuccess) {
+        bm_free(pool);
+        app->error = BlopAllocationFailed;
+        if (app->exit_on_error) {
+            fprintf(stderr, "BLOP: Unable to allocate memory for Pool\n");
+            exit(EXIT_FAILURE);
+        }
+        return NULL;
+    }
+
+    return pool;
 }
-void       __df_blop_debug(const char* file, uint32_t line, const char* function, const char* message) {
-    printf("\n[BLOP DEBUG REPORT]\nfile: %s:%u\nfunction: %s\nmessage: %s\n\n", BlopUtilsPathLast(file), line, function, message);
+void            BlopDestroyPool(BlopPool pool) {
+
+}
+size_t          BlopPoolCount(BlopPool pool) {
+    return pool->list.size;
+}
+size_t          BlopPoolTotal(BlopPool pool) {
+    return pool->total;
+}
+void            BlopPoolPrint(BlopPool pool) {
+    
+}
+void            BlopPoolClean(BlopPool pool) {
+
 }
 
-BlopResult BlopSetFreeCallback   (PFN_BlopFreeCallback callback) {
-    return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    __blop_free = callback;
-    return BlopSuccess;
-}
-BlopResult BlopSetAllocCallback  (PFN_BlopAllocCallback callback) {
-    return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    __blop_alloc = callback;
-    return BlopSuccess;
-}
-BlopResult BlopSetReallocCallback(PFN_BlopReallocCallback callback) {
-    return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    __blop_realloc = callback;
-    return BlopSuccess;
-}
-BlopResult BlopSetErrorCallback  (PFN_BlopLogCallback callback) {
-    return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    __blop_error = callback;
-    return BlopSuccess;
-}
-BlopResult BlopSetDebugCallback  (PFN_BlopLogCallback callback) {
-    return_verbose_if(callback == NULL, BlopNullException, "Callback cant be a null ptr")
-    __blop_debug = callback;
-    return BlopSuccess;
-}
+void*           BlopAlloc(BlopPool pool, size_t size);
+void*           BlopRealloc(BlopPool pool, void* ptr, size_t size);
+void*           BlopDuplicate(BlopPool pool, void* ptr, size_t size);
+void            BlopFree(void* ptr);
+
+BlopPool      __BlopCreateDebugPool(BlopApplication app, const char* alias, const char* file, uint32_t line, const char* function);
+void            BlopDestroyDebugPool(BlopPool pool);
+size_t          BlopDebugPoolCount(BlopPool pool);
+size_t          BlopDebugPoolTotal(BlopPool pool);
+void            BlopDebugPoolPrint(BlopPool pool);
+void            BlopDebugPoolClean(BlopPool pool);
+
+void*         __BlopDebugAlloc(BlopPool pool, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void*         __BlopDebugRealloc(BlopPool pool, void* ptr, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void*         __BlopDebugDuplicate(BlopPool pool, void* ptr, size_t size, const char* alias, const char* file, uint32_t line, const char* function);
+void            BlopDebugFree(void* ptr);

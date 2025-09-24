@@ -7,53 +7,41 @@
 #include <string.h>
 #include <stdbool.h>
 
+typedef struct _BlopPool_t* BlopPool;
+typedef struct _BlopApplication_t* BlopApplication;
+
 typedef enum {
     BlopSuccess             ,      
     BlopNullException       , 
-    BlopIndexException      , 
     BlopAllocationFailed    , 
     BlopDeallocationlFailed , 
-    BlopLoopedCallback      ,
+    BlopIndexException      , 
     BlopWrongSignature      ,
     BlopNonEmptyStructure   ,
-    BlopNoAllocation        ,
-} BlopResult;
+} BlopError;
 
-typedef BlopResult  (*PFN_BlopFreeCallback)(void* ptr);
-typedef void*       (*PFN_BlopAllocCallback)(size_t size);
-typedef void*       (*PFN_BlopReallocCallback)(void* ptr, size_t size);
+#ifdef __BLOP_SHOW_APPLICATION_IMPLEMENTATION__
 
-typedef void        (*PFN_BlopLogCallback)(const char* file, uint32_t line, const char* function, const char* message);
-typedef void        (*PFN_BlopExitCallback)(int code);
+#define __BLOP_SHOW_LIST_IMPLEMENTATION__
+#include <blop/list.h>
 
-BlopResult BlopSetFreeCallback   (PFN_BlopFreeCallback callback);
-BlopResult BlopSetAllocCallback  (PFN_BlopAllocCallback callback);
-BlopResult BlopSetReallocCallback(PFN_BlopReallocCallback callback);
-BlopResult BlopSetErrorCallback  (PFN_BlopLogCallback callback);
-BlopResult BlopSetDebugCallback  (PFN_BlopLogCallback callback);
+struct _BlopApplication_t {
+    BlopError error;
+    struct _BlopList_t pools;
+    struct _BlopList_t debug_pools;
+};
 
-const char* BlopResultToString(BlopResult result);
+#endif // __BLOP_SHOW_APPLICATION_IMPLEMENTATION__
 
-#ifdef __BLOP_DEFAULT_CALLBACKS__
+#include <blop/list.h>
 
-#define blop_free(ptr)                       __blop_free((void*)ptr)
-#define blop_free_if(cnd, ptr)     if (cnd) {__blop_free((void*)ptr);}
-#define blop_alloc(type, size)        (type*)__blop_alloc(size)
-#define blop_calloc(type, count)      (type*)__blop_alloc(sizeof(type) * count)
-#define blop_realloc(type, ptr, size) (type*)__blop_realloc(ptr, size)
-#define blop_error(message)                  __blop_error(__FILE__, __LINE__, __FUNCTION__, message)
-#define blop_debug(message)                  __blop_debug(__FILE__, __LINE__, __FUNCTION__, message)
-#define blop_debug_if(cnd, message) if (cnd) { blop_debug(message); }
+BlopApplication BlopCreateApplication(int exit_on_error);
+int             BlopDestroyApplication(BlopApplication app);
 
-#define blop_assert_null(ptr)       if (ptr == NULL) {blop_error(BlopResultToString(BlopNullException));  return BlopNullException; }
-#define blop_assert_index(idx, max) if (idx >= max)  {blop_error(BlopResultToString(BlopIndexException)); return BlopIndexException; }
+BlopError       BlopGetLastError(BlopApplication app);
+const char*     BlopGetErrorString(BlopError error);
 
-extern PFN_BlopFreeCallback     __blop_free; 
-extern PFN_BlopAllocCallback    __blop_alloc;
-extern PFN_BlopReallocCallback  __blop_realloc;
-extern PFN_BlopLogCallback      __blop_error;
-extern PFN_BlopLogCallback      __blop_debug;
-
-#endif // __BLOP_DEFAULT_CALLBACKS__
+BlopList        BlopGetActivePools(BlopApplication app);
+BlopList        BlopGetActiveDebugPools(BlopApplication app);
 
 #endif // __BLOP_H__

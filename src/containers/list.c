@@ -1,8 +1,55 @@
 #define __BLOP_DEFAULT_CALLBACKS__
 #define __BLOP_SHOW_LIST_IMPLEMENTATION__
-#include <blop/blop.h>
 #include <blop/list.h>
-#include <blop/utils.h>
+#include <blop/error.h>
+#include <blop/stdmacro.h>
+
+BLIST       BLIST_Create    () {
+    BLIST list = stdm_calloc(struct _BLIST_t, 1);
+    if (list == NULL) {
+        BERROR_SetLast(BlopAllocationFailed);
+        return NULL;
+    }
+
+    memset(list, 0, sizeof(struct _BLIST_t));
+    return list;
+}
+void        BLIST_Destroy   (BLIST list) {
+    if (list->size > 0) {
+        BERROR_SetLast(BlopNonEmptyStructure);
+        return;
+    }
+
+    stdm_free(list);
+}
+
+BNODE       BNODE_Create    ();
+BNODE       BNODE_Duplicate (BNODE node);
+void        BNODE_Destroy   (BNODE node);
+
+// The stack parameter lets you store a value by copying it instead of having a ptr
+void        BNODE_SetStack  (BNODE node, long long stack);
+void        BNODE_SetHeap   (BNODE node, void* heap);
+
+// The stack parameter lets you store a value by copying it instead of having a ptr
+long long   BNODE_GetStack  (BNODE node);
+void*       BNODE_GetHeap   (BNODE node);
+BNODE       BNODE_GetNext   (BNODE node);
+BNODE       BNODE_GetPrev   (BNODE node);
+BNODE       BLIST_GetFront  (BLIST list);
+BNODE       BLIST_GetBack   (BLIST list);
+size_t      BLIST_GetSize   (BLIST list);
+BNODE       BLIST_GetNode   (BLIST list, size_t index);
+
+void        BLIST_Clear     (BLIST list, int deallocate);
+void        BLIST_Erase     (BLIST list, BNODE node, int deallocate);
+void        BLIST_PopBack   (BLIST list, int deallocate);
+void        BLIST_PopFront  (BLIST list, int deallocate);
+
+void        BLIST_PushBack  (BLIST list, BNODE node);
+void        BLIST_PushFront (BLIST list, BNODE node);
+void        BLIST_InsertNext(BLIST list, BNODE pivot, BNODE node);
+void        BLIST_InsertPrev(BLIST list, BNODE pivot, BNODE node);
 
 BlopResult BlopNewList       (BlopList* buffer) {
     return_verbose_if(buffer == NULL, BlopNullException, "buffer cant be a NULL ptr")

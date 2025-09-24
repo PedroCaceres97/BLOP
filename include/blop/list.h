@@ -34,7 +34,7 @@ void        BNODE_Destroy   (BNODE node);
 void        BNODE_SetStack  (BNODE node, long long stack);
 void        BNODE_SetHeap   (BNODE node, void* heap);
 
-// The stack parameter let  s you store a value by copying it instead of having a ptr
+// The stack parameter lets you store a value by copying it instead of having a ptr
 long long   BNODE_GetStack  (BNODE node);
 void*       BNODE_GetHeap   (BNODE node);
 BNODE       BNODE_GetNext   (BNODE node);

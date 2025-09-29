@@ -1,5 +1,5 @@
 # BLOP
-BLOP – Bizarre Logic & Odd Procedures
+BLOP – Bizarre Logic & Odd Procedures (Only headers modules)
 
 Long ago, in the dawn of digital chaos, a nameless programmer faced an eternal problem:
 "Where do I put the code that doesn’t fit anywhere else?"
@@ -21,17 +21,3 @@ Yet, BLOP has survived countless rewrites, refactors, and total project failures
 BLOP is eternal.
 BLOP is inevitable.
 BLOP… just works.
-
-[cmake]
-cmake -S . -B build -G "MinGW Makefiles" -DCMAKE_INSTALL_PREFIX "C:\Users\Maximo\Desktop\BLOP\install"
-
-[.clangd]
-
-CompileFlags:
-  Add: [-IC:\Dev\BLOP\include]
-
-CompileFlags:
-  Add: [-IC:\Users\Maximo\Desktop\BLOP\include]
-
-CompileFlags:
-  Add: [-ID:\Pedro\BLOP\include]

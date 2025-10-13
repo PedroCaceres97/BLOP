@@ -1,296 +1,508 @@
-#ifndef __BLOP_LIST_H__
-#define __BLOP_LIST_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
-#ifndef BLOP_CONCAT
-    #define BLOP_CONCAT(a, b) a##b
+#include "blop_basics.h"
+
+#ifndef BLOP_LIST_NAME
+    #define BLOP_LIST_NAME blop
 #endif
 
-#ifndef BLOP_XCONCAT
-    #define BLOP_XCONCAT(a, b) BLOP_CONCAT(a, b)
+#ifndef BLOP_LIST_DATA_TYPE
+    #define BLOP_LIST_DATA_TYPE void*
 #endif
 
-// ============================================================================
-// ========================== SNAKE_CASE LIST MACROS ==========================
-// ============================================================================
+#ifndef BLOP_LIST_DEALLOCATE_DATA
+    #define BLOP_LIST_DEALLOCATE_DATA(ptr)
+#endif
 
-#define BLOP_DECLARE_LIST_SNAKE(name, type)                                                                                             \
-                                                                                                                                        \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t))* name;                                                                       \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _node_t))* BLOP_XCONCAT(name, _node);                                             \
-                                                                                                                                        \
-    name BLOP_XCONCAT(name, _create)();                                                                                                 \
-    void BLOP_XCONCAT(name, _destroy)(name list);                                                                                       \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_front)(name list);                                                                \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_back)(name list);                                                                 \
-    size_t BLOP_XCONCAT(name, _get_size)(name list);                                                                                    \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_node)(name list, size_t index);                                                   \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, _clear)(name list, int deallocate);                                                                         \
-    void BLOP_XCONCAT(name, _erase)(name list, BLOP_XCONCAT(name, _node) node, int deallocate);                                         \
-    void BLOP_XCONCAT(name, _pop_back)(name list, int deallocate);                                                                      \
-    void BLOP_XCONCAT(name, _pop_front)(name list, int deallocate);                                                                     \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, _push_back)(name list, BLOP_XCONCAT(name, _node) node);                                                     \
-    void BLOP_XCONCAT(name, _push_front)(name list, BLOP_XCONCAT(name, _node) node);                                                    \
-    void BLOP_XCONCAT(name, _insert_next)(name list, BLOP_XCONCAT(name, _node) pivot, BLOP_XCONCAT(name, _node) node);                  \
-    void BLOP_XCONCAT(name, _insert_prev)(name list, BLOP_XCONCAT(name, _node) pivot, BLOP_XCONCAT(name, _node) node);                  \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_create)();                                                                       \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_duplicate)(BLOP_XCONCAT(name, _node) node);                                      \
-    void BLOP_XCONCAT(name, _node_destroy)(BLOP_XCONCAT(name, _node) node);                                                             \
-    void BLOP_XCONCAT(name, _node_set_data)(BLOP_XCONCAT(name, _node) node, type data);                                                 \
-    type BLOP_XCONCAT(name, _node_get_data)(BLOP_XCONCAT(name, _node) node);                                                            \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_get_next)(BLOP_XCONCAT(name, _node) node);                                       \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_get_prev)(BLOP_XCONCAT(name, _node) node);
+#ifdef BLOP_LIST_SAFE_MODE
+    #define BLOP_LIST_ASSERT_PTR(ptr, rt) if (ptr == NULL) {printf("[BLOP {list.h}]: " #ptr " is a null ptr (returning without effect)"); return rt;}
+    #define BLOP_LIST_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {printf("[BLOP {list.h}]: " #ptr " is a null ptr (returning without effect)"); return;}
+#else
+    #define BLOP_LIST_ASSERT_PTR(ptr, rt)
+    #define BLOP_LIST_ASSERT_PTR_VOID(ptr)
+#endif
 
-#define BLOP_DEFINE_LIST_STRUCT_SNAKE(name, type)           \
-                                                            \
-    struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _node_t)) {   \
-        type data;                                          \
-        BLOP_XCONCAT(name, _node_t) next;                   \
-        BLOP_XCONCAT(name, _node_t) prev;                   \
-        name list;                                          \
-    };                                                      \
-                                                            \
-    struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t)) {        \
-        size_t size;                                        \
-        BLOP_XCONCAT(name, _node) front;                    \
-        BLOP_XCONCAT(name, _node) back;                     \
-    };
+#ifndef BLOP_LIST_CAMEL
 
-#define BLOP_DEFINE_LIST_CREATE_SNAKE(name, type)                                           \
-    name BLOP_XCONCAT(name, _create)() {                                                    \
-        name list = (name)malloc(sizeof(struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t))));   \
-        if (!list) {                                                                        \
-            return NULL;                                                                    \
-        }                                                                                   \
-        list->size = 0;                                                                     \
-        list->front = NULL;                                                                 \
-        list->back = NULL;                                                                  \
-        return list;                                                                        \
+    #define __BLOPS_LIST                BLOP_CONCAT3(_, BLOP_LIST_NAME, _t)
+    #define __BLOPS_NODE                BLOP_CONCAT3(_, BLOP_LIST_NAME, _node_t)
+
+    #define __BLOPT_LIST                BLOP_LIST_NAME
+    #define __BLOPT_NODE                BLOP_CONCAT2(BLOP_LIST_NAME, _node)
+
+    #define __BLOPF_LIST_CREATE         BLOP_CONCAT2(BLOP_LIST_NAME, _create)
+    #define __BLOPF_LIST_DESTROY        BLOP_CONCAT2(BLOP_LIST_NAME, _destroy)
+    #define __BLOPF_LIST_GET_FRONT      BLOP_CONCAT2(BLOP_LIST_NAME, _get_front)
+    #define __BLOPF_LIST_GET_BACK       BLOP_CONCAT2(BLOP_LIST_NAME, _get_back)
+    #define __BLOPF_LIST_GET_SIZE       BLOP_CONCAT2(BLOP_LIST_NAME, _get_size)
+    #define __BLOPF_LIST_GET_NODE       BLOP_CONCAT2(BLOP_LIST_NAME, _get_node)
+    #define __BLOPF_LIST_CLEAR          BLOP_CONCAT2(BLOP_LIST_NAME, _clear)
+    #define __BLOPF_LIST_ERASE          BLOP_CONCAT2(BLOP_LIST_NAME, _erase)
+    #define __BLOPF_LIST_POP_BACK       BLOP_CONCAT2(BLOP_LIST_NAME, _pop_back)
+    #define __BLOPF_LIST_POP_FRONT      BLOP_CONCAT2(BLOP_LIST_NAME, _pop_front)
+    #define __BLOPF_LIST_PUSH_BACK      BLOP_CONCAT2(BLOP_LIST_NAME, _push_back)
+    #define __BLOPF_LIST_PUSH_FRONT     BLOP_CONCAT2(BLOP_LIST_NAME, _push_front)
+    #define __BLOPF_LIST_INSERT_NEXT    BLOP_CONCAT2(BLOP_LIST_NAME, _insert_next)
+    #define __BLOPF_LIST_INSERT_PREV    BLOP_CONCAT2(BLOP_LIST_NAME, _insert_prev)
+
+    #define __BLOPF_NODE_CREATE         BLOP_CONCAT2(BLOP_LIST_NAME, _node_create)
+    #define __BLOPF_NODE_DUPLICATE      BLOP_CONCAT2(BLOP_LIST_NAME, _node_duplicate)
+    #define __BLOPF_NODE_DESTROY        BLOP_CONCAT2(BLOP_LIST_NAME, _node_destroy)
+    #define __BLOPF_NODE_SET_DATA       BLOP_CONCAT2(BLOP_LIST_NAME, _node_set_data)
+    #define __BLOPF_NODE_GET_DATA       BLOP_CONCAT2(BLOP_LIST_NAME, _node_get_data)
+    #define __BLOPF_NODE_GET_NEXT       BLOP_CONCAT2(BLOP_LIST_NAME, _node_get_next)
+    #define __BLOPF_NODE_GET_PREV       BLOP_CONCAT2(BLOP_LIST_NAME, _node_get_prev)
+
+#else // BLOP_LIST_CAMEL
+
+    #define __BLOPS_LIST                BLOP_CONCAT3(_, BLOP_LIST_NAME, _t)
+    #define __BLOPS_NODE                BLOP_CONCAT3(_, BLOP_LIST_NAME, Node_t)
+
+    #define __BLOPT_LIST                BLOP_LIST_NAME
+    #define __BLOPT_NODE                BLOP_CONCAT2(BLOP_LIST_NAME, Node)
+
+    #define __BLOPF_LIST_CREATE         BLOP_CONCAT2(BLOP_LIST_NAME, Create)
+    #define __BLOPF_LIST_DESTROY        BLOP_CONCAT2(BLOP_LIST_NAME, Destroy)
+
+    #define __BLOPF_LIST_GET_FRONT      BLOP_CONCAT2(BLOP_LIST_NAME, GetFront)
+    #define __BLOPF_LIST_GET_BACK       BLOP_CONCAT2(BLOP_LIST_NAME, GetBack)
+    #define __BLOPF_LIST_GET_SIZE       BLOP_CONCAT2(BLOP_LIST_NAME, GetSize)
+    #define __BLOPF_LIST_GET_NODE       BLOP_CONCAT2(BLOP_LIST_NAME, GetNode)
+
+    #define __BLOPF_LIST_CLEAR          BLOP_CONCAT2(BLOP_LIST_NAME, Clear)
+    #define __BLOPF_LIST_ERASE          BLOP_CONCAT2(BLOP_LIST_NAME, Erase)
+    #define __BLOPF_LIST_POP_BACK       BLOP_CONCAT2(BLOP_LIST_NAME, PopBack)
+    #define __BLOPF_LIST_POP_FRONT      BLOP_CONCAT2(BLOP_LIST_NAME, PopFront)
+
+    #define __BLOPF_LIST_PUSH_BACK      BLOP_CONCAT2(BLOP_LIST_NAME, PushBack)
+    #define __BLOPF_LIST_PUSH_FRONT     BLOP_CONCAT2(BLOP_LIST_NAME, PushFront)
+    #define __BLOPF_LIST_INSERT_NEXT    BLOP_CONCAT2(BLOP_LIST_NAME, InsertNext)
+    #define __BLOPF_LIST_INSERT_PREV    BLOP_CONCAT2(BLOP_LIST_NAME, InsertPrev)
+
+    #define __BLOPF_NODE_CREATE         BLOP_CONCAT2(BLOP_LIST_NAME, NodeCreate)
+    #define __BLOPF_NODE_DUPLICATE      BLOP_CONCAT2(BLOP_LIST_NAME, NodeDuplicate)
+    #define __BLOPF_NODE_DESTROY        BLOP_CONCAT2(BLOP_LIST_NAME, NodeDestroy)
+    #define __BLOPF_NODE_SET_DATA       BLOP_CONCAT2(BLOP_LIST_NAME, NodeSetData)
+    #define __BLOPF_NODE_GET_DATA       BLOP_CONCAT2(BLOP_LIST_NAME, NodeGetData)
+    #define __BLOPF_NODE_GET_NEXT       BLOP_CONCAT2(BLOP_LIST_NAME, NodeGetNext)
+    #define __BLOPF_NODE_GET_PREV       BLOP_CONCAT2(BLOP_LIST_NAME, NodeGetPrev)
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct __BLOPS_LIST* __BLOPT_LIST;
+typedef struct __BLOPS_NODE* __BLOPT_NODE;
+
+__BLOPT_LIST        __BLOPF_LIST_CREATE     ();
+void                __BLOPF_LIST_DESTROY    (__BLOPT_LIST list);
+
+__BLOPT_NODE        __BLOPF_LIST_GET_FRONT  (__BLOPT_LIST list);
+__BLOPT_NODE        __BLOPF_LIST_GET_BACK   (__BLOPT_LIST list);
+size_t              __BLOPF_LIST_GET_SIZE   (__BLOPT_LIST list);
+__BLOPT_NODE        __BLOPF_LIST_GET_NODE   (__BLOPT_LIST list, size_t index);
+
+void                __BLOPF_LIST_CLEAR      (__BLOPT_LIST list, int deallocate);
+void                __BLOPF_LIST_ERASE      (__BLOPT_LIST list, __BLOPT_NODE node, int deallocate);
+void                __BLOPF_LIST_POP_BACK   (__BLOPT_LIST list, int deallocate);
+void                __BLOPF_LIST_POP_FRONT  (__BLOPT_LIST list, int deallocate);
+
+void                __BLOPF_LIST_PUSH_BACK  (__BLOPT_LIST list, __BLOPT_NODE node);
+void                __BLOPF_LIST_PUSH_FRONT (__BLOPT_LIST list, __BLOPT_NODE node);
+void                __BLOPF_LIST_INSERT_NEXT(__BLOPT_LIST list, __BLOPT_NODE pivot, __BLOPT_NODE node);
+void                __BLOPF_LIST_INSERT_PREV(__BLOPT_LIST list, __BLOPT_NODE pivot, __BLOPT_NODE node);
+
+__BLOPT_NODE        __BLOPF_NODE_CREATE     ();
+__BLOPT_NODE        __BLOPF_NODE_DUPLICATE  (__BLOPT_NODE node);
+void                __BLOPF_NODE_DESTROY    (__BLOPT_NODE node);
+void                __BLOPF_NODE_SET_DATA   (__BLOPT_NODE node, BLOP_LIST_DATA_TYPE data);
+BLOP_LIST_DATA_TYPE __BLOPF_NODE_GET_DATA   (__BLOPT_NODE node);
+__BLOPT_NODE        __BLOPF_NODE_GET_NEXT   (__BLOPT_NODE node);
+__BLOPT_NODE        __BLOPF_NODE_GET_PREV   (__BLOPT_NODE node);
+
+#ifdef BLOP_INCLUDE_IMPLEMENTATION
+
+struct __BLOPS_NODE {
+    BLOP_LIST_DATA_TYPE data;
+    __BLOPT_NODE        next;
+    __BLOPT_NODE        prev;
+    __BLOPT_LIST        list;
+};
+                        
+struct __BLOPS_LIST {
+    size_t          size;
+    __BLOPT_NODE    front;
+    __BLOPT_NODE    back;
+};
+
+__BLOPT_LIST __BLOPF_LIST_CREATE() {
+    __BLOPT_LIST list = (__BLOPT_LIST)calloc(1, sizeof(struct __BLOPS_LIST));
+    if (!list) {
+        printf("[BLOP {list.h}]: Failed to allocate memory for list (returning NULL)\n");
+        return NULL;
+    }
+    return list;
+}
+void __BLOPF_LIST_DESTROY(__BLOPT_LIST list) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+
+    if (list->size > 0) {
+        printf("[BLOP {list.h}]: A non empty list can not be destroyed (returning without effect), clear the list\n");
+        return;
+    }
+    free(list);
+}
+
+__BLOPT_NODE __BLOPF_LIST_GET_FRONT(__BLOPT_LIST list) {
+    BLOP_LIST_ASSERT_PTR(list, NULL);
+    return list->front;
+}
+__BLOPT_NODE __BLOPF_LIST_GET_BACK(__BLOPT_LIST list) {
+    BLOP_LIST_ASSERT_PTR(list, NULL);
+    return list->back;
+}
+size_t __BLOPF_LIST_GET_SIZE(__BLOPT_LIST list) {
+    BLOP_LIST_ASSERT_PTR(list, 0);
+    return list->size;
+}
+__BLOPT_NODE __BLOPF_LIST_GET_NODE(__BLOPT_LIST list, size_t index) {
+    BLOP_LIST_ASSERT_PTR(list, NULL);
+
+    if (index >= list->size) {
+        printf("[BLOP {list.h}]: Out of bounds (returning NULL)\n");
+        return NULL;
     }
 
-#define BLOP_DEFINE_LIST_DESTROY_SNAKE(name, type)                                          \
-    void BLOP_XCONCAT(name, _destroy)(name list) {                                          \
-        if (list->size > 0) {                                                               \
-            printf("["__FUNCTION__"]: Freeing a non empty list may cause memory leaks");    \
-            return;                                                                         \
-        }                                                                                   \
-        free(list);                                                                         \
+    __BLOPT_NODE current = NULL;
+    if (index < list->size / 2) {
+        current = list->front;
+        for (int i = 0; i < index; i++) {
+            current = current->next;
+        }
+    } else {
+        current = list->back;
+        for (int i = list->size - 1; i > index; i--) {
+            current = current->prev;
+        }
+    }
+    return current;
+}
+
+void __BLOPF_LIST_CLEAR(__BLOPT_LIST list, int deallocate) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+
+    if (list->size == 0) {
+        return;
     }
 
-#define BLOP_DEFINE_LIST_GET_FRONT_SNAKE(name, type)                        \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_front)(name list) {   \
-        return list->front;                                                 \
+    __BLOPT_NODE current = list->front;
+    __BLOPT_NODE next = NULL;
+    while (current) {
+        next = current->next;
+        current->list = NULL;
+        current->next = NULL;
+        current->prev = NULL;
+        if (deallocate) {
+            __BLOPF_NODE_DESTROY(current);
+        }
+        current = next;
     }
 
-#define BLOP_DEFINE_LIST_GET_BACK_SNAKE(name, type)                        \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_back)(name list) {   \
-        return list->back;                                                 \
+    list->size = 0;
+    list->front = NULL;
+    list->back = NULL;
+}
+void __BLOPF_LIST_ERASE(__BLOPT_LIST list, __BLOPT_NODE node, int deallocate) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list != list) {
+        printf("[BLOP {list.h}]: The node does not belong to this list (returning without effect)\n");
+        return;
     }
 
-#define BLOP_DEFINE_LIST_GET_SIZE_SNAKE(name, type)                         \
-    size BLOP_XCONCAT(name, _get_back)(name list) {                         \
-        return list->size;                                                  \
+    if (node->prev) {
+        node->prev->next = node->next;
+    } else {
+        list->front = node->next;
     }
 
-#define BLOP_DEFINE_LIST_GET_NODE_SNAKE(name, type)                                     \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_node)(name list, size_t index) {  \
-        if (index >= list->size) {                                                      \
-            printf("["__FUNCTION__"]: Out of bounds");                                  \
-            return NULL;                                                                \
-        }                                                                               \
-                                                                                        \
-        if (index == 0) {                                                               \
-            return list->front;                                                         \
-        }                                                                               \
-        if (index == list->size - 1) {                                                  \
-            return list->back;                                                          \
-        }                                                                               \
-                                                                                        \
-        BLOP_XCONCAT(name, _node) current = NULL;                                       \
-        if (index < list->size / 2) {                                                   \
-            current = list->front->next;                                                \
-            for (int i = 1; i < index; i++) {                                           \
-                current = current->next;                                                \
-            }                                                                           \
-        } else {                                                                        \
-            current = list->back->prev;                                                 \
-            for (int i = list->size - 2; i > index; i--) {                              \
-                current = current->prev;                                                \
-            }                                                                           \
-                                                                                        \
-        }                                                                               \
-        return current;                                                                 \
+    if (node->next) {
+        node->next->prev = node->prev;
+    } else {
+        list->back = node->prev;
     }
 
-#define BLOP_DEFINE_LIST_GET_NODE_SNAKE(name, type)                                     \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _get_node)(name list, size_t index) {  \
-        if (index >= list->size) {                                                      \
-            printf("["__FUNCTION__"]: Out of bounds");                                  \
-            return NULL;                                                                \
-        }                                                                               \
-                                                                                        \
-        if (index == 0) {                                                               \
-            return list->front;                                                         \
-        }                                                                               \
-        if (index == list->size - 1) {                                                  \
-            return list->back;                                                          \
-        }                                                                               \
-                                                                                        \
-        BLOP_XCONCAT(name, _node) current = NULL;                                       \
-        if (index < list->size / 2) {                                                   \
-            current = list->front->next;                                                \
-            for (int i = 1; i < index; i++) {                                           \
-                current = current->next;                                                \
-            }                                                                           \
-        } else {                                                                        \
-            current = list->back->prev;                                                 \
-            for (int i = list->size - 2; i > index; i--) {                              \
-                current = current->prev;                                                \
-            }                                                                           \
-                                                                                        \
-        }                                                                               \
-        return current;                                                                 \
+    list->size--;
+
+    node->list = NULL;
+    node->next = NULL;
+    node->prev = NULL;
+    if (deallocate) {
+        __BLOPF_NODE_DESTROY(node);
+    }
+}
+void __BLOPF_LIST_POP_BACK(__BLOPT_LIST list, int deallocate) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+
+    if (list->size == 0) {
+        printf("[BLOP {list.h}]: The list is empty (returning without effect)\n");
+        return;
     }
 
-#define BLOP_DEFINE_LIST_SNAKE(name, type)                                                                                              \
-                                                                                                                                        \
-    BLOP_DECLARE_LIST_SNAKE(name, type)                                                                                                 \
-    BLOP_DEFINE_LIST_STRUCT_SNAKE(name, type)                                                                                           \
-                                                                                                                                        \
-    BLOP_DEFINE_LIST_CREATE_SNAKE(name, type)                                                                                           \
-    BLOP_DEFINE_LIST_DESTROY_SNAKE(name, type)                                                                                          \
-    BLOP_DEFINE_LIST_GET_FRONT_SNAKE(name, type)                                                                                        \
-    BLOP_DEFINE_LIST_GET_BACK_SNAKE(name, type)                                                                                         \
-    BLOP_DEFINE_LIST_GET_SIZE_SNAKE(name, type)                                                                                         \
-    BLOP_DEFINE_LIST_GET_NODE_SNAKE(name, type)                                                                                         \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, _clear)(name list, int deallocate);                                                                         \
-    void BLOP_XCONCAT(name, _erase)(name list, BLOP_XCONCAT(name, _node) node, int deallocate);                                         \
-    void BLOP_XCONCAT(name, _pop_back)(name list, int deallocate);                                                                      \
-    void BLOP_XCONCAT(name, _pop_front)(name list, int deallocate);                                                                     \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, _push_back)(name list, BLOP_XCONCAT(name, _node) node);                                                     \
-    void BLOP_XCONCAT(name, _push_front)(name list, BLOP_XCONCAT(name, _node) node);                                                    \
-    void BLOP_XCONCAT(name, _insert_next)(name list, BLOP_XCONCAT(name, _node) pivot, BLOP_XCONCAT(name, _node) node);                  \
-    void BLOP_XCONCAT(name, _insert_prev)(name list, BLOP_XCONCAT(name, _node) pivot, BLOP_XCONCAT(name, _node) node);                  \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_create)();                                                                       \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_duplicate)(BLOP_XCONCAT(name, _node) node);                                      \
-    void BLOP_XCONCAT(name, _node_destroy)(BLOP_XCONCAT(name, _node) node);                                                             \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, _node_set_data)(BLOP_XCONCAT(name, _node) node, type data);                                                 \
-    type BLOP_XCONCAT(name, _node_get_data)(BLOP_XCONCAT(name, _node) node);                                                            \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_get_next)(BLOP_XCONCAT(name, _node) node);                                       \
-    BLOP_XCONCAT(name, _node) BLOP_XCONCAT(name, _node_get_prev)(BLOP_XCONCAT(name, _node) node);
+    __BLOPT_NODE back = list->back;
 
-// ============================================================================
-// ========================== CAMEL CASE LIST MACROS ==========================
-// ============================================================================
-
-#define BLOP_DECLARE_LIST_CAMEL(name, type)                                                                                             \
-                                                                                                                                        \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t))* name;                                                                       \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, Node_t))* BLOP_XCONCAT(name, Node);                                               \
-                                                                                                                                        \
-    name BLOP_XCONCAT(name, _create)();                                                                                                 \
-    void BLOP_XCONCAT(name, _destroy)(name list);                                                                                       \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetFront)(name list);                                                                   \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetBack)(name list);                                                                    \
-    size_t BLOP_XCONCAT(name, GetSize)(name list);                                                                                      \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetNode)(name list, size_t index);                                                      \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, Clear)(name list, int deallocate);                                                                          \
-    void BLOP_XCONCAT(name, Erase)(name list, BLOP_XCONCAT(name, Node) node, int deallocate);                                           \
-    void BLOP_XCONCAT(name, PopBack)(name list, int deallocate);                                                                        \
-    void BLOP_XCONCAT(name, PopFront)(name list, int deallocate);                                                                       \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, PushBack)(name list, BLOP_XCONCAT(name, Node) node);                                                        \
-    void BLOP_XCONCAT(name, PushFront)(name list, BLOP_XCONCAT(name, Node) node);                                                       \
-    void BLOP_XCONCAT(name, InsertBext)(name list, BLOP_XCONCAT(name, Node) pivot, BLOP_XCONCAT(name, Node) node);                      \
-    void BLOP_XCONCAT(name, InsertPrev)(name list, BLOP_XCONCAT(name, Node) pivot, BLOP_XCONCAT(name, Node) node);                      \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeCreate)();                                                                          \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeDuplicate)(BLOP_XCONCAT(name, Node) node);                                          \
-    void BLOP_XCONCAT(name, NodeDestroy)(BLOP_XCONCAT(name, Node) node);                                                                \
-    void BLOP_XCONCAT(name, NodeSetData)(BLOP_XCONCAT(name, Node) node, type data);                                                     \
-    type BLOP_XCONCAT(name, NodeGetData)(BLOP_XCONCAT(name, Node) node);                                                                \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeGetNext)(BLOP_XCONCAT(name, Node) node);                                            \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeGetPrev)(BLOP_XCONCAT(name, Node) node);
-
-#define BLOP_DEFINE_LIST_STRUCT_CAMEL(name, type)           \
-                                                            \
-    struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, Node_t)) {    \
-        type data;                                          \
-        BLOP_XCONCAT(name, Node_t) next;                    \
-        BLOP_XCONCAT(name, Node_t) prev;                    \
-        name list;                                          \
-    };                                                      \
-                                                            \
-    struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t)) {        \
-        size_t size;                                        \
-        BLOP_XCONCAT(name, Node) front;                     \
-        BLOP_XCONCAT(name, Node) back;                      \
-    };
-
-#define BLOP_DEFINE_LIST_CREATE_CAMEL(name, type)                                           \
-    name BLOP_XCONCAT(name, Create)() {                                                     \
-        name list = (name)malloc(sizeof(struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t))));   \
-        if (!list) {                                                                        \
-            return NULL;                                                                    \
-        }                                                                                   \
-        list->size = 0;                                                                     \
-        list->front = NULL;                                                                 \
-        list->back = NULL;                                                                  \
-        return list;                                                                        \
+    if (list->back->prev) {
+        list->back->prev->next = NULL;
+        list->back = list->back->prev;
+    } else {
+        list->front = NULL;
+        list->back = NULL;
     }
 
-#define BLOP_DEFINE_LIST_DESTROY_CAMEL(name, type)                  \
-    void BLOP_XCONCAT(name, Destroy)(name list) {                   \
-        if (!list) {                                                \
-            return;                                                 \
-        }                                                           \
-        if (list->size > 0) {                                       \
-            printf("["__FUNCTION__"]: Cant free a non empty list"); \
-            return;                                                 \
-        }                                                           \
-        free(list);                                                 \
+    list->size--;
+
+    back->list = NULL;
+    back->next = NULL;
+    back->prev = NULL;
+    if (deallocate) {
+        __BLOPF_NODE_DESTROY(back);
+    }
+}
+void __BLOPF_LIST_POP_FRONT(__BLOPT_LIST list, int deallocate) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+
+    if (list->size == 0) {
+        printf("[BLOP {list.h}]: The list is empty (returning without effect)\n");
+        return;
     }
 
-#define BLOP_DEFINE_LIST_CAMEL(name, type)                                                                                              \
-                                                                                                                                        \
-    BLOP_DEFINE_LIST_STRUCT_CAMEL(name, type)                                                                                           \
-                                                                                                                                        \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, _t))* name;                                                                       \
-    typedef struct BLOP_XCONCAT(_, BLOP_XCONCAT(name, Node_t))* BLOP_XCONCAT(name, Node);                                               \
-                                                                                                                                        \
-    name BLOP_XCONCAT(name, _create)();                                                                                                 \
-    void BLOP_XCONCAT(name, _destroy)(name list);                                                                                       \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetFront)(name list);                                                                   \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetBack)(name list);                                                                    \
-    size_t BLOP_XCONCAT(name, GetSize)(name list);                                                                                      \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, GetNode)(name list, size_t index);                                                      \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, Clear)(name list, int deallocate);                                                                          \
-    void BLOP_XCONCAT(name, Erase)(name list, BLOP_XCONCAT(name, Node) node, int deallocate);                                           \
-    void BLOP_XCONCAT(name, PopBack)(name list, int deallocate);                                                                        \
-    void BLOP_XCONCAT(name, PopFront)(name list, int deallocate);                                                                       \
-                                                                                                                                        \
-    void BLOP_XCONCAT(name, PushBack)(name list, BLOP_XCONCAT(name, Node) node);                                                        \
-    void BLOP_XCONCAT(name, PushFront)(name list, BLOP_XCONCAT(name, Node) node);                                                       \
-    void BLOP_XCONCAT(name, InsertBext)(name list, BLOP_XCONCAT(name, Node) pivot, BLOP_XCONCAT(name, Node) node);                      \
-    void BLOP_XCONCAT(name, InsertPrev)(name list, BLOP_XCONCAT(name, Node) pivot, BLOP_XCONCAT(name, Node) node);                      \
-                                                                                                                                        \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeCreate)();                                                                          \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeDuplicate)(BLOP_XCONCAT(name, Node) node);                                          \
-    void BLOP_XCONCAT(name, NodeDestroy)(BLOP_XCONCAT(name, Node) node);                                                                \
-    void BLOP_XCONCAT(name, NodeSetData)(BLOP_XCONCAT(name, Node) node, type data);                                                     \
-    type BLOP_XCONCAT(name, NodeGetData)(BLOP_XCONCAT(name, Node) node);                                                                \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeGetNext)(BLOP_XCONCAT(name, Node) node);                                            \
-    BLOP_XCONCAT(name, Node) BLOP_XCONCAT(name, NodeGetPrev)(BLOP_XCONCAT(name, Node) node);
+    __BLOPT_NODE front = list->front;
 
-#endif // __BLOP_LIST_H__
+    if (list->front->next) {
+        list->front->next->prev = NULL;
+        list->front = list->front->next;
+    } else {
+        list->front = NULL;
+        list->back = NULL;
+    }
+
+    list->size--;
+
+    front->list = NULL;
+    front->next = NULL;
+    front->prev = NULL;
+    if (deallocate) {
+        __BLOPF_NODE_DESTROY(front);
+    }
+}
+
+void __BLOPF_LIST_PUSH_BACK(__BLOPT_LIST list, __BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list) {
+        printf("[BLOP {list.h}]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        return;
+    }
+
+    node->list = list;
+    node->next = NULL;
+    node->prev = list->back;
+
+    if (list->back) {
+        list->back->next = node;
+        list->back = node;
+    } else {
+        list->front = node;
+        list->back = node;
+    }
+
+    list->size++;
+}
+void __BLOPF_LIST_PUSH_FRONT(__BLOPT_LIST list, __BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list) {
+        printf("[BLOP {list.h}]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        return;
+    }
+
+    node->list = list;
+    node->next = list->front;
+    node->prev = NULL;
+
+    if (list->front) {
+        list->front->prev = node;
+        list->front = node;
+    } else {
+        list->front = node;
+        list->back = node;
+    }
+
+    list->size++;
+}
+void __BLOPF_LIST_INSERT_NEXT(__BLOPT_LIST list, __BLOPT_NODE pivot, __BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+    BLOP_LIST_ASSERT_PTR_VOID(pivot);
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list) {
+        printf("[BLOP {list.h}]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        return;
+    }
+
+    if (list->size == 0) {
+        __BLOPF_LIST_PUSH_BACK(list, node);
+        return;
+    }
+
+    if (pivot->list != list) {
+        printf("[BLOP {list.h}]: The pivot does not belong to this list (returning without effect)\n");
+        return;
+    }
+
+    node->list = list;
+    node->prev = pivot;
+    node->next = pivot->next;
+
+    if (pivot->next) {
+        pivot->next->prev = node;
+        pivot->next = node;
+    } else {
+        pivot->next = node;
+        list->back = node;
+    }
+
+    list->size++;
+}
+void __BLOPF_LIST_INSERT_PREV(__BLOPT_LIST list, __BLOPT_NODE pivot, __BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR_VOID(list);
+    BLOP_LIST_ASSERT_PTR_VOID(pivot);
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list) {
+        printf("[BLOP {list.h}]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        return;
+    }
+
+    if (list->size == 0) {
+        __BLOPF_LIST_PUSH_BACK(list, node);
+        return;
+    }
+
+    if (pivot->list != list) {
+        printf("[BLOP {list.h}]: The pivot does not belong to this list (returning without effect)\n");
+        return;
+    }
+
+    node->list = list;
+    node->next = pivot;
+    node->prev = pivot->prev;
+
+    if (pivot->prev) {
+        pivot->prev->next = node;
+        pivot->prev = node;
+    } else {
+        pivot->prev = node;
+        list->front = node;
+    }
+
+    list->size++;
+}
+
+__BLOPT_NODE __BLOPF_NODE_CREATE() {
+    __BLOPT_NODE node = (__BLOPT_NODE)calloc(1, sizeof(struct __BLOPS_NODE));
+    if (!node) {
+        printf("[BLOP {list.h}]: Failed to allocate memory for node (returning NULL)\n");
+        return NULL;
+    }
+    return node;
+}
+__BLOPT_NODE __BLOPF_NODE_DUPLICATE(__BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR(node, NULL);
+
+    __BLOPT_NODE dupnode = (__BLOPT_NODE)calloc(1, sizeof(struct __BLOPS_NODE));
+    if (!dupnode) {
+        printf("[BLOP {list.h}]: Failed to allocate memory for node (returning NULL)\n");
+        return NULL;
+    }
+    dupnode->data = node->data;
+    return dupnode;
+}
+void __BLOPF_NODE_DESTROY(__BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+
+    if (node->list) {
+        printf("[BLOP {list.h}]: The node belongs to a list, it can not be destroyed (returning without effect), you can deallocate a node at erase time.\n");
+        return;
+    }
+    BLOP_LIST_DEALLOCATE_DATA(node->data);
+    free(node);
+}
+void __BLOPF_NODE_SET_DATA(__BLOPT_NODE node, BLOP_LIST_DATA_TYPE data) {
+    BLOP_LIST_ASSERT_PTR_VOID(node);
+    node->data = data;
+}
+BLOP_LIST_DATA_TYPE __BLOPF_NODE_GET_DATA(__BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR(node, (BLOP_LIST_DATA_TYPE)0);
+    return node->data;
+}
+__BLOPT_NODE __BLOPF_NODE_GET_NEXT(__BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR(node, NULL);
+    return node->next;
+}
+__BLOPT_NODE __BLOPF_NODE_GET_PREV(__BLOPT_NODE node) {
+    BLOP_LIST_ASSERT_PTR(node, NULL);
+    return node->prev;
+}
+
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#undef BLOP_LIST_SAFE_MODE
+#undef BLOP_LIST_ASSERT_PTR
+
+#undef BLOP_LIST_NAME
+#undef BLOP_LIST_DATA_TYPE
+#undef BLOP_LIST_DEALLOCATE_DATA
+
+#undef __BLOPS_LIST               
+#undef __BLOPS_NODE               
+
+#undef __BLOPT_LIST               
+#undef __BLOPT_NODE   
+
+#undef BLOP_LIST_CAMEL
+
+#undef __BLOPF_LIST_CREATE        
+#undef __BLOPF_LIST_DESTROY       
+#undef __BLOPF_LIST_GET_FRONT     
+#undef __BLOPF_LIST_GET_BACK      
+#undef __BLOPF_LIST_GET_SIZE      
+#undef __BLOPF_LIST_GET_NODE      
+#undef __BLOPF_LIST_CLEAR         
+#undef __BLOPF_LIST_ERASE         
+#undef __BLOPF_LIST_POP_BACK      
+#undef __BLOPF_LIST_POP_FRONT     
+#undef __BLOPF_LIST_PUSH_BACK     
+#undef __BLOPF_LIST_PUSH_FRONT    
+#undef __BLOPF_LIST_INSERT_NEXT   
+#undef __BLOPF_LIST_INSERT_PREV   
+
+#undef __BLOPF_NODE_CREATE        
+#undef __BLOPF_NODE_DUPLICATE     
+#undef __BLOPF_NODE_DESTROY       
+#undef __BLOPF_NODE_SET_DATA      
+#undef __BLOPF_NODE_GET_DATA      
+#undef __BLOPF_NODE_GET_NEXT      
+#undef __BLOPF_NODE_GET_PREV      

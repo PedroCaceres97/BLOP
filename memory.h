@@ -1,7 +1,7 @@
 #ifndef __BLOP_MEMORY_H__
 #define __BLOP_MEMORY_H__
 
-#include <blop/common.h>
+#include <blop/blop.h>
 
 typedef struct _BMPOOL_t* BMPOOL;
 typedef struct _BDPOOL_t* BDPOOL;

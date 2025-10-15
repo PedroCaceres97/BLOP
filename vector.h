@@ -3,16 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 
-#ifndef __BLOP_BASICS_H__
-#define __BLOP_BASICS_H__
-
-#define BLOP_CONCAT2_IMPL(a, b) a##b
-#define BLOP_CONCAT3_IMPL(a, b, c) a##b##c
-
-#define BLOP_CONCAT2(a, b) BLOP_CONCAT2_IMPL(a, b)
-#define BLOP_CONCAT3(a, b, c) BLOP_CONCAT3_IMPL(a, b, c)
-
-#endif // __BLOP_BASICS_H__
+#include <blop/blop.h>
 
 #ifndef BLOP_VECTOR_NAME
     #define BLOP_VECTOR_NAME blop
@@ -31,8 +22,8 @@
 #endif
 
 #ifdef BLOP_VECTOR_SAFE_MODE
-    #define BLOP_VECTOR_ASSERT_PTR(ptr, rt) if (ptr == NULL) {printf("[BLOP -> vector.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_VECTOR_EXIT; return rt;}
-    #define BLOP_VECTOR_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {printf("[BLOP -> vector.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_VECTOR_EXIT; return;}
+    #define BLOP_VECTOR_ASSERT_PTR(ptr, rt) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " is a null ptr (returning without effect)"); BLOP_VECTOR_EXIT; return rt;}
+    #define BLOP_VECTOR_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " is a null ptr (returning without effect)"); BLOP_VECTOR_EXIT; return;}
 #else
     #define BLOP_VECTOR_ASSERT_PTR(ptr, rt)
     #define BLOP_VECTOR_ASSERT_PTR_VOID(ptr)
@@ -149,19 +140,22 @@ struct _BLOPS_VECTOR {
 };
 
 _BLOPT_VECTOR _BLOPF_VECTOR_CREATE() {
-    _BLOPT_VECTOR vec = (_BLOPT_VECTOR)calloc(1, sizeof(struct _BLOPS_VECTOR));
+    _BLOPT_VECTOR vec = BLOP_MALLOC(struct _BLOPS_VECTOR, 1);
     if (!vec) {
-        printf("[BLOP -> vector.h]: Failed to allocate memory for vector (returning NULL)\n");
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for vector (returning NULL)");
         BLOP_VECTOR_EXIT;
         return NULL;
     }
-    vec->data = (BLOP_VECTOR_DATA_TYPE*)calloc(BLOP_VECTOR_INITIAL_COUNT, sizeof(BLOP_VECTOR_DATA_TYPE));
+
+    vec->data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, BLOP_VECTOR_INITIAL_COUNT);
     if (!vec->data) {
-        printf("[BLOP -> vector.h]: Failed to allocate memory for vector data (returning NULL)\n");
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for vector->data (returning NULL)");
         free(vec);
         BLOP_VECTOR_EXIT;
         return NULL;
     }
+
+    memset(vec->data, 0, BLOP_VECTOR_INITIAL_COUNT * sizeof(BLOP_VECTOR_DATA_TYPE));
     vec->capacity = BLOP_VECTOR_INITIAL_COUNT;
     vec->count = 0;
     return vec;
@@ -170,7 +164,7 @@ void _BLOPF_VECTOR_DESTROY(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (vec->count > 0) {
-        printf("[BLOP -> vector.h]: A non empty vector can not be destroyed (returning without effect), clear the vector\n");
+        BLOP_ERROR_MESSAGE("A non empty vector can not be destroyed (returning without effect), clear the vector");
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -183,7 +177,7 @@ void _BLOPF_VECTOR_SET(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE valu
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (idx >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning without effect)\n");
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx, vec->count);
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -194,7 +188,7 @@ BLOP_VECTOR_DATA_TYPE _BLOPF_VECTOR_GET(_BLOPT_VECTOR vec, size_t idx) {
     BLOP_VECTOR_ASSERT_PTR(vec, (BLOP_VECTOR_DATA_TYPE)0);
 
     if (idx >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning 0)\n");
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx, vec->count);
         BLOP_VECTOR_EXIT;
         return (BLOP_VECTOR_DATA_TYPE)0;
     }
@@ -206,7 +200,7 @@ void _BLOPF_VECTOR_INSERT(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE v
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (idx >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning without effect)\n");
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx, vec->count);
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -222,10 +216,10 @@ void _BLOPF_VECTOR_INSERT(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE v
     }
 
     if (vec->count == vec->capacity) {
-        size_t new_capacity = vec->capacity * BLOP_VECTOR_SCALATOR;
-        BLOP_VECTOR_DATA_TYPE* new_data = (BLOP_VECTOR_DATA_TYPE*)calloc(new_capacity, sizeof(BLOP_VECTOR_DATA_TYPE));
-        if (!new_data) {
-            printf("[BLOP -> vector.h]: Failed to allocate memory for vector data (returning without effect)\n");
+        size_t capacity = vec->capacity * BLOP_VECTOR_SCALATOR;
+        BLOP_VECTOR_DATA_TYPE* data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, capacity);
+        if (!data) {
+            BLOP_ERROR_MESSAGE("Failed to allocate memory for vector data (returning without effect)");
             BLOP_VECTOR_EXIT;
             return;
         }
@@ -235,15 +229,17 @@ void _BLOPF_VECTOR_INSERT(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE v
             -   from 0 to idx-1, as idx element is the idx + 1 number of element
                 we only need to copy idx elements (0 to idx-1 contains exactly idx number of elements)
             -   then we place the new element at index idx
-            -   finally we copy from idx to count-1, which is (count - idx) elements
+            -   we copy from idx to count-1, which is (count - idx) elements
+            -   finally we fill with zeros the remaining capacity
         */
-        memcpy(new_data, vec->data, idx * sizeof(BLOP_VECTOR_DATA_TYPE));
-        new_data[idx] = value;
-        memcpy(&new_data[idx + 1], &vec->data[idx], (vec->count - idx) * sizeof(BLOP_VECTOR_DATA_TYPE));
-        
+        memcpy(data, vec->data, idx * sizeof(BLOP_VECTOR_DATA_TYPE));
+        data[idx] = value;
+        memcpy(&data[idx + 1], &vec->data[idx], (vec->count - idx) * sizeof(BLOP_VECTOR_DATA_TYPE));
+        memset(&data[vec->count + 1], 0, (capacity - (vec->count + 1)) * sizeof(BLOP_VECTOR_DATA_TYPE));
+
         free(vec->data);
-        vec->data = new_data;
-        vec->capacity = new_capacity;
+        vec->data = data;
+        vec->capacity = capacity;
         vec->count++;
         return;
     }
@@ -257,7 +253,10 @@ void _BLOPF_VECTOR_PUSH_BACK(_BLOPT_VECTOR vec, BLOP_VECTOR_DATA_TYPE value) {
 
     if (vec->count == vec->capacity) {
         vec->capacity *= BLOP_VECTOR_SCALATOR;
-        vec->data = (BLOP_VECTOR_DATA_TYPE*)realloc(vec->data, vec->capacity * sizeof(BLOP_VECTOR_DATA_TYPE));
+        BLOP_VECTOR_DATA_TYPE* data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, vec->capacity);
+        memcpy(vec->data, data, vec->count * sizeof(BLOP_VECTOR_DATA_TYPE));
+        free(vec->data);
+        vec->data = data;
     }
 
     vec->data[vec->count] = value;
@@ -267,20 +266,20 @@ void _BLOPF_VECTOR_PUSH_FRONT(_BLOPT_VECTOR vec, BLOP_VECTOR_DATA_TYPE value) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (vec->count == vec->capacity) {
-        size_t new_capacity = vec->capacity * BLOP_VECTOR_SCALATOR;
-        BLOP_VECTOR_DATA_TYPE* new_data = (BLOP_VECTOR_DATA_TYPE*)calloc(new_capacity, sizeof(BLOP_VECTOR_DATA_TYPE));
-        if (!new_data) {
-            printf("[BLOP -> vector.h]: Failed to allocate memory for vector data (returning without effect)\n");
+        size_t capacity = vec->capacity * BLOP_VECTOR_SCALATOR;
+        BLOP_VECTOR_DATA_TYPE* data = (BLOP_VECTOR_DATA_TYPE*)calloc(capacity, sizeof(BLOP_VECTOR_DATA_TYPE));
+        if (!data) {
+            BLOP_ERROR_MESSAGE("Failed to allocate memory for vector data (returning without effect)");
             BLOP_VECTOR_EXIT;
             return;
         }
 
-        memcpy(&new_data[1], vec->data, vec->count * sizeof(BLOP_VECTOR_DATA_TYPE));
-        new_data[0] = value;
+        memcpy(&data[1], vec->data, vec->count * sizeof(BLOP_VECTOR_DATA_TYPE));
+        data[0] = value;
 
         free(vec->data);
-        vec->data = new_data;
-        vec->capacity = new_capacity;
+        vec->data = data;
+        vec->capacity = capacity;
         vec->count++;
         return;
     }
@@ -304,19 +303,18 @@ void _BLOPF_VECTOR_CLEAR(_BLOPT_VECTOR vec) {
     free(vec->data);
     vec->count = 0;
     vec->capacity = BLOP_VECTOR_INITIAL_COUNT;
-    vec->data = (BLOP_VECTOR_DATA_TYPE*)calloc(vec->capacity, sizeof(BLOP_VECTOR_DATA_TYPE));
+    vec->data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, vec->capacity);
     if (!vec->data) {
-        printf("[BLOP -> vector.h]: Failed to allocate memory for vector data (data cleared but vector is now broken)\n");
-        vec->capacity = 0;
+        free(vec);
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for vector data (vector was deallocated)");
         BLOP_VECTOR_EXIT;
-        return;
     }
 }
 void _BLOPF_VECTOR_ERASE(_BLOPT_VECTOR vec, size_t idx) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (idx >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning without effect)\n");
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx, vec->count);
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -344,7 +342,7 @@ void _BLOPF_VECTOR_POP_BACK(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (vec->count == 0) {
-        printf("[BLOP -> vector.h]: The vector is empty (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The vector is empty (returning without effect)");
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -361,7 +359,7 @@ void _BLOPF_VECTOR_POP_FRONT(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
     if (vec->count == 0) {
-        printf("[BLOP -> vector.h]: The vector is empty (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The vector is empty (returning without effect)");
         BLOP_VECTOR_EXIT;
         return;
     }
@@ -398,7 +396,16 @@ void _BLOPF_VECTOR_RESIZE(_BLOPT_VECTOR vec, size_t count) {
 
     if (count > vec->capacity) {
         vec->capacity = count;
-        vec->data = (BLOP_VECTOR_DATA_TYPE*)realloc(vec->data, vec->capacity * sizeof(BLOP_VECTOR_DATA_TYPE));
+        BLOP_VECTOR_DATA_TYPE* data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, vec->capacity);
+        if (!data) {
+            BLOP_ERROR_MESSAGE("Failed to allocate memory for vector data (returning without effect)");
+            BLOP_VECTOR_EXIT;
+            return;
+        }
+
+        memcpy(data, vec->data, vec->count * sizeof(BLOP_VECTOR_DATA_TYPE));
+        free(vec->data);
+        vec->data = data;
     }
 
     memset(&vec->data[vec->count], 0, (count - vec->count) * sizeof(BLOP_VECTOR_DATA_TYPE));
@@ -407,10 +414,19 @@ void _BLOPF_VECTOR_RESIZE(_BLOPT_VECTOR vec, size_t count) {
 void _BLOPF_VECTOR_SHRINK(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
-    if (vec->count < vec->capacity / (BLOP_VECTOR_SCALATOR * 2)) {
+    if (vec->count < vec->capacity / (BLOP_VECTOR_SCALATOR * 2) && vec->count > BLOP_VECTOR_INITIAL_COUNT) {
         vec->capacity = vec->count * BLOP_VECTOR_SCALATOR;
         vec->capacity = (vec->capacity < BLOP_VECTOR_INITIAL_COUNT) ? BLOP_VECTOR_INITIAL_COUNT : vec->capacity;
-        vec->data = (BLOP_VECTOR_DATA_TYPE*)realloc(vec->data, vec->capacity * sizeof(BLOP_VECTOR_DATA_TYPE));
+        BLOP_VECTOR_DATA_TYPE* data = BLOP_MALLOC(BLOP_VECTOR_DATA_TYPE, vec->capacity);
+        if (!data) {
+            BLOP_ERROR_MESSAGE("Failed to allocate memory for vector data (returning without effect)");
+            BLOP_VECTOR_EXIT;
+            return;
+        }
+
+        memcpy(data, vec->data, vec->count * sizeof(BLOP_VECTOR_DATA_TYPE));
+        free(vec->data);
+        vec->data = data;
     }
 }
 
@@ -418,38 +434,24 @@ void _BLOPF_VECTOR_MEMCPY(_BLOPT_VECTOR vec, size_t idx, const BLOP_VECTOR_DATA_
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
     BLOP_VECTOR_ASSERT_PTR_VOID(src);
 
-    if (idx + count >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning without effect)\n");
+    if (idx + count > vec->count) {
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx + count, vec->count);
         BLOP_VECTOR_EXIT;
         return;
     }
 
-    #ifdef BLOP_VECTOR_DEALLOCATE_DATA
-        for (size_t i = 0; i < count; i++) {
-            BLOP_VECTOR_DEALLOCATE_DATA(vec->data[idx + i]);
-            vec->data[idx + i] = src[i];
-        }
-    #else
-        memcpy(&vec->data[idx], src, count * sizeof(BLOP_VECTOR_DATA_TYPE));
-    #endif
+    memcpy(&vec->data[idx], src, count * sizeof(BLOP_VECTOR_DATA_TYPE));
 }
 void _BLOPF_VECTOR_MEMSET(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE value, size_t count) {
     BLOP_VECTOR_ASSERT_PTR_VOID(vec);
 
-    if (idx + count >= vec->count) {
-        printf("[BLOP -> vector.h]: Index out of bounds (returning without effect)\n");
+    if (idx + count > vec->count) {
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx + count, vec->count);
         BLOP_VECTOR_EXIT;
         return;
     }
 
-    if (idx + count > vec->count) {
-        count = vec->count - idx;
-    }
-
     for (size_t i = 0; i < count; i++) {
-        #ifdef BLOP_VECTOR_DEALLOCATE_DATA
-            BLOP_VECTOR_DEALLOCATE_DATA(vec->data[idx + i]);
-        #endif
         vec->data[idx + i] = value;
     }
 }
@@ -458,7 +460,7 @@ BLOP_VECTOR_DATA_TYPE* _BLOPF_VECTOR_GET_DATA(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR(vec, NULL);
     return vec->data;
 }
-size_t   _BLOPF_VECTOR_GET_COUNT(_BLOPT_VECTOR vec) {
+size_t _BLOPF_VECTOR_GET_COUNT(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR(vec, 0);
     return vec->count;
 }
@@ -466,7 +468,7 @@ BLOP_VECTOR_DATA_TYPE _BLOPF_VECTOR_GET_BACK(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR(vec, (BLOP_VECTOR_DATA_TYPE)0);
 
     if (vec->count == 0) {
-        printf("[BLOP -> vector.h]: The vector is empty (returning 0)\n");
+        BLOP_ERROR_MESSAGE("The vector is empty (returning 0)");
         BLOP_VECTOR_EXIT;
         return (BLOP_VECTOR_DATA_TYPE)0;
     }
@@ -477,7 +479,7 @@ BLOP_VECTOR_DATA_TYPE _BLOPF_VECTOR_GET_FRONT(_BLOPT_VECTOR vec) {
     BLOP_VECTOR_ASSERT_PTR(vec, (BLOP_VECTOR_DATA_TYPE)0);
 
     if (vec->count == 0) {
-        printf("[BLOP -> vector.h]: The vector is empty (returning 0)\n");
+        BLOP_ERROR_MESSAGE("The vector is empty (returning 0)");
         BLOP_VECTOR_EXIT;
         return (BLOP_VECTOR_DATA_TYPE)0;
     }

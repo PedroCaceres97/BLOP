@@ -54,6 +54,8 @@ int main() {
     list1_print(list);
     list2_print(list2);
 
+    TestList_get_node(list, 100);
+
     TestList_clear(list, true);
     TestList2_clear(list2, true);
 

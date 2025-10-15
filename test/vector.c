@@ -46,6 +46,9 @@ int main() {
     TestVector_erase(vector, 5);
     TestVector2_erase(vector2, 5);
 
+    TestVector_memset(vector, 0, 42, 7);
+    TestVector2_memset(vector2, 0, tests[0], 7);
+
     vector1_print(vector);
     vector2_print(vector2);
 

@@ -3,28 +3,19 @@
 #include <stdint.h>
 #include <string.h>
 
-#ifndef __BLOP_BASICS_H__
-#define __BLOP_BASICS_H__
-
-#define BLOP_CONCAT2_IMPL(a, b) a##b
-#define BLOP_CONCAT3_IMPL(a, b, c) a##b##c
-
-#define BLOP_CONCAT2(a, b) BLOP_CONCAT2_IMPL(a, b)
-#define BLOP_CONCAT3(a, b, c) BLOP_CONCAT3_IMPL(a, b, c)
-
-#endif // __BLOP_BASICS_H__
+#include <blop/blop.h>
 
 #ifndef BLOP_LIST_NAME
     #define BLOP_LIST_NAME blop
 #endif
 
 #ifndef BLOP_LIST_DATA_TYPE
-    #define BLOP_LIST_DATA_TYPE void*
+    #define BLOP_LIST_DATA_TYPE uint8_t
 #endif
 
 #ifdef BLOP_LIST_SAFE_MODE
-    #define BLOP_LIST_ASSERT_PTR(ptr, rt) if (ptr == NULL) {printf("[BLOP -> list.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return rt;}
-    #define BLOP_LIST_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {printf("[BLOP -> list.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return;}
+    #define BLOP_LIST_ASSERT_PTR(ptr, rt) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return rt;}
+    #define BLOP_LIST_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return;}
 #else
     #define BLOP_LIST_ASSERT_PTR(ptr, rt)
     #define BLOP_LIST_ASSERT_PTR_VOID(ptr)
@@ -140,31 +131,33 @@ _BLOPT_NODE         _BLOPF_NODE_GET_PREV   (_BLOPT_NODE node);
 
 struct _BLOPS_NODE {
     BLOP_LIST_DATA_TYPE data;
-    _BLOPT_NODE        next;
-    _BLOPT_NODE        prev;
-    _BLOPT_LIST        list;
+    _BLOPT_NODE         next;
+    _BLOPT_NODE         prev;
+    _BLOPT_LIST         list;
 };
                         
 struct _BLOPS_LIST {
     size_t          size;
-    _BLOPT_NODE    front;
-    _BLOPT_NODE    back;
+    _BLOPT_NODE     front;
+    _BLOPT_NODE     back;
 };
 
 _BLOPT_LIST _BLOPF_LIST_CREATE() {
-    _BLOPT_LIST list = (_BLOPT_LIST)calloc(1, sizeof(struct _BLOPS_LIST));
+    _BLOPT_LIST list = BLOP_MALLOC(struct _BLOPS_LIST, 1);
     if (!list) {
-        printf("[BLOP -> list.h]: Failed to allocate memory for list (returning NULL)\n");
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for list (returning NULL)");
         BLOP_LIST_EXIT;
         return NULL;
     }
+
+    memset(list, 0, sizeof(struct _BLOPS_LIST));
     return list;
 }
 void _BLOPF_LIST_DESTROY(_BLOPT_LIST list) {
     BLOP_LIST_ASSERT_PTR_VOID(list);
 
     if (list->size > 0) {
-        printf("[BLOP -> list.h]: A non empty list can not be destroyed (returning without effect), clear the list\n");
+        BLOP_ERROR_MESSAGE("A non empty list can not be destroyed (returning without effect), clear the list");
         BLOP_LIST_EXIT;
         return;
     }
@@ -183,24 +176,24 @@ size_t _BLOPF_LIST_GET_SIZE(_BLOPT_LIST list) {
     BLOP_LIST_ASSERT_PTR(list, 0);
     return list->size;
 }
-_BLOPT_NODE _BLOPF_LIST_GET_NODE(_BLOPT_LIST list, size_t index) {
+_BLOPT_NODE _BLOPF_LIST_GET_NODE(_BLOPT_LIST list, size_t idx) {
     BLOP_LIST_ASSERT_PTR(list, NULL);
 
-    if (index >= list->size) {
-        printf("[BLOP -> list.h]: Out of bounds (returning NULL)\n");
+    if (idx >= list->size) {
+        BLOP_ERROR_MESSAGE_BONDS("Index out of bounds (returning without effect)", idx, list->size);
         BLOP_LIST_EXIT;
         return NULL;
     }
 
     _BLOPT_NODE current = NULL;
-    if (index < list->size / 2) {
+    if (idx < list->size / 2) {
         current = list->front;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < idx; i++) {
             current = current->next;
         }
     } else {
         current = list->back;
-        for (int i = list->size - 1; i > index; i--) {
+        for (int i = list->size - 1; i > idx; i--) {
             current = current->prev;
         }
     }
@@ -236,7 +229,7 @@ void _BLOPF_LIST_ERASE(_BLOPT_LIST list, _BLOPT_NODE node, int deallocate) {
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list != list) {
-        printf("[BLOP -> list.h]: The node does not belong to this list (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The node does not belong to this list (returning without effect)");
         BLOP_LIST_EXIT;
         return;
     }
@@ -266,7 +259,7 @@ void _BLOPF_LIST_POP_BACK(_BLOPT_LIST list, int deallocate) {
     BLOP_LIST_ASSERT_PTR_VOID(list);
 
     if (list->size == 0) {
-        printf("[BLOP -> list.h]: The list is empty (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The list is empty (returning without effect)")
         BLOP_LIST_EXIT;
         return;
     }
@@ -294,7 +287,7 @@ void _BLOPF_LIST_POP_FRONT(_BLOPT_LIST list, int deallocate) {
     BLOP_LIST_ASSERT_PTR_VOID(list);
 
     if (list->size == 0) {
-        printf("[BLOP -> list.h]: The list is empty (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The list is empty (returning without effect)")
         BLOP_LIST_EXIT;
         return;
     }
@@ -324,7 +317,7 @@ void _BLOPF_LIST_PUSH_BACK(_BLOPT_LIST list, _BLOPT_NODE node) {
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list) {
-        printf("[BLOP -> list.h]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        BLOP_ERROR_MESSAGE("The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.");
         BLOP_LIST_EXIT;
         return;
     }
@@ -348,7 +341,7 @@ void _BLOPF_LIST_PUSH_FRONT(_BLOPT_LIST list, _BLOPT_NODE node) {
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list) {
-        printf("[BLOP -> list.h]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
+        BLOP_ERROR_MESSAGE("The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.");
         BLOP_LIST_EXIT;
         return;
     }
@@ -373,20 +366,19 @@ void _BLOPF_LIST_INSERT_NEXT(_BLOPT_LIST list, _BLOPT_NODE pivot, _BLOPT_NODE no
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list) {
-        printf("[BLOP -> list.h]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
-        BLOP_LIST_EXIT;
-        return;
-    }
-
-    if (list->size == 0) {
-        _BLOPF_LIST_PUSH_BACK(list, node);
+        BLOP_ERROR_MESSAGE("The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.");
         BLOP_LIST_EXIT;
         return;
     }
 
     if (pivot->list != list) {
-        printf("[BLOP -> list.h]: The pivot does not belong to this list (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The pivot does not belong to this list (returning without effect)");
         BLOP_LIST_EXIT;
+        return;
+    }
+
+    if (pivot == list->back) {
+        _BLOPF_LIST_PUSH_BACK(list, node);
         return;
     }
 
@@ -394,13 +386,8 @@ void _BLOPF_LIST_INSERT_NEXT(_BLOPT_LIST list, _BLOPT_NODE pivot, _BLOPT_NODE no
     node->prev = pivot;
     node->next = pivot->next;
 
-    if (pivot->next) {
-        pivot->next->prev = node;
-        pivot->next = node;
-    } else {
-        pivot->next = node;
-        list->back = node;
-    }
+    pivot->next->prev = node;
+    pivot->next = node;
 
     list->size++;
 }
@@ -410,20 +397,19 @@ void _BLOPF_LIST_INSERT_PREV(_BLOPT_LIST list, _BLOPT_NODE pivot, _BLOPT_NODE no
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list) {
-        printf("[BLOP -> list.h]: The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.\n");
-        BLOP_LIST_EXIT;
-        return;
-    }
-
-    if (list->size == 0) {
-        _BLOPF_LIST_PUSH_BACK(list, node);
+        BLOP_ERROR_MESSAGE("The node already belongs to a list (returning without effect), duplicate the node to obtain same data without belonging to a list or erase it from the belonging list.");
         BLOP_LIST_EXIT;
         return;
     }
 
     if (pivot->list != list) {
-        printf("[BLOP -> list.h]: The pivot does not belong to this list (returning without effect)\n");
+        BLOP_ERROR_MESSAGE("The pivot does not belong to this list (returning without effect)");
         BLOP_LIST_EXIT;
+        return;
+    }
+
+    if (pivot == list->front) {
+        _BLOPF_LIST_PUSH_FRONT(list, node);
         return;
     }
 
@@ -431,35 +417,36 @@ void _BLOPF_LIST_INSERT_PREV(_BLOPT_LIST list, _BLOPT_NODE pivot, _BLOPT_NODE no
     node->next = pivot;
     node->prev = pivot->prev;
 
-    if (pivot->prev) {
-        pivot->prev->next = node;
-        pivot->prev = node;
-    } else {
-        pivot->prev = node;
-        list->front = node;
-    }
+    pivot->prev->next = node;
+    pivot->prev = node;
 
     list->size++;
 }
 
 _BLOPT_NODE _BLOPF_NODE_CREATE() {
-    _BLOPT_NODE node = (_BLOPT_NODE)calloc(1, sizeof(struct _BLOPS_NODE));
+    _BLOPT_NODE node = BLOP_MALLOC(struct _BLOPS_NODE, 1);
     if (!node) {
-        printf("[BLOP -> list.h]: Failed to allocate memory for node (returning NULL)\n");
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for node (returning NULL)");
         BLOP_LIST_EXIT;
         return NULL;
     }
+
+    memset(node, 0, sizeof(struct _BLOPS_NODE));
     return node;
 }
 _BLOPT_NODE _BLOPF_NODE_DUPLICATE(_BLOPT_NODE node) {
     BLOP_LIST_ASSERT_PTR(node, NULL);
 
-    _BLOPT_NODE dupnode = (_BLOPT_NODE)calloc(1, sizeof(struct _BLOPS_NODE));
+    _BLOPT_NODE dupnode = BLOP_MALLOC(struct _BLOPS_NODE, 1);
     if (!dupnode) {
-        printf("[BLOP -> list.h]: Failed to allocate memory for node (returning NULL)\n");
+        BLOP_ERROR_MESSAGE("Failed to allocate memory for node (returning NULL)");
         BLOP_LIST_EXIT;
         return NULL;
     }
+
+    dupnode->next = NULL;
+    dupnode->prev = NULL;
+    dupnode->list = NULL;
     dupnode->data = node->data;
     return dupnode;
 }
@@ -467,7 +454,7 @@ void _BLOPF_NODE_DESTROY(_BLOPT_NODE node) {
     BLOP_LIST_ASSERT_PTR_VOID(node);
 
     if (node->list) {
-        printf("[BLOP -> list.h]: The node belongs to a list, it can not be destroyed (returning without effect), you can deallocate a node at erase time.\n");
+        BLOP_ERROR_MESSAGE("The node belongs to a list, it can not be destroyed (returning without effect), you can deallocate a node at erase time.");
         BLOP_LIST_EXIT;
         return;
     }

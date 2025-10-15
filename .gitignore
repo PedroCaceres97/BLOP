@@ -58,3 +58,4 @@ dkms.conf
 build
 install
 .clangd
+test/*.exe

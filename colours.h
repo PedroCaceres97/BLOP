@@ -1,17 +1,13 @@
 #ifndef __BLOP_COLOURS__
 #define __BLOP_COLOURS__
 
-#include <blop/blop_basics.h>
+#include <blop/blop.h>
 
 /*
 ANSI escape codes colours to work with console.
 On linux they are enabled by default.
 On windows you should enable virtual terminal.
 */
-
-#ifndef BLOP_COLOUR_PREFIX
-    #define BLOP_COLOUR_PREFIX BLOP_
-#endif
 
 #define SEQUENCE            "\x1b["
 #define SEPARATOR           ";"

@@ -14,17 +14,24 @@
 void list1_push(TestList list, int data) {
     TestList_push_back(list, TestList_node_set_data(TestList_node_create(), data));
 }
-
 void list2_push(TestList2 list, const char* data) {
     TestList2_push_back(list, TestList2_node_set_data(TestList2_node_create(), data));
 }
 
-void ups() {
-    printf("Ups\n");
+void list1_print(TestList list) {
+    for (size_t i = 0; i < TestList_get_size(list); i++) {
+        printf("Node %zu Data: %d\n", i, TestList_node_get_data(TestList_get_node(list, i)));
+    }
 }
 
+void list2_print(TestList2 list) {
+    for (size_t i = 0; i < TestList2_get_size(list); i++) {
+        printf("Node %zu Data: %s\n", i, TestList2_node_get_data(TestList2_get_node(list, i)));
+    }
+}
+
+
 int main() {
-    atexit(ups);
 
     TestList list = TestList_create();
     TestList2 list2 = TestList2_create();
@@ -35,15 +42,17 @@ int main() {
         list2_push(list2, tests[i]);
     }
 
-    for (int i = 0; i < 10; i++) {
-        printf("List1 Node %d Data: %d\n", i, TestList_node_get_data(TestList_get_node(list, i)));
-    }
-    for (int i = 0; i < 10; i++) {
-        printf("List2 Node %d Data: %s\n", i, TestList2_node_get_data(TestList2_get_node(list2, i)));
-    }
+    list1_print(list);
+    list2_print(list2);
 
-    TestList_destroy(list);
-    TestList2_destroy(list2);
+    TestList_node node = TestList_get_node(list, 5);
+    TestList2_node node2 = TestList2_get_node(list2, 5);
+
+    TestList_erase(list, node, true);
+    TestList2_erase(list2, node2, true);
+
+    list1_print(list);
+    list2_print(list2);
 
     TestList_clear(list, true);
     TestList2_clear(list2, true);

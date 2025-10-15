@@ -22,10 +22,6 @@
     #define BLOP_LIST_DATA_TYPE void*
 #endif
 
-#ifndef BLOP_LIST_DEALLOCATE_DATA
-    #define BLOP_LIST_DEALLOCATE_DATA(ptr)
-#endif
-
 #ifdef BLOP_LIST_SAFE_MODE
     #define BLOP_LIST_ASSERT_PTR(ptr, rt) if (ptr == NULL) {printf("[BLOP -> list.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return rt;}
     #define BLOP_LIST_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {printf("[BLOP -> list.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return;}
@@ -291,7 +287,7 @@ void _BLOPF_LIST_POP_BACK(_BLOPT_LIST list, int deallocate) {
     back->next = NULL;
     back->prev = NULL;
     if (deallocate) {
-        __BLOPF_NODE_DESTROY(back);
+        _BLOPF_NODE_DESTROY(back);
     }
 }
 void _BLOPF_LIST_POP_FRONT(_BLOPT_LIST list, int deallocate) {
@@ -447,7 +443,7 @@ void _BLOPF_LIST_INSERT_PREV(_BLOPT_LIST list, _BLOPT_NODE pivot, _BLOPT_NODE no
 }
 
 _BLOPT_NODE _BLOPF_NODE_CREATE() {
-    _BLOPT_NODE node = (_BLOPT_NODE)calloc(1, sizeof(struct __BLOPS_NODE));
+    _BLOPT_NODE node = (_BLOPT_NODE)calloc(1, sizeof(struct _BLOPS_NODE));
     if (!node) {
         printf("[BLOP -> list.h]: Failed to allocate memory for node (returning NULL)\n");
         BLOP_LIST_EXIT;
@@ -458,7 +454,7 @@ _BLOPT_NODE _BLOPF_NODE_CREATE() {
 _BLOPT_NODE _BLOPF_NODE_DUPLICATE(_BLOPT_NODE node) {
     BLOP_LIST_ASSERT_PTR(node, NULL);
 
-    _BLOPT_NODE dupnode = (_BLOPT_NODE)calloc(1, sizeof(struct __BLOPS_NODE));
+    _BLOPT_NODE dupnode = (_BLOPT_NODE)calloc(1, sizeof(struct _BLOPS_NODE));
     if (!dupnode) {
         printf("[BLOP -> list.h]: Failed to allocate memory for node (returning NULL)\n");
         BLOP_LIST_EXIT;
@@ -475,7 +471,11 @@ void _BLOPF_NODE_DESTROY(_BLOPT_NODE node) {
         BLOP_LIST_EXIT;
         return;
     }
-    BLOP_LIST_DEALLOCATE_DATA(node->data);
+
+    #ifdef BLOP_LIST_DEALLOCATE_DATA
+        BLOP_LIST_DEALLOCATE_DATA(node->data);
+    #endif
+
     free(node);
 }
 _BLOPT_NODE _BLOPF_NODE_SET_DATA(_BLOPT_NODE node, BLOP_LIST_DATA_TYPE data) {

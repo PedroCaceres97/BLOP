@@ -1,43 +1,134 @@
-#ifndef __BLOP_VECTOR_H__
-#define __BLOP_VECTOR_H__
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
-#include <blop/common.h>
+#ifndef __BLOP_BASICS_H__
+#define __BLOP_BASICS_H__
 
-typedef struct _BVECTOR_t* BVECTOR;
+#define BLOP_CONCAT2_IMPL(a, b) a##b
+#define BLOP_CONCAT3_IMPL(a, b, c) a##b##c
 
-#ifdef __BLOP_SHOW_VECTOR_IMPLEMENTATION__
+#define BLOP_CONCAT2(a, b) BLOP_CONCAT2_IMPL(a, b)
+#define BLOP_CONCAT3(a, b, c) BLOP_CONCAT3_IMPL(a, b, c)
 
-struct _BVECTOR_t {
-    size_t min;         // Minimum size of the vector before shrinking
-    size_t size;       // Number of elements in the vector
-    size_t capacity;    // Allocated capacity of the vector
-    size_t element;     // Size of each element in bytes
+#endif // __BLOP_BASICS_H__
 
-    void* data;         // Pointer to the data array
-    uint8_t scalator;   // Growth factor for resizing
-};
+#ifndef BLOP_VECTOR_NAME
+    #define BLOP_VECTOR_NAME blop
+#endif
 
-#endif // __BLOP_SHOW_VECTOR_IMPLEMENTATION__
+#ifndef BLOP_VECTOR_DATA_TYPE
+    #define BLOP_VECTOR_DATA_TYPE uint8_t
+#endif
 
-/*
-Creates a new BVECTOR with the specified initial data, count of elements in initial data, 
-size of each element, and the scalator (growth factor for resizing).
-If init_data is NULL, the vector is initialized with all zeros.
-*/
-BVECTOR BVECTOR_Create  (void* init, size_t initc, size_t element, uint8_t scalator);
-void    BVECTOR_Destroy (BVECTOR vector, int keep_data);
+#if !defined(BLOP_VECTOR_SCALATOR) || BLOP_VECTOR_SCALATOR < 2
+    #define BLOP_VECTOR_SCALATOR 2
+#endif
 
-/*
-When BVECTOR_Resize is called with a size greater than the current size, new elements are
-initialized with the data provided. If data is NULL, the new elements are left uninitialized (handle carefully).
-*/
-void    BVECTOR_Resize  (BVECTOR vector, size_t size, void* init);
-void*   BVECTOR_GetData (BVECTOR vector);
-size_t  BVECTOR_GetSize (BVECTOR vector);
+#ifndef BLOP_VECTOR_DEALLOCATE_DATA
+    #define BLOP_VECTOR_DEALLOCATE_DATA(ptr)
+#endif
 
-void    BVECTOR_Set     (BVECTOR vector, size_t idx, void* buffer);
-void    BVECTOR_Get     (BVECTOR vector, size_t idx, void* buffer);
-void    BVECTOR_PopBack (BVECTOR vector, void* buffer);
-void    BVECTOR_PushBack(BVECTOR vector, void* buffer);
+#ifdef BLOP_VECTOR_SAFE_MODE
+    #define BLOP_VECTOR_ASSERT_PTR(ptr, rt) if (ptr == NULL) {printf("[BLOP -> vector.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return rt;}
+    #define BLOP_VECTOR_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {printf("[BLOP -> vector.h]: " #ptr " is a null ptr (returning without effect)"); BLOP_LIST_EXIT; return;}
+#else
+    #define BLOP_VECTOR_ASSERT_PTR(ptr, rt)
+    #define BLOP_VECTOR_ASSERT_PTR_VOID(ptr)
+#endif
 
-#endif // __BLOP_VECTOR_H__
+#ifdef BLOP_VECTOR_EXIT_ON_ERROR
+    #define BLOP_VECTOR_EXIT exit(-1)
+#else
+    #define BLOP_VECTOR_EXIT
+#endif
+
+#ifndef BLOP_VECTOR_CAMEL
+
+    #define _BLOPS_VECTOR              BLOP_CONCAT3(_, BLOP_VECTOR_NAME, _t)
+    #define _BLOPT_VECTOR              BLOP_VECTOR_NAME
+
+    #define _BLOPF_VECTOR_CREATE       BLOP_CONCAT2(BLOP_VECTOR_NAME, _create)
+    #define _BLOPF_VECTOR_DESTROY      BLOP_CONCAT2(BLOP_VECTOR_NAME, _destroy)
+
+    #define _BLOPF_VECTOR_SET          BLOP_CONCAT2(BLOP_VECTOR_NAME, _set)
+    #define _BLOPF_VECTOR_GET          BLOP_CONCAT2(BLOP_VECTOR_NAME, _get)
+    #define _BLOPF_VECTOR_GET_SIZE     BLOP_CONCAT2(BLOP_VECTOR_NAME, _get_data)
+    #define _BLOPF_VECTOR_GET_DATA     BLOP_CONCAT2(BLOP_VECTOR_NAME, _get_size)
+    #define _BLOPF_VECTOR_GET_BACK     BLOP_CONCAT2(BLOP_VECTOR_NAME, _get_back)
+    #define _BLOPF_VECTOR_GET_FRONT    BLOP_CONCAT2(BLOP_VECTOR_NAME, _get_front)
+
+    #define _BLOPF_VECTOR_CLEAR        BLOP_CONCAT2(BLOP_VECTOR_NAME, _clear)
+    #define _BLOPF_VECTOR_ERASE        BLOP_CONCAT2(BLOP_VECTOR_NAME, _erase)
+    #define _BLOPF_VECTOR_INSERT       BLOP_CONCAT2(BLOP_VECTOR_NAME, _insert)
+    #define _BLOPF_VECTOR_POP_BACK     BLOP_CONCAT2(BLOP_VECTOR_NAME, _pop_back)
+    #define _BLOPF_VECTOR_POP_FRONT    BLOP_CONCAT2(BLOP_VECTOR_NAME, _pop_front)
+    #define _BLOPF_VECTOR_PUSH_BACK    BLOP_CONCAT2(BLOP_VECTOR_NAME, _push_back)
+    #define _BLOPF_VECTOR_PUSH_FRONT   BLOP_CONCAT2(BLOP_VECTOR_NAME, _push_front)
+
+#else // BLOP_VECTOR_CAMEL
+
+    #define _BLOPS_VECTOR              BLOP_CONCAT3(_, BLOP_VECTOR_NAME, _t)
+    #define _BLOPT_VECTOR              BLOP_VECTOR_NAME
+
+    #define _BLOPF_VECTOR_CREATE       BLOP_CONCAT2(BLOP_VECTOR_NAME, Create)
+    #define _BLOPF_VECTOR_DESTROY      BLOP_CONCAT2(BLOP_VECTOR_NAME, Destroy)
+
+    #define _BLOPF_VECTOR_SET          BLOP_CONCAT2(BLOP_VECTOR_NAME, Set)
+    #define _BLOPF_VECTOR_GET          BLOP_CONCAT2(BLOP_VECTOR_NAME, Get)
+    #define _BLOPF_VECTOR_GET_SIZE     BLOP_CONCAT2(BLOP_VECTOR_NAME, GetData)
+    #define _BLOPF_VECTOR_GET_DATA     BLOP_CONCAT2(BLOP_VECTOR_NAME, GetSize)
+    #define _BLOPF_VECTOR_GET_BACK     BLOP_CONCAT2(BLOP_VECTOR_NAME, GetBack)
+    #define _BLOPF_VECTOR_GET_FRONT    BLOP_CONCAT2(BLOP_VECTOR_NAME, GetFront)
+
+    #define _BLOPF_VECTOR_CLEAR        BLOP_CONCAT2(BLOP_VECTOR_NAME, Clear)
+    #define _BLOPF_VECTOR_ERASE        BLOP_CONCAT2(BLOP_VECTOR_NAME, Erase)
+    #define _BLOPF_VECTOR_INSERT       BLOP_CONCAT2(BLOP_VECTOR_NAME, Insert)
+    #define _BLOPF_VECTOR_POP_BACK     BLOP_CONCAT2(BLOP_VECTOR_NAME, PopBack)
+    #define _BLOPF_VECTOR_POP_FRONT    BLOP_CONCAT2(BLOP_VECTOR_NAME, PopFront)
+    #define _BLOPF_VECTOR_PUSH_BACK    BLOP_CONCAT2(BLOP_VECTOR_NAME, PushBack)
+    #define _BLOPF_VECTOR_PUSH_FRONT   BLOP_CONCAT2(BLOP_VECTOR_NAME, PushFront)
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+typedef struct _BLOPS_VECTOR* _BLOPT_VECTOR;
+
+_BLOPT_VECTOR           _BLOPF_VECTOR_CREATE(size_t inits);
+
+void                    _BLOPF_VECTOR_DESTROY(_BLOPT_VECTOR vec);
+
+void                    _BLOPF_VECTOR_SET(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE value);       
+BLOP_VECTOR_DATA_TYPE   _BLOPF_VECTOR_GET(_BLOPT_VECTOR vec, size_t idx);       
+size_t                  _BLOPF_VECTOR_GET_SIZE(_BLOPT_VECTOR vec);  
+uint8_t*                _BLOPF_VECTOR_GET_DATA(_BLOPT_VECTOR vec);  
+BLOP_VECTOR_DATA_TYPE   _BLOPF_VECTOR_GET_BACK(_BLOPT_VECTOR vec);  
+BLOP_VECTOR_DATA_TYPE   _BLOPF_VECTOR_GET_FRONT(_BLOPT_VECTOR vec); 
+void                    _BLOPF_VECTOR_CLEAR(_BLOPT_VECTOR vec);     
+void                    _BLOPF_VECTOR_ERASE(_BLOPT_VECTOR vec);     
+void                    _BLOPF_VECTOR_INSERT(_BLOPT_VECTOR vec, size_t idx, BLOP_VECTOR_DATA_TYPE value);    
+void                    _BLOPF_VECTOR_POP_BACK(_BLOPT_VECTOR vec);  
+void                    _BLOPF_VECTOR_POP_FRONT(_BLOPT_VECTOR vec); 
+void                    _BLOPF_VECTOR_PUSH_BACK(_BLOPT_VECTOR vec, BLOP_VECTOR_DATA_TYPE value); 
+void                    _BLOPF_VECTOR_PUSH_FRONT(_BLOPT_VECTOR vec, BLOP_VECTOR_DATA_TYPE value);
+
+#ifdef BLOP_VECTOR_IMPLEMENTATION
+
+#endif
+
+#ifdef __cplusplus
+}
+#endif
+
+#undef BLOP_LIST_SAFE_MODE
+#undef BLOP_LIST_EXIT_ON_ERROR
+#undef BLOP_LIST_ASSERT_PTR
+#undef BLOP_LIST_EXIT
+
+#undef BLOP_LIST_NAME
+#undef BLOP_LIST_DATA_TYPE
+#undef BLOP_LIST_DEALLOCATE_DATA

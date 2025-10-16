@@ -6,7 +6,7 @@
 #include <blop/blop.h>
 
 #ifndef BLOP_LIST_NAME
-    #define BLOP_LIST_NAME blop
+    #define BLOP_LIST_NAME BList
 #endif
 
 #ifndef BLOP_LIST_DATA_TYPE

@@ -22,6 +22,7 @@
 // Memory Macros
 
 #define BLOP_FREE(ptr)                         free((void*)ptr)
+#define BLOP_ALLOC(cast, bytes)         (type*)malloc(bytes)
 #define BLOP_MALLOC(type, count)        (type*)malloc(sizeof(type) * (count))
 #define BLOP_CALLOC(type, count)        (type*)calloc(count, sizeof(type))
 #define BLOP_REALLOC(type, ptr, size)   (type*)realloc((void*)ptr, size)

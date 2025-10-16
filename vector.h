@@ -6,7 +6,7 @@
 #include <blop/blop.h>
 
 #ifndef BLOP_VECTOR_NAME
-    #define BLOP_VECTOR_NAME blop
+    #define BLOP_VECTOR_NAME BVector
 #endif
 
 #ifndef BLOP_VECTOR_DATA_TYPE

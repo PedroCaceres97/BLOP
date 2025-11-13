@@ -10,8 +10,40 @@
 
 // Custom Macros
 
-#define BLOP_ERROR_MESSAGE(msg)                     printf("[BLOP -> %s{%s} ]: %s\n", __FILE__, __FUNCTION__, msg)
-#define BLOP_ERROR_MESSAGE_BONDS(msg, idx, bond)    printf("[BLOP -> %s{%s} idx = %zu while bond = %zu]: %s\n", __FILE__, __FUNCTION__, idx, bond, msg)
+#define BLOP_ERROR_MESSAGE(msg)             printf("[BLOP -> %s{%s} ]: %s\n", __FILE__, __FUNCTION__, msg)
+#define BLOP_OUT_OF_BONDS(msg, idx, bond)   printf("[BLOP -> %s{%s} idx = %zu while bond = %zu]: %s\n", __FILE__, __FUNCTION__, idx, bond, msg);
+
+#if defined(BLOP_ABORT_ON_ERROR) && !defined(BLOP_EXIT_ON_ERROR)
+
+#define BLOP_ABORT() abort();
+
+#elif defined(BLOP_EXIT_ON_ERROR)
+
+#define BLOP_ABORT() exit(-1);
+
+#else
+
+#define BLOP_ABORT() ((void)0)
+
+#endif
+
+#ifdef BLOP_SAFE_MODE
+
+#define BLOP_ASSERT(cnd, rtn, msg) if (!(cnd)) {BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return rtn;}
+#define BLOP_ASSERT_VOID(cnd, msg) if (!(cnd)) {BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return;}
+
+#define BLOP_ASSERT_PTR(ptr, rtn) if (ptr == nullptr) {BLOP_ERROR_MESSAGE(#ptr " parameter is a nullptr"); BLOP_ABORT(); return rtn;}
+#define BLOP_ASSERT_PTR_VOID(ptr) if (ptr == nullptr) {BLOP_ERROR_MESSAGE(#ptr " parameter is a nullptr"); BLOP_ABORT(); return;}
+
+#else
+
+#define BLOP_ASSERT(cnd, rtn, msg) ((void)0)
+#define BLOP_ASSERT_VOID(cnd, msg) ((void)0)
+
+#define BLOP_ASSERT_PTR(ptr, rtn)  ((void)0)
+#define BLOP_ASSERT_PTR_VOID(ptr)  ((void)0)
+
+#endif
 
 #define BLOP_CONCAT2_IMPL(a, b)     a##b
 #define BLOP_CONCAT3_IMPL(a, b, c)  a##b##c

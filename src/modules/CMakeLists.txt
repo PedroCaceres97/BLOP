@@ -1,1 +1,0 @@
-target_sources(blop PRIVATE memory.c)

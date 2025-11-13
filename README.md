@@ -1,6 +1,7 @@
 # First Chapter
 
 BLOP – Bizarre Logic & Odd Procedures
+
 *A collection of header-only modules nobody asked for, but everyone deserves.*
 
 ## Introduction
@@ -49,25 +50,42 @@ If you add to BLOP, you’re part of its history. Forever.
 There are many ways to obtain BLOP.
 None of them are officially supported.
 
-1. The Traditional Way 
-Clone the repository like any mortal would: ```bash git clone https://github.com/you/BLOP.git``` Then, include the header of your choosing and hope for the best.
-2. The Forbidden Way 
+1. The Traditional Way: 
+
+Clone the repository like any mortal would: 
+```bash 
+git clone https://github.com/you/BLOP.git
+``` 
+Then, include the header of your choosing and hope for the best.
+
+2. The Forbidden Way:
+
 Download a random .zip file labeled blop_final_FINAL_v2.zip from an obscure forum.
 This may or may not summon undefined behavior (literally).
-3. The Ancient Way
+
+3. The Ancient Way:
+
 Carve the source code onto a stone tablet and compile it with sheer willpower.
 Results may vary depending on compiler and geological conditions.
 
 ## Usage
 
 To use BLOP, simply include one of its headers:
-```C #include <blop/blop.h>```
+
+```C 
+#include <blop/blop.h>
+```
 Then, call a function whose purpose even you don’t fully understand:
-```C blop_doSomethingWeird();```
+
+```C 
+blop_doSomethingWeird();
+```
+
 If it compiles, congratulations — you are now part of the BLOP legacy.
 If it doesn’t, that’s just BLOP testing your resolve.
 Remember: BLOP doesn’t produce errors, it produces challenges.
 
 ## Uninstallation
 You don’t uninstall BLOP.
+
 It uninstalls you.

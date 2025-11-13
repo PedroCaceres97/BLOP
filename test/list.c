@@ -1,15 +1,15 @@
-#define BLOP_LIST_NAME  TestList
-#define BLOP_LIST_DATA_TYPE int
-#define BLOP_LIST_IMPLEMENTATION
-#include "../list.h"
+#define BLOP_SAFE_MODE
+#define BLOP_EXIT_ON_ERROR
 
-#define BLOP_LIST_NAME  TestList2
-#define BLOP_LIST_DATA_TYPE const char*
+#define BLOP_LIST_NAME              TestList
+#define BLOP_LIST_DATA_TYPE         int
 #define BLOP_LIST_IMPLEMENTATION
-// #define BLOP_LIST_EXIT_ON_ERROR
-#include "../list.h"
+#include <blop/list.h>
 
-#include <stdbool.h>
+#define BLOP_LIST_NAME              TestList2
+#define BLOP_LIST_DATA_TYPE const   char*
+#define BLOP_LIST_IMPLEMENTATION
+#include <blop/list.h>
 
 void list1_push(TestList list, int data) {
     TestList_push_back(list, TestList_node_set_data(TestList_node_create(), data));
@@ -54,7 +54,7 @@ int main() {
     list1_print(list);
     list2_print(list2);
 
-    TestList_get_node(list, 100);
+    TestList_get_node(list, 0);
 
     TestList_clear(list, true);
     TestList2_clear(list2, true);

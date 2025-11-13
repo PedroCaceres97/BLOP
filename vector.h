@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-
 #include <blop/blop.h>
 
 #ifndef BLOP_VECTOR_NAME
@@ -451,8 +446,8 @@ BLOP_VECTOR_DATA_TYPE   blopfn_vector_get_front(blopt_vector vec) {
 #undef BLOP_VECTOR_DEALLOCATE_DATA
 #undef BLOP_VECTOR_IMPLEMENTATION
 
-#undef blops_vector   
 #undef blopt_vector
+#undef blops_vector   
 
 #undef blopfn_vector_create    
 #undef blopfn_vector_destroy

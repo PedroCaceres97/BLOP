@@ -32,8 +32,8 @@
 #define BLOP_ASSERT(cnd, rtn, msg) if (!(cnd)) {BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return rtn;}
 #define BLOP_ASSERT_VOID(cnd, msg) if (!(cnd)) {BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return;}
 
-#define BLOP_ASSERT_PTR(ptr, rtn) if (ptr == nullptr) {BLOP_ERROR_MESSAGE(#ptr " parameter is a nullptr"); BLOP_ABORT(); return rtn;}
-#define BLOP_ASSERT_PTR_VOID(ptr) if (ptr == nullptr) {BLOP_ERROR_MESSAGE(#ptr " parameter is a nullptr"); BLOP_ABORT(); return;}
+#define BLOP_ASSERT_PTR(ptr, rtn) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " parameter is a NULL"); BLOP_ABORT(); return rtn;}
+#define BLOP_ASSERT_PTR_VOID(ptr) if (ptr == NULL) {BLOP_ERROR_MESSAGE(#ptr " parameter is a NULL"); BLOP_ABORT(); return;}
 
 #else
 

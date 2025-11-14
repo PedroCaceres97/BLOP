@@ -3,34 +3,17 @@
 BLOP - [Module Name]
 -------------------------------------------------------------------------------
 Documentation template and writing guide for module-specific documentation.
-This template is intended for an AI (or human) that will produce the
-module documentation that appears inside each module's header/source file.
-It explains, in detail, what needs to appear in each numbered section of
-the original template and how to write it so all modules share the same
-conventions and completeness.
 -------------------------------------------------------------------------------
-Style notes (read before filling):
- - Write in plain, precise technical English. Prefer active voice.
- - Be consistent with terminology (use "owner" for memory ownership, "caller"
-   for the code that invoked an API, etc.).
- - Use concrete examples and small code snippets where appropriate, but
-   never include module-specific internals or actual implementation data.
- - Keep the "overview" a little inventive if you like, but the rest must be
-   factual, structured and unambiguous.
- - Use lists and labeled subsections for easy scanning.
- - Include a minimal "metadata" block at the very top for automation tools.
--------------------------------------------------------------------------------
-Required metadata (place at the top of every module doc produced from this template):
- - Module name: short canonical name used in code (e.g. MyModule)
+Metadata:
+ - Module name: short canonical name used in code (e.g. list, vector, pool)
  - Version: semantic or date-based doc version
  - Status: experimental | stable | deprecated
- - Dependencies: other modules, platform constraints, compiler features
- - Macros/flags that modify the API or behavior (list with brief meaning)
+ - Dependencies: blop.h, other modules
 -------------------------------------------------------------------------------
 Table of Contents
   1. First Overview
-  2. Macros, how to fit your needs
-  3. API conventions and public types
+  2. API conventions and public types
+  3. Macros, how to fit your needs
   4. Memory and ownership
   5. Error handling and safe-mode behavior
   6. Thread-safety
@@ -40,11 +23,11 @@ Table of Contents
 ===============================================================================
 
 1) First Overview
- - Purpose: An introduction that states what the module does,
-   what problem(s) it solves, and its intended audience.
-   It can be very creative, fun and engaging to read,
-   do not make fake statements but try to hook the reader.
-   Here´s the README.md as an example:
+  - Purpose:  give a high-level summary of the module for new users.
+              It starts with a brief, engaging introduction to capture interest,
+              then explains what the module does, its scope, and key features.
+
+    Here´s the README.md as an example for the first overview section:
       # BLOP
       BLOP – Bizarre Logic & Odd Procedures (Only headers modules)
 
@@ -87,73 +70,76 @@ Table of Contents
       BLOP is a principle — one of pure, unfiltered usefulness wrapped in absurdity.
       If you add to BLOP, you’re part of its history. Forever."
 
- - Scope: Short bullet list of what is inside the module and what is NOT
-   inside (boundaries). For example: "Provides lightweight dynamic arrays.
-   Does NOT provide thread-safe variants by default."
- - Requirements and constraints: runtime or compile-time constraints (e.g.
-   requires C99, assumes little-endian only for the wire-format helpers,
-   must be initialized before use).
- - Intended usage scenarios: 2–4 concise scenarios where the module shines.
- - Stability statement: whether the API is stable or experimental; whether
-   breaking changes might be expected.
- - Tone guidance: this paragraph can be a tiny bit creative to engage the
-   reader, but stay factual: no fictional metaphors in the detailed sections.
+  Layout:
+    1. Brief, engaging introduction as shown before (2-3 paragraphs).
+    2. What the module does, its scope, and key features (3-5 paragraphs).
+    3. Any high-level design principles or philosophies guiding the module.
 
-What to write:
- - Start with "This module ..." and follow with one clear sentence of intent.
- - Add 3–5 bullets: features, exclusions, platform constraints.
- - Add one line describing expected maturity and compatibility (ABI/semantic).
- - Avoid implementation details (no function names, no static internals).
+2) API conventions and public types
+  - Purpose:  explain naming conventions, data types, and general API design
+              principles used in the module.
+  - Layout:
+    1. Naming conventions: function prefixes/suffixes, type naming patterns.
+    2. Public types: structs, enums, typedefs used in the API.
+    3. API design principles: error handling, memory management, thread-safety.
 
-2) Macros, how to fit your needs
+  - Note: The filosofy of BLOP is to keep things simple and straightforward.
+          If you enable safe-mode, the module will perform extra checks and validations
+          and always exit on error. But if not it will assume the caller knows 
+          what they are doing and dont do shit to maximize performance.
+          Almost all errors are undefined behavior unless safe-mode is enabled.
+          You can be sure any function returning a pointer will return NULL on failure,
+          but in any other case the return value does not relate to an error. 
+          (Add examples of this with examples of the particuar module).
+
+3) Macros, how to fit your needs
  - Purpose: explain all preprocessor macros, compile-time configuration
    points, and how they change the API or behavior.
- - For every macro provide:
-   - Macro name and default value.
-   - Allowed values or formats and their meaning.
-   - Whether the macro must be defined before including the header, or if
-     it can be changed per translation unit.
-   - Examples of common configurations (short, not module-specific).
- - Mention interactions: if Macro A affects Macro B or toggles features.
- - Mention safety macros that switch on "safe mode" or debug assertions.
 
-What to write:
- - Present a table-like list: Macro — Default — Type — Effect — Notes.
- - Show one or two tiny code examples demonstrating how to override macros:
-   e.g. #define MODULE_NAME MyModule before including header.
+ - For EVERY SINGLE macro provide next structure in this exact format:
+   - Macro: [name of the macro]
+   - Default: [default value if any]
+   - Type: [What is supposed to define, a c data type, a function, a boolean flag]
+   - Explanation: [What the macro does, what it affects, and how it changes behavior]
+   - Notes: [Any special notes, caveats, or interactions with other macros] 
 
-3) API conventions and public types
- - Purpose: document naming conventions, calling conventions, typedefs,
-   and the set of public opaque types and handles.
- - Include:
-   - Naming rules for types, functions and macros used by this project.
-   - The public types (opaque structs, enums, typedefs) and a sentence
-     describing their role. For opaque types state "opaque" and lifetime.
-   - Function categories (create/destroy, accessors, mutators, helpers).
-   - Argument nullability rules: which pointers may be NULL, and what that
-     means.
-   - Return value conventions: success codes, sentinel values, and whether
-     functions return errors via errno, custom codes, or assert/abort.
+ - Always include this macros info no matter the module:
+   - Macro: BLOP_SAFE_MODE
+     Default: not defined
+     Type: Boolean flag
+     Explanation: Enables extra runtime checks and validations for safer usage.
+     Notes: When enabled, functions will perform bounds checking and null
+            pointer validations, potentially impacting performance.
 
-What to write:
- - List every public type signature and one-line description (no internals).
- - Define how functions are named and grouped (prefixes/suffixes).
+   - Macro: BLOP_EXIT_ON_ERROR
+     Default: not defined
+     Type: Boolean flag
+     Explanation: Whenever an error is detected it will use exit(-1).
+     Notes: It allows the use of atexit().
+
+   - Macro: BLOP_ABORT_ON_ERROR
+     Default: not defined
+     Type: Boolean flag
+     Explanation: Whenever an error is detected it will use abort().
+     Notes: Useful for debugging as it generates a core dump.
 
 4) Memory and ownership
  - Purpose: make ownership semantics explicit so callers know who must free
-   what and when.
- - For every allocation-returning function describe:
-   - Who owns the returned memory (caller or module).
-   - How to deallocate it (free, module-specific free function).
-   - Whether the module provides pooled or borrowed pointers.
-   - If memory is shared across calls or cached, note lifetime and thread
-     constraints.
- - For input buffers or pointers:
-   - Whether the module copies, borrows, or takes ownership.
-   - Whether the module expects the buffer to be valid until some call.
- - Alignment and size guarantees.
- - Suggest recommended idioms: use helper destroy functions rather than free()
-   when appropriate; prefer stack for small temporary objects.
+            what and when. This has to be very tecnical and precise, jokes aside.
+
+ - Layout: 
+  1. General BLOP rules about memory ownership (Literal copy-paste except these brackets): 
+      You call a function to create and then you call a function to destroy it, 
+      you never call malloc or free directly. 
+      If a function returns a pointer you own it unless otherwise stated.
+
+  2. For every function that allocates, deallocates or may provide this functionality 
+     through their paramaters describe:
+     - Signature (exact prototype).
+     - What activates allocation/deallocation (only in case where the function may but not necessesarily do).
+     - Who owns the returned memory (caller or module).
+     - How to deallocate it (free, module-specific free function).
+     - Alternative functionality or similar function (only if any)
 
 What to write:
  - For each "create"/"alloc" function include a short sentence: "Returns an

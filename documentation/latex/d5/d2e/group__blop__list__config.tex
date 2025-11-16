@@ -1,0 +1,61 @@
+\doxysection{List Configuration Macros }
+\hypertarget{group__blop__list__config}{}\label{group__blop__list__config}\index{List Configuration Macros@{List Configuration Macros}}
+
+
+Configuration options controlling how a list instance is generated.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}~listb
+\begin{DoxyCompactList}\small\item\em The base identifier used for generating symbol names. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}}~uint8\+\_\+t
+\begin{DoxyCompactList}\small\item\em The type stored in each list node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration options controlling how a list instance is generated. 
+
+These macros must be defined {\bfseries{before including the header}}.
+
+If they are not defined, default values are used. 
+
+\label{doc-define-members}
+\Hypertarget{group__blop__list__config_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}\index{List Configuration Macros@{List Configuration Macros}!BLOP\_LIST\_DATA\_TYPE@{BLOP\_LIST\_DATA\_TYPE}}
+\index{BLOP\_LIST\_DATA\_TYPE@{BLOP\_LIST\_DATA\_TYPE}!List Configuration Macros@{List Configuration Macros}}
+\doxysubsubsection{\texorpdfstring{BLOP\_LIST\_DATA\_TYPE}{BLOP\_LIST\_DATA\_TYPE}}
+{\footnotesize\ttfamily \label{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26} 
+\#define BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE~uint8\+\_\+t}
+
+
+
+The type stored in each list node. 
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_DATA\_TYPE\ float}}
+
+\end{DoxyCode}
+
+
+Defaults to {\ttfamily uint8\+\_\+t}. \Hypertarget{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}\index{List Configuration Macros@{List Configuration Macros}!BLOP\_LIST\_NAME@{BLOP\_LIST\_NAME}}
+\index{BLOP\_LIST\_NAME@{BLOP\_LIST\_NAME}!List Configuration Macros@{List Configuration Macros}}
+\doxysubsubsection{\texorpdfstring{BLOP\_LIST\_NAME}{BLOP\_LIST\_NAME}}
+{\footnotesize\ttfamily \label{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d} 
+\#define BLOP\+\_\+\+LIST\+\_\+\+NAME~listb}
+
+
+
+The base identifier used for generating symbol names. 
+
+Example\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_NAME\ mylist}}
+
+\end{DoxyCode}
+
+
+Defaults to {\ttfamily listb}. 

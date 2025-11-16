@@ -1,0 +1,185 @@
+\doxysection{list.\+h File Reference}
+\hypertarget{list_8h}{}\label{list_8h}\index{list.h@{list.h}}
+
+
+Generic intrusive doubly-\/linked list (header-\/only, macro-\/configurable).  
+
+
+{\ttfamily \#include $<$blop/blop.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}~listb
+\begin{DoxyCompactList}\small\item\em The base identifier used for generating symbol names. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}}~uint8\+\_\+t
+\begin{DoxyCompactList}\small\item\em The type stored in each list node. \end{DoxyCompactList}\item 
+\#define {\bfseries blopt\+\_\+list}~\mbox{\hyperlink{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}
+\begin{DoxyCompactList}\small\item\em Internal alias for the configured list name. \end{DoxyCompactList}\item 
+\#define {\bfseries blopt\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+node)
+\begin{DoxyCompactList}\small\item\em Internal alias for the configured node name. \end{DoxyCompactList}\item 
+\#define {\bfseries blops\+\_\+list}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+t)
+\begin{DoxyCompactList}\small\item\em Internal typedef token for the concrete list structure. \end{DoxyCompactList}\item 
+\#define {\bfseries blops\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+node\+\_\+t)
+\begin{DoxyCompactList}\small\item\em Internal typedef token for the concrete node structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Generated public function tokens}\par
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+create}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+create)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+destroy}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+destroy)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+front)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+size}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+size)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+node)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+clear}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+clear)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+erase}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+erase)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+pop\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+pop\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+pop\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+pop\+\_\+front)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+push\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+push\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+push\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+push\+\_\+front)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+insert\+\_\+next}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+insert\+\_\+next)
+\item 
+\#define {\bfseries blopfn\+\_\+list\+\_\+insert\+\_\+prev}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+insert\+\_\+prev)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+create}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+create)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+duplicate}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+duplicate)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+destroy}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+destroy)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+set\+\_\+data}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+set\+\_\+data)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+data}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+data)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+next}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+next)
+\item 
+\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+prev}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+prev)
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{list_8h_ad9e9a0143f96837c0eac143f6be6396f}\label{list_8h_ad9e9a0143f96837c0eac143f6be6396f} 
+typedef struct \+\_\+listb\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries listb}
+\item 
+\Hypertarget{list_8h_aaf95155d67efeb03a9d7ea3ac68dadc6}\label{list_8h_aaf95155d67efeb03a9d7ea3ac68dadc6} 
+typedef struct \+\_\+listb\+\_\+node\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries listb\+\_\+node}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{list_8h_a45ae9dbe8787a8ababf480bf7f535fe7}\label{list_8h_a45ae9dbe8787a8ababf480bf7f535fe7} 
+listb {\bfseries listb\+\_\+create} ()
+\item 
+\Hypertarget{list_8h_ab561e26b477c5bdad5007d7d7bbc5f6b}\label{list_8h_ab561e26b477c5bdad5007d7d7bbc5f6b} 
+void {\bfseries listb\+\_\+destroy} (listb list)
+\item 
+\Hypertarget{list_8h_a89710d5014004816002913dd445eacb2}\label{list_8h_a89710d5014004816002913dd445eacb2} 
+listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+front} (listb list)
+\item 
+\Hypertarget{list_8h_ae271be7b0a15f95e3d8bd35cc3c56018}\label{list_8h_ae271be7b0a15f95e3d8bd35cc3c56018} 
+listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+back} (listb list)
+\item 
+\Hypertarget{list_8h_a379cba956d5c8c1755a793e4c8dbe1c5}\label{list_8h_a379cba956d5c8c1755a793e4c8dbe1c5} 
+size\+\_\+t {\bfseries listb\+\_\+get\+\_\+size} (listb list)
+\item 
+\Hypertarget{list_8h_aeb2ad539f12f58e2dc5aae8fbff341df}\label{list_8h_aeb2ad539f12f58e2dc5aae8fbff341df} 
+listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+node} (listb list, size\+\_\+t index)
+\item 
+\Hypertarget{list_8h_ae39ad958a0e833dd2ef46dcd8d2515b8}\label{list_8h_ae39ad958a0e833dd2ef46dcd8d2515b8} 
+void {\bfseries listb\+\_\+clear} (listb list, int deallocate)
+\item 
+\Hypertarget{list_8h_a46f42c823be998de4c6403079b274506}\label{list_8h_a46f42c823be998de4c6403079b274506} 
+void {\bfseries listb\+\_\+erase} (listb list, listb\+\_\+node node, int deallocate)
+\item 
+\Hypertarget{list_8h_ae92af3d17df4e76089462f7c06f12b39}\label{list_8h_ae92af3d17df4e76089462f7c06f12b39} 
+void {\bfseries listb\+\_\+pop\+\_\+back} (listb list, int deallocate)
+\item 
+\Hypertarget{list_8h_ae1999e28d53d6fc81fc8e446e77fabb2}\label{list_8h_ae1999e28d53d6fc81fc8e446e77fabb2} 
+void {\bfseries listb\+\_\+pop\+\_\+front} (listb list, int deallocate)
+\item 
+\Hypertarget{list_8h_ade70d77438ff5a8a57f87cf0595937ae}\label{list_8h_ade70d77438ff5a8a57f87cf0595937ae} 
+void {\bfseries listb\+\_\+push\+\_\+back} (listb list, listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_ab1edbb58d6ef42e52b2758ba431e1e61}\label{list_8h_ab1edbb58d6ef42e52b2758ba431e1e61} 
+void {\bfseries listb\+\_\+push\+\_\+front} (listb list, listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_a3c585c0ba77bd0a0cf360a5a2d328f9d}\label{list_8h_a3c585c0ba77bd0a0cf360a5a2d328f9d} 
+void {\bfseries listb\+\_\+insert\+\_\+next} (listb list, listb\+\_\+node pivot, listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_af23f1d6df3eb8ef326e47bed44738009}\label{list_8h_af23f1d6df3eb8ef326e47bed44738009} 
+void {\bfseries listb\+\_\+insert\+\_\+prev} (listb list, listb\+\_\+node pivot, listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_a386985904633be9b8e9631b2f833c8dd}\label{list_8h_a386985904633be9b8e9631b2f833c8dd} 
+listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+create} ()
+\item 
+\Hypertarget{list_8h_a36b3e72a2c7126bce693a158d48c0327}\label{list_8h_a36b3e72a2c7126bce693a158d48c0327} 
+listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+duplicate} (listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_a644d0a41d932668c14830162b4047986}\label{list_8h_a644d0a41d932668c14830162b4047986} 
+void {\bfseries listb\+\_\+node\+\_\+destroy} (listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_a5ffe993486b8ea08b5aa2ee393a7caab}\label{list_8h_a5ffe993486b8ea08b5aa2ee393a7caab} 
+listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+set\+\_\+data} (listb\+\_\+node node, uint8\+\_\+t data)
+\item 
+\Hypertarget{list_8h_a1e0fb6bb3c334a56699609db9cf88819}\label{list_8h_a1e0fb6bb3c334a56699609db9cf88819} 
+uint8\+\_\+t {\bfseries listb\+\_\+node\+\_\+get\+\_\+data} (listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_afce7267dfb09ef5dfbc27bdee705adff}\label{list_8h_afce7267dfb09ef5dfbc27bdee705adff} 
+listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+get\+\_\+next} (listb\+\_\+node node)
+\item 
+\Hypertarget{list_8h_a9b936989c01c6eafee9777861e84f672}\label{list_8h_a9b936989c01c6eafee9777861e84f672} 
+listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+get\+\_\+prev} (listb\+\_\+node node)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generic intrusive doubly-\/linked list (header-\/only, macro-\/configurable). 
+
+This header implements a small, configurable, intrusive doubly-\/linked list. The module is designed to be lightweight, header-\/only, and fully customizable through macro configuration.\hypertarget{list_8h_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{list_8h_autotoc_md1}
+The list is intrusive\+: each node holds its own data and the pointers linking it to the list. This reduces allocations and allows users to fully control memory layouts.
+
+The API is generated from configuration macros and may produce multiple list types simply by including this header with different macro definitions.\hypertarget{list_8h_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{How to use}{How to use}}\label{list_8h_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Include normally to get declarations.
+\item In exactly one translation unit, define\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_IMPLEMENTATION}}
+
+\end{DoxyCode}
+
+
+before including this header so that implementation bodies are emitted.
+\end{DoxyItemize}\hypertarget{list_8h_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Example}{Example}}\label{list_8h_autotoc_md3}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_NAME\ mylist}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_DATA\_TYPE\ int}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_IMPLEMENTATION}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
+
+\end{DoxyCode}
+
+
+After this, functions such as {\ttfamily mylist\+\_\+create}, {\ttfamily mylist\+\_\+push\+\_\+back}, etc., become available.
+
+\begin{DoxyDate}{Date}
+2025-\/11-\/16 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Pedro Caceres 
+\end{DoxyAuthor}

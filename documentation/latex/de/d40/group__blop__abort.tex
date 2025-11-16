@@ -1,0 +1,49 @@
+\doxysection{Abort / Exit Helpers }
+\hypertarget{group__blop__abort}{}\label{group__blop__abort}\index{Abort / Exit Helpers@{Abort / Exit Helpers}}
+
+
+Fatal error behavior configuration.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT}}()
+\begin{DoxyCompactList}\small\item\em Abort or exit depending on compile-\/time configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fatal error behavior configuration. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__blop__abort_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}\index{Abort / Exit Helpers@{Abort / Exit Helpers}!BLOP\_ABORT@{BLOP\_ABORT}}
+\index{BLOP\_ABORT@{BLOP\_ABORT}!Abort / Exit Helpers@{Abort / Exit Helpers}}
+\doxysubsubsection{\texorpdfstring{BLOP\_ABORT}{BLOP\_ABORT}}
+{\footnotesize\ttfamily \label{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015} 
+\#define BLOP\+\_\+\+ABORT(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{exit(-\/1)}
+
+\end{DoxyCode}
+
+
+Abort or exit depending on compile-\/time configuration. 
+
+Behavior\+:
+\begin{DoxyItemize}
+\item If {\ttfamily BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+CRASH\+\_\+\+ON\+\_\+\+ERROR\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined\+:
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT()}} becomes a no-\/op.
+\end{DoxyItemize}
+\item Otherwise\+:
+\begin{DoxyItemize}
+\item If {\ttfamily BLOP\+\_\+\+ABORT\+\_\+\+ON\+\_\+\+ERROR} is defined → calls {\ttfamily abort()}.
+\item Else → calls {\ttfamily exit(-\/1)}. 
+\end{DoxyItemize}
+\end{DoxyItemize}

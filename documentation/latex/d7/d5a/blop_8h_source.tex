@@ -1,0 +1,149 @@
+\doxysection{blop.\+h}
+\hypertarget{blop_8h_source}{}\label{blop_8h_source}\mbox{\hyperlink{blop_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#ifndef\ \_\_BLOP\_H\_\_}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#define\ \_\_BLOP\_H\_\_}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00087\ \ \textcolor{comment}{/*\ end\ of\ blop\_config\ */}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ BLOP\_ERROR\_MESSAGE(msg)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf("{}[BLOP\ -\/>\ \%s\{\%s\}\ ]:\ \%s\(\backslash\)n"{},\ \_\_FILE\_\_,\ \_\_FUNCTION\_\_,\ msg)}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\#define\ BLOP\_OUT\_OF\_BONDS\_MESSAGE(idx,\ bond)\ \ \ \ printf("{}[BLOP\ -\/>\ \%s\{\%s\}\ idx\ =\ \%zu\ while\ bond\ =\ \%zu]:\ Index\ out\ of\ bonds\(\backslash\)n"{},\ \_\_FILE\_\_,\ \_\_FUNCTION\_\_,\ idx,\ bond);}}
+\DoxyCodeLine{00117\ \ \textcolor{comment}{/*\ end\ of\ blop\_logging\ */}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\#ifndef\ BLOP\_I\_DONT\_WANT\_TO\_CRASH\_ON\_ERROR\_I\_KNOW\_WHAT\_I\_AM\_DOING}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ BLOP\_ABORT\_ON\_ERROR}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ABORT()\ abort()}}
+\DoxyCodeLine{00143\ \ \ \ \ }
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00156\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ABORT()\ exit(-\/1)}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ABORT()\ ((void)0)}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00175\ \ \textcolor{comment}{/*\ end\ of\ blop\_abort\ */}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#ifndef\ BLOP\_I\_DONT\_WANT\_TO\_CRASH\_ON\_ERROR\_I\_KNOW\_WHAT\_I\_AM\_DOING}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00201\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT(cnd,\ rtn,\ msg)\ \(\backslash\)}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!(cnd))\ \{\ BLOP\_ERROR\_MESSAGE(msg);\ BLOP\_ABORT();\ return\ rtn;\ \}}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_VOID(cnd,\ msg)\ \(\backslash\)}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!(cnd))\ \{\ BLOP\_ERROR\_MESSAGE(msg);\ BLOP\_ABORT();\ return;\ \}}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00222\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_BONDS(idx,\ bond,\ rtn)\ \(\backslash\)}}
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ ((idx)\ >=\ (bond))\ \{\ BLOP\_OUT\_OF\_BONDS\_MESSAGE(idx,\ bond);\ BLOP\_ABORT();\ return\ rtn;\ \}}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_BONDS\_VOID(idx,\ bond)\ \(\backslash\)}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ ((idx)\ >=\ (bond))\ \{\ BLOP\_OUT\_OF\_BONDS\_MESSAGE(idx,\ bond);\ BLOP\_ABORT();\ return;\ \}}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\ \ \ \ \#ifdef\ BLOP\_SAFE\_MODE}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00244\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ASSERT\_PTR(ptr,\ rtn)\ \(\backslash\)}}
+\DoxyCodeLine{00245\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ ((ptr)\ ==\ NULL)\ \{\ BLOP\_ERROR\_MESSAGE(\#ptr\ "{}\ parameter\ is\ NULL"{});\ BLOP\_ABORT();\ return\ rtn;\ \}}}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ASSERT\_PTR\_VOID(ptr)\ \(\backslash\)}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ if\ ((ptr)\ ==\ NULL)\ \{\ BLOP\_ERROR\_MESSAGE(\#ptr\ "{}\ parameter\ is\ NULL"{});\ BLOP\_ABORT();\ return;\ \}}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\ \ \ \ \#else}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00264\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ASSERT\_PTR(ptr,\ rtn)\ \ ((void)0)}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00271\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ BLOP\_ASSERT\_PTR\_VOID(ptr)\ \ ((void)0)}}
+\DoxyCodeLine{00272\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#else\ }\textcolor{comment}{/*\ assertions\ disabled\ entirely\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00290\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT(cnd,\ rtn,\ msg)\ \ \ \ \ \ \ \ \ \ ((void)0)}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00298\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_VOID(cnd,\ msg)\ \ \ \ \ \ \ \ \ \ ((void)0)}}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00309\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_BONDS(idx,\ bond,\ rtn)\ \ \ ((void)0)}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00317\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_BONDS\_VOID(idx,\ bond)\ \ \ ((void)0)}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00327\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_PTR(ptr,\ rtn)\ \ \ \ \ \ \ \ \ \ \ ((void)0)}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00334\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_ASSERT\_PTR\_VOID(ptr)\ \ \ \ \ \ \ \ \ \ \ ((void)0)}}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00337\ \ \textcolor{comment}{/*\ end\ of\ blop\_assert\ */}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#ifndef\ BLOP\_VALID\_EMPTY\_POPPING}}
+\DoxyCodeLine{00360\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_EMPTY\_POPPING(msg)\ \(\backslash\)}}
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ BLOP\_ERROR\_MESSAGE(msg);\ BLOP\_ABORT();}}
+\DoxyCodeLine{00362\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_EMPTY\_POPPING(msg)\ ((void)0)}}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00365\ \ \textcolor{comment}{/*\ end\ of\ blop\_popping\ */}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00381\ \textcolor{preprocessor}{\#define\ BLOP\_CONCAT2\_IMPL(a,\ b)\ a\#\#b}}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00390\ \textcolor{preprocessor}{\#define\ BLOP\_CONCAT3\_IMPL(a,\ b,\ c)\ a\#\#b\#\#c}}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00395\ \textcolor{preprocessor}{\#define\ BLOP\_CONCAT2(a,\ b)\ \ \ \ \ \ \ \ \ BLOP\_CONCAT2\_IMPL(a,\ b)}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00400\ \textcolor{preprocessor}{\#define\ BLOP\_CONCAT3(a,\ b,\ c)\ \ \ \ \ \ BLOP\_CONCAT3\_IMPL(a,\ b,\ c)}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00413\ \textcolor{preprocessor}{\#define\ BLOP\_FREE(ptr)\ free((void*)(ptr))}}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00422\ \textcolor{preprocessor}{\#define\ BLOP\_ALLOC(cast,\ bytes)\ (cast*)malloc(bytes)}}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00431\ \textcolor{preprocessor}{\#define\ BLOP\_MALLOC(type,\ count)\ (type*)malloc(sizeof(type)\ *\ (count))}}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00439\ \textcolor{preprocessor}{\#define\ BLOP\_CALLOC(type,\ count)\ (type*)calloc(count,\ sizeof(type))}}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00448\ \textcolor{preprocessor}{\#define\ BLOP\_REALLOC(cast,\ ptr,\ size)\ (cast*)realloc((void*)(ptr),\ (size))}}
+\DoxyCodeLine{00449\ \ \textcolor{comment}{/*\ end\ memory\ helpers\ */}}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00458\ \textcolor{preprocessor}{\#define\ BLOP\_CAST(type,\ tocast)\ ((type)(tocast))}}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00463\ \textcolor{preprocessor}{\#define\ BLOP\_TERNARY(cnd,\ x,\ y)\ ((cnd)\ ?\ (x)\ :\ (y))}}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00470\ \textcolor{preprocessor}{\#define\ BLOP\_MIN(x,\ y)\ BLOP\_TERNARY((x\ >\ y),\ y,\ x)}}
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00477\ \textcolor{preprocessor}{\#define\ BLOP\_MAX(x,\ y)\ BLOP\_TERNARY((x\ >\ y),\ x,\ y)}}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00482\ \textcolor{preprocessor}{\#define\ BLOP\_DISTANCE(x,\ y)\ (BLOP\_TERNARY(x\ >\ y,\ x\ -\/\ y,\ y\ -\/\ x))}}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00487\ \textcolor{preprocessor}{\#define\ BLOP\_DIFFERENCE(x,\ y)\ (BLOP\_TERNARY(x\ >\ y,\ x\ -\/\ y,\ 0\ -\/\ (y\ -\/\ x)))}}
+\DoxyCodeLine{00488\ }
+\DoxyCodeLine{00498\ \textcolor{preprocessor}{\#define\ BLOP\_PADD(ptr,\ value)\ ((void*)((uint8\_t*)(ptr)\ +\ (value)))}}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00509\ \textcolor{preprocessor}{\#define\ BLOP\_PSUB(ptr,\ value)\ ((void*)((uint8\_t*)(ptr)\ -\/\ (value)))}}
+\DoxyCodeLine{00510\ \ \textcolor{comment}{/*\ end\ blop\_util\ */}}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00513\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ \_\_BLOP\_H\_\_\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

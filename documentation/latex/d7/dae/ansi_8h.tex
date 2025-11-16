@@ -1,0 +1,139 @@
+\doxysection{ansi.\+h File Reference}
+\hypertarget{ansi_8h}{}\label{ansi_8h}\index{ansi.h@{ansi.h}}
+
+
+ANSI escape sequence helper macros.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bfseries ANSI\+\_\+\+ESC}~"{}\textbackslash{}x1b\mbox{[}"{}
+\begin{DoxyCompactList}\small\item\em Control Sequence Introducer (CSI). ~\newline
+ Most ANSI sequences begin with this prefix. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__colors_ga4290716150f11ffa0d453520e79c5116}{ANSI\+\_\+\+COLOR\+\_\+\+SET}}(color)
+\begin{DoxyCompactList}\small\item\em Passthrough identity macro for color constants. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__colors_gaf3df0ee321bb6ba4fb17c4b02618cc78}{ANSI\+\_\+\+COLOR\+\_\+\+TEXT}}(color,  text)
+\begin{DoxyCompactList}\small\item\em Expand to color + text + reset. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+BLACK}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}30m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to black (30). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+RED}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}31m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to red (31). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+GREEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}32m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to green (32). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+YELLOW}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}33m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to yellow (33). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+BLUE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}34m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to blue (34). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+MAGENTA}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}35m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to magenta (35). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+CYAN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}36m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to cyan (36). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+FG\+\_\+\+WHITE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}37m"{}
+\begin{DoxyCompactList}\small\item\em Set foreground to white (37). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+BLACK}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}40m"{}
+\begin{DoxyCompactList}\small\item\em Set background to black (40). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+RED}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}41m"{}
+\begin{DoxyCompactList}\small\item\em Set background to red (41). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+GREEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}42m"{}
+\begin{DoxyCompactList}\small\item\em Set background to green (42). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+YELLOW}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}43m"{}
+\begin{DoxyCompactList}\small\item\em Set background to yellow (43). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+BLUE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}44m"{}
+\begin{DoxyCompactList}\small\item\em Set background to blue (44). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+MAGENTA}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}45m"{}
+\begin{DoxyCompactList}\small\item\em Set background to magenta (45). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+CYAN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}46m"{}
+\begin{DoxyCompactList}\small\item\em Set background to cyan (46). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BG\+\_\+\+WHITE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}47m"{}
+\begin{DoxyCompactList}\small\item\em Set background to white (47). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+RESET\+\_\+\+FULL}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}c"{}
+\begin{DoxyCompactList}\small\item\em Full device reset (ESC c). Resets terminal state. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+RESET}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0m"{}
+\begin{DoxyCompactList}\small\item\em Reset all graphics attributes (SGR 0). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BOLD}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1m"{}
+\begin{DoxyCompactList}\small\item\em Bold text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+DIM}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2m"{}
+\begin{DoxyCompactList}\small\item\em Dim / faint text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+ITALIC}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}3m"{}
+\begin{DoxyCompactList}\small\item\em Italic text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+UNDERLINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}4m"{}
+\begin{DoxyCompactList}\small\item\em Underlined text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+BLINK}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}5m"{}
+\begin{DoxyCompactList}\small\item\em Blink text (slow blink). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+REVERSE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}7m"{}
+\begin{DoxyCompactList}\small\item\em Reverse foreground/background. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+HIDDEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}8m"{}
+\begin{DoxyCompactList}\small\item\em Hidden/obscured text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+STRIKETHROUGH}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}9m"{}
+\begin{DoxyCompactList}\small\item\em Strikethrough text. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+DOUBLE\+\_\+\+UNDER}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}21m"{}
+\begin{DoxyCompactList}\small\item\em Double underline. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+OVERLINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}53m"{}
+\begin{DoxyCompactList}\small\item\em Overlined text. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__extended_ga83224b1892feed6a11a38ab803351222}{ANSI\+\_\+\+FG\+\_\+256}}(n)
+\begin{DoxyCompactList}\small\item\em Foreground 256-\/color mode. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__extended_ga89e3db045f49473e4d2863a21245a726}{ANSI\+\_\+\+BG\+\_\+256}}(n)
+\begin{DoxyCompactList}\small\item\em Background 256-\/color mode. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__extended_ga6d0837a7ede921cce03d25a6ebc0287b}{ANSI\+\_\+\+FG\+\_\+\+RGB}}(r,  g,  b)
+\begin{DoxyCompactList}\small\item\em True-\/color (RGB) foreground. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__extended_ga0789e4540c423be7f8374b6ab9aa969d}{ANSI\+\_\+\+BG\+\_\+\+RGB}}(r,  g,  b)
+\begin{DoxyCompactList}\small\item\em True-\/color (RGB) background. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_gaf50618fe95b808bcd186947f0cf6a5c1}{ANSI\+\_\+\+CURSOR\+\_\+\+UP}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor up by n lines. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga70e5df7169f9b02882e5f22473682d6d}{ANSI\+\_\+\+CURSOR\+\_\+\+DOWN}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor down by n lines. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga749c2591682125075b62d19f7a942ba9}{ANSI\+\_\+\+CURSOR\+\_\+\+FORWARD}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor forward by n columns. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga9d81c1b0675c737f4ce013f3c2e70ae1}{ANSI\+\_\+\+CURSOR\+\_\+\+BACK}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor backward by n columns. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_gae9745d57d25f85d93b779d06631aff26}{ANSI\+\_\+\+CURSOR\+\_\+\+POS}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Absolute cursor positioning (x column, y row). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+SAVE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}s"{}
+\begin{DoxyCompactList}\small\item\em Save current cursor position. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+RESTORE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}u"{}
+\begin{DoxyCompactList}\small\item\em Restore saved cursor position. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+HIDE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}?25l"{}
+\begin{DoxyCompactList}\small\item\em Hide cursor. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+SHOW}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}?25h"{}
+\begin{DoxyCompactList}\small\item\em Show cursor. \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+SCREEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2J"{}
+\begin{DoxyCompactList}\small\item\em Clear entire screen (2J). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2K"{}
+\begin{DoxyCompactList}\small\item\em Clear entire current line (2K). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+END}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+J"{}
+\begin{DoxyCompactList}\small\item\em Clear screen from cursor to end (0J). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+START}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1J"{}
+\begin{DoxyCompactList}\small\item\em Clear screen from cursor to beginning (1J). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+END}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+K"{}
+\begin{DoxyCompactList}\small\item\em Clear line from cursor to end (0K). \end{DoxyCompactList}\item 
+\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+START}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1K"{}
+\begin{DoxyCompactList}\small\item\em Clear line from cursor to start (1K). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+ANSI escape sequence helper macros. 
+
+A lightweight, header-\/only collection of macros generating ANSI/\+VT100 escape sequences for terminal text styling, coloring, cursor control and screen manipulation. All macros expand into constant string literals that may be printed directly to any ANSI-\/compatible terminal.
+
+Usage examples\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{printf(\mbox{\hyperlink{group__ansi__colors_ga4b82ce02685b3d7ebc5e8da4eaefae53}{ANSI\_FG\_RED}}\ \textcolor{stringliteral}{"{}Error!"{}}\ \mbox{\hyperlink{group__ansi__styles_gaf77a445894f2f750d43cf2182cd29e55}{ANSI\_RESET}});}
+\DoxyCodeLine{printf(\mbox{\hyperlink{group__ansi__extended_ga83224b1892feed6a11a38ab803351222}{ANSI\_FG\_256}}(42)\ \textcolor{stringliteral}{"{}Hello"{}}\ \mbox{\hyperlink{group__ansi__styles_gaf77a445894f2f750d43cf2182cd29e55}{ANSI\_RESET}});}
+\DoxyCodeLine{printf(\mbox{\hyperlink{group__ansi__cursor_gae9745d57d25f85d93b779d06631aff26}{ANSI\_CURSOR\_POS}}(10,\ 5));}
+
+\end{DoxyCode}
+
+
+Important\+:
+\begin{DoxyItemize}
+\item Many macros use the \# operator and require compile-\/time literal numbers.
+\item These macros produce raw escape sequences (no validation is performed).
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+Pedro Caceres 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/11-\/16 
+\end{DoxyDate}

@@ -1,0 +1,406 @@
+\doxysection{Miscellaneous Utilities }
+\hypertarget{group__blop__util}{}\label{group__blop__util}\index{Miscellaneous Utilities@{Miscellaneous Utilities}}
+
+
+Token concatenation, memory helpers, casting helpers and arithmetic utilities.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__util_ga42c1738d18b2daa4f4383d8c9ee02787}{BLOP\+\_\+\+CONCAT2\+\_\+\+IMPL}}(a,  b)
+\begin{DoxyCompactList}\small\item\em Concatenate two tokens (raw implementation). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga1b198ae72c7415817df23c840fe76a79}{BLOP\+\_\+\+CONCAT3\+\_\+\+IMPL}}(a,  b,  c)
+\begin{DoxyCompactList}\small\item\em Concatenate three tokens (raw implementation). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(a,  b)
+\begin{DoxyCompactList}\small\item\em Public interface for two token concatenation). \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(a,  b,  c)
+\begin{DoxyCompactList}\small\item\em Public interface for three token concatenation. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga2f71ce13c915019bbb031f62fdbff103}{BLOP\+\_\+\+CAST}}(type,  tocast)
+\begin{DoxyCompactList}\small\item\em Cast a value to another type. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}{BLOP\+\_\+\+TERNARY}}(cnd,  x,  y)
+\begin{DoxyCompactList}\small\item\em Ternary operator helper macro. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga879f948a4bcecec67e975edef8fe47f0}{BLOP\+\_\+\+MIN}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Compute the minimum two values. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_gafa35fa3a0ed4c32517d22d93b935938c}{BLOP\+\_\+\+MAX}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Compute the maximum two values. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga6b0781b86d1e42f24549007b09e265db}{BLOP\+\_\+\+DISTANCE}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Compute absolute difference between two values. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_gad9f0a73211fae39cfbac56d1ce2a32f9}{BLOP\+\_\+\+DIFFERENCE}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Compute signed difference between two values. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_gafecd08c51a496921986067f60ef32b6d}{BLOP\+\_\+\+PADD}}(ptr,  value)
+\begin{DoxyCompactList}\small\item\em Perform byte-\/accurate pointer arithmetic. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga2c02629d5ff69977e9cb4a166179ae53}{BLOP\+\_\+\+PSUB}}(ptr,  value)
+\begin{DoxyCompactList}\small\item\em Perform byte-\/accurate pointer arithmetic. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Memory Helpers}
+Macros for malloc, calloc, realloc, and free. \begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__util_gad6bb5b14476b143cf7cabc864bd55f32}{BLOP\+\_\+\+FREE}}(ptr)
+\begin{DoxyCompactList}\small\item\em Free a previously allocated pointer. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_gae55349f5ce499acce7650ea4e8dc1293}{BLOP\+\_\+\+ALLOC}}(cast,  bytes)
+\begin{DoxyCompactList}\small\item\em Allocate raw memory and cast the result. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\+\_\+\+MALLOC}}(type,  count)
+\begin{DoxyCompactList}\small\item\em Allocate an array of a given type. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga45c90640187ed2c5e4ff9875fe3b719e}{BLOP\+\_\+\+CALLOC}}(type,  count)
+\begin{DoxyCompactList}\small\item\em Allocate and zero-\/initialize an array. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__util_ga783dcb10ca1cf1a2f8c313d0b9ef50af}{BLOP\+\_\+\+REALLOC}}(cast,  ptr,  \mbox{\hyperlink{group__blop__list__impl_ga2cb6e44474d476813d39b6f62bda1c3c}{size}})
+\begin{DoxyCompactList}\small\item\em Reallocate memory and cast the returned pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Token concatenation, memory helpers, casting helpers and arithmetic utilities. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__blop__util_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__util_gae55349f5ce499acce7650ea4e8dc1293}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_ALLOC@{BLOP\_ALLOC}}
+\index{BLOP\_ALLOC@{BLOP\_ALLOC}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_ALLOC}{BLOP\_ALLOC}}
+{\footnotesize\ttfamily \label{group__blop__util_gae55349f5ce499acce7650ea4e8dc1293} 
+\#define BLOP\+\_\+\+ALLOC(\begin{DoxyParamCaption}\item[{}]{cast}{, }\item[{}]{bytes}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(cast*)malloc(bytes)}
+
+\end{DoxyCode}
+
+
+Allocate raw memory and cast the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cast} & Pointer type (e.\+g., {\ttfamily int}). \\
+\hline
+{\em bytes} & Number of bytes to allocate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer of type {\ttfamily (cast\texorpdfstring{$\ast$}{*})}. 
+\end{DoxyReturn}
+\Hypertarget{group__blop__util_ga45c90640187ed2c5e4ff9875fe3b719e}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CALLOC@{BLOP\_CALLOC}}
+\index{BLOP\_CALLOC@{BLOP\_CALLOC}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CALLOC}{BLOP\_CALLOC}}
+{\footnotesize\ttfamily \label{group__blop__util_ga45c90640187ed2c5e4ff9875fe3b719e} 
+\#define BLOP\+\_\+\+CALLOC(\begin{DoxyParamCaption}\item[{}]{type}{, }\item[{}]{count}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(type*)calloc(count,\ \textcolor{keyword}{sizeof}(type))}
+
+\end{DoxyCode}
+
+
+Allocate and zero-\/initialize an array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Element type. \\
+\hline
+{\em count} & Number of elements. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_ga2f71ce13c915019bbb031f62fdbff103}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CAST@{BLOP\_CAST}}
+\index{BLOP\_CAST@{BLOP\_CAST}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CAST}{BLOP\_CAST}}
+{\footnotesize\ttfamily \label{group__blop__util_ga2f71ce13c915019bbb031f62fdbff103} 
+\#define BLOP\+\_\+\+CAST(\begin{DoxyParamCaption}\item[{}]{type}{, }\item[{}]{tocast}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((type)(tocast))}
+
+\end{DoxyCode}
+
+
+Cast a value to another type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Target type. \\
+\hline
+{\em tocast} & Expression or value to cast. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2}{BLOP\_CONCAT2}}
+{\footnotesize\ttfamily \label{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb} 
+\#define BLOP\+\_\+\+CONCAT2(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__blop__util_ga42c1738d18b2daa4f4383d8c9ee02787}{BLOP\_CONCAT2\_IMPL}}(a,\ b)}
+
+\end{DoxyCode}
+
+
+Public interface for two token concatenation). 
+
+\Hypertarget{group__blop__util_ga42c1738d18b2daa4f4383d8c9ee02787}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CONCAT2\_IMPL@{BLOP\_CONCAT2\_IMPL}}
+\index{BLOP\_CONCAT2\_IMPL@{BLOP\_CONCAT2\_IMPL}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2\_IMPL}{BLOP\_CONCAT2\_IMPL}}
+{\footnotesize\ttfamily \label{group__blop__util_ga42c1738d18b2daa4f4383d8c9ee02787} 
+\#define BLOP\+\_\+\+CONCAT2\+\_\+\+IMPL(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{a\#\#b}
+
+\end{DoxyCode}
+
+
+Concatenate two tokens (raw implementation). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First token. \\
+\hline
+{\em b} & Second token. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CONCAT3@{BLOP\_CONCAT3}}
+\index{BLOP\_CONCAT3@{BLOP\_CONCAT3}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT3}{BLOP\_CONCAT3}}
+{\footnotesize\ttfamily \label{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326} 
+\#define BLOP\+\_\+\+CONCAT3(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{, }\item[{}]{c}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__blop__util_ga1b198ae72c7415817df23c840fe76a79}{BLOP\_CONCAT3\_IMPL}}(a,\ b,\ c)}
+
+\end{DoxyCode}
+
+
+Public interface for three token concatenation. 
+
+\Hypertarget{group__blop__util_ga1b198ae72c7415817df23c840fe76a79}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_CONCAT3\_IMPL@{BLOP\_CONCAT3\_IMPL}}
+\index{BLOP\_CONCAT3\_IMPL@{BLOP\_CONCAT3\_IMPL}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT3\_IMPL}{BLOP\_CONCAT3\_IMPL}}
+{\footnotesize\ttfamily \label{group__blop__util_ga1b198ae72c7415817df23c840fe76a79} 
+\#define BLOP\+\_\+\+CONCAT3\+\_\+\+IMPL(\begin{DoxyParamCaption}\item[{}]{a}{, }\item[{}]{b}{, }\item[{}]{c}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{a\#\#b\#\#c}
+
+\end{DoxyCode}
+
+
+Concatenate three tokens (raw implementation). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First token. \\
+\hline
+{\em b} & Second token. \\
+\hline
+{\em c} & Third token. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_gad9f0a73211fae39cfbac56d1ce2a32f9}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_DIFFERENCE@{BLOP\_DIFFERENCE}}
+\index{BLOP\_DIFFERENCE@{BLOP\_DIFFERENCE}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_DIFFERENCE}{BLOP\_DIFFERENCE}}
+{\footnotesize\ttfamily \label{group__blop__util_gad9f0a73211fae39cfbac56d1ce2a32f9} 
+\#define BLOP\+\_\+\+DIFFERENCE(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\mbox{\hyperlink{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}{BLOP\_TERNARY}}(x\ >\ y,\ x\ -\/\ y,\ 0\ -\/\ (y\ -\/\ x)))}
+
+\end{DoxyCode}
+
+
+Compute signed difference between two values. 
+
+\Hypertarget{group__blop__util_ga6b0781b86d1e42f24549007b09e265db}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_DISTANCE@{BLOP\_DISTANCE}}
+\index{BLOP\_DISTANCE@{BLOP\_DISTANCE}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_DISTANCE}{BLOP\_DISTANCE}}
+{\footnotesize\ttfamily \label{group__blop__util_ga6b0781b86d1e42f24549007b09e265db} 
+\#define BLOP\+\_\+\+DISTANCE(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(\mbox{\hyperlink{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}{BLOP\_TERNARY}}(x\ >\ y,\ x\ -\/\ y,\ y\ -\/\ x))}
+
+\end{DoxyCode}
+
+
+Compute absolute difference between two values. 
+
+\Hypertarget{group__blop__util_gad6bb5b14476b143cf7cabc864bd55f32}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_FREE@{BLOP\_FREE}}
+\index{BLOP\_FREE@{BLOP\_FREE}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_FREE}{BLOP\_FREE}}
+{\footnotesize\ttfamily \label{group__blop__util_gad6bb5b14476b143cf7cabc864bd55f32} 
+\#define BLOP\+\_\+\+FREE(\begin{DoxyParamCaption}\item[{}]{ptr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{free((\textcolor{keywordtype}{void}*)(ptr))}
+
+\end{DoxyCode}
+
+
+Free a previously allocated pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to free. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_MALLOC@{BLOP\_MALLOC}}
+\index{BLOP\_MALLOC@{BLOP\_MALLOC}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_MALLOC}{BLOP\_MALLOC}}
+{\footnotesize\ttfamily \label{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778} 
+\#define BLOP\+\_\+\+MALLOC(\begin{DoxyParamCaption}\item[{}]{type}{, }\item[{}]{count}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(type*)malloc(\textcolor{keyword}{sizeof}(type)\ *\ (count))}
+
+\end{DoxyCode}
+
+
+Allocate an array of a given type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Type of each element. \\
+\hline
+{\em count} & Number of elements. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Allocated pointer. 
+\end{DoxyReturn}
+\Hypertarget{group__blop__util_gafa35fa3a0ed4c32517d22d93b935938c}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_MAX@{BLOP\_MAX}}
+\index{BLOP\_MAX@{BLOP\_MAX}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_MAX}{BLOP\_MAX}}
+{\footnotesize\ttfamily \label{group__blop__util_gafa35fa3a0ed4c32517d22d93b935938c} 
+\#define BLOP\+\_\+\+MAX(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}{BLOP\_TERNARY}}((x\ >\ y),\ x,\ y)}
+
+\end{DoxyCode}
+
+
+Compute the maximum two values. 
+
+\begin{DoxyWarning}{Warning}
+Arguments may be evaluated multiple times. 
+\end{DoxyWarning}
+\Hypertarget{group__blop__util_ga879f948a4bcecec67e975edef8fe47f0}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_MIN@{BLOP\_MIN}}
+\index{BLOP\_MIN@{BLOP\_MIN}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_MIN}{BLOP\_MIN}}
+{\footnotesize\ttfamily \label{group__blop__util_ga879f948a4bcecec67e975edef8fe47f0} 
+\#define BLOP\+\_\+\+MIN(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}{BLOP\_TERNARY}}((x\ >\ y),\ y,\ x)}
+
+\end{DoxyCode}
+
+
+Compute the minimum two values. 
+
+\begin{DoxyWarning}{Warning}
+Arguments may be evaluated multiple times. 
+\end{DoxyWarning}
+\Hypertarget{group__blop__util_gafecd08c51a496921986067f60ef32b6d}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_PADD@{BLOP\_PADD}}
+\index{BLOP\_PADD@{BLOP\_PADD}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_PADD}{BLOP\_PADD}}
+{\footnotesize\ttfamily \label{group__blop__util_gafecd08c51a496921986067f60ef32b6d} 
+\#define BLOP\+\_\+\+PADD(\begin{DoxyParamCaption}\item[{}]{ptr}{, }\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((\textcolor{keywordtype}{void}*)((uint8\_t*)(ptr)\ +\ (value)))}
+
+\end{DoxyCode}
+
+
+Perform byte-\/accurate pointer arithmetic. 
+
+These macros convert the pointer to {\ttfamily uint8\+\_\+t\texorpdfstring{$\ast$}{*}} internally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Base pointer. \\
+\hline
+{\em value} & Byte offset forwards. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Adjusted pointer as {\ttfamily void\texorpdfstring{$\ast$}{*}}. 
+\end{DoxyReturn}
+\Hypertarget{group__blop__util_ga2c02629d5ff69977e9cb4a166179ae53}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_PSUB@{BLOP\_PSUB}}
+\index{BLOP\_PSUB@{BLOP\_PSUB}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_PSUB}{BLOP\_PSUB}}
+{\footnotesize\ttfamily \label{group__blop__util_ga2c02629d5ff69977e9cb4a166179ae53} 
+\#define BLOP\+\_\+\+PSUB(\begin{DoxyParamCaption}\item[{}]{ptr}{, }\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((\textcolor{keywordtype}{void}*)((uint8\_t*)(ptr)\ -\/\ (value)))}
+
+\end{DoxyCode}
+
+
+Perform byte-\/accurate pointer arithmetic. 
+
+These macros convert the pointer to {\ttfamily uint8\+\_\+t\texorpdfstring{$\ast$}{*}} internally.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Base pointer. \\
+\hline
+{\em value} & Byte offset backwards. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Adjusted pointer as {\ttfamily void\texorpdfstring{$\ast$}{*}}. 
+\end{DoxyReturn}
+\Hypertarget{group__blop__util_ga783dcb10ca1cf1a2f8c313d0b9ef50af}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_REALLOC@{BLOP\_REALLOC}}
+\index{BLOP\_REALLOC@{BLOP\_REALLOC}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_REALLOC}{BLOP\_REALLOC}}
+{\footnotesize\ttfamily \label{group__blop__util_ga783dcb10ca1cf1a2f8c313d0b9ef50af} 
+\#define BLOP\+\_\+\+REALLOC(\begin{DoxyParamCaption}\item[{}]{cast}{, }\item[{}]{ptr}{, }\item[{}]{\mbox{\hyperlink{group__blop__list__impl_ga2cb6e44474d476813d39b6f62bda1c3c}{size}}}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{(cast*)realloc((\textcolor{keywordtype}{void}*)(ptr),\ (\mbox{\hyperlink{group__blop__list__impl_ga2cb6e44474d476813d39b6f62bda1c3c}{size}}))}
+
+\end{DoxyCode}
+
+
+Reallocate memory and cast the returned pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cast} & Pointer type. \\
+\hline
+{\em ptr} & Pointer to reallocate. \\
+\hline
+{\em size} & New size in bytes. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__util_gab9de23c5459ca71bd138640ed19a2811}\index{Miscellaneous Utilities@{Miscellaneous Utilities}!BLOP\_TERNARY@{BLOP\_TERNARY}}
+\index{BLOP\_TERNARY@{BLOP\_TERNARY}!Miscellaneous Utilities@{Miscellaneous Utilities}}
+\doxysubsubsection{\texorpdfstring{BLOP\_TERNARY}{BLOP\_TERNARY}}
+{\footnotesize\ttfamily \label{group__blop__util_gab9de23c5459ca71bd138640ed19a2811} 
+\#define BLOP\+\_\+\+TERNARY(\begin{DoxyParamCaption}\item[{}]{cnd}{, }\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((cnd)\ ?\ (x)\ :\ (y))}
+
+\end{DoxyCode}
+
+
+Ternary operator helper macro. 
+

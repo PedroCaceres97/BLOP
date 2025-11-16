@@ -1,10 +1,10 @@
-# First Chapter
+# Introduction
 
 BLOP – Bizarre Logic & Odd Procedures
 
 *A collection of header-only modules nobody asked for, but everyone deserves.*
 
-## Introduction
+## Begginings
 *“Long ago, in the dark ages of computing, there was only chaos.*
 *Code was scattered, functions wandered aimlessly, and programmers wept.*
 *Then came BLOP — a mysterious artifact, forged in the fires of *.countless debug sessions.”*
@@ -33,9 +33,9 @@ Yet somehow, BLOP always finds a way to be useful.
 
 ## Core Principles
 
-1) Embrace the Weird    – No function is too strange for BLOP.
-2) Chaos is Consistency – The only standard is having no standard.
-3) Survive Anything     – BLOP will outlive you, me, and possibly the internet.
+1) Embrace the Weird        – No function is too strange for BLOP.
+2) Zero Tolerance on errors - Every error produces program to stop.
+3) Survive Anything         – BLOP will outlive you, me, and possibly the internet.
 
 ## Warning
 
@@ -43,7 +43,7 @@ BLOP does not follow modern software design principles.
 BLOP is a principle — one of pure, unfiltered usefulness wrapped in absurdity.
 If you add to BLOP, you’re part of its history. Forever.
 
-# Second Chapter
+NO THREAD-SAFETY IMPLEMENTED (FOR NOW)
 
 ## Installation
 

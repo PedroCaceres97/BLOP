@@ -1,0 +1,144 @@
+\doxysection{Cursor movement \& visibility }
+\hypertarget{group__ansi__cursor}{}\label{group__ansi__cursor}\index{Cursor movement \& visibility@{Cursor movement \& visibility}}
+
+
+Cursor-\/positioning ANSI sequences.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_gaf50618fe95b808bcd186947f0cf6a5c1}{ANSI\+\_\+\+CURSOR\+\_\+\+UP}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor up by n lines. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga70e5df7169f9b02882e5f22473682d6d}{ANSI\+\_\+\+CURSOR\+\_\+\+DOWN}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor down by n lines. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga749c2591682125075b62d19f7a942ba9}{ANSI\+\_\+\+CURSOR\+\_\+\+FORWARD}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor forward by n columns. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_ga9d81c1b0675c737f4ce013f3c2e70ae1}{ANSI\+\_\+\+CURSOR\+\_\+\+BACK}}(n)
+\begin{DoxyCompactList}\small\item\em Move cursor backward by n columns. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__ansi__cursor_gae9745d57d25f85d93b779d06631aff26}{ANSI\+\_\+\+CURSOR\+\_\+\+POS}}(x,  y)
+\begin{DoxyCompactList}\small\item\em Absolute cursor positioning (x column, y row). \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__cursor_ga1fd3cf5e7ebc3bea75240de3f1fd46f1}\label{group__ansi__cursor_ga1fd3cf5e7ebc3bea75240de3f1fd46f1} 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+SAVE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}s"{}
+\begin{DoxyCompactList}\small\item\em Save current cursor position. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__cursor_ga8303ee4443d1bac8a4926fa430609b7f}\label{group__ansi__cursor_ga8303ee4443d1bac8a4926fa430609b7f} 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+RESTORE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}u"{}
+\begin{DoxyCompactList}\small\item\em Restore saved cursor position. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__cursor_gaf170399b6defc03e053c22cd7688595c}\label{group__ansi__cursor_gaf170399b6defc03e053c22cd7688595c} 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+HIDE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}?25l"{}
+\begin{DoxyCompactList}\small\item\em Hide cursor. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__cursor_ga1dc4531d034b4a7826cbdde1e7fb3a78}\label{group__ansi__cursor_ga1dc4531d034b4a7826cbdde1e7fb3a78} 
+\#define {\bfseries ANSI\+\_\+\+CURSOR\+\_\+\+SHOW}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}?25h"{}
+\begin{DoxyCompactList}\small\item\em Show cursor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Cursor-\/positioning ANSI sequences. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__ansi__cursor_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__ansi__cursor_ga9d81c1b0675c737f4ce013f3c2e70ae1}\index{Cursor movement \& visibility@{Cursor movement \& visibility}!ANSI\_CURSOR\_BACK@{ANSI\_CURSOR\_BACK}}
+\index{ANSI\_CURSOR\_BACK@{ANSI\_CURSOR\_BACK}!Cursor movement \& visibility@{Cursor movement \& visibility}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CURSOR\_BACK}{ANSI\_CURSOR\_BACK}}
+{\footnotesize\ttfamily \label{group__ansi__cursor_ga9d81c1b0675c737f4ce013f3c2e70ae1} 
+\#define ANSI\+\_\+\+CURSOR\+\_\+\+BACK(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \#n\ \textcolor{stringliteral}{"{}D"{}}}
+
+\end{DoxyCode}
+
+
+Move cursor backward by n columns. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of columns (literal). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ansi__cursor_ga70e5df7169f9b02882e5f22473682d6d}\index{Cursor movement \& visibility@{Cursor movement \& visibility}!ANSI\_CURSOR\_DOWN@{ANSI\_CURSOR\_DOWN}}
+\index{ANSI\_CURSOR\_DOWN@{ANSI\_CURSOR\_DOWN}!Cursor movement \& visibility@{Cursor movement \& visibility}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CURSOR\_DOWN}{ANSI\_CURSOR\_DOWN}}
+{\footnotesize\ttfamily \label{group__ansi__cursor_ga70e5df7169f9b02882e5f22473682d6d} 
+\#define ANSI\+\_\+\+CURSOR\+\_\+\+DOWN(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \#n\ \textcolor{stringliteral}{"{}B"{}}}
+
+\end{DoxyCode}
+
+
+Move cursor down by n lines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of lines (literal). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ansi__cursor_ga749c2591682125075b62d19f7a942ba9}\index{Cursor movement \& visibility@{Cursor movement \& visibility}!ANSI\_CURSOR\_FORWARD@{ANSI\_CURSOR\_FORWARD}}
+\index{ANSI\_CURSOR\_FORWARD@{ANSI\_CURSOR\_FORWARD}!Cursor movement \& visibility@{Cursor movement \& visibility}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CURSOR\_FORWARD}{ANSI\_CURSOR\_FORWARD}}
+{\footnotesize\ttfamily \label{group__ansi__cursor_ga749c2591682125075b62d19f7a942ba9} 
+\#define ANSI\+\_\+\+CURSOR\+\_\+\+FORWARD(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \#n\ \textcolor{stringliteral}{"{}C"{}}}
+
+\end{DoxyCode}
+
+
+Move cursor forward by n columns. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of columns (literal). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ansi__cursor_gae9745d57d25f85d93b779d06631aff26}\index{Cursor movement \& visibility@{Cursor movement \& visibility}!ANSI\_CURSOR\_POS@{ANSI\_CURSOR\_POS}}
+\index{ANSI\_CURSOR\_POS@{ANSI\_CURSOR\_POS}!Cursor movement \& visibility@{Cursor movement \& visibility}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CURSOR\_POS}{ANSI\_CURSOR\_POS}}
+{\footnotesize\ttfamily \label{group__ansi__cursor_gae9745d57d25f85d93b779d06631aff26} 
+\#define ANSI\+\_\+\+CURSOR\+\_\+\+POS(\begin{DoxyParamCaption}\item[{}]{x}{, }\item[{}]{y}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \#y\ \textcolor{stringliteral}{"{};"{}}\ \#x\ \textcolor{stringliteral}{"{}H"{}}}
+
+\end{DoxyCode}
+
+
+Absolute cursor positioning (x column, y row). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Column number (1-\/based). \\
+\hline
+{\em y} & Row number (1-\/based). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__ansi__cursor_gaf50618fe95b808bcd186947f0cf6a5c1}\index{Cursor movement \& visibility@{Cursor movement \& visibility}!ANSI\_CURSOR\_UP@{ANSI\_CURSOR\_UP}}
+\index{ANSI\_CURSOR\_UP@{ANSI\_CURSOR\_UP}!Cursor movement \& visibility@{Cursor movement \& visibility}}
+\doxysubsubsection{\texorpdfstring{ANSI\_CURSOR\_UP}{ANSI\_CURSOR\_UP}}
+{\footnotesize\ttfamily \label{group__ansi__cursor_gaf50618fe95b808bcd186947f0cf6a5c1} 
+\#define ANSI\+\_\+\+CURSOR\+\_\+\+UP(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \#n\ \textcolor{stringliteral}{"{}A"{}}}
+
+\end{DoxyCode}
+
+
+Move cursor up by n lines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Number of lines (literal). \\
+\hline
+\end{DoxyParams}

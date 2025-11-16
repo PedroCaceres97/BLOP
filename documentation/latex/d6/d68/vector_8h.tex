@@ -1,0 +1,519 @@
+\doxysection{vector.\+h File Reference}
+\hypertarget{vector_8h}{}\label{vector_8h}\index{vector.h@{vector.h}}
+
+
+Configurable, header-\/only dynamic array (vector) implementation.  
+
+
+{\ttfamily \#include $<$blop/blop.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__vector__config_gabb8f6fe86d264193c78ef862f96f78d5}{BLOP\+\_\+\+VECTOR\+\_\+\+NAME}}~vectorb
+\begin{DoxyCompactList}\small\item\em Name used to build the public API identifiers. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__vector__config_gac0de757b3a48f1fd859893520914112b}{BLOP\+\_\+\+VECTOR\+\_\+\+DATA\+\_\+\+TYPE}}~uint8\+\_\+t
+\begin{DoxyCompactList}\small\item\em Type stored in each element of the vector. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__vector__config_gab1b44db3a82f0b794d27fbf1a8c34a7e}{BLOP\+\_\+\+VECTOR\+\_\+\+SCALATOR}}~2
+\begin{DoxyCompactList}\small\item\em Growth factor to use when increasing capacity. \end{DoxyCompactList}\item 
+\#define {\bfseries BLOP\+\_\+\+VECTOR\+\_\+\+INITIAL\+\_\+\+COUNT}~10
+\begin{DoxyCompactList}\small\item\em Initial number of elements allocated for a new vector. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}~\mbox{\hyperlink{group__vector__config_gabb8f6fe86d264193c78ef862f96f78d5}{BLOP\+\_\+\+VECTOR\+\_\+\+NAME}}
+\begin{DoxyCompactList}\small\item\em Opaque pointer typedef name for the generated vector. \end{DoxyCompactList}\item 
+\#define {\bfseries blops\+\_\+vector}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+t)
+\begin{DoxyCompactList}\small\item\em Internal struct tag for the concrete vector when IMPLEMENTATION is defined. \end{DoxyCompactList}\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+create}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+create)
+\begin{DoxyCompactList}\small\item\em Function name tokens generated from the chosen vector name. \end{DoxyCompactList}\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+destroy}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+destroy)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+set}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+set)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+get}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+get)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+insert}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+insert)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+push\+\_\+back}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+push\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+push\+\_\+front}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+push\+\_\+front)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+clear}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+clear)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+erase}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+erase)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+pop\+\_\+back}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+pop\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+pop\+\_\+front}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+pop\+\_\+front)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+resize}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+resize)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+shrink}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+shrink)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+memcpy}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+memcpy)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+memset}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+memset)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+get\+\_\+data}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+get\+\_\+data)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+get\+\_\+count}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+get\+\_\+count)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+get\+\_\+back}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+get\+\_\+back)
+\item 
+\#define {\bfseries blopfn\+\_\+vector\+\_\+get\+\_\+front}~\mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__vector__tokens_gaf2b2b43b304f4bc25b2e49acb0f756eb}{blopt\+\_\+vector}}, \+\_\+get\+\_\+front)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{vector_8h_ae332d0e654193aabdb18078d8b8f4efc}\label{vector_8h_ae332d0e654193aabdb18078d8b8f4efc} 
+struct {\bfseries BLOP\+\_\+\+CONCAT3} (\+\_\+, vectorb, \+\_\+t) \texorpdfstring{$\ast$}{*}vectorb
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Public API\+: creation / destruction}\par
+\begin{DoxyCompactItemize}
+\item 
+vectorb \mbox{\hyperlink{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+create)()
+\begin{DoxyCompactList}\small\item\em Allocate and initialize a new vector instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_ab9b68c5d9eef23599c98614d9a6c5ee6}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+destroy)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Destroy a vector instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Public API\+: insertion / removal}\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{vector_8h_aa00ce3bd54e403219cca8965969af35a}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+insert)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Insert value at index shifting subsequent elements right. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a73aa4eddfe4444e5ec1650c9341bbc22}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+push\+\_\+back)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Append value to the end of the vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a21c42e45ba11b2081c2d1227233bd564}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+push\+\_\+front)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Prepend value to the start of the vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a4488b4f2ffe3b09370dc8788c1060ef8}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+clear)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Remove all elements from the vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_ae7823435c73765776813c0b9824602db}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+erase)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Erase element at index shifting subsequent elements left. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a3a7a7bcd55f2cf13e40ec4544353f361}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+pop\+\_\+back)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Pop the last element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a36f7175c606bbcef90a43bf43abecd57}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+pop\+\_\+front)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Pop the first element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Public API\+: inspectors}\par
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{vector_8h_ae3c1a370bfc9e003a13766669c72e5f1}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+get\+\_\+data)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Get pointer to internal data buffer. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{vector_8h_ae890cfee45f5ecad382bfbbd53fbb57d}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+get\+\_\+count)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Get number of elements currently stored. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{vector_8h_ac88f9f5229d09544911a23ac103c75ad}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+get\+\_\+back)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Get last element value. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{vector_8h_add3d5a0d1c9d1f60353737faba9c9c51}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+get\+\_\+front)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Get first element value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsubsection*{Public API\+: element access}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{vector_8h_a5cd9d052a4d561b36665b1f764d646e0}\label{vector_8h_a5cd9d052a4d561b36665b1f764d646e0} 
+void size\+\_\+t {\bfseries idx}
+\item 
+\Hypertarget{vector_8h_ad5c3b686dbea4bf0fc0584def54fc9a1}\label{vector_8h_ad5c3b686dbea4bf0fc0584def54fc9a1} 
+void size\+\_\+t uint8\+\_\+t {\bfseries value}
+\item 
+void \mbox{\hyperlink{vector_8h_a54e94bd7728df8007593cce3a333ac39}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+set)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Set element value at index. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{vector_8h_ae59db9a6e1dc60e4c77a56865d51f94b}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+get)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Get element value at index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public API\+: resizing / capacity management}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{vector_8h_a502002c43b928f7acbee9a75c7b0c022}\label{vector_8h_a502002c43b928f7acbee9a75c7b0c022} 
+void size\+\_\+t {\bfseries count}
+\item 
+void \mbox{\hyperlink{vector_8h_aff995d030a7386a8064e8854619f25f3}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+resize)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Ensure vector has exactly {\ttfamily count} elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a1345da4610b77a30aa69ebb386f99966}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+shrink)(vectorb vec)
+\begin{DoxyCompactList}\small\item\em Attempt to shrink capacity to match usage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public API\+: bulk memory ops}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{vector_8h_a4ea50201df88f9367af3edd5b71149d8}\label{vector_8h_a4ea50201df88f9367af3edd5b71149d8} 
+void size\+\_\+t const uint8\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries src}
+\item 
+void \mbox{\hyperlink{vector_8h_a80c167ba698a67f54f6701304457fd62}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+memcpy)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Copy {\ttfamily count} elements from {\ttfamily src} into vector starting at {\ttfamily idx}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{vector_8h_a2f9146cd607e4a7f1ca30a052db24fda}{BLOP\+\_\+\+CONCAT2}} (vectorb, \+\_\+memset)(vectorb vec
+\begin{DoxyCompactList}\small\item\em Set {\ttfamily count} elements starting at {\ttfamily idx} to {\ttfamily value}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configurable, header-\/only dynamic array (vector) implementation. 
+
+This header emits a typed, configurable dynamic array API when included. Configure the generated type and behavior using the following macros prior to inclusion\+:
+
+
+\begin{DoxyItemize}
+\item BLOP\+\_\+\+VECTOR\+\_\+\+NAME\+: Identifier for the generated vector type and API (default\+: {\ttfamily vectorb}).
+\item BLOP\+\_\+\+VECTOR\+\_\+\+DATA\+\_\+\+TYPE\+: Element type stored in the vector (default\+: {\ttfamily uint8\+\_\+t}).
+\item BLOP\+\_\+\+VECTOR\+\_\+\+SCALATOR\+: Growth factor used when expanding capacity (default\+: 2; minimum is 2).
+\item BLOP\+\_\+\+VECTOR\+\_\+\+INITIAL\+\_\+\+COUNT\+: Initial capacity when a vector is created (default\+: 10).
+\item BLOP\+\_\+\+VECTOR\+\_\+\+DEALLOCATE\+\_\+\+DATA\+: Optional macro/function called to deallocate an element when removed (should accept one argument).
+\item BLOP\+\_\+\+VECTOR\+\_\+\+IMPLEMENTATION\+: Define in exactly one translation unit to emit the function implementations. Without this only the declarations are produced.
+\end{DoxyItemize}
+
+The API is emitted under mangled names derived from BLOP\+\_\+\+VECTOR\+\_\+\+NAME. Use the produced symbols (functions/typedefs/macros) to manipulate the vector.
+
+\begin{DoxyAuthor}{Author}
+Pedro Caceres 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/11-\/16 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{vector_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{vector_8h_a4488b4f2ffe3b09370dc8788c1060ef8}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a4488b4f2ffe3b09370dc8788c1060ef8} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+clear}]{}{}\end{DoxyParamCaption})}
+
+
+
+Remove all elements from the vector. 
+
+If BLOP\+\_\+\+VECTOR\+\_\+\+DEALLOCATE\+\_\+\+DATA is defined it is called for each element prior to clearing the underlying buffer.
+
+After clearing the internal buffer is reset to BLOP\+\_\+\+VECTOR\+\_\+\+INITIAL\+\_\+\+COUNT.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to clear. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a599a93c8fb8f0f0d995a6d28ce1e2855} 
+vectorb BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+create}]{}{}\end{DoxyParamCaption})}
+
+
+
+Allocate and initialize a new vector instance. 
+
+Behavior\+:
+\begin{DoxyItemize}
+\item Allocates the vector structure and an internal buffer with BLOP\+\_\+\+VECTOR\+\_\+\+INITIAL\+\_\+\+COUNT capacity.
+\item On allocation failure prints an error and calls BLOP\+\_\+\+ABORT (may exit/abort).
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+Pointer to the new vector, or NULL on failure (after BLOP\+\_\+\+ABORT if configured). 
+\end{DoxyReturn}
+\Hypertarget{vector_8h_ab9b68c5d9eef23599c98614d9a6c5ee6}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [3/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ab9b68c5d9eef23599c98614d9a6c5ee6} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+destroy}]{}{}\end{DoxyParamCaption})}
+
+
+
+Destroy a vector instance. 
+
+Requirements\+:
+\begin{DoxyItemize}
+\item The vector must be empty (count == 0) when destroyed. Use clear() to remove elements first.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to destroy (may be NULL -\/ implementation asserts). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_ae7823435c73765776813c0b9824602db}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [4/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ae7823435c73765776813c0b9824602db} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+erase}]{}{}\end{DoxyParamCaption})}
+
+
+
+Erase element at index shifting subsequent elements left. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+{\em idx} & Index of element to erase (0..count-\/1). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_ae59db9a6e1dc60e4c77a56865d51f94b}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [5/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ae59db9a6e1dc60e4c77a56865d51f94b} 
+uint8\+\_\+t BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+get}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get element value at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to query. \\
+\hline
+{\em idx} & Zero-\/based index (must be \texorpdfstring{$<$}{<} count). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stored value, or a cast-\/zero when vec is NULL or on error. 
+\end{DoxyReturn}
+\Hypertarget{vector_8h_ac88f9f5229d09544911a23ac103c75ad}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [6/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ac88f9f5229d09544911a23ac103c75ad} 
+uint8\+\_\+t BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+get\+\_\+back}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get last element value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value at back (or cast-\/zero on error). 
+\end{DoxyReturn}
+\Hypertarget{vector_8h_ae890cfee45f5ecad382bfbbd53fbb57d}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [7/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ae890cfee45f5ecad382bfbbd53fbb57d} 
+size\+\_\+t BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+get\+\_\+count}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get number of elements currently stored. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Element count (0 if vec is NULL). 
+\end{DoxyReturn}
+\Hypertarget{vector_8h_ae3c1a370bfc9e003a13766669c72e5f1}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [8/19]}}
+{\footnotesize\ttfamily \label{vector_8h_ae3c1a370bfc9e003a13766669c72e5f1} 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+get\+\_\+data}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get pointer to internal data buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to data buffer or NULL if vec is NULL.
+\end{DoxyReturn}
+Note\+: Direct writes into the buffer bypass bounds checks; use with care. \Hypertarget{vector_8h_add3d5a0d1c9d1f60353737faba9c9c51}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [9/19]}}
+{\footnotesize\ttfamily \label{vector_8h_add3d5a0d1c9d1f60353737faba9c9c51} 
+uint8\+\_\+t BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+get\+\_\+front}]{}{}\end{DoxyParamCaption})}
+
+
+
+Get first element value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value at front (or cast-\/zero on error). 
+\end{DoxyReturn}
+\Hypertarget{vector_8h_aa00ce3bd54e403219cca8965969af35a}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [10/19]}}
+{\footnotesize\ttfamily \label{vector_8h_aa00ce3bd54e403219cca8965969af35a} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+insert}]{}{}\end{DoxyParamCaption})}
+
+
+
+Insert value at index shifting subsequent elements right. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+{\em idx} & Index to insert at (0..count). \\
+\hline
+{\em value} & Value to insert. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a80c167ba698a67f54f6701304457fd62}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [11/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a80c167ba698a67f54f6701304457fd62} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+memcpy}]{}{}\end{DoxyParamCaption})}
+
+
+
+Copy {\ttfamily count} elements from {\ttfamily src} into vector starting at {\ttfamily idx}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Target vector. \\
+\hline
+{\em idx} & Destination index. \\
+\hline
+{\em src} & Source array (must not be NULL). \\
+\hline
+{\em count} & Number of elements to copy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a2f9146cd607e4a7f1ca30a052db24fda}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [12/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a2f9146cd607e4a7f1ca30a052db24fda} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+memset}]{}{}\end{DoxyParamCaption})}
+
+
+
+Set {\ttfamily count} elements starting at {\ttfamily idx} to {\ttfamily value}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Target vector. \\
+\hline
+{\em idx} & Start index. \\
+\hline
+{\em value} & Value to set. \\
+\hline
+{\em count} & Number of elements to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a3a7a7bcd55f2cf13e40ec4544353f361}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [13/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a3a7a7bcd55f2cf13e40ec4544353f361} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+pop\+\_\+back}]{}{}\end{DoxyParamCaption})}
+
+
+
+Pop the last element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a36f7175c606bbcef90a43bf43abecd57}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [14/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a36f7175c606bbcef90a43bf43abecd57} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+pop\+\_\+front}]{}{}\end{DoxyParamCaption})}
+
+
+
+Pop the first element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a73aa4eddfe4444e5ec1650c9341bbc22}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [15/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a73aa4eddfe4444e5ec1650c9341bbc22} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+push\+\_\+back}]{}{}\end{DoxyParamCaption})}
+
+
+
+Append value to the end of the vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+{\em value} & Value to append. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a21c42e45ba11b2081c2d1227233bd564}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [16/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a21c42e45ba11b2081c2d1227233bd564} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+push\+\_\+front}]{}{}\end{DoxyParamCaption})}
+
+
+
+Prepend value to the start of the vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+{\em value} & Value to prepend. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_aff995d030a7386a8064e8854619f25f3}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [17/19]}}
+{\footnotesize\ttfamily \label{vector_8h_aff995d030a7386a8064e8854619f25f3} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+resize}]{}{}\end{DoxyParamCaption})}
+
+
+
+Ensure vector has exactly {\ttfamily count} elements. 
+
+
+\begin{DoxyItemize}
+\item If count \texorpdfstring{$>$}{>} current count, capacity may be expanded and new elements are zero-\/initialized.
+\item If count \texorpdfstring{$<$}{<} current count, elements beyond {\ttfamily count} are optionally deallocated via BLOP\+\_\+\+VECTOR\+\_\+\+DEALLOCATE\+\_\+\+DATA if defined.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to resize. \\
+\hline
+{\em count} & New element count. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a54e94bd7728df8007593cce3a333ac39}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [18/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a54e94bd7728df8007593cce3a333ac39} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+set}]{}{}\end{DoxyParamCaption})}
+
+
+
+Set element value at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to modify. \\
+\hline
+{\em idx} & Zero-\/based index (must be \texorpdfstring{$<$}{<} count). \\
+\hline
+{\em value} & Value to store. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{vector_8h_a1345da4610b77a30aa69ebb386f99966}\index{vector.h@{vector.h}!BLOP\_CONCAT2@{BLOP\_CONCAT2}}
+\index{BLOP\_CONCAT2@{BLOP\_CONCAT2}!vector.h@{vector.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_CONCAT2()}{BLOP\_CONCAT2()}\hspace{0.1cm}{\footnotesize\ttfamily [19/19]}}
+{\footnotesize\ttfamily \label{vector_8h_a1345da4610b77a30aa69ebb386f99966} 
+void BLOP\+\_\+\+CONCAT2 (\begin{DoxyParamCaption}\item[{vectorb}]{}{, }\item[{\+\_\+shrink}]{}{}\end{DoxyParamCaption})}
+
+
+
+Attempt to shrink capacity to match usage. 
+
+The implementation reduces capacity when the used count is much smaller than the allocated capacity according to BLOP\+\_\+\+VECTOR\+\_\+\+SCALATOR heuristics.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to shrink. \\
+\hline
+\end{DoxyParams}

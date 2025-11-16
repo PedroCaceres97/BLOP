@@ -1,5 +1,4 @@
 #define BLOP_SAFE_MODE
-#define BLOP_EXIT_ON_ERROR
 
 #define BLOP_LIST_NAME              TestList
 #define BLOP_LIST_DATA_TYPE         int
@@ -29,7 +28,6 @@ void list2_print(TestList2 list) {
         printf("Node %zu Data: %s\n", i, TestList2_node_get_data(TestList2_get_node(list, i)));
     }
 }
-
 
 int main() {
 

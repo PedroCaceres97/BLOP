@@ -1,0 +1,51 @@
+\doxysection{Text styles and reset }
+\hypertarget{group__ansi__styles}{}\label{group__ansi__styles}\index{Text styles and reset@{Text styles and reset}}
+
+
+Text formatting escape sequences.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__ansi__styles_ga40cb83d8a7c9938e6f5100f5ce088ce8}\label{group__ansi__styles_ga40cb83d8a7c9938e6f5100f5ce088ce8} 
+\#define {\bfseries ANSI\+\_\+\+RESET\+\_\+\+FULL}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}c"{}
+\begin{DoxyCompactList}\small\item\em Full device reset (ESC c). Resets terminal state. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_gaf77a445894f2f750d43cf2182cd29e55}\label{group__ansi__styles_gaf77a445894f2f750d43cf2182cd29e55} 
+\#define {\bfseries ANSI\+\_\+\+RESET}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0m"{}
+\begin{DoxyCompactList}\small\item\em Reset all graphics attributes (SGR 0). \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga46587b83544b8e9be045bb93f644ac82}\label{group__ansi__styles_ga46587b83544b8e9be045bb93f644ac82} 
+\#define {\bfseries ANSI\+\_\+\+BOLD}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1m"{}
+\begin{DoxyCompactList}\small\item\em Bold text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga51fea81bd0f75dcc2fc1b341d9cc7958}\label{group__ansi__styles_ga51fea81bd0f75dcc2fc1b341d9cc7958} 
+\#define {\bfseries ANSI\+\_\+\+DIM}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2m"{}
+\begin{DoxyCompactList}\small\item\em Dim / faint text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_gae35d96d809e9bfdb3f66c910fd0f734c}\label{group__ansi__styles_gae35d96d809e9bfdb3f66c910fd0f734c} 
+\#define {\bfseries ANSI\+\_\+\+ITALIC}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}3m"{}
+\begin{DoxyCompactList}\small\item\em Italic text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_gab9e3d5230787ccc126d1a1d8b739c740}\label{group__ansi__styles_gab9e3d5230787ccc126d1a1d8b739c740} 
+\#define {\bfseries ANSI\+\_\+\+UNDERLINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}4m"{}
+\begin{DoxyCompactList}\small\item\em Underlined text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga50773a74baf9b6d4245e26e966394d1e}\label{group__ansi__styles_ga50773a74baf9b6d4245e26e966394d1e} 
+\#define {\bfseries ANSI\+\_\+\+BLINK}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}5m"{}
+\begin{DoxyCompactList}\small\item\em Blink text (slow blink). \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_gac423db26b82c1e6f0a8162edc0900013}\label{group__ansi__styles_gac423db26b82c1e6f0a8162edc0900013} 
+\#define {\bfseries ANSI\+\_\+\+REVERSE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}7m"{}
+\begin{DoxyCompactList}\small\item\em Reverse foreground/background. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga935ed377cbb72d3a3dab2dc4bcaf6b71}\label{group__ansi__styles_ga935ed377cbb72d3a3dab2dc4bcaf6b71} 
+\#define {\bfseries ANSI\+\_\+\+HIDDEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}8m"{}
+\begin{DoxyCompactList}\small\item\em Hidden/obscured text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga9270c9100196971189dc14b22eb78158}\label{group__ansi__styles_ga9270c9100196971189dc14b22eb78158} 
+\#define {\bfseries ANSI\+\_\+\+STRIKETHROUGH}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}9m"{}
+\begin{DoxyCompactList}\small\item\em Strikethrough text. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga4672ea895be62aa212db45195790dcc9}\label{group__ansi__styles_ga4672ea895be62aa212db45195790dcc9} 
+\#define {\bfseries ANSI\+\_\+\+DOUBLE\+\_\+\+UNDER}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}21m"{}
+\begin{DoxyCompactList}\small\item\em Double underline. \end{DoxyCompactList}\item 
+\Hypertarget{group__ansi__styles_ga0b7ccdbb72a5acf7dd61888fd62142cd}\label{group__ansi__styles_ga0b7ccdbb72a5acf7dd61888fd62142cd} 
+\#define {\bfseries ANSI\+\_\+\+OVERLINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}53m"{}
+\begin{DoxyCompactList}\small\item\em Overlined text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Text formatting escape sequences. 
+

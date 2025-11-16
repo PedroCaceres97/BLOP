@@ -1,0 +1,53 @@
+\doxysection{Empty-\/\+Container Popping Behaviour }
+\hypertarget{group__blop__popping}{}\label{group__blop__popping}\index{Empty-\/Container Popping Behaviour@{Empty-\/Container Popping Behaviour}}
+
+
+Error handling when popping from empty containers.  
+
+
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__popping_ga05f0374365a2317f59b0c3fc80813a86}{BLOP\+\_\+\+EMPTY\+\_\+\+POPPING}}(msg)
+\begin{DoxyCompactList}\small\item\em Behavior when attempting to pop from an empty container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Error handling when popping from empty containers. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__blop__popping_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__popping_ga05f0374365a2317f59b0c3fc80813a86}\index{Empty-\/Container Popping Behaviour@{Empty-\/Container Popping Behaviour}!BLOP\_EMPTY\_POPPING@{BLOP\_EMPTY\_POPPING}}
+\index{BLOP\_EMPTY\_POPPING@{BLOP\_EMPTY\_POPPING}!Empty-\/Container Popping Behaviour@{Empty-\/Container Popping Behaviour}}
+\doxysubsubsection{\texorpdfstring{BLOP\_EMPTY\_POPPING}{BLOP\_EMPTY\_POPPING}}
+{\footnotesize\ttfamily \label{group__blop__popping_ga05f0374365a2317f59b0c3fc80813a86} 
+\#define BLOP\+\_\+\+EMPTY\+\_\+\+POPPING(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(msg);\ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
+
+\end{DoxyCode}
+
+
+Behavior when attempting to pop from an empty container. 
+
+If {\ttfamily BLOP\+\_\+\+VALID\+\_\+\+EMPTY\+\_\+\+POPPING} is {\bfseries{not}} defined\+:
+\begin{DoxyItemize}
+\item Prints the provided message.
+\item Aborts or exits depending on \doxylink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT}.
+\end{DoxyItemize}
+
+Otherwise\+:
+\begin{DoxyItemize}
+\item Becomes a no-\/op.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message printed when popping from an empty container. \\
+\hline
+\end{DoxyParams}

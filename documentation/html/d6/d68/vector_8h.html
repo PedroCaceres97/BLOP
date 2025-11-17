@@ -106,116 +106,83 @@ Macros</h2></td></tr>
 <tr class="memdesc:gac0de757b3a48f1fd859893520914112b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type stored in each element of the vector.  <br /></td></tr>
 <tr class="memitem:gab1b44db3a82f0b794d27fbf1a8c34a7e" id="r_gab1b44db3a82f0b794d27fbf1a8c34a7e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d70/group__vector__config.html#gab1b44db3a82f0b794d27fbf1a8c34a7e">BLOP_VECTOR_SCALATOR</a>&#160;&#160;&#160;2</td></tr>
 <tr class="memdesc:gab1b44db3a82f0b794d27fbf1a8c34a7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Growth factor to use when increasing capacity.  <br /></td></tr>
-<tr class="memitem:ga3b1dd329c8915f4474a003d3dad53588" id="r_ga3b1dd329c8915f4474a003d3dad53588"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>BLOP_VECTOR_INITIAL_COUNT</b>&#160;&#160;&#160;10</td></tr>
-<tr class="memdesc:ga3b1dd329c8915f4474a003d3dad53588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial number of elements allocated for a new vector. <br /></td></tr>
+<tr class="memitem:ga3b1dd329c8915f4474a003d3dad53588" id="r_ga3b1dd329c8915f4474a003d3dad53588"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d70/group__vector__config.html#ga3b1dd329c8915f4474a003d3dad53588">BLOP_VECTOR_INITIAL_COUNT</a>&#160;&#160;&#160;10</td></tr>
+<tr class="memdesc:ga3b1dd329c8915f4474a003d3dad53588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initial number of elements allocated for a new vector.  <br /></td></tr>
 <tr class="memitem:gaf2b2b43b304f4bc25b2e49acb0f756eb" id="r_gaf2b2b43b304f4bc25b2e49acb0f756eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>&#160;&#160;&#160;<a class="el" href="../../da/d70/group__vector__config.html#gabb8f6fe86d264193c78ef862f96f78d5">BLOP_VECTOR_NAME</a></td></tr>
 <tr class="memdesc:gaf2b2b43b304f4bc25b2e49acb0f756eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opaque pointer typedef name for the generated vector.  <br /></td></tr>
-<tr class="memitem:ga6c85edb44304da3e59af84b3d922bd9e" id="r_ga6c85edb44304da3e59af84b3d922bd9e"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blops_vector</b>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga27d81a40c9ac890bf15664c1b6ce0326">BLOP_CONCAT3</a>(_, <a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _t)</td></tr>
-<tr class="memdesc:ga6c85edb44304da3e59af84b3d922bd9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal struct tag for the concrete vector when IMPLEMENTATION is defined. <br /></td></tr>
-<tr class="memitem:gab1a4582aba005ce69127e08d19e5a6a5" id="r_gab1a4582aba005ce69127e08d19e5a6a5"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_create</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _create)</td></tr>
-<tr class="memdesc:gab1a4582aba005ce69127e08d19e5a6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function name tokens generated from the chosen vector name. <br /></td></tr>
-<tr class="memitem:ga345bcf52a59986d229e7c28e5dc86914" id="r_ga345bcf52a59986d229e7c28e5dc86914"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_destroy</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _destroy)</td></tr>
-<tr class="memitem:ga7539b0082b9710d0f28ce44a20ca6ba2" id="r_ga7539b0082b9710d0f28ce44a20ca6ba2"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_set</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _set)</td></tr>
-<tr class="memitem:gac197755aaf367ec0445902fb70512867" id="r_gac197755aaf367ec0445902fb70512867"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_get</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _get)</td></tr>
-<tr class="memitem:ga8ffcb41b3cbc5da02ea49f73e892418f" id="r_ga8ffcb41b3cbc5da02ea49f73e892418f"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_insert</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _insert)</td></tr>
-<tr class="memitem:gae8a251f5ece34f980ba8d7f79adb2ee6" id="r_gae8a251f5ece34f980ba8d7f79adb2ee6"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_push_back</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _push_back)</td></tr>
-<tr class="memitem:ga2e276298918d21703f5f2b48c72173a9" id="r_ga2e276298918d21703f5f2b48c72173a9"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_push_front</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _push_front)</td></tr>
-<tr class="memitem:gacc555b4bef4f919c597ab01913f66656" id="r_gacc555b4bef4f919c597ab01913f66656"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_clear</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _clear)</td></tr>
-<tr class="memitem:ga31c03fd12a0025264ba20414d63dcaf6" id="r_ga31c03fd12a0025264ba20414d63dcaf6"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_erase</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _erase)</td></tr>
-<tr class="memitem:gad9ebc7eb373da98860500b93330c8dd4" id="r_gad9ebc7eb373da98860500b93330c8dd4"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_pop_back</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _pop_back)</td></tr>
-<tr class="memitem:ga2ce53bb8424b721e056bbeb6136b52be" id="r_ga2ce53bb8424b721e056bbeb6136b52be"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_pop_front</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _pop_front)</td></tr>
-<tr class="memitem:ga156ec1e6dc529be0830a3098d681b44c" id="r_ga156ec1e6dc529be0830a3098d681b44c"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_resize</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _resize)</td></tr>
-<tr class="memitem:ga93aa13103fbfb27ec55f563cff7d5911" id="r_ga93aa13103fbfb27ec55f563cff7d5911"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_shrink</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _shrink)</td></tr>
-<tr class="memitem:gac307ce6471dbcde6281d5e2c708b72c9" id="r_gac307ce6471dbcde6281d5e2c708b72c9"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_memcpy</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _memcpy)</td></tr>
-<tr class="memitem:gac6a0c503b2d3f92ad090b2dd48daea28" id="r_gac6a0c503b2d3f92ad090b2dd48daea28"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_memset</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _memset)</td></tr>
-<tr class="memitem:gae82b861dcaa912cdffa1d2d9193cfb78" id="r_gae82b861dcaa912cdffa1d2d9193cfb78"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_get_data</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _get_data)</td></tr>
-<tr class="memitem:gab24312b6b8fdac967c64812c7b53694b" id="r_gab24312b6b8fdac967c64812c7b53694b"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_get_count</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _get_count)</td></tr>
-<tr class="memitem:ga9b70e59089e7ed35af2b8cf0508da9e5" id="r_ga9b70e59089e7ed35af2b8cf0508da9e5"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_get_back</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _get_back)</td></tr>
-<tr class="memitem:ga557dc065e7bf2de4fd2eaa4cb2674a97" id="r_ga557dc065e7bf2de4fd2eaa4cb2674a97"><td class="memItemLeft" align="right" valign="top">
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>blopfn_vector_get_front</b>&#160;&#160;&#160;<a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a>(<a class="el" href="../../db/df1/group__vector__tokens.html#gaf2b2b43b304f4bc25b2e49acb0f756eb">blopt_vector</a>, _get_front)</td></tr>
+<tr class="memitem:ga6c85edb44304da3e59af84b3d922bd9e" id="r_ga6c85edb44304da3e59af84b3d922bd9e"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga6c85edb44304da3e59af84b3d922bd9e">blops_vector</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga27d81a40c9ac890bf15664c1b6ce0326">BLOP_CONCAT3</a>(_, <a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _t)</td></tr>
+<tr class="memdesc:ga6c85edb44304da3e59af84b3d922bd9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal struct tag for the concrete vector when IMPLEMENTATION is defined.  <br /></td></tr>
+<tr class="memitem:ga345bcf52a59986d229e7c28e5dc86914" id="r_ga345bcf52a59986d229e7c28e5dc86914"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga345bcf52a59986d229e7c28e5dc86914">blopfn_vector_destroy</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _destroy)</td></tr>
+<tr class="memitem:ga7539b0082b9710d0f28ce44a20ca6ba2" id="r_ga7539b0082b9710d0f28ce44a20ca6ba2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga7539b0082b9710d0f28ce44a20ca6ba2">blopfn_vector_set</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _set)</td></tr>
+<tr class="memitem:gac197755aaf367ec0445902fb70512867" id="r_gac197755aaf367ec0445902fb70512867"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gac197755aaf367ec0445902fb70512867">blopfn_vector_get</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _get)</td></tr>
+<tr class="memitem:ga8ffcb41b3cbc5da02ea49f73e892418f" id="r_ga8ffcb41b3cbc5da02ea49f73e892418f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga8ffcb41b3cbc5da02ea49f73e892418f">blopfn_vector_insert</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _insert)</td></tr>
+<tr class="memitem:gae8a251f5ece34f980ba8d7f79adb2ee6" id="r_gae8a251f5ece34f980ba8d7f79adb2ee6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gae8a251f5ece34f980ba8d7f79adb2ee6">blopfn_vector_push_back</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _push_back)</td></tr>
+<tr class="memitem:ga2e276298918d21703f5f2b48c72173a9" id="r_ga2e276298918d21703f5f2b48c72173a9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga2e276298918d21703f5f2b48c72173a9">blopfn_vector_push_front</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _push_front)</td></tr>
+<tr class="memitem:gacc555b4bef4f919c597ab01913f66656" id="r_gacc555b4bef4f919c597ab01913f66656"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gacc555b4bef4f919c597ab01913f66656">blopfn_vector_clear</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _clear)</td></tr>
+<tr class="memitem:ga31c03fd12a0025264ba20414d63dcaf6" id="r_ga31c03fd12a0025264ba20414d63dcaf6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga31c03fd12a0025264ba20414d63dcaf6">blopfn_vector_erase</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _erase)</td></tr>
+<tr class="memitem:gad9ebc7eb373da98860500b93330c8dd4" id="r_gad9ebc7eb373da98860500b93330c8dd4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gad9ebc7eb373da98860500b93330c8dd4">blopfn_vector_pop_back</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _pop_back)</td></tr>
+<tr class="memitem:ga2ce53bb8424b721e056bbeb6136b52be" id="r_ga2ce53bb8424b721e056bbeb6136b52be"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga2ce53bb8424b721e056bbeb6136b52be">blopfn_vector_pop_front</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _pop_front)</td></tr>
+<tr class="memitem:ga156ec1e6dc529be0830a3098d681b44c" id="r_ga156ec1e6dc529be0830a3098d681b44c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga156ec1e6dc529be0830a3098d681b44c">blopfn_vector_resize</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _resize)</td></tr>
+<tr class="memitem:ga93aa13103fbfb27ec55f563cff7d5911" id="r_ga93aa13103fbfb27ec55f563cff7d5911"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga93aa13103fbfb27ec55f563cff7d5911">blopfn_vector_shrink</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _shrink)</td></tr>
+<tr class="memitem:gac307ce6471dbcde6281d5e2c708b72c9" id="r_gac307ce6471dbcde6281d5e2c708b72c9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gac307ce6471dbcde6281d5e2c708b72c9">blopfn_vector_memcpy</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _memcpy)</td></tr>
+<tr class="memitem:gac6a0c503b2d3f92ad090b2dd48daea28" id="r_gac6a0c503b2d3f92ad090b2dd48daea28"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gac6a0c503b2d3f92ad090b2dd48daea28">blopfn_vector_memset</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _memset)</td></tr>
+<tr class="memitem:gae82b861dcaa912cdffa1d2d9193cfb78" id="r_gae82b861dcaa912cdffa1d2d9193cfb78"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gae82b861dcaa912cdffa1d2d9193cfb78">blopfn_vector_get_data</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _get_data)</td></tr>
+<tr class="memitem:gab24312b6b8fdac967c64812c7b53694b" id="r_gab24312b6b8fdac967c64812c7b53694b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gab24312b6b8fdac967c64812c7b53694b">blopfn_vector_get_count</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _get_count)</td></tr>
+<tr class="memitem:ga9b70e59089e7ed35af2b8cf0508da9e5" id="r_ga9b70e59089e7ed35af2b8cf0508da9e5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga9b70e59089e7ed35af2b8cf0508da9e5">blopfn_vector_get_back</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _get_back)</td></tr>
+<tr class="memitem:ga557dc065e7bf2de4fd2eaa4cb2674a97" id="r_ga557dc065e7bf2de4fd2eaa4cb2674a97"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#ga557dc065e7bf2de4fd2eaa4cb2674a97">blopfn_vector_get_front</a>&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _get_front)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ac347f950fd52a3e70dba2c54fb4b84aa" id="r_ac347f950fd52a3e70dba2c54fb4b84aa"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="../../db/df1/group__vector__tokens.html#ga6c85edb44304da3e59af84b3d922bd9e">blops_vector</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ae332d0e654193aabdb18078d8b8f4efc" id="r_ae332d0e654193aabdb18078d8b8f4efc"><td class="memItemLeft" align="right" valign="top"><a id="ae332d0e654193aabdb18078d8b8f4efc" name="ae332d0e654193aabdb18078d8b8f4efc"></a>
-struct&#160;</td><td class="memItemRight" valign="bottom"><b>BLOP_CONCAT3</b> (_, vectorb, _t) *vectorb</td></tr>
-<tr id="func-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: creation / destruction</div></td></tr>
-<tr class="memitem:a599a93c8fb8f0f0d995a6d28ce1e2855" id="r_a599a93c8fb8f0f0d995a6d28ce1e2855"><td class="memItemLeft" align="right" valign="top">vectorb&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a599a93c8fb8f0f0d995a6d28ce1e2855">BLOP_CONCAT2</a> (vectorb, _create)()</td></tr>
-<tr class="memdesc:a599a93c8fb8f0f0d995a6d28ce1e2855"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and initialize a new vector instance.  <br /></td></tr>
-<tr class="memitem:ab9b68c5d9eef23599c98614d9a6c5ee6" id="r_ab9b68c5d9eef23599c98614d9a6c5ee6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9b68c5d9eef23599c98614d9a6c5ee6">BLOP_CONCAT2</a> (vectorb, _destroy)(vectorb vec)</td></tr>
-<tr class="memdesc:ab9b68c5d9eef23599c98614d9a6c5ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a vector instance.  <br /></td></tr>
+<tr id="func-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: element access</div></td></tr>
+<tr class="memitem:aa0b70c0e171bf28a5e9237638413b5f4" id="r_aa0b70c0e171bf28a5e9237638413b5f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa0b70c0e171bf28a5e9237638413b5f4">blopfn_vector_set</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx, <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> value)</td></tr>
+<tr class="memdesc:aa0b70c0e171bf28a5e9237638413b5f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set element value at index.  <br /></td></tr>
+<tr class="memitem:a0d8a0a5519d4fbc0bc6a8079d4be8b61" id="r_a0d8a0a5519d4fbc0bc6a8079d4be8b61"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d8a0a5519d4fbc0bc6a8079d4be8b61">blopfn_vector_get</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx)</td></tr>
+<tr class="memdesc:a0d8a0a5519d4fbc0bc6a8079d4be8b61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get element value at index.  <br /></td></tr>
 <tr id="func-members-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: insertion / removal</div></td></tr>
-<tr class="memitem:aa00ce3bd54e403219cca8965969af35a" id="r_aa00ce3bd54e403219cca8965969af35a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa00ce3bd54e403219cca8965969af35a">BLOP_CONCAT2</a> (vectorb, _insert)(vectorb vec</td></tr>
-<tr class="memdesc:aa00ce3bd54e403219cca8965969af35a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert value at index shifting subsequent elements right.  <br /></td></tr>
-<tr class="memitem:a73aa4eddfe4444e5ec1650c9341bbc22" id="r_a73aa4eddfe4444e5ec1650c9341bbc22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73aa4eddfe4444e5ec1650c9341bbc22">BLOP_CONCAT2</a> (vectorb, _push_back)(vectorb vec</td></tr>
-<tr class="memdesc:a73aa4eddfe4444e5ec1650c9341bbc22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append value to the end of the vector.  <br /></td></tr>
-<tr class="memitem:a21c42e45ba11b2081c2d1227233bd564" id="r_a21c42e45ba11b2081c2d1227233bd564"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a21c42e45ba11b2081c2d1227233bd564">BLOP_CONCAT2</a> (vectorb, _push_front)(vectorb vec</td></tr>
-<tr class="memdesc:a21c42e45ba11b2081c2d1227233bd564"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepend value to the start of the vector.  <br /></td></tr>
-<tr class="memitem:a4488b4f2ffe3b09370dc8788c1060ef8" id="r_a4488b4f2ffe3b09370dc8788c1060ef8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4488b4f2ffe3b09370dc8788c1060ef8">BLOP_CONCAT2</a> (vectorb, _clear)(vectorb vec)</td></tr>
-<tr class="memdesc:a4488b4f2ffe3b09370dc8788c1060ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all elements from the vector.  <br /></td></tr>
-<tr class="memitem:ae7823435c73765776813c0b9824602db" id="r_ae7823435c73765776813c0b9824602db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae7823435c73765776813c0b9824602db">BLOP_CONCAT2</a> (vectorb, _erase)(vectorb vec</td></tr>
-<tr class="memdesc:ae7823435c73765776813c0b9824602db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase element at index shifting subsequent elements left.  <br /></td></tr>
-<tr class="memitem:a3a7a7bcd55f2cf13e40ec4544353f361" id="r_a3a7a7bcd55f2cf13e40ec4544353f361"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a7a7bcd55f2cf13e40ec4544353f361">BLOP_CONCAT2</a> (vectorb, _pop_back)(vectorb vec)</td></tr>
-<tr class="memdesc:a3a7a7bcd55f2cf13e40ec4544353f361"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop the last element.  <br /></td></tr>
-<tr class="memitem:a36f7175c606bbcef90a43bf43abecd57" id="r_a36f7175c606bbcef90a43bf43abecd57"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a36f7175c606bbcef90a43bf43abecd57">BLOP_CONCAT2</a> (vectorb, _pop_front)(vectorb vec)</td></tr>
-<tr class="memdesc:a36f7175c606bbcef90a43bf43abecd57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop the first element.  <br /></td></tr>
-<tr id="func-members-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: inspectors</div></td></tr>
-<tr class="memitem:ae3c1a370bfc9e003a13766669c72e5f1" id="r_ae3c1a370bfc9e003a13766669c72e5f1"><td class="memItemLeft" align="right" valign="top">uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3c1a370bfc9e003a13766669c72e5f1">BLOP_CONCAT2</a> (vectorb, _get_data)(vectorb vec)</td></tr>
-<tr class="memdesc:ae3c1a370bfc9e003a13766669c72e5f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to internal data buffer.  <br /></td></tr>
-<tr class="memitem:ae890cfee45f5ecad382bfbbd53fbb57d" id="r_ae890cfee45f5ecad382bfbbd53fbb57d"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae890cfee45f5ecad382bfbbd53fbb57d">BLOP_CONCAT2</a> (vectorb, _get_count)(vectorb vec)</td></tr>
-<tr class="memdesc:ae890cfee45f5ecad382bfbbd53fbb57d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of elements currently stored.  <br /></td></tr>
-<tr class="memitem:ac88f9f5229d09544911a23ac103c75ad" id="r_ac88f9f5229d09544911a23ac103c75ad"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac88f9f5229d09544911a23ac103c75ad">BLOP_CONCAT2</a> (vectorb, _get_back)(vectorb vec)</td></tr>
-<tr class="memdesc:ac88f9f5229d09544911a23ac103c75ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get last element value.  <br /></td></tr>
-<tr class="memitem:add3d5a0d1c9d1f60353737faba9c9c51" id="r_add3d5a0d1c9d1f60353737faba9c9c51"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#add3d5a0d1c9d1f60353737faba9c9c51">BLOP_CONCAT2</a> (vectorb, _get_front)(vectorb vec)</td></tr>
-<tr class="memdesc:add3d5a0d1c9d1f60353737faba9c9c51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first element value.  <br /></td></tr>
+<tr class="memitem:a615307aa0a9492f511e6220ac1b98321" id="r_a615307aa0a9492f511e6220ac1b98321"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a615307aa0a9492f511e6220ac1b98321">blopfn_vector_insert</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx, <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> value)</td></tr>
+<tr class="memdesc:a615307aa0a9492f511e6220ac1b98321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insert value at index shifting subsequent elements right.  <br /></td></tr>
+<tr class="memitem:a83a21fc1a3ffda1c67c3134215838a95" id="r_a83a21fc1a3ffda1c67c3134215838a95"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a83a21fc1a3ffda1c67c3134215838a95">blopfn_vector_push_back</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> value)</td></tr>
+<tr class="memdesc:a83a21fc1a3ffda1c67c3134215838a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append value to the end of the vector.  <br /></td></tr>
+<tr class="memitem:a26ea254ea5c5be3936fb27653c4518a2" id="r_a26ea254ea5c5be3936fb27653c4518a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26ea254ea5c5be3936fb27653c4518a2">blopfn_vector_push_front</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> value)</td></tr>
+<tr class="memdesc:a26ea254ea5c5be3936fb27653c4518a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepend value to the start of the vector.  <br /></td></tr>
+<tr class="memitem:a2932a0a2711e892c78b047c5fac89665" id="r_a2932a0a2711e892c78b047c5fac89665"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2932a0a2711e892c78b047c5fac89665">blopfn_vector_clear</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:a2932a0a2711e892c78b047c5fac89665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove all elements from the vector.  <br /></td></tr>
+<tr class="memitem:a6e2f49db59189d26a52937eda4d7877a" id="r_a6e2f49db59189d26a52937eda4d7877a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e2f49db59189d26a52937eda4d7877a">blopfn_vector_erase</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx)</td></tr>
+<tr class="memdesc:a6e2f49db59189d26a52937eda4d7877a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase element at index shifting subsequent elements left.  <br /></td></tr>
+<tr class="memitem:addc6aee0917eb03b66c551d6c6e09898" id="r_addc6aee0917eb03b66c551d6c6e09898"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#addc6aee0917eb03b66c551d6c6e09898">blopfn_vector_pop_back</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:addc6aee0917eb03b66c551d6c6e09898"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop the last element.  <br /></td></tr>
+<tr class="memitem:a87b5e66d5809f2a074df57483e6460f5" id="r_a87b5e66d5809f2a074df57483e6460f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87b5e66d5809f2a074df57483e6460f5">blopfn_vector_pop_front</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:a87b5e66d5809f2a074df57483e6460f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop the first element.  <br /></td></tr>
+<tr id="func-members-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: resizing / capacity management</div></td></tr>
+<tr class="memitem:af4fdd9e724eb60964a7ebce0cd3eb22b" id="r_af4fdd9e724eb60964a7ebce0cd3eb22b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4fdd9e724eb60964a7ebce0cd3eb22b">blopfn_vector_resize</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t count)</td></tr>
+<tr class="memdesc:af4fdd9e724eb60964a7ebce0cd3eb22b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure vector has exactly <span class="tt">count</span> elements.  <br /></td></tr>
+<tr class="memitem:af2ca08e395f4acc0729cc56e0df3fa18" id="r_af2ca08e395f4acc0729cc56e0df3fa18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2ca08e395f4acc0729cc56e0df3fa18">blopfn_vector_shrink</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:af2ca08e395f4acc0729cc56e0df3fa18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to shrink capacity to match usage.  <br /></td></tr>
+<tr id="func-members-3" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: bulk memory ops</div></td></tr>
+<tr class="memitem:a1956451601054dde350f5430d5669ce9" id="r_a1956451601054dde350f5430d5669ce9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1956451601054dde350f5430d5669ce9">blopfn_vector_memcpy</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx, const <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> *src, size_t count)</td></tr>
+<tr class="memdesc:a1956451601054dde350f5430d5669ce9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <span class="tt">count</span> elements from <span class="tt">src</span> into vector starting at <span class="tt">idx</span>.  <br /></td></tr>
+<tr class="memitem:af9e460b408225c8db3f08a2336b0668a" id="r_af9e460b408225c8db3f08a2336b0668a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af9e460b408225c8db3f08a2336b0668a">blopfn_vector_memset</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec, size_t idx, <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> value, size_t count)</td></tr>
+<tr class="memdesc:af9e460b408225c8db3f08a2336b0668a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set <span class="tt">count</span> elements starting at <span class="tt">idx</span> to <span class="tt">value</span>.  <br /></td></tr>
+<tr id="func-members-4" class="groupHeader"><td colspan="2"><div class="groupHeader">Public API: inspectors</div></td></tr>
+<tr class="memitem:a4c916fa074bf3e2f594747295f41481d" id="r_a4c916fa074bf3e2f594747295f41481d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4c916fa074bf3e2f594747295f41481d">blopfn_vector_get_data</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:a4c916fa074bf3e2f594747295f41481d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get pointer to internal data buffer.  <br /></td></tr>
+<tr class="memitem:a9e9b504b4582a5fa39419edcaf901854" id="r_a9e9b504b4582a5fa39419edcaf901854"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9e9b504b4582a5fa39419edcaf901854">blopfn_vector_get_count</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:a9e9b504b4582a5fa39419edcaf901854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get number of elements currently stored.  <br /></td></tr>
+<tr class="memitem:a6b4bc42a9f3afa82141ac602da843f69" id="r_a6b4bc42a9f3afa82141ac602da843f69"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b4bc42a9f3afa82141ac602da843f69">blopfn_vector_get_back</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:a6b4bc42a9f3afa82141ac602da843f69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get last element value.  <br /></td></tr>
+<tr class="memitem:ab85ec23053172b55530b6a61cc3f0e85" id="r_ab85ec23053172b55530b6a61cc3f0e85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab85ec23053172b55530b6a61cc3f0e85">blopfn_vector_get_front</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:ab85ec23053172b55530b6a61cc3f0e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get first element value.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Public API: element access</h2></td></tr>
-<tr class="memitem:a5cd9d052a4d561b36665b1f764d646e0" id="r_a5cd9d052a4d561b36665b1f764d646e0"><td class="memItemLeft" align="right" valign="top"><a id="a5cd9d052a4d561b36665b1f764d646e0" name="a5cd9d052a4d561b36665b1f764d646e0"></a>
-void size_t&#160;</td><td class="memItemRight" valign="bottom"><b>idx</b></td></tr>
-<tr class="memitem:ad5c3b686dbea4bf0fc0584def54fc9a1" id="r_ad5c3b686dbea4bf0fc0584def54fc9a1"><td class="memItemLeft" align="right" valign="top"><a id="ad5c3b686dbea4bf0fc0584def54fc9a1" name="ad5c3b686dbea4bf0fc0584def54fc9a1"></a>
-void size_t uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>value</b></td></tr>
-<tr class="memitem:a54e94bd7728df8007593cce3a333ac39" id="r_a54e94bd7728df8007593cce3a333ac39"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a54e94bd7728df8007593cce3a333ac39">BLOP_CONCAT2</a> (vectorb, _set)(vectorb vec</td></tr>
-<tr class="memdesc:a54e94bd7728df8007593cce3a333ac39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set element value at index.  <br /></td></tr>
-<tr class="memitem:ae59db9a6e1dc60e4c77a56865d51f94b" id="r_ae59db9a6e1dc60e4c77a56865d51f94b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae59db9a6e1dc60e4c77a56865d51f94b">BLOP_CONCAT2</a> (vectorb, _get)(vectorb vec</td></tr>
-<tr class="memdesc:ae59db9a6e1dc60e4c77a56865d51f94b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get element value at index.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Public API: resizing / capacity management</h2></td></tr>
-<tr class="memitem:a502002c43b928f7acbee9a75c7b0c022" id="r_a502002c43b928f7acbee9a75c7b0c022"><td class="memItemLeft" align="right" valign="top"><a id="a502002c43b928f7acbee9a75c7b0c022" name="a502002c43b928f7acbee9a75c7b0c022"></a>
-void size_t&#160;</td><td class="memItemRight" valign="bottom"><b>count</b></td></tr>
-<tr class="memitem:aff995d030a7386a8064e8854619f25f3" id="r_aff995d030a7386a8064e8854619f25f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aff995d030a7386a8064e8854619f25f3">BLOP_CONCAT2</a> (vectorb, _resize)(vectorb vec</td></tr>
-<tr class="memdesc:aff995d030a7386a8064e8854619f25f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure vector has exactly <span class="tt">count</span> elements.  <br /></td></tr>
-<tr class="memitem:a1345da4610b77a30aa69ebb386f99966" id="r_a1345da4610b77a30aa69ebb386f99966"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1345da4610b77a30aa69ebb386f99966">BLOP_CONCAT2</a> (vectorb, _shrink)(vectorb vec)</td></tr>
-<tr class="memdesc:a1345da4610b77a30aa69ebb386f99966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to shrink capacity to match usage.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Public API: bulk memory ops</h2></td></tr>
-<tr class="memitem:a4ea50201df88f9367af3edd5b71149d8" id="r_a4ea50201df88f9367af3edd5b71149d8"><td class="memItemLeft" align="right" valign="top"><a id="a4ea50201df88f9367af3edd5b71149d8" name="a4ea50201df88f9367af3edd5b71149d8"></a>
-void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>src</b></td></tr>
-<tr class="memitem:a80c167ba698a67f54f6701304457fd62" id="r_a80c167ba698a67f54f6701304457fd62"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80c167ba698a67f54f6701304457fd62">BLOP_CONCAT2</a> (vectorb, _memcpy)(vectorb vec</td></tr>
-<tr class="memdesc:a80c167ba698a67f54f6701304457fd62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <span class="tt">count</span> elements from <span class="tt">src</span> into vector starting at <span class="tt">idx</span>.  <br /></td></tr>
-<tr class="memitem:a2f9146cd607e4a7f1ca30a052db24fda" id="r_a2f9146cd607e4a7f1ca30a052db24fda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f9146cd607e4a7f1ca30a052db24fda">BLOP_CONCAT2</a> (vectorb, _memset)(vectorb vec</td></tr>
-<tr class="memdesc:a2f9146cd607e4a7f1ca30a052db24fda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set <span class="tt">count</span> elements starting at <span class="tt">idx</span> to <span class="tt">value</span>.  <br /></td></tr>
+Public API: creation / destruction</h2></td></tr>
+<tr class="memitem:gaccf6b2260c27ee3ce67872a3e175f5c1" id="r_gaccf6b2260c27ee3ce67872a3e175f5c1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gaccf6b2260c27ee3ce67872a3e175f5c1">blopfn_vector_create</a>()&#160;&#160;&#160;<a class="el" href="../../d3/d3a/group__blop__util.html#ga61209f734b7fd0fb96f7ef71e4c365fb">BLOP_CONCAT2</a>(<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a>, _create)</td></tr>
+<tr class="memdesc:gaccf6b2260c27ee3ce67872a3e175f5c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Allocate and initialize a new vector instance.  <br /></td></tr>
+<tr class="memitem:gaa224e999b7a82e2b3b7c3cdf4d30fab9" id="r_gaa224e999b7a82e2b3b7c3cdf4d30fab9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/df1/group__vector__tokens.html#gaa224e999b7a82e2b3b7c3cdf4d30fab9">blopfn_vector_destroy</a> (<a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a> vec)</td></tr>
+<tr class="memdesc:gaa224e999b7a82e2b3b7c3cdf4d30fab9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy a vector instance.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Configurable, header-only dynamic array (vector) implementation. </p>
@@ -231,22 +198,33 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 <p>The API is emitted under mangled names derived from BLOP_VECTOR_NAME. Use the produced symbols (functions/typedefs/macros) to manipulate the vector.</p>
 <dl class="section author"><dt>Author</dt><dd>Pedro Caceres </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-11-16 </dd></dl>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="a4488b4f2ffe3b09370dc8788c1060ef8" name="a4488b4f2ffe3b09370dc8788c1060ef8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4488b4f2ffe3b09370dc8788c1060ef8">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[1/19]</span></h2>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a id="ac347f950fd52a3e70dba2c54fb4b84aa" name="ac347f950fd52a3e70dba2c54fb4b84aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac347f950fd52a3e70dba2c54fb4b84aa">&#9670;&#160;</a></span>blopt_vector</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
-          <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="memname">typedef struct <a class="el" href="../../db/df1/group__vector__tokens.html#ga6c85edb44304da3e59af84b3d922bd9e">blops_vector</a>* <a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>
         </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a2932a0a2711e892c78b047c5fac89665" name="a2932a0a2711e892c78b047c5fac89665"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2932a0a2711e892c78b047c5fac89665">&#9670;&#160;</a></span>blopfn_vector_clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
+          <td class="memname">void blopfn_vector_clear </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_clear</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -263,81 +241,21 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a599a93c8fb8f0f0d995a6d28ce1e2855" name="a599a93c8fb8f0f0d995a6d28ce1e2855"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a599a93c8fb8f0f0d995a6d28ce1e2855">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[2/19]</span></h2>
+<a id="a6e2f49db59189d26a52937eda4d7877a" name="a6e2f49db59189d26a52937eda4d7877a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e2f49db59189d26a52937eda4d7877a">&#9670;&#160;</a></span>blopfn_vector_erase()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">vectorb BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_erase </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_create</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Allocate and initialize a new vector instance. </p>
-<p>Behavior:</p><ul>
-<li>Allocates the vector structure and an internal buffer with BLOP_VECTOR_INITIAL_COUNT capacity.</li>
-<li>On allocation failure prints an error and calls BLOP_ABORT (may exit/abort).</li>
-</ul>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the new vector, or NULL on failure (after BLOP_ABORT if configured). </dd></dl>
-
-</div>
-</div>
-<a id="ab9b68c5d9eef23599c98614d9a6c5ee6" name="ab9b68c5d9eef23599c98614d9a6c5ee6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9b68c5d9eef23599c98614d9a6c5ee6">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[3/19]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
-          <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_destroy</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Destroy a vector instance. </p>
-<p>Requirements:</p><ul>
-<li>The vector must be empty (count == 0) when destroyed. Use clear() to remove elements first.</li>
-</ul>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vec</td><td>Vector to destroy (may be NULL - implementation asserts). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="ae7823435c73765776813c0b9824602db" name="ae7823435c73765776813c0b9824602db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae7823435c73765776813c0b9824602db">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[4/19]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
-          <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">_erase</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,21 +271,21 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="ae59db9a6e1dc60e4c77a56865d51f94b" name="ae59db9a6e1dc60e4c77a56865d51f94b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae59db9a6e1dc60e4c77a56865d51f94b">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[5/19]</span></h2>
+<a id="a0d8a0a5519d4fbc0bc6a8079d4be8b61" name="a0d8a0a5519d4fbc0bc6a8079d4be8b61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d8a0a5519d4fbc0bc6a8079d4be8b61">&#9670;&#160;</a></span>blopfn_vector_get()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t BLOP_CONCAT2 </td>
+          <td class="memname"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> blopfn_vector_get </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_get</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -384,21 +302,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="ac88f9f5229d09544911a23ac103c75ad" name="ac88f9f5229d09544911a23ac103c75ad"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac88f9f5229d09544911a23ac103c75ad">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[6/19]</span></h2>
+<a id="a6b4bc42a9f3afa82141ac602da843f69" name="a6b4bc42a9f3afa82141ac602da843f69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4bc42a9f3afa82141ac602da843f69">&#9670;&#160;</a></span>blopfn_vector_get_back()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t BLOP_CONCAT2 </td>
+          <td class="memname"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> blopfn_vector_get_back </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_get_back</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -414,21 +328,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="ae890cfee45f5ecad382bfbbd53fbb57d" name="ae890cfee45f5ecad382bfbbd53fbb57d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae890cfee45f5ecad382bfbbd53fbb57d">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[7/19]</span></h2>
+<a id="a9e9b504b4582a5fa39419edcaf901854" name="a9e9b504b4582a5fa39419edcaf901854"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e9b504b4582a5fa39419edcaf901854">&#9670;&#160;</a></span>blopfn_vector_get_count()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">size_t BLOP_CONCAT2 </td>
+          <td class="memname">size_t blopfn_vector_get_count </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_get_count</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -444,21 +354,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="ae3c1a370bfc9e003a13766669c72e5f1" name="ae3c1a370bfc9e003a13766669c72e5f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae3c1a370bfc9e003a13766669c72e5f1">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[8/19]</span></h2>
+<a id="a4c916fa074bf3e2f594747295f41481d" name="a4c916fa074bf3e2f594747295f41481d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c916fa074bf3e2f594747295f41481d">&#9670;&#160;</a></span>blopfn_vector_get_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t * BLOP_CONCAT2 </td>
+          <td class="memname"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> * blopfn_vector_get_data </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_get_data</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -475,21 +381,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="add3d5a0d1c9d1f60353737faba9c9c51" name="add3d5a0d1c9d1f60353737faba9c9c51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add3d5a0d1c9d1f60353737faba9c9c51">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[9/19]</span></h2>
+<a id="ab85ec23053172b55530b6a61cc3f0e85" name="ab85ec23053172b55530b6a61cc3f0e85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab85ec23053172b55530b6a61cc3f0e85">&#9670;&#160;</a></span>blopfn_vector_get_front()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t BLOP_CONCAT2 </td>
+          <td class="memname"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> blopfn_vector_get_front </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_get_front</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -505,21 +407,26 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="aa00ce3bd54e403219cca8965969af35a" name="aa00ce3bd54e403219cca8965969af35a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa00ce3bd54e403219cca8965969af35a">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[10/19]</span></h2>
+<a id="a615307aa0a9492f511e6220ac1b98321" name="a615307aa0a9492f511e6220ac1b98321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a615307aa0a9492f511e6220ac1b98321">&#9670;&#160;</a></span>blopfn_vector_insert()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_insert </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_insert</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -536,21 +443,31 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a80c167ba698a67f54f6701304457fd62" name="a80c167ba698a67f54f6701304457fd62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80c167ba698a67f54f6701304457fd62">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[11/19]</span></h2>
+<a id="a1956451601054dde350f5430d5669ce9" name="a1956451601054dde350f5430d5669ce9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1956451601054dde350f5430d5669ce9">&#9670;&#160;</a></span>blopfn_vector_memcpy()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_memcpy </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_memcpy</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a> *</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>count</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -568,21 +485,31 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a2f9146cd607e4a7f1ca30a052db24fda" name="a2f9146cd607e4a7f1ca30a052db24fda"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f9146cd607e4a7f1ca30a052db24fda">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[12/19]</span></h2>
+<a id="af9e460b408225c8db3f08a2336b0668a" name="af9e460b408225c8db3f08a2336b0668a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9e460b408225c8db3f08a2336b0668a">&#9670;&#160;</a></span>blopfn_vector_memset()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_memset </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_memset</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>count</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -600,21 +527,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a3a7a7bcd55f2cf13e40ec4544353f361" name="a3a7a7bcd55f2cf13e40ec4544353f361"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a7a7bcd55f2cf13e40ec4544353f361">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[13/19]</span></h2>
+<a id="addc6aee0917eb03b66c551d6c6e09898" name="addc6aee0917eb03b66c551d6c6e09898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addc6aee0917eb03b66c551d6c6e09898">&#9670;&#160;</a></span>blopfn_vector_pop_back()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_pop_back </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_pop_back</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -629,21 +552,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a36f7175c606bbcef90a43bf43abecd57" name="a36f7175c606bbcef90a43bf43abecd57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36f7175c606bbcef90a43bf43abecd57">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[14/19]</span></h2>
+<a id="a87b5e66d5809f2a074df57483e6460f5" name="a87b5e66d5809f2a074df57483e6460f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87b5e66d5809f2a074df57483e6460f5">&#9670;&#160;</a></span>blopfn_vector_pop_front()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_pop_front </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_pop_front</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -658,21 +577,21 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a73aa4eddfe4444e5ec1650c9341bbc22" name="a73aa4eddfe4444e5ec1650c9341bbc22"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73aa4eddfe4444e5ec1650c9341bbc22">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[15/19]</span></h2>
+<a id="a83a21fc1a3ffda1c67c3134215838a95" name="a83a21fc1a3ffda1c67c3134215838a95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83a21fc1a3ffda1c67c3134215838a95">&#9670;&#160;</a></span>blopfn_vector_push_back()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_push_back </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_push_back</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -688,21 +607,21 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a21c42e45ba11b2081c2d1227233bd564" name="a21c42e45ba11b2081c2d1227233bd564"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a21c42e45ba11b2081c2d1227233bd564">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[16/19]</span></h2>
+<a id="a26ea254ea5c5be3936fb27653c4518a2" name="a26ea254ea5c5be3936fb27653c4518a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26ea254ea5c5be3936fb27653c4518a2">&#9670;&#160;</a></span>blopfn_vector_push_front()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_push_front </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_push_front</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -718,21 +637,21 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="aff995d030a7386a8064e8854619f25f3" name="aff995d030a7386a8064e8854619f25f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aff995d030a7386a8064e8854619f25f3">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[17/19]</span></h2>
+<a id="af4fdd9e724eb60964a7ebce0cd3eb22b" name="af4fdd9e724eb60964a7ebce0cd3eb22b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4fdd9e724eb60964a7ebce0cd3eb22b">&#9670;&#160;</a></span>blopfn_vector_resize()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_resize </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_resize</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>count</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -752,21 +671,26 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a54e94bd7728df8007593cce3a333ac39" name="a54e94bd7728df8007593cce3a333ac39"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a54e94bd7728df8007593cce3a333ac39">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[18/19]</span></h2>
+<a id="aa0b70c0e171bf28a5e9237638413b5f4" name="aa0b70c0e171bf28a5e9237638413b5f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b70c0e171bf28a5e9237638413b5f4">&#9670;&#160;</a></span>blopfn_vector_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_set </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">_set</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>idx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../da/d70/group__vector__config.html#gac0de757b3a48f1fd859893520914112b">BLOP_VECTOR_DATA_TYPE</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -783,21 +707,17 @@ void size_t const uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><
 
 </div>
 </div>
-<a id="a1345da4610b77a30aa69ebb386f99966" name="a1345da4610b77a30aa69ebb386f99966"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1345da4610b77a30aa69ebb386f99966">&#9670;&#160;</a></span>BLOP_CONCAT2() <span class="overload">[19/19]</span></h2>
+<a id="af2ca08e395f4acc0729cc56e0df3fa18" name="af2ca08e395f4acc0729cc56e0df3fa18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2ca08e395f4acc0729cc56e0df3fa18">&#9670;&#160;</a></span>blopfn_vector_shrink()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void BLOP_CONCAT2 </td>
+          <td class="memname">void blopfn_vector_shrink </td>
           <td>(</td>
-          <td class="paramtype">vectorb</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="#ac347f950fd52a3e70dba2c54fb4b84aa">blopt_vector</a></td>          <td class="paramname"><span class="paramname"><em>vec</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">_shrink</td>          <td class="paramname"><span class="paramname"><em></em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

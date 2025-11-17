@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['node_20api_0',['Node API',['../d8/d5e/group__blop__list__api__node.html',1,'']]]
+  ['uninstallation_0',['Uninstallation',['../index.html#autotoc_md7',1,'']]],
+  ['usage_1',['Usage',['../index.html#autotoc_md6',1,'']]],
+  ['utilities_2',['Utilities',['../d3/d3a/group__blop__util.html',1,'']]]
 ];

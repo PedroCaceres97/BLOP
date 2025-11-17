@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['implementation_20details_0',['Internal Implementation Details',['../db/d3c/group__blop__list__impl.html',1,'']]],
-  ['internal_20generated_20macros_1',['Internal Generated Macros',['../db/def/group__blop__list__internal.html',1,'']]],
-  ['internal_20implementation_20details_2',['Internal Implementation Details',['../db/d3c/group__blop__list__impl.html',1,'']]]
+  ['text_20styles_0',['Text Styles',['../d5/d0f/group__ansi__styles.html',1,'']]],
+  ['tokens_1',['Core tokens',['../dc/d20/group__ansi__core.html',1,'']]]
 ];

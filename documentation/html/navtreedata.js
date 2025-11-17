@@ -25,25 +25,12 @@
 var NAVTREE =
 [
   [ "BLOP", "index.html", [
-    [ "Introduction", "d3/dcc/md__r_e_a_d_m_e.html", [
-      [ "Begginings", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md5", null ],
-      [ "Purpose", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md6", null ],
-      [ "Core Principles", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md7", null ],
-      [ "Warning", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md8", null ],
-      [ "Installation", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md9", null ],
-      [ "Usage", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md10", null ],
-      [ "Uninstallation", "d3/dcc/md__r_e_a_d_m_e.html#autotoc_md11", null ]
-    ] ],
+    [ "Introduction", "index.html", "index" ],
     [ "Topics", "topics.html", "topics" ],
-    [ "Data Structures", "annotated.html", [
-      [ "Data Structures", "annotated.html", "annotated_dup" ],
-      [ "Data Structure Index", "classes.html", null ]
-    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -52,7 +39,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"annotated.html"
+"d0/d6e/group__blop__configuration.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

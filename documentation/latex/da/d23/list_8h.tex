@@ -9,177 +9,692 @@ Generic intrusive doubly-\/linked list (header-\/only, macro-\/configurable).
 \doxysubsubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
-\#define \mbox{\hyperlink{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}~listb
-\begin{DoxyCompactList}\small\item\em The base identifier used for generating symbol names. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}}~uint8\+\_\+t
-\begin{DoxyCompactList}\small\item\em The type stored in each list node. \end{DoxyCompactList}\item 
-\#define {\bfseries blopt\+\_\+list}~\mbox{\hyperlink{group__blop__list__config_ga647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}
-\begin{DoxyCompactList}\small\item\em Internal alias for the configured list name. \end{DoxyCompactList}\item 
-\#define {\bfseries blopt\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+node)
-\begin{DoxyCompactList}\small\item\em Internal alias for the configured node name. \end{DoxyCompactList}\item 
-\#define {\bfseries blops\+\_\+list}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+t)
-\begin{DoxyCompactList}\small\item\em Internal typedef token for the concrete list structure. \end{DoxyCompactList}\item 
-\#define {\bfseries blops\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+node\+\_\+t)
-\begin{DoxyCompactList}\small\item\em Internal typedef token for the concrete node structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\begin{Indent}\textbf{ Generated public function tokens}\par
-\begin{DoxyCompactItemize}
+\#define \mbox{\hyperlink{list_8h_a647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}~listb
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+create}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+create)
+\#define \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}}~uint8\+\_\+t
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+destroy}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+destroy)
+\#define \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}~\mbox{\hyperlink{list_8h_a647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}
+\begin{DoxyCompactList}\small\item\em Opaque pointer to the configured list type. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+node)
+\begin{DoxyCompactList}\small\item\em Opaque pointer to the configured node type. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\+\_\+list}}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+t)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+front)
+\#define \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\+\_\+node}}~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+node\+\_\+t)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+back)
+\#define \mbox{\hyperlink{list_8h_ab082e35a21b4fa338acdb8ab0de89aa0}{blopfn\+\_\+list\+\_\+destroy}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+destroy)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+size}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+size)
+\#define \mbox{\hyperlink{list_8h_a3b2f829f4b231aa88ef77b7551c6653d}{blopfn\+\_\+list\+\_\+get\+\_\+front}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+front)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+get\+\_\+node}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+get\+\_\+node)
+\#define \mbox{\hyperlink{list_8h_aaa37bd3879f10358fb5e5bf156edcc3e}{blopfn\+\_\+list\+\_\+get\+\_\+back}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+back)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+clear}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+clear)
+\#define \mbox{\hyperlink{list_8h_a5eb8a97ba6980dac7f43c6438e482e46}{blopfn\+\_\+list\+\_\+get\+\_\+size}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+size)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+erase}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+erase)
+\#define \mbox{\hyperlink{list_8h_a8858fb1adc27922954be7f6ee37a67a2}{blopfn\+\_\+list\+\_\+get\+\_\+node}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+node)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+pop\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+pop\+\_\+back)
+\#define \mbox{\hyperlink{list_8h_a0bb2bdf6dcf8da55fd33ad326ff0adbd}{blopfn\+\_\+list\+\_\+clear}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+clear)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+pop\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+pop\+\_\+front)
+\#define \mbox{\hyperlink{list_8h_ad9f3d27852db6090cd54f42f1f6789db}{blopfn\+\_\+list\+\_\+erase}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+erase)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+push\+\_\+back}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+push\+\_\+back)
+\#define \mbox{\hyperlink{list_8h_ab956d1bb229292467b5a40015ae7a92c}{blopfn\+\_\+list\+\_\+pop\+\_\+back}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+pop\+\_\+back)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+push\+\_\+front}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+push\+\_\+front)
+\#define \mbox{\hyperlink{list_8h_a9005d843d2e3c8fdaa4dbdc999f3c35e}{blopfn\+\_\+list\+\_\+pop\+\_\+front}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+pop\+\_\+front)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+insert\+\_\+next}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+insert\+\_\+next)
+\#define \mbox{\hyperlink{list_8h_a7830d16e114e2b6f804119c788784d59}{blopfn\+\_\+list\+\_\+push\+\_\+back}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+push\+\_\+back)
 \item 
-\#define {\bfseries blopfn\+\_\+list\+\_\+insert\+\_\+prev}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\+\_\+list}}, \+\_\+insert\+\_\+prev)
+\#define \mbox{\hyperlink{list_8h_a045bc3e11414d470eabffb7d880c4d04}{blopfn\+\_\+list\+\_\+push\+\_\+front}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+push\+\_\+front)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+create}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+create)
+\#define \mbox{\hyperlink{list_8h_a1395085ce9e61fc2c96b0ccf85c87875}{blopfn\+\_\+list\+\_\+insert\+\_\+next}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+insert\+\_\+next)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+duplicate}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+duplicate)
+\#define \mbox{\hyperlink{list_8h_a293cfcf81640a0b49b360333fa01e682}{blopfn\+\_\+list\+\_\+insert\+\_\+prev}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+insert\+\_\+prev)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+destroy}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+destroy)
+\#define \mbox{\hyperlink{list_8h_aac9cf6ddedede3f7b96e8eea2c3dbcc2}{blopfn\+\_\+node\+\_\+duplicate}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+duplicate)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+set\+\_\+data}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+set\+\_\+data)
+\#define \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\+\_\+node\+\_\+destroy}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+destroy)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+data}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+data)
+\#define \mbox{\hyperlink{list_8h_a9c858a355a35ff4a801df3a35f11d15e}{blopfn\+\_\+node\+\_\+set\+\_\+data}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+set\+\_\+data)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+next}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+next)
+\#define \mbox{\hyperlink{list_8h_ad3aed8f452d480b84cc053103e819fcc}{blopfn\+\_\+node\+\_\+get\+\_\+data}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+data)
 \item 
-\#define {\bfseries blopfn\+\_\+node\+\_\+get\+\_\+prev}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\+\_\+node}}, \+\_\+get\+\_\+prev)
+\#define \mbox{\hyperlink{list_8h_a46d339eb39d0396405fa1f758c04760b}{blopfn\+\_\+node\+\_\+get\+\_\+next}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+next)
+\item 
+\#define \mbox{\hyperlink{list_8h_af95f9f03d73e88c8f0dab743b82f68eb}{blopfn\+\_\+node\+\_\+get\+\_\+prev}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+prev)
 \end{DoxyCompactItemize}
-\end{Indent}
 \doxysubsubsection*{Typedefs}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{list_8h_ad9e9a0143f96837c0eac143f6be6396f}\label{list_8h_ad9e9a0143f96837c0eac143f6be6396f} 
-typedef struct \+\_\+listb\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries listb}
+typedef struct \mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\+\_\+list}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}
 \item 
-\Hypertarget{list_8h_aaf95155d67efeb03a9d7ea3ac68dadc6}\label{list_8h_aaf95155d67efeb03a9d7ea3ac68dadc6} 
-typedef struct \+\_\+listb\+\_\+node\+\_\+t \texorpdfstring{$\ast$}{*} {\bfseries listb\+\_\+node}
+typedef struct \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\+\_\+node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}
 \end{DoxyCompactItemize}
-\doxysubsubsection*{Functions}
+\doxysubsubsection*{List API}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{list_8h_a45ae9dbe8787a8ababf480bf7f535fe7}\label{list_8h_a45ae9dbe8787a8ababf480bf7f535fe7} 
-listb {\bfseries listb\+\_\+create} ()
+\#define \mbox{\hyperlink{list_8h_a4b5e7c122782caf8ef0f1785dd509f24}{blopfn\+\_\+list\+\_\+create}}()~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+create)
+\begin{DoxyCompactList}\small\item\em Allocate and initialize a new empty list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a525ecbacecde83226238a35063fdfb12}{blopfn\+\_\+list\+\_\+destroy}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list)
+\begin{DoxyCompactList}\small\item\em Destroy a list structure. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_ab129fe6133290a50057bdf8e79d55cff}{blopfn\+\_\+list\+\_\+get\+\_\+front}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list)
+\begin{DoxyCompactList}\small\item\em Get the front node of the list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_ae7ef64c7dfbaea6f0e0928b6d265e6ba}{blopfn\+\_\+list\+\_\+get\+\_\+back}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list)
+\begin{DoxyCompactList}\small\item\em Get the back node of the list. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{list_8h_a88a30a337f9545ac6516c01a65536b3b}{blopfn\+\_\+list\+\_\+get\+\_\+size}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list)
+\begin{DoxyCompactList}\small\item\em Get the number of nodes in the list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_ac487a892cd94812a27096b177cfd580c}{blopfn\+\_\+list\+\_\+get\+\_\+node}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Fetch node at zero-\/based index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_aec07d98b7c1af697d9e8485cdb54470e}{blopfn\+\_\+list\+\_\+clear}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, int deallocate)
+\begin{DoxyCompactList}\small\item\em Remove all nodes from a list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a73a007ce037541bc9420bee26e666ade}{blopfn\+\_\+list\+\_\+erase}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node, int deallocate)
+\begin{DoxyCompactList}\small\item\em Erase a specific node from a list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a9d633b0ffc5812418d7f0f879615aeee}{blopfn\+\_\+list\+\_\+pop\+\_\+back}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, int deallocate)
+\begin{DoxyCompactList}\small\item\em Pop the back node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_acdd3e4994a4f75360f61c25646ddd0ac}{blopfn\+\_\+list\+\_\+pop\+\_\+front}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, int deallocate)
+\begin{DoxyCompactList}\small\item\em Pop the front node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_abcfeaf9255c79817bd607d2b52bf87d0}{blopfn\+\_\+list\+\_\+push\+\_\+back}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Push an existing node at the back of the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a973ccc150b4a83713adbdd1874651b6a}{blopfn\+\_\+list\+\_\+push\+\_\+front}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Push an existing node at the front of the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_aed5aebc1d1019687e23a17e333c1f065}{blopfn\+\_\+list\+\_\+insert\+\_\+next}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} pivot, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Insert node after a pivot node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a7dba2fb9e2fb7b64b92d66b2fe837ed9}{blopfn\+\_\+list\+\_\+insert\+\_\+prev}} (\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} list, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} pivot, \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Insert node before a pivot node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Node API}
+\begin{DoxyCompactItemize}
 \item 
-\Hypertarget{list_8h_ab561e26b477c5bdad5007d7d7bbc5f6b}\label{list_8h_ab561e26b477c5bdad5007d7d7bbc5f6b} 
-void {\bfseries listb\+\_\+destroy} (listb list)
-\item 
-\Hypertarget{list_8h_a89710d5014004816002913dd445eacb2}\label{list_8h_a89710d5014004816002913dd445eacb2} 
-listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+front} (listb list)
-\item 
-\Hypertarget{list_8h_ae271be7b0a15f95e3d8bd35cc3c56018}\label{list_8h_ae271be7b0a15f95e3d8bd35cc3c56018} 
-listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+back} (listb list)
-\item 
-\Hypertarget{list_8h_a379cba956d5c8c1755a793e4c8dbe1c5}\label{list_8h_a379cba956d5c8c1755a793e4c8dbe1c5} 
-size\+\_\+t {\bfseries listb\+\_\+get\+\_\+size} (listb list)
-\item 
-\Hypertarget{list_8h_aeb2ad539f12f58e2dc5aae8fbff341df}\label{list_8h_aeb2ad539f12f58e2dc5aae8fbff341df} 
-listb\+\_\+node {\bfseries listb\+\_\+get\+\_\+node} (listb list, size\+\_\+t index)
-\item 
-\Hypertarget{list_8h_ae39ad958a0e833dd2ef46dcd8d2515b8}\label{list_8h_ae39ad958a0e833dd2ef46dcd8d2515b8} 
-void {\bfseries listb\+\_\+clear} (listb list, int deallocate)
-\item 
-\Hypertarget{list_8h_a46f42c823be998de4c6403079b274506}\label{list_8h_a46f42c823be998de4c6403079b274506} 
-void {\bfseries listb\+\_\+erase} (listb list, listb\+\_\+node node, int deallocate)
-\item 
-\Hypertarget{list_8h_ae92af3d17df4e76089462f7c06f12b39}\label{list_8h_ae92af3d17df4e76089462f7c06f12b39} 
-void {\bfseries listb\+\_\+pop\+\_\+back} (listb list, int deallocate)
-\item 
-\Hypertarget{list_8h_ae1999e28d53d6fc81fc8e446e77fabb2}\label{list_8h_ae1999e28d53d6fc81fc8e446e77fabb2} 
-void {\bfseries listb\+\_\+pop\+\_\+front} (listb list, int deallocate)
-\item 
-\Hypertarget{list_8h_ade70d77438ff5a8a57f87cf0595937ae}\label{list_8h_ade70d77438ff5a8a57f87cf0595937ae} 
-void {\bfseries listb\+\_\+push\+\_\+back} (listb list, listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_ab1edbb58d6ef42e52b2758ba431e1e61}\label{list_8h_ab1edbb58d6ef42e52b2758ba431e1e61} 
-void {\bfseries listb\+\_\+push\+\_\+front} (listb list, listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_a3c585c0ba77bd0a0cf360a5a2d328f9d}\label{list_8h_a3c585c0ba77bd0a0cf360a5a2d328f9d} 
-void {\bfseries listb\+\_\+insert\+\_\+next} (listb list, listb\+\_\+node pivot, listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_af23f1d6df3eb8ef326e47bed44738009}\label{list_8h_af23f1d6df3eb8ef326e47bed44738009} 
-void {\bfseries listb\+\_\+insert\+\_\+prev} (listb list, listb\+\_\+node pivot, listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_a386985904633be9b8e9631b2f833c8dd}\label{list_8h_a386985904633be9b8e9631b2f833c8dd} 
-listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+create} ()
-\item 
-\Hypertarget{list_8h_a36b3e72a2c7126bce693a158d48c0327}\label{list_8h_a36b3e72a2c7126bce693a158d48c0327} 
-listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+duplicate} (listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_a644d0a41d932668c14830162b4047986}\label{list_8h_a644d0a41d932668c14830162b4047986} 
-void {\bfseries listb\+\_\+node\+\_\+destroy} (listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_a5ffe993486b8ea08b5aa2ee393a7caab}\label{list_8h_a5ffe993486b8ea08b5aa2ee393a7caab} 
-listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+set\+\_\+data} (listb\+\_\+node node, uint8\+\_\+t data)
-\item 
-\Hypertarget{list_8h_a1e0fb6bb3c334a56699609db9cf88819}\label{list_8h_a1e0fb6bb3c334a56699609db9cf88819} 
-uint8\+\_\+t {\bfseries listb\+\_\+node\+\_\+get\+\_\+data} (listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_afce7267dfb09ef5dfbc27bdee705adff}\label{list_8h_afce7267dfb09ef5dfbc27bdee705adff} 
-listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+get\+\_\+next} (listb\+\_\+node node)
-\item 
-\Hypertarget{list_8h_a9b936989c01c6eafee9777861e84f672}\label{list_8h_a9b936989c01c6eafee9777861e84f672} 
-listb\+\_\+node {\bfseries listb\+\_\+node\+\_\+get\+\_\+prev} (listb\+\_\+node node)
-\end{DoxyCompactItemize}
+\#define \mbox{\hyperlink{list_8h_a2563d497b25fb82b055094bbdebc3022}{blopfn\+\_\+node\+\_\+create}}()~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+create)
+\begin{DoxyCompactList}\small\item\em Allocate a new node initialized to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_a3a4e602a25d401d4ca7254d8e7aabe58}{blopfn\+\_\+node\+\_\+duplicate}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Duplicate a node (shallow copy of {\ttfamily data} only). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{list_8h_a00900a85f61ae908fe066e8de08435a5}{blopfn\+\_\+node\+\_\+destroy}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Destroy a standalone node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_afbf49066096f6da1cc25651674c15adb}{blopfn\+\_\+node\+\_\+set\+\_\+data}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node, \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}} data)
+\begin{DoxyCompactList}\small\item\em Set node data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}} \mbox{\hyperlink{list_8h_abf13c63862ad93e0a3597bf8b2100f69}{blopfn\+\_\+node\+\_\+get\+\_\+data}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Get node data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_a260225b0627b933f40330d754b8b1a5f}{blopfn\+\_\+node\+\_\+get\+\_\+next}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Get next node pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} \mbox{\hyperlink{list_8h_a4bf5435c6ee51f6af495aca315fb3d07}{blopfn\+\_\+node\+\_\+get\+\_\+prev}} (\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} node)
+\begin{DoxyCompactList}\small\item\em Get previous node pointer. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Generic intrusive doubly-\/linked list (header-\/only, macro-\/configurable). 
 
-This header implements a small, configurable, intrusive doubly-\/linked list. The module is designed to be lightweight, header-\/only, and fully customizable through macro configuration.\hypertarget{list_8h_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{list_8h_autotoc_md1}
-The list is intrusive\+: each node holds its own data and the pointers linking it to the list. This reduces allocations and allows users to fully control memory layouts.
+This header provides a small, configurable, intrusive doubly-\/linked list implementation. It is intended to be included with different macro configurations to produce typed list variants.
 
-The API is generated from configuration macros and may produce multiple list types simply by including this header with different macro definitions.\hypertarget{list_8h_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{How to use}{How to use}}\label{list_8h_autotoc_md2}
-
+Configuration macros\+:
 \begin{DoxyItemize}
-\item Include normally to get declarations.
-\item In exactly one translation unit, define\+:
+\item BLOP\+\_\+\+LIST\+\_\+\+NAME\+: Identifier for the list (defaults to {\ttfamily listb}).
+\item BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE\+: Type stored in each node (defaults to {\ttfamily uint8\+\_\+t}).
+\item BLOP\+\_\+\+LIST\+\_\+\+DEALLOCATE\+\_\+\+DATA\+: Optional macro/function invoked during node destruction to free user data. Should be a macro taking one argument\+: the data value.
+\item BLOP\+\_\+\+LIST\+\_\+\+IMPLEMENTATION\+: Define in one translation unit to emit the implementation bodies.
+\end{DoxyItemize}
 
+Usage\+:
+\begin{DoxyItemize}
+\item Include this header normally to get type/function declarations.
+\item In one .c file define BLOP\+\_\+\+LIST\+\_\+\+IMPLEMENTATION before including to get definitions.
+\end{DoxyItemize}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_IMPLEMENTATION}}
+Example\+: \#define BLOP\+\_\+\+LIST\+\_\+\+NAME mylist \#define BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE int \#define BLOP\+\_\+\+LIST\+\_\+\+IMPLEMENTATION \#include "{}list.\+h"{}
 
-\end{DoxyCode}
+The API is intrusive\+: nodes contain the stored data and list pointers.
 
-
-before including this header so that implementation bodies are emitted.
-\end{DoxyItemize}\hypertarget{list_8h_autotoc_md3}{}\doxysubsubsection{\texorpdfstring{Example}{Example}}\label{list_8h_autotoc_md3}
-
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_NAME\ mylist}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_DATA\_TYPE\ int}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#define\ BLOP\_LIST\_IMPLEMENTATION}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{list_8h}{list.h}}"{}}}
-
-\end{DoxyCode}
-
-
-After this, functions such as {\ttfamily mylist\+\_\+create}, {\ttfamily mylist\+\_\+push\+\_\+back}, etc., become available.
-
-\begin{DoxyDate}{Date}
-2025-\/11-\/16 
-\end{DoxyDate}
 \begin{DoxyAuthor}{Author}
 Pedro Caceres 
 \end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/11-\/16 
+\end{DoxyDate}
+
+
+\label{doc-define-members}
+\Hypertarget{list_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}\index{list.h@{list.h}!BLOP\_LIST\_DATA\_TYPE@{BLOP\_LIST\_DATA\_TYPE}}
+\index{BLOP\_LIST\_DATA\_TYPE@{BLOP\_LIST\_DATA\_TYPE}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_LIST\_DATA\_TYPE}{BLOP\_LIST\_DATA\_TYPE}}
+{\footnotesize\ttfamily \label{list_8h_ac29a4e355a2da73568a5cd0f0de27e26} 
+\#define BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE~uint8\+\_\+t}
+
+\Hypertarget{list_8h_a647e5040e07940fbac31f4f0d3b8bf6d}\index{list.h@{list.h}!BLOP\_LIST\_NAME@{BLOP\_LIST\_NAME}}
+\index{BLOP\_LIST\_NAME@{BLOP\_LIST\_NAME}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{BLOP\_LIST\_NAME}{BLOP\_LIST\_NAME}}
+{\footnotesize\ttfamily \label{list_8h_a647e5040e07940fbac31f4f0d3b8bf6d} 
+\#define BLOP\+\_\+\+LIST\+\_\+\+NAME~listb}
+
+\Hypertarget{list_8h_a0bb2bdf6dcf8da55fd33ad326ff0adbd}\index{list.h@{list.h}!blopfn\_list\_clear@{blopfn\_list\_clear}}
+\index{blopfn\_list\_clear@{blopfn\_list\_clear}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_clear}{blopfn\_list\_clear}}
+{\footnotesize\ttfamily \label{list_8h_a0bb2bdf6dcf8da55fd33ad326ff0adbd} 
+\#define blopfn\+\_\+list\+\_\+clear~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+clear)}
+
+\Hypertarget{list_8h_a4b5e7c122782caf8ef0f1785dd509f24}\index{list.h@{list.h}!blopfn\_list\_create@{blopfn\_list\_create}}
+\index{blopfn\_list\_create@{blopfn\_list\_create}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_create}{blopfn\_list\_create}}
+{\footnotesize\ttfamily \label{list_8h_a4b5e7c122782caf8ef0f1785dd509f24} 
+\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}} blopfn\+\_\+list\+\_\+create(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+create)}
+
+
+
+Allocate and initialize a new empty list. 
+
+\begin{DoxyReturn}{Returns}
+Newly allocated list pointer, or NULL on allocation failure.
+\end{DoxyReturn}
+Public function name tokens derived from list name. \Hypertarget{list_8h_ab082e35a21b4fa338acdb8ab0de89aa0}\index{list.h@{list.h}!blopfn\_list\_destroy@{blopfn\_list\_destroy}}
+\index{blopfn\_list\_destroy@{blopfn\_list\_destroy}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_destroy}{blopfn\_list\_destroy}}
+{\footnotesize\ttfamily \label{list_8h_ab082e35a21b4fa338acdb8ab0de89aa0} 
+\#define blopfn\+\_\+list\+\_\+destroy~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+destroy)}
+
+\Hypertarget{list_8h_ad9f3d27852db6090cd54f42f1f6789db}\index{list.h@{list.h}!blopfn\_list\_erase@{blopfn\_list\_erase}}
+\index{blopfn\_list\_erase@{blopfn\_list\_erase}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_erase}{blopfn\_list\_erase}}
+{\footnotesize\ttfamily \label{list_8h_ad9f3d27852db6090cd54f42f1f6789db} 
+\#define blopfn\+\_\+list\+\_\+erase~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+erase)}
+
+\Hypertarget{list_8h_aaa37bd3879f10358fb5e5bf156edcc3e}\index{list.h@{list.h}!blopfn\_list\_get\_back@{blopfn\_list\_get\_back}}
+\index{blopfn\_list\_get\_back@{blopfn\_list\_get\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_back}{blopfn\_list\_get\_back}}
+{\footnotesize\ttfamily \label{list_8h_aaa37bd3879f10358fb5e5bf156edcc3e} 
+\#define blopfn\+\_\+list\+\_\+get\+\_\+back~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+back)}
+
+\Hypertarget{list_8h_a3b2f829f4b231aa88ef77b7551c6653d}\index{list.h@{list.h}!blopfn\_list\_get\_front@{blopfn\_list\_get\_front}}
+\index{blopfn\_list\_get\_front@{blopfn\_list\_get\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_front}{blopfn\_list\_get\_front}}
+{\footnotesize\ttfamily \label{list_8h_a3b2f829f4b231aa88ef77b7551c6653d} 
+\#define blopfn\+\_\+list\+\_\+get\+\_\+front~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+front)}
+
+\Hypertarget{list_8h_a8858fb1adc27922954be7f6ee37a67a2}\index{list.h@{list.h}!blopfn\_list\_get\_node@{blopfn\_list\_get\_node}}
+\index{blopfn\_list\_get\_node@{blopfn\_list\_get\_node}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_node}{blopfn\_list\_get\_node}}
+{\footnotesize\ttfamily \label{list_8h_a8858fb1adc27922954be7f6ee37a67a2} 
+\#define blopfn\+\_\+list\+\_\+get\+\_\+node~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+node)}
+
+\Hypertarget{list_8h_a5eb8a97ba6980dac7f43c6438e482e46}\index{list.h@{list.h}!blopfn\_list\_get\_size@{blopfn\_list\_get\_size}}
+\index{blopfn\_list\_get\_size@{blopfn\_list\_get\_size}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_size}{blopfn\_list\_get\_size}}
+{\footnotesize\ttfamily \label{list_8h_a5eb8a97ba6980dac7f43c6438e482e46} 
+\#define blopfn\+\_\+list\+\_\+get\+\_\+size~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+get\+\_\+size)}
+
+\Hypertarget{list_8h_a1395085ce9e61fc2c96b0ccf85c87875}\index{list.h@{list.h}!blopfn\_list\_insert\_next@{blopfn\_list\_insert\_next}}
+\index{blopfn\_list\_insert\_next@{blopfn\_list\_insert\_next}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_insert\_next}{blopfn\_list\_insert\_next}}
+{\footnotesize\ttfamily \label{list_8h_a1395085ce9e61fc2c96b0ccf85c87875} 
+\#define blopfn\+\_\+list\+\_\+insert\+\_\+next~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+insert\+\_\+next)}
+
+\Hypertarget{list_8h_a293cfcf81640a0b49b360333fa01e682}\index{list.h@{list.h}!blopfn\_list\_insert\_prev@{blopfn\_list\_insert\_prev}}
+\index{blopfn\_list\_insert\_prev@{blopfn\_list\_insert\_prev}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_insert\_prev}{blopfn\_list\_insert\_prev}}
+{\footnotesize\ttfamily \label{list_8h_a293cfcf81640a0b49b360333fa01e682} 
+\#define blopfn\+\_\+list\+\_\+insert\+\_\+prev~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+insert\+\_\+prev)}
+
+\Hypertarget{list_8h_ab956d1bb229292467b5a40015ae7a92c}\index{list.h@{list.h}!blopfn\_list\_pop\_back@{blopfn\_list\_pop\_back}}
+\index{blopfn\_list\_pop\_back@{blopfn\_list\_pop\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_pop\_back}{blopfn\_list\_pop\_back}}
+{\footnotesize\ttfamily \label{list_8h_ab956d1bb229292467b5a40015ae7a92c} 
+\#define blopfn\+\_\+list\+\_\+pop\+\_\+back~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+pop\+\_\+back)}
+
+\Hypertarget{list_8h_a9005d843d2e3c8fdaa4dbdc999f3c35e}\index{list.h@{list.h}!blopfn\_list\_pop\_front@{blopfn\_list\_pop\_front}}
+\index{blopfn\_list\_pop\_front@{blopfn\_list\_pop\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_pop\_front}{blopfn\_list\_pop\_front}}
+{\footnotesize\ttfamily \label{list_8h_a9005d843d2e3c8fdaa4dbdc999f3c35e} 
+\#define blopfn\+\_\+list\+\_\+pop\+\_\+front~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+pop\+\_\+front)}
+
+\Hypertarget{list_8h_a7830d16e114e2b6f804119c788784d59}\index{list.h@{list.h}!blopfn\_list\_push\_back@{blopfn\_list\_push\_back}}
+\index{blopfn\_list\_push\_back@{blopfn\_list\_push\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_push\_back}{blopfn\_list\_push\_back}}
+{\footnotesize\ttfamily \label{list_8h_a7830d16e114e2b6f804119c788784d59} 
+\#define blopfn\+\_\+list\+\_\+push\+\_\+back~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+push\+\_\+back)}
+
+\Hypertarget{list_8h_a045bc3e11414d470eabffb7d880c4d04}\index{list.h@{list.h}!blopfn\_list\_push\_front@{blopfn\_list\_push\_front}}
+\index{blopfn\_list\_push\_front@{blopfn\_list\_push\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_push\_front}{blopfn\_list\_push\_front}}
+{\footnotesize\ttfamily \label{list_8h_a045bc3e11414d470eabffb7d880c4d04} 
+\#define blopfn\+\_\+list\+\_\+push\+\_\+front~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+push\+\_\+front)}
+
+\Hypertarget{list_8h_a2563d497b25fb82b055094bbdebc3022}\index{list.h@{list.h}!blopfn\_node\_create@{blopfn\_node\_create}}
+\index{blopfn\_node\_create@{blopfn\_node\_create}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_create}{blopfn\_node\_create}}
+{\footnotesize\ttfamily \label{list_8h_a2563d497b25fb82b055094bbdebc3022} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+node\+\_\+create(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+create)}
+
+
+
+Allocate a new node initialized to zero. 
+
+\begin{DoxyReturn}{Returns}
+Newly allocated node pointer, or NULL on allocation failure. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a9fba92ded89de0da3476001e1f05ddab}\index{list.h@{list.h}!blopfn\_node\_destroy@{blopfn\_node\_destroy}}
+\index{blopfn\_node\_destroy@{blopfn\_node\_destroy}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_destroy}{blopfn\_node\_destroy}}
+{\footnotesize\ttfamily \label{list_8h_a9fba92ded89de0da3476001e1f05ddab} 
+\#define blopfn\+\_\+node\+\_\+destroy~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+destroy)}
+
+\Hypertarget{list_8h_aac9cf6ddedede3f7b96e8eea2c3dbcc2}\index{list.h@{list.h}!blopfn\_node\_duplicate@{blopfn\_node\_duplicate}}
+\index{blopfn\_node\_duplicate@{blopfn\_node\_duplicate}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_duplicate}{blopfn\_node\_duplicate}}
+{\footnotesize\ttfamily \label{list_8h_aac9cf6ddedede3f7b96e8eea2c3dbcc2} 
+\#define blopfn\+\_\+node\+\_\+duplicate~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+duplicate)}
+
+\Hypertarget{list_8h_ad3aed8f452d480b84cc053103e819fcc}\index{list.h@{list.h}!blopfn\_node\_get\_data@{blopfn\_node\_get\_data}}
+\index{blopfn\_node\_get\_data@{blopfn\_node\_get\_data}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_data}{blopfn\_node\_get\_data}}
+{\footnotesize\ttfamily \label{list_8h_ad3aed8f452d480b84cc053103e819fcc} 
+\#define blopfn\+\_\+node\+\_\+get\+\_\+data~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+data)}
+
+\Hypertarget{list_8h_a46d339eb39d0396405fa1f758c04760b}\index{list.h@{list.h}!blopfn\_node\_get\_next@{blopfn\_node\_get\_next}}
+\index{blopfn\_node\_get\_next@{blopfn\_node\_get\_next}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_next}{blopfn\_node\_get\_next}}
+{\footnotesize\ttfamily \label{list_8h_a46d339eb39d0396405fa1f758c04760b} 
+\#define blopfn\+\_\+node\+\_\+get\+\_\+next~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+next)}
+
+\Hypertarget{list_8h_af95f9f03d73e88c8f0dab743b82f68eb}\index{list.h@{list.h}!blopfn\_node\_get\_prev@{blopfn\_node\_get\_prev}}
+\index{blopfn\_node\_get\_prev@{blopfn\_node\_get\_prev}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_prev}{blopfn\_node\_get\_prev}}
+{\footnotesize\ttfamily \label{list_8h_af95f9f03d73e88c8f0dab743b82f68eb} 
+\#define blopfn\+\_\+node\+\_\+get\+\_\+prev~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+get\+\_\+prev)}
+
+\Hypertarget{list_8h_a9c858a355a35ff4a801df3a35f11d15e}\index{list.h@{list.h}!blopfn\_node\_set\_data@{blopfn\_node\_set\_data}}
+\index{blopfn\_node\_set\_data@{blopfn\_node\_set\_data}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_set\_data}{blopfn\_node\_set\_data}}
+{\footnotesize\ttfamily \label{list_8h_a9c858a355a35ff4a801df3a35f11d15e} 
+\#define blopfn\+\_\+node\+\_\+set\+\_\+data~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}, \+\_\+set\+\_\+data)}
+
+\Hypertarget{list_8h_a1a7e19f41d72b4576222bf113ac07f30}\index{list.h@{list.h}!blops\_list@{blops\_list}}
+\index{blops\_list@{blops\_list}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blops\_list}{blops\_list}}
+{\footnotesize\ttfamily \label{list_8h_a1a7e19f41d72b4576222bf113ac07f30} 
+\#define blops\+\_\+list~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+t)}
+
+\Hypertarget{list_8h_af2e5e1800ee7b46291546e13e9ba396c}\index{list.h@{list.h}!blops\_node@{blops\_node}}
+\index{blops\_node@{blops\_node}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blops\_node}{blops\_node}}
+{\footnotesize\ttfamily \label{list_8h_af2e5e1800ee7b46291546e13e9ba396c} 
+\#define blops\+\_\+node~\mbox{\hyperlink{group__blop__util_ga27d81a40c9ac890bf15664c1b6ce0326}{BLOP\+\_\+\+CONCAT3}}(\+\_\+, \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+node\+\_\+t)}
+
+\Hypertarget{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}\index{list.h@{list.h}!blopt\_list@{blopt\_list}}
+\index{blopt\_list@{blopt\_list}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopt\_list}{blopt\_list}}
+{\footnotesize\ttfamily \label{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e} 
+\#define \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}~\mbox{\hyperlink{list_8h_a647e5040e07940fbac31f4f0d3b8bf6d}{BLOP\+\_\+\+LIST\+\_\+\+NAME}}}
+
+
+
+Opaque pointer to the configured list type. 
+
+Internal token names derived from configuration macros. \Hypertarget{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}\index{list.h@{list.h}!blopt\_node@{blopt\_node}}
+\index{blopt\_node@{blopt\_node}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopt\_node}{blopt\_node}}
+{\footnotesize\ttfamily \label{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4} 
+\#define \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}~\mbox{\hyperlink{group__blop__util_ga61209f734b7fd0fb96f7ef71e4c365fb}{BLOP\+\_\+\+CONCAT2}}(\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}, \+\_\+node)}
+
+
+
+Opaque pointer to the configured node type. 
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{list_8h_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{list_8h_ad0a1d041114a1979f1531c02d227afd4}\index{list.h@{list.h}!blopt\_list@{blopt\_list}}
+\index{blopt\_list@{blopt\_list}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopt\_list}{blopt\_list}}
+{\footnotesize\ttfamily \label{list_8h_ad0a1d041114a1979f1531c02d227afd4} 
+typedef struct \mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\+\_\+list}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}
+
+\Hypertarget{list_8h_addb46b129aba84f5c9eca08a1ef3467d}\index{list.h@{list.h}!blopt\_node@{blopt\_node}}
+\index{blopt\_node@{blopt\_node}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopt\_node}{blopt\_node}}
+{\footnotesize\ttfamily \label{list_8h_addb46b129aba84f5c9eca08a1ef3467d} 
+typedef struct \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\+\_\+node}}\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{list_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{list_8h_aec07d98b7c1af697d9e8485cdb54470e}\index{list.h@{list.h}!blopfn\_list\_clear@{blopfn\_list\_clear}}
+\index{blopfn\_list\_clear@{blopfn\_list\_clear}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_clear()}{blopfn\_list\_clear()}}
+{\footnotesize\ttfamily \label{list_8h_aec07d98b7c1af697d9e8485cdb54470e} 
+void blopfn\+\_\+list\+\_\+clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{int}]{deallocate}{}\end{DoxyParamCaption})}
+
+
+
+Remove all nodes from a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to clear. \\
+\hline
+{\em deallocate} & If non-\/zero the nodes are destroyed (and their data deallocated if BLOP\+\_\+\+LIST\+\_\+\+DEALLOCATE\+\_\+\+DATA is provided). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a525ecbacecde83226238a35063fdfb12}\index{list.h@{list.h}!blopfn\_list\_destroy@{blopfn\_list\_destroy}}
+\index{blopfn\_list\_destroy@{blopfn\_list\_destroy}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_destroy()}{blopfn\_list\_destroy()}}
+{\footnotesize\ttfamily \label{list_8h_a525ecbacecde83226238a35063fdfb12} 
+void blopfn\+\_\+list\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Destroy a list structure. 
+
+The list must be empty (size == 0) when destroyed. Use blopfn\+\_\+list\+\_\+clear to remove and optionally deallocate nodes prior to calling destroy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a73a007ce037541bc9420bee26e666ade}\index{list.h@{list.h}!blopfn\_list\_erase@{blopfn\_list\_erase}}
+\index{blopfn\_list\_erase@{blopfn\_list\_erase}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_erase()}{blopfn\_list\_erase()}}
+{\footnotesize\ttfamily \label{list_8h_a73a007ce037541bc9420bee26e666ade} 
+void blopfn\+\_\+list\+\_\+erase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{, }\item[{int}]{deallocate}{}\end{DoxyParamCaption})}
+
+
+
+Erase a specific node from a list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List containing the node. \\
+\hline
+{\em node} & Node to remove. \\
+\hline
+{\em deallocate} & If non-\/zero the node is destroyed after unlinking. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_ae7ef64c7dfbaea6f0e0928b6d265e6ba}\index{list.h@{list.h}!blopfn\_list\_get\_back@{blopfn\_list\_get\_back}}
+\index{blopfn\_list\_get\_back@{blopfn\_list\_get\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_back()}{blopfn\_list\_get\_back()}}
+{\footnotesize\ttfamily \label{list_8h_ae7ef64c7dfbaea6f0e0928b6d265e6ba} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+list\+\_\+get\+\_\+back (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Get the back node of the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Back node pointer or NULL if list is empty or list is NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ab129fe6133290a50057bdf8e79d55cff}\index{list.h@{list.h}!blopfn\_list\_get\_front@{blopfn\_list\_get\_front}}
+\index{blopfn\_list\_get\_front@{blopfn\_list\_get\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_front()}{blopfn\_list\_get\_front()}}
+{\footnotesize\ttfamily \label{list_8h_ab129fe6133290a50057bdf8e79d55cff} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+list\+\_\+get\+\_\+front (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Get the front node of the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Front node pointer or NULL if list is empty or list is NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_ac487a892cd94812a27096b177cfd580c}\index{list.h@{list.h}!blopfn\_list\_get\_node@{blopfn\_list\_get\_node}}
+\index{blopfn\_list\_get\_node@{blopfn\_list\_get\_node}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_node()}{blopfn\_list\_get\_node()}}
+{\footnotesize\ttfamily \label{list_8h_ac487a892cd94812a27096b177cfd580c} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+list\+\_\+get\+\_\+node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Fetch node at zero-\/based index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to search. \\
+\hline
+{\em index} & Zero-\/based index (0..size-\/1). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Node pointer at index, or NULL on error (out of bounds or NULL list). 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a88a30a337f9545ac6516c01a65536b3b}\index{list.h@{list.h}!blopfn\_list\_get\_size@{blopfn\_list\_get\_size}}
+\index{blopfn\_list\_get\_size@{blopfn\_list\_get\_size}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_get\_size()}{blopfn\_list\_get\_size()}}
+{\footnotesize\ttfamily \label{list_8h_a88a30a337f9545ac6516c01a65536b3b} 
+size\+\_\+t blopfn\+\_\+list\+\_\+get\+\_\+size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{}\end{DoxyParamCaption})}
+
+
+
+Get the number of nodes in the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of nodes, or 0 if list is NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_aed5aebc1d1019687e23a17e333c1f065}\index{list.h@{list.h}!blopfn\_list\_insert\_next@{blopfn\_list\_insert\_next}}
+\index{blopfn\_list\_insert\_next@{blopfn\_list\_insert\_next}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_insert\_next()}{blopfn\_list\_insert\_next()}}
+{\footnotesize\ttfamily \label{list_8h_aed5aebc1d1019687e23a17e333c1f065} 
+void blopfn\+\_\+list\+\_\+insert\+\_\+next (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{pivot}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Insert node after a pivot node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Target list. \\
+\hline
+{\em pivot} & Node after which to insert. \\
+\hline
+{\em node} & Node to insert (must not already belong to a list). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a7dba2fb9e2fb7b64b92d66b2fe837ed9}\index{list.h@{list.h}!blopfn\_list\_insert\_prev@{blopfn\_list\_insert\_prev}}
+\index{blopfn\_list\_insert\_prev@{blopfn\_list\_insert\_prev}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_insert\_prev()}{blopfn\_list\_insert\_prev()}}
+{\footnotesize\ttfamily \label{list_8h_a7dba2fb9e2fb7b64b92d66b2fe837ed9} 
+void blopfn\+\_\+list\+\_\+insert\+\_\+prev (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{pivot}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Insert node before a pivot node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Target list. \\
+\hline
+{\em pivot} & Node before which to insert. \\
+\hline
+{\em node} & Node to insert (must not already belong to a list). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a9d633b0ffc5812418d7f0f879615aeee}\index{list.h@{list.h}!blopfn\_list\_pop\_back@{blopfn\_list\_pop\_back}}
+\index{blopfn\_list\_pop\_back@{blopfn\_list\_pop\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_pop\_back()}{blopfn\_list\_pop\_back()}}
+{\footnotesize\ttfamily \label{list_8h_a9d633b0ffc5812418d7f0f879615aeee} 
+void blopfn\+\_\+list\+\_\+pop\+\_\+back (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{int}]{deallocate}{}\end{DoxyParamCaption})}
+
+
+
+Pop the back node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to operate on. \\
+\hline
+{\em deallocate} & If non-\/zero the popped node is destroyed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_acdd3e4994a4f75360f61c25646ddd0ac}\index{list.h@{list.h}!blopfn\_list\_pop\_front@{blopfn\_list\_pop\_front}}
+\index{blopfn\_list\_pop\_front@{blopfn\_list\_pop\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_pop\_front()}{blopfn\_list\_pop\_front()}}
+{\footnotesize\ttfamily \label{list_8h_acdd3e4994a4f75360f61c25646ddd0ac} 
+void blopfn\+\_\+list\+\_\+pop\+\_\+front (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{int}]{deallocate}{}\end{DoxyParamCaption})}
+
+
+
+Pop the front node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & List to operate on. \\
+\hline
+{\em deallocate} & If non-\/zero the popped node is destroyed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_abcfeaf9255c79817bd607d2b52bf87d0}\index{list.h@{list.h}!blopfn\_list\_push\_back@{blopfn\_list\_push\_back}}
+\index{blopfn\_list\_push\_back@{blopfn\_list\_push\_back}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_push\_back()}{blopfn\_list\_push\_back()}}
+{\footnotesize\ttfamily \label{list_8h_abcfeaf9255c79817bd607d2b52bf87d0} 
+void blopfn\+\_\+list\+\_\+push\+\_\+back (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Push an existing node at the back of the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Target list. \\
+\hline
+{\em node} & Node to insert (must not already belong to a list). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a973ccc150b4a83713adbdd1874651b6a}\index{list.h@{list.h}!blopfn\_list\_push\_front@{blopfn\_list\_push\_front}}
+\index{blopfn\_list\_push\_front@{blopfn\_list\_push\_front}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_list\_push\_front()}{blopfn\_list\_push\_front()}}
+{\footnotesize\ttfamily \label{list_8h_a973ccc150b4a83713adbdd1874651b6a} 
+void blopfn\+\_\+list\+\_\+push\+\_\+front (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_ad0a1d041114a1979f1531c02d227afd4}{blopt\+\_\+list}}}]{list}{, }\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Push an existing node at the front of the list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list} & Target list. \\
+\hline
+{\em node} & Node to insert (must not already belong to a list). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a00900a85f61ae908fe066e8de08435a5}\index{list.h@{list.h}!blopfn\_node\_destroy@{blopfn\_node\_destroy}}
+\index{blopfn\_node\_destroy@{blopfn\_node\_destroy}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_destroy()}{blopfn\_node\_destroy()}}
+{\footnotesize\ttfamily \label{list_8h_a00900a85f61ae908fe066e8de08435a5} 
+void blopfn\+\_\+node\+\_\+destroy (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Destroy a standalone node. 
+
+Node must not belong to any list. If BLOP\+\_\+\+LIST\+\_\+\+DEALLOCATE\+\_\+\+DATA is provided it will be invoked on the node data before freeing the node storage.
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to destroy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{list_8h_a3a4e602a25d401d4ca7254d8e7aabe58}\index{list.h@{list.h}!blopfn\_node\_duplicate@{blopfn\_node\_duplicate}}
+\index{blopfn\_node\_duplicate@{blopfn\_node\_duplicate}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_duplicate()}{blopfn\_node\_duplicate()}}
+{\footnotesize\ttfamily \label{list_8h_a3a4e602a25d401d4ca7254d8e7aabe58} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+node\+\_\+duplicate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Duplicate a node (shallow copy of {\ttfamily data} only). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to duplicate (must be non-\/\+NULL). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New node containing a copy of node-\/\texorpdfstring{$>$}{>}data, not attached to any list. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_abf13c63862ad93e0a3597bf8b2100f69}\index{list.h@{list.h}!blopfn\_node\_get\_data@{blopfn\_node\_get\_data}}
+\index{blopfn\_node\_get\_data@{blopfn\_node\_get\_data}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_data()}{blopfn\_node\_get\_data()}}
+{\footnotesize\ttfamily \label{list_8h_abf13c63862ad93e0a3597bf8b2100f69} 
+\mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}} blopfn\+\_\+node\+\_\+get\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Get node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stored data, or 0 (cast) if node is NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a260225b0627b933f40330d754b8b1a5f}\index{list.h@{list.h}!blopfn\_node\_get\_next@{blopfn\_node\_get\_next}}
+\index{blopfn\_node\_get\_next@{blopfn\_node\_get\_next}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_next()}{blopfn\_node\_get\_next()}}
+{\footnotesize\ttfamily \label{list_8h_a260225b0627b933f40330d754b8b1a5f} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+node\+\_\+get\+\_\+next (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Get next node pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Next node or NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_a4bf5435c6ee51f6af495aca315fb3d07}\index{list.h@{list.h}!blopfn\_node\_get\_prev@{blopfn\_node\_get\_prev}}
+\index{blopfn\_node\_get\_prev@{blopfn\_node\_get\_prev}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_get\_prev()}{blopfn\_node\_get\_prev()}}
+{\footnotesize\ttfamily \label{list_8h_a4bf5435c6ee51f6af495aca315fb3d07} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+node\+\_\+get\+\_\+prev (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Get previous node pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Node to query. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Previous node or NULL. 
+\end{DoxyReturn}
+\Hypertarget{list_8h_afbf49066096f6da1cc25651674c15adb}\index{list.h@{list.h}!blopfn\_node\_set\_data@{blopfn\_node\_set\_data}}
+\index{blopfn\_node\_set\_data@{blopfn\_node\_set\_data}!list.h@{list.h}}
+\doxysubsubsection{\texorpdfstring{blopfn\_node\_set\_data()}{blopfn\_node\_set\_data()}}
+{\footnotesize\ttfamily \label{list_8h_afbf49066096f6da1cc25651674c15adb} 
+\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}} blopfn\+\_\+node\+\_\+set\+\_\+data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{list_8h_addb46b129aba84f5c9eca08a1ef3467d}{blopt\+\_\+node}}}]{node}{, }\item[{\mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\+\_\+\+LIST\+\_\+\+DATA\+\_\+\+TYPE}}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Set node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Target node. \\
+\hline
+{\em data} & Data value to store. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The same node pointer (for convenience / chaining), or NULL on error. 
+\end{DoxyReturn}

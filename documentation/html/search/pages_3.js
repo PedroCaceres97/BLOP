@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['how_20to_20use_0',['How to use',['../da/d23/list_8h.html#autotoc_md2',1,'']]]
+  ['principles_0',['Core Principles',['../index.html#autotoc_md3',1,'']]],
+  ['purpose_1',['Purpose',['../index.html#autotoc_md2',1,'']]]
 ];

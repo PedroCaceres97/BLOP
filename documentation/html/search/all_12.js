@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vector_2eh_0',['vector.h',['../d6/d68/vector_8h.html',1,'']]],
-  ['visibility_1',['Cursor movement &amp;amp; visibility',['../d7/d0c/group__ansi__cursor.html',1,'']]]
+  ['uninstallation_0',['Uninstallation',['../d3/dcc/md__r_e_a_d_m_e.html#autotoc_md8',1,'']]],
+  ['usage_1',['Usage',['../d3/dcc/md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
+  ['utilities_2',['4. Miscellaneous Utilities',['../d3/d3a/group__blop__util.html',1,'']]]
 ];

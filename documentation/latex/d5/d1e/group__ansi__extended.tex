@@ -1,54 +1,32 @@
-\doxysection{Extended color macros }
-\hypertarget{group__ansi__extended}{}\label{group__ansi__extended}\index{Extended color macros@{Extended color macros}}
+\doxysubsection{Extended colors }
+\hypertarget{group__ansi__extended}{}\label{group__ansi__extended}\index{Extended colors@{Extended colors}}
 
 
 256-\/color and 24-\/bit RGB sequences.  
 
 
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
+\doxysubsubsubsection*{Extended colors}
+256-\/color and 24-\/bit RGB sequences. \begin{DoxyCompactItemize}
 \item 
 \#define \mbox{\hyperlink{group__ansi__extended_ga83224b1892feed6a11a38ab803351222}{ANSI\+\_\+\+FG\+\_\+256}}(n)
 \begin{DoxyCompactList}\small\item\em Foreground 256-\/color mode. \end{DoxyCompactList}\item 
-\#define \mbox{\hyperlink{group__ansi__extended_ga89e3db045f49473e4d2863a21245a726}{ANSI\+\_\+\+BG\+\_\+256}}(n)
-\begin{DoxyCompactList}\small\item\em Background 256-\/color mode. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__ansi__extended_ga6d0837a7ede921cce03d25a6ebc0287b}{ANSI\+\_\+\+FG\+\_\+\+RGB}}(r,  g,  b)
-\begin{DoxyCompactList}\small\item\em True-\/color (RGB) foreground. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Background 256-\/color mode. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__ansi__extended_ga0789e4540c423be7f8374b6ab9aa969d}{ANSI\+\_\+\+BG\+\_\+\+RGB}}(r,  g,  b)
 \begin{DoxyCompactList}\small\item\em True-\/color (RGB) background. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\doxysubsubsection{Detailed Description}
 256-\/color and 24-\/bit RGB sequences. 
 
 
 
 \label{doc-define-members}
 \Hypertarget{group__ansi__extended_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{group__ansi__extended_ga89e3db045f49473e4d2863a21245a726}\index{Extended color macros@{Extended color macros}!ANSI\_BG\_256@{ANSI\_BG\_256}}
-\index{ANSI\_BG\_256@{ANSI\_BG\_256}!Extended color macros@{Extended color macros}}
-\doxysubsubsection{\texorpdfstring{ANSI\_BG\_256}{ANSI\_BG\_256}}
-{\footnotesize\ttfamily \label{group__ansi__extended_ga89e3db045f49473e4d2863a21245a726} 
-\#define ANSI\+\_\+\+BG\+\_\+256(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
-
-{\bfseries Value\+:}
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\_ESC}}\ \textcolor{stringliteral}{"{}48;5;"{}}\ \#n\ \textcolor{stringliteral}{"{}m"{}}}
-
-\end{DoxyCode}
-
-
-Background 256-\/color mode. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em n} & Color index (0–255). Must be a literal numeric token. \\
-\hline
-\end{DoxyParams}
-\Hypertarget{group__ansi__extended_ga0789e4540c423be7f8374b6ab9aa969d}\index{Extended color macros@{Extended color macros}!ANSI\_BG\_RGB@{ANSI\_BG\_RGB}}
-\index{ANSI\_BG\_RGB@{ANSI\_BG\_RGB}!Extended color macros@{Extended color macros}}
-\doxysubsubsection{\texorpdfstring{ANSI\_BG\_RGB}{ANSI\_BG\_RGB}}
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group__ansi__extended_ga0789e4540c423be7f8374b6ab9aa969d}\index{Extended colors@{Extended colors}!ANSI\_BG\_RGB@{ANSI\_BG\_RGB}}
+\index{ANSI\_BG\_RGB@{ANSI\_BG\_RGB}!Extended colors@{Extended colors}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_BG\_RGB}{ANSI\_BG\_RGB}}
 {\footnotesize\ttfamily \label{group__ansi__extended_ga0789e4540c423be7f8374b6ab9aa969d} 
 \#define ANSI\+\_\+\+BG\+\_\+\+RGB(\begin{DoxyParamCaption}\item[{}]{r}{, }\item[{}]{g}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
 
@@ -70,9 +48,9 @@ True-\/color (RGB) background.
 {\em b} & Blue (0-\/255). \\
 \hline
 \end{DoxyParams}
-\Hypertarget{group__ansi__extended_ga83224b1892feed6a11a38ab803351222}\index{Extended color macros@{Extended color macros}!ANSI\_FG\_256@{ANSI\_FG\_256}}
-\index{ANSI\_FG\_256@{ANSI\_FG\_256}!Extended color macros@{Extended color macros}}
-\doxysubsubsection{\texorpdfstring{ANSI\_FG\_256}{ANSI\_FG\_256}}
+\Hypertarget{group__ansi__extended_ga83224b1892feed6a11a38ab803351222}\index{Extended colors@{Extended colors}!ANSI\_FG\_256@{ANSI\_FG\_256}}
+\index{ANSI\_FG\_256@{ANSI\_FG\_256}!Extended colors@{Extended colors}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_FG\_256}{ANSI\_FG\_256}}
 {\footnotesize\ttfamily \label{group__ansi__extended_ga83224b1892feed6a11a38ab803351222} 
 \#define ANSI\+\_\+\+FG\+\_\+256(\begin{DoxyParamCaption}\item[{}]{n}{}\end{DoxyParamCaption})}
 
@@ -90,9 +68,9 @@ Foreground 256-\/color mode.
 {\em n} & Color index (0–255). Must be a literal numeric token. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{group__ansi__extended_ga6d0837a7ede921cce03d25a6ebc0287b}\index{Extended color macros@{Extended color macros}!ANSI\_FG\_RGB@{ANSI\_FG\_RGB}}
-\index{ANSI\_FG\_RGB@{ANSI\_FG\_RGB}!Extended color macros@{Extended color macros}}
-\doxysubsubsection{\texorpdfstring{ANSI\_FG\_RGB}{ANSI\_FG\_RGB}}
+\Hypertarget{group__ansi__extended_ga6d0837a7ede921cce03d25a6ebc0287b}\index{Extended colors@{Extended colors}!ANSI\_FG\_RGB@{ANSI\_FG\_RGB}}
+\index{ANSI\_FG\_RGB@{ANSI\_FG\_RGB}!Extended colors@{Extended colors}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_FG\_RGB}{ANSI\_FG\_RGB}}
 {\footnotesize\ttfamily \label{group__ansi__extended_ga6d0837a7ede921cce03d25a6ebc0287b} 
 \#define ANSI\+\_\+\+FG\+\_\+\+RGB(\begin{DoxyParamCaption}\item[{}]{r}{, }\item[{}]{g}{, }\item[{}]{b}{}\end{DoxyParamCaption})}
 
@@ -103,9 +81,14 @@ Foreground 256-\/color mode.
 \end{DoxyCode}
 
 
+Background 256-\/color mode. 
+
+\doxylink{ansi_8h_a89e3db045f49473e4d2863a21245a726}{ANSI\+\_\+\+BG\+\_\+256(n)} 
+\begin{DoxyParams}{Parameters}
+{\em n} & Color index (0–255). Must be a literal numeric token.\\
+\hline
+\end{DoxyParams}
 True-\/color (RGB) foreground. 
-
-
 \begin{DoxyParams}{Parameters}
 {\em r} & Red (0-\/255). \\
 \hline

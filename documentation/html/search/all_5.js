@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['flags_0',['BLOP Global Configuration Flags',['../df/d0b/group__blop__config.html',1,'']]]
+  ['installation_0',['Installation',['../index.html#autotoc_md5',1,'']]],
+  ['introduction_1',['Introduction',['../index.html',1,'']]]
 ];

@@ -1,0 +1,94 @@
+\doxysubsection{Error Reporting }
+\hypertarget{group__blop__reporting}{}\label{group__blop__reporting}\index{Error Reporting@{Error Reporting}}
+
+
+Macros for printing diagnostic messages.  
+
+
+\doxysubsubsubsection*{Error Reporting}
+Macros for printing diagnostic messages. \begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT}}()
+\begin{DoxyCompactList}\small\item\em Abort or exit depending on compile-\/time configuration. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}}(msg)
+\begin{DoxyCompactList}\small\item\em Print a generic error message including file and function context. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{group__blop__reporting_ga930106573f19165a0f4565daab64d281}{BLOP\+\_\+\+OUT\+\_\+\+OF\+\_\+\+BONDS\+\_\+\+MESSAGE}}(idx,  bond)
+\begin{DoxyCompactList}\small\item\em Print an "{}index out of bounds"{} diagnostic message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsubsection{Detailed Description}
+Macros for printing diagnostic messages. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__blop__reporting_doc-define-members}
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}\index{Error Reporting@{Error Reporting}!BLOP\_ABORT@{BLOP\_ABORT}}
+\index{BLOP\_ABORT@{BLOP\_ABORT}!Error Reporting@{Error Reporting}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ABORT}{BLOP\_ABORT}}
+{\footnotesize\ttfamily \label{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015} 
+\#define BLOP\+\_\+\+ABORT(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{exit(-\/1)}
+
+\end{DoxyCode}
+
+
+Abort or exit depending on compile-\/time configuration. 
+
+When any kind of error is detected \doxylink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} is called to exit program. By default it uses {\ttfamily exit(-\/1)} to allow the use of {\ttfamily atexit()} function. If \+::\+BLOP\+\_\+\+ABORT\+\_\+\+ON\+\_\+\+EXIT is defined the it will use {\ttfamily abort()} to core dump.
+
+\doxylink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} is called almost entirily by \doxylink{group__blop__assertions_ga47676b7a24ab75b0bcad3234b836a337}{BLOP\+\_\+\+ASSERT} and family of macros \Hypertarget{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}\index{Error Reporting@{Error Reporting}!BLOP\_ERROR\_MESSAGE@{BLOP\_ERROR\_MESSAGE}}
+\index{BLOP\_ERROR\_MESSAGE@{BLOP\_ERROR\_MESSAGE}!Error Reporting@{Error Reporting}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ERROR\_MESSAGE}{BLOP\_ERROR\_MESSAGE}}
+{\footnotesize\ttfamily \label{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543} 
+\#define BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{printf(\textcolor{stringliteral}{"{}[BLOP\ -\/>\ \%s\{\%s\}\ ]:\ \%s\(\backslash\)n"{}},\ \_\_FILE\_\_,\ \_\_FUNCTION\_\_,\ msg)}
+
+\end{DoxyCode}
+
+
+Print a generic error message including file and function context. 
+
+Example output\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[BLOP\ -\/>\ file.c\{my\_function\}\ ]:\ Something\ went\ wrong}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Null-\/terminated message string to print. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{group__blop__reporting_ga930106573f19165a0f4565daab64d281}\index{Error Reporting@{Error Reporting}!BLOP\_OUT\_OF\_BONDS\_MESSAGE@{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}
+\index{BLOP\_OUT\_OF\_BONDS\_MESSAGE@{BLOP\_OUT\_OF\_BONDS\_MESSAGE}!Error Reporting@{Error Reporting}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_OUT\_OF\_BONDS\_MESSAGE}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}
+{\footnotesize\ttfamily \label{group__blop__reporting_ga930106573f19165a0f4565daab64d281} 
+\#define BLOP\+\_\+\+OUT\+\_\+\+OF\+\_\+\+BONDS\+\_\+\+MESSAGE(\begin{DoxyParamCaption}\item[{}]{idx}{, }\item[{}]{bond}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{printf(\textcolor{stringliteral}{"{}[BLOP\ -\/>\ \%s\{\%s\}\ idx\ =\ \%zu\ while\ bond\ =\ \%zu]:\ Index\ out\ of\ bonds\(\backslash\)n"{}},\ \_\_FILE\_\_,\ \_\_FUNCTION\_\_,\ idx,\ bond);}
+
+\end{DoxyCode}
+
+
+Print an "{}index out of bounds"{} diagnostic message. 
+
+The message includes the attempted index and the valid bound.
+
+
+\begin{DoxyParams}{Parameters}
+{\em idx} & The index that was attempted. \\
+\hline
+{\em bond} & The upper bound (array/list size). \\
+\hline
+\end{DoxyParams}

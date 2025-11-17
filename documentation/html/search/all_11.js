@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['uninstallation_0',['Uninstallation',['../d3/dcc/md__r_e_a_d_m_e.html#autotoc_md11',1,'']]],
-  ['usage_1',['Usage',['../d3/dcc/md__r_e_a_d_m_e.html#autotoc_md10',1,'']]],
-  ['use_2',['How to use',['../da/d23/list_8h.html#autotoc_md2',1,'']]],
-  ['utilities_3',['Miscellaneous Utilities',['../d3/d3a/group__blop__util.html',1,'']]]
+  ['text_20styles_20and_20reset_0',['Text styles and reset',['../d5/d0f/group__ansi__styles.html',1,'']]],
+  ['token_20macros_1',['Generated token macros',['../db/df1/group__vector__tokens.html',1,'']]],
+  ['tokens_2',['Core tokens',['../dc/d20/group__ansi__core.html',1,'']]]
 ];

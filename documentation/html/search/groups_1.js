@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['behaviour_0',['Empty-Container Popping Behaviour',['../d7/d86/group__blop__popping.html',1,'']]],
-  ['blop_20global_20configuration_20flags_1',['BLOP Global Configuration Flags',['../df/d0b/group__blop__config.html',1,'']]],
-  ['bounds_20checking_2',['Assertions and Bounds Checking',['../df/dd0/group__blop__assert.html',1,'']]]
+  ['blop_20ansi_0',['BLOP Ansi',['../d2/dd1/group__blop__ansi.html',1,'']]],
+  ['blop_20global_1',['BLOP Global',['../d6/d90/group__blop__global.html',1,'']]]
 ];

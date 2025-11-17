@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['example_0',['Example',['../da/d23/list_8h.html#autotoc_md3',1,'']]]
+  ['installation_0',['Installation',['../index.html#autotoc_md5',1,'']]],
+  ['introduction_1',['Introduction',['../index.html',1,'']]]
 ];

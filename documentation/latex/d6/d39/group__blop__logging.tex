@@ -1,30 +1,58 @@
-\doxysection{Logging \& Error Reporting }
+\doxysubsection{Logging \& Error Reporting }
 \hypertarget{group__blop__logging}{}\label{group__blop__logging}\index{Logging \& Error Reporting@{Logging \& Error Reporting}}
 
 
 Macros for printing diagnostic messages.  
 
 
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
+\doxysubsubsubsection*{Logging \& Error Reporting Macros}
+Macros for printing diagnostic messages. \begin{DoxyCompactItemize}
 \item 
+\#define \mbox{\hyperlink{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT}}()
+\begin{DoxyCompactList}\small\item\em Abort or exit depending on compile-\/time configuration. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}}(msg)
 \begin{DoxyCompactList}\small\item\em Print a generic error message including file and function context. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__logging_ga930106573f19165a0f4565daab64d281}{BLOP\+\_\+\+OUT\+\_\+\+OF\+\_\+\+BONDS\+\_\+\+MESSAGE}}(idx,  bond)
 \begin{DoxyCompactList}\small\item\em Print an "{}index out of bounds"{} diagnostic message. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\doxysubsubsection{Detailed Description}
 Macros for printing diagnostic messages. 
 
 
 
 \label{doc-define-members}
 \Hypertarget{group__blop__logging_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
-\Hypertarget{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}\index{Logging \& Error Reporting@{Logging \& Error Reporting}!BLOP\_ERROR\_MESSAGE@{BLOP\_ERROR\_MESSAGE}}
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}\index{Logging \& Error Reporting@{Logging \& Error Reporting}!BLOP\_ABORT@{BLOP\_ABORT}}
+\index{BLOP\_ABORT@{BLOP\_ABORT}!Logging \& Error Reporting@{Logging \& Error Reporting}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ABORT}{BLOP\_ABORT}}
+{\footnotesize\ttfamily \label{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015} 
+\#define BLOP\+\_\+\+ABORT(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{exit(-\/1)}
+
+\end{DoxyCode}
+
+
+Abort or exit depending on compile-\/time configuration. 
+
+Behavior\+:
+\begin{DoxyItemize}
+\item If {\ttfamily BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+CRASH\+\_\+\+ON\+\_\+\+ERROR\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined\+:
+\begin{DoxyItemize}
+\item \doxylink{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} becomes a no-\/op.
+\end{DoxyItemize}
+\item Otherwise\+:
+\begin{DoxyItemize}
+\item If \+::\+BLOP\+\_\+\+ABORT\+\_\+\+ON\+\_\+\+ERROR is defined → calls {\ttfamily abort()}.
+\item Else → calls {\ttfamily exit(-\/1)}. 
+\end{DoxyItemize}
+\end{DoxyItemize}\Hypertarget{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}\index{Logging \& Error Reporting@{Logging \& Error Reporting}!BLOP\_ERROR\_MESSAGE@{BLOP\_ERROR\_MESSAGE}}
 \index{BLOP\_ERROR\_MESSAGE@{BLOP\_ERROR\_MESSAGE}!Logging \& Error Reporting@{Logging \& Error Reporting}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ERROR\_MESSAGE}{BLOP\_ERROR\_MESSAGE}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ERROR\_MESSAGE}{BLOP\_ERROR\_MESSAGE}}
 {\footnotesize\ttfamily \label{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543} 
 \#define BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
 
@@ -51,7 +79,7 @@ Example output\+:
 \end{DoxyParams}
 \Hypertarget{group__blop__logging_ga930106573f19165a0f4565daab64d281}\index{Logging \& Error Reporting@{Logging \& Error Reporting}!BLOP\_OUT\_OF\_BONDS\_MESSAGE@{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}
 \index{BLOP\_OUT\_OF\_BONDS\_MESSAGE@{BLOP\_OUT\_OF\_BONDS\_MESSAGE}!Logging \& Error Reporting@{Logging \& Error Reporting}}
-\doxysubsubsection{\texorpdfstring{BLOP\_OUT\_OF\_BONDS\_MESSAGE}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_OUT\_OF\_BONDS\_MESSAGE}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}
 {\footnotesize\ttfamily \label{group__blop__logging_ga930106573f19165a0f4565daab64d281} 
 \#define BLOP\+\_\+\+OUT\+\_\+\+OF\+\_\+\+BONDS\+\_\+\+MESSAGE(\begin{DoxyParamCaption}\item[{}]{idx}{, }\item[{}]{bond}{}\end{DoxyParamCaption})}
 

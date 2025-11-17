@@ -1,19 +1,21 @@
-\doxysection{Assertions and Bounds Checking }
+\doxysubsection{Assertions and Bounds Checking }
 \hypertarget{group__blop__assert}{}\label{group__blop__assert}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}}
 
 
 Runtime parameter and bounds validation helpers.  
 
 
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
+\doxysubsubsubsection*{Assertion and Bounds Checking Macros}
+Macros for runtime parameter and bounds validation. \begin{DoxyCompactItemize}
 \item 
+\#define \mbox{\hyperlink{group__blop__assert_gacb60246d9090d31ff5826981f4f3c6ba}{BLOP\+\_\+\+EMPTY\+\_\+\+POPPING}}()
+\begin{DoxyCompactList}\small\item\em Behavior when attempting to pop from an empty container. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__assert_ga47676b7a24ab75b0bcad3234b836a337}{BLOP\+\_\+\+ASSERT}}(cnd,  rtn,  msg)
 \begin{DoxyCompactList}\small\item\em Assert a condition and return a value on failure. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\+\_\+\+ASSERT\+\_\+\+VOID}}(cnd,  msg)
-\begin{DoxyCompactList}\small\item\em Assert a condition and return from a {\ttfamily void} function on failure. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Void-\/returning version of \doxylink{group__blop__assert_ga47676b7a24ab75b0bcad3234b836a337}{BLOP\+\_\+\+ASSERT}. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1}{BLOP\+\_\+\+ASSERT\+\_\+\+BONDS}}(idx,  bond,  rtn)
-\begin{DoxyCompactList}\small\item\em Ensure that an index is within bounds. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Ensure that an index is within bounds (idx \texorpdfstring{$>$}{>}= bond). \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__assert_ga157247c2569cf4be67d3e164e7c8b503}{BLOP\+\_\+\+ASSERT\+\_\+\+BONDS\+\_\+\+VOID}}(idx,  bond)
 \begin{DoxyCompactList}\small\item\em Void-\/returning version of \doxylink{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1}{BLOP\+\_\+\+ASSERT\+\_\+\+BONDS}. \end{DoxyCompactList}\item 
 \#define \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\+\_\+\+ASSERT\+\_\+\+PTR}}(ptr,  rtn)
@@ -22,23 +24,23 @@ Runtime parameter and bounds validation helpers.
 \begin{DoxyCompactList}\small\item\em Void-\/returning version of \doxylink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\+\_\+\+ASSERT\+\_\+\+PTR}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\doxysubsubsection{Detailed Description}
 Runtime parameter and bounds validation helpers. 
 
 
 
 \label{doc-define-members}
 \Hypertarget{group__blop__assert_doc-define-members}
-\doxysubsection{Macro Definition Documentation}
+\doxysubsubsection{Macro Definition Documentation}
 \Hypertarget{group__blop__assert_ga47676b7a24ab75b0bcad3234b836a337}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT@{BLOP\_ASSERT}}
 \index{BLOP\_ASSERT@{BLOP\_ASSERT}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT}{BLOP\_ASSERT}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT}{BLOP\_ASSERT}}
 {\footnotesize\ttfamily \label{group__blop__assert_ga47676b7a24ab75b0bcad3234b836a337} 
 \#define BLOP\+\_\+\+ASSERT(\begin{DoxyParamCaption}\item[{}]{cnd}{, }\item[{}]{rtn}{, }\item[{}]{msg}{}\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(cnd))\ \{\ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(msg);\ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return}\ rtn;\ \}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (!(cnd))\ \{\ \mbox{\hyperlink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(msg);\ \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return}\ rtn;\ \}}
 
 \end{DoxyCode}
 
@@ -47,12 +49,12 @@ Assert a condition and return a value on failure.
 
 If the assertion fails\+:
 \begin{DoxyItemize}
-\item Prints the provided message via \doxylink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}.
-\item Calls \doxylink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} (unless disabled).
+\item Prints the provided message via \doxylink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}.
+\item Calls \doxylink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} (unless disabled).
 \item Returns {\ttfamily rtn}.
 \end{DoxyItemize}
 
-Disabled when {\ttfamily BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+CRASH\+\_\+\+ON\+\_\+\+ERROR\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined.
+Disabled when {\ttfamily \doxylink{group__blop__config_ga8126419529944b54118f782a7873a8d5}{BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+ASSERT\+\_\+\+ANYTHING\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined}.
 
 
 \begin{DoxyParams}{Parameters}
@@ -65,20 +67,27 @@ Disabled when {\ttfamily BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+
 \end{DoxyParams}
 \Hypertarget{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT\_BONDS@{BLOP\_ASSERT\_BONDS}}
 \index{BLOP\_ASSERT\_BONDS@{BLOP\_ASSERT\_BONDS}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT\_BONDS}{BLOP\_ASSERT\_BONDS}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT\_BONDS}{BLOP\_ASSERT\_BONDS}}
 {\footnotesize\ttfamily \label{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1} 
 \#define BLOP\+\_\+\+ASSERT\+\_\+\+BONDS(\begin{DoxyParamCaption}\item[{}]{idx}{, }\item[{}]{bond}{, }\item[{}]{rtn}{}\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((idx)\ >=\ (bond))\ \{\ \mbox{\hyperlink{group__blop__logging_ga930106573f19165a0f4565daab64d281}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}(idx,\ bond);\ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return}\ rtn;\ \}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((idx)\ >=\ (bond))\ \{\ \mbox{\hyperlink{group__blop__reporting_ga930106573f19165a0f4565daab64d281}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}(idx,\ bond);\ \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return}\ rtn;\ \}}
 
 \end{DoxyCode}
 
 
-Ensure that an index is within bounds. 
+Ensure that an index is within bounds (idx \texorpdfstring{$>$}{>}= bond). 
 
-Fails when {\ttfamily idx \texorpdfstring{$>$}{>}= bond}.
+If the assertion fails\+:
+\begin{DoxyItemize}
+\item Prints the provided message via \doxylink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}.
+\item Calls \doxylink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT} (unless disabled).
+\item Returns {\ttfamily rtn}.
+\end{DoxyItemize}
+
+Disabled when \doxylink{group__blop__config_ga8126419529944b54118f782a7873a8d5}{BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+ASSERT\+\_\+\+ANYTHING\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined.
 
 
 \begin{DoxyParams}{Parameters}
@@ -91,13 +100,13 @@ Fails when {\ttfamily idx \texorpdfstring{$>$}{>}= bond}.
 \end{DoxyParams}
 \Hypertarget{group__blop__assert_ga157247c2569cf4be67d3e164e7c8b503}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT\_BONDS\_VOID@{BLOP\_ASSERT\_BONDS\_VOID}}
 \index{BLOP\_ASSERT\_BONDS\_VOID@{BLOP\_ASSERT\_BONDS\_VOID}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT\_BONDS\_VOID}{BLOP\_ASSERT\_BONDS\_VOID}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT\_BONDS\_VOID}{BLOP\_ASSERT\_BONDS\_VOID}}
 {\footnotesize\ttfamily \label{group__blop__assert_ga157247c2569cf4be67d3e164e7c8b503} 
 \#define BLOP\+\_\+\+ASSERT\+\_\+\+BONDS\+\_\+\+VOID(\begin{DoxyParamCaption}\item[{}]{idx}{, }\item[{}]{bond}{}\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((idx)\ >=\ (bond))\ \{\ \mbox{\hyperlink{group__blop__logging_ga930106573f19165a0f4565daab64d281}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}(idx,\ bond);\ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ ((idx)\ >=\ (bond))\ \{\ \mbox{\hyperlink{group__blop__reporting_ga930106573f19165a0f4565daab64d281}{BLOP\_OUT\_OF\_BONDS\_MESSAGE}}(idx,\ bond);\ \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return};\ \}}
 
 \end{DoxyCode}
 
@@ -113,7 +122,7 @@ Void-\/returning version of \doxylink{group__blop__assert_ga1f0437b979f8e4ae1b59
 \end{DoxyParams}
 \Hypertarget{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT\_PTR@{BLOP\_ASSERT\_PTR}}
 \index{BLOP\_ASSERT\_PTR@{BLOP\_ASSERT\_PTR}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT\_PTR}{BLOP\_ASSERT\_PTR}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT\_PTR}{BLOP\_ASSERT\_PTR}}
 {\footnotesize\ttfamily \label{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7} 
 \#define BLOP\+\_\+\+ASSERT\+\_\+\+PTR(\begin{DoxyParamCaption}\item[{}]{ptr}{, }\item[{}]{rtn}{}\end{DoxyParamCaption})}
 
@@ -126,7 +135,7 @@ Void-\/returning version of \doxylink{group__blop__assert_ga1f0437b979f8e4ae1b59
 
 Assert that a pointer parameter is not NULL. 
 
-Enabled only when {\ttfamily BLOP\+\_\+\+SAFE\+\_\+\+MODE} is defined.
+Enabled only when \doxylink{group__blop__config_ga6031064c8263fa054f0226a5517b96f6}{BLOP\+\_\+\+SAFE\+\_\+\+MODE} is defined. Disabled when \doxylink{group__blop__config_ga8126419529944b54118f782a7873a8d5}{BLOP\+\_\+\+I\+\_\+\+DONT\+\_\+\+WANT\+\_\+\+TO\+\_\+\+ASSERT\+\_\+\+ANYTHING\+\_\+\+I\+\_\+\+KNOW\+\_\+\+WHAT\+\_\+\+I\+\_\+\+AM\+\_\+\+DOING} is defined.
 
 
 \begin{DoxyParams}{Parameters}
@@ -137,7 +146,7 @@ Enabled only when {\ttfamily BLOP\+\_\+\+SAFE\+\_\+\+MODE} is defined.
 \end{DoxyParams}
 \Hypertarget{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT\_PTR\_VOID@{BLOP\_ASSERT\_PTR\_VOID}}
 \index{BLOP\_ASSERT\_PTR\_VOID@{BLOP\_ASSERT\_PTR\_VOID}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT\_PTR\_VOID}{BLOP\_ASSERT\_PTR\_VOID}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT\_PTR\_VOID}{BLOP\_ASSERT\_PTR\_VOID}}
 {\footnotesize\ttfamily \label{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99} 
 \#define BLOP\+\_\+\+ASSERT\+\_\+\+PTR\+\_\+\+VOID(\begin{DoxyParamCaption}\item[{}]{ptr}{}\end{DoxyParamCaption})}
 
@@ -157,18 +166,18 @@ Void-\/returning version of \doxylink{group__blop__assert_gad4dda6e86a3e4454ac66
 \end{DoxyParams}
 \Hypertarget{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_ASSERT\_VOID@{BLOP\_ASSERT\_VOID}}
 \index{BLOP\_ASSERT\_VOID@{BLOP\_ASSERT\_VOID}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
-\doxysubsubsection{\texorpdfstring{BLOP\_ASSERT\_VOID}{BLOP\_ASSERT\_VOID}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_ASSERT\_VOID}{BLOP\_ASSERT\_VOID}}
 {\footnotesize\ttfamily \label{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff} 
 \#define BLOP\+\_\+\+ASSERT\+\_\+\+VOID(\begin{DoxyParamCaption}\item[{}]{cnd}{, }\item[{}]{msg}{}\end{DoxyParamCaption})}
 
 {\bfseries Value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!(cnd))\ \{\ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(msg);\ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (!(cnd))\ \{\ \mbox{\hyperlink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(msg);\ \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();\ \textcolor{keywordflow}{return};\ \}}
 
 \end{DoxyCode}
 
 
-Assert a condition and return from a {\ttfamily void} function on failure. 
+Void-\/returning version of \doxylink{group__blop__assert_ga47676b7a24ab75b0bcad3234b836a337}{BLOP\+\_\+\+ASSERT}. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -177,3 +186,25 @@ Assert a condition and return from a {\ttfamily void} function on failure.
 {\em msg} & Error message printed on failure. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{group__blop__assert_gacb60246d9090d31ff5826981f4f3c6ba}\index{Assertions and Bounds Checking@{Assertions and Bounds Checking}!BLOP\_EMPTY\_POPPING@{BLOP\_EMPTY\_POPPING}}
+\index{BLOP\_EMPTY\_POPPING@{BLOP\_EMPTY\_POPPING}!Assertions and Bounds Checking@{Assertions and Bounds Checking}}
+\doxysubsubsubsection{\texorpdfstring{BLOP\_EMPTY\_POPPING}{BLOP\_EMPTY\_POPPING}}
+{\footnotesize\ttfamily \label{group__blop__assert_gacb60246d9090d31ff5826981f4f3c6ba} 
+\#define BLOP\+\_\+\+EMPTY\+\_\+\+POPPING(\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}To\ enable\ empty\ popping\ and\ avoid\ this\ error\ define\ BLOP\_VALID\_EMPTY\_POPPING"{}});\ \mbox{\hyperlink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
+
+\end{DoxyCode}
+
+
+Behavior when attempting to pop from an empty container. 
+
+By default, popping from an empty container produces\+:
+\begin{DoxyItemize}
+\item Call \doxylink{group__blop__reporting_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\+\_\+\+ERROR\+\_\+\+MESSAGE}.
+\item Call \doxylink{group__blop__reporting_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\+\_\+\+ABORT}.
+\end{DoxyItemize}
+
+Disabled when \doxylink{group__blop__config_ga1649f2d8055d480fad46354e1a49a6d6}{BLOP\+\_\+\+VALID\+\_\+\+EMPTY\+\_\+\+POPPING} is defined, this mean that you can pop from an empty container and the program wont crash. 

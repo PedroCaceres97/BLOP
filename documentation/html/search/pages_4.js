@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['installation_0',['Installation',['../d3/dcc/md__r_e_a_d_m_e.html#autotoc_md9',1,'']]],
-  ['introduction_1',['Introduction',['../d3/dcc/md__r_e_a_d_m_e.html',1,'']]]
+  ['uninstallation_0',['Uninstallation',['../index.html#autotoc_md7',1,'']]],
+  ['usage_1',['Usage',['../index.html#autotoc_md6',1,'']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>BLOP: Screen/line clearing helpers</title>
+<title>BLOP: Screen/line clearing</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -88,36 +88,129 @@ $(function(){initNavTree('d5/dba/group__ansi__screen.html','../../',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Screen/line clearing helpers </div></div>
+  <div class="headertitle"><div class="title">Screen/line clearing <div class="ingroups"><a class="el" href="../../d2/dd1/group__blop__ansi.html">BLOP Ansi</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Commands for clearing the terminal display.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:ga4bda262c39a1cce7632b62644fdee97b" id="r_ga4bda262c39a1cce7632b62644fdee97b"><td class="memItemLeft" align="right" valign="top"><a id="ga4bda262c39a1cce7632b62644fdee97b" name="ga4bda262c39a1cce7632b62644fdee97b"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_SCREEN</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2J&quot;</td></tr>
-<tr class="memdesc:ga4bda262c39a1cce7632b62644fdee97b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear entire screen (2J). <br /></td></tr>
-<tr class="memitem:ga98051331efc7fbe841adfaa6e359a26a" id="r_ga98051331efc7fbe841adfaa6e359a26a"><td class="memItemLeft" align="right" valign="top"><a id="ga98051331efc7fbe841adfaa6e359a26a" name="ga98051331efc7fbe841adfaa6e359a26a"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_LINE</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2K&quot;</td></tr>
-<tr class="memdesc:ga98051331efc7fbe841adfaa6e359a26a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear entire current line (2K). <br /></td></tr>
-<tr class="memitem:ga54bbc18dc1f760f32f69ac714dc6ff88" id="r_ga54bbc18dc1f760f32f69ac714dc6ff88"><td class="memItemLeft" align="right" valign="top"><a id="ga54bbc18dc1f760f32f69ac714dc6ff88" name="ga54bbc18dc1f760f32f69ac714dc6ff88"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_TO_END</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0J&quot;</td></tr>
-<tr class="memdesc:ga54bbc18dc1f760f32f69ac714dc6ff88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear screen from cursor to end (0J). <br /></td></tr>
-<tr class="memitem:ga3fbfdf975c74d2b68aa534773fbc6fdb" id="r_ga3fbfdf975c74d2b68aa534773fbc6fdb"><td class="memItemLeft" align="right" valign="top"><a id="ga3fbfdf975c74d2b68aa534773fbc6fdb" name="ga3fbfdf975c74d2b68aa534773fbc6fdb"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_TO_START</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1J&quot;</td></tr>
-<tr class="memdesc:ga3fbfdf975c74d2b68aa534773fbc6fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear screen from cursor to beginning (1J). <br /></td></tr>
-<tr class="memitem:gacd359c63f629d1116e87e02a4beb8a94" id="r_gacd359c63f629d1116e87e02a4beb8a94"><td class="memItemLeft" align="right" valign="top"><a id="gacd359c63f629d1116e87e02a4beb8a94" name="gacd359c63f629d1116e87e02a4beb8a94"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_LINE_END</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0K&quot;</td></tr>
-<tr class="memdesc:gacd359c63f629d1116e87e02a4beb8a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear line from cursor to end (0K). <br /></td></tr>
-<tr class="memitem:ga20ff44a95ee60b15fb3fffbcca078e0f" id="r_ga20ff44a95ee60b15fb3fffbcca078e0f"><td class="memItemLeft" align="right" valign="top"><a id="ga20ff44a95ee60b15fb3fffbcca078e0f" name="ga20ff44a95ee60b15fb3fffbcca078e0f"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ANSI_CLEAR_LINE_START</b>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1K&quot;</td></tr>
-<tr class="memdesc:ga20ff44a95ee60b15fb3fffbcca078e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear line from cursor to start (1K). <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Screen/line clearing</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Commands for clearing the terminal display. </p>
+</td></tr>
+<tr class="memitem:ga4bda262c39a1cce7632b62644fdee97b" id="r_ga4bda262c39a1cce7632b62644fdee97b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga4bda262c39a1cce7632b62644fdee97b">ANSI_CLEAR_SCREEN</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2J&quot;</td></tr>
+<tr class="memdesc:ga4bda262c39a1cce7632b62644fdee97b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear entire screen (2J).  <br /></td></tr>
+<tr class="memitem:ga98051331efc7fbe841adfaa6e359a26a" id="r_ga98051331efc7fbe841adfaa6e359a26a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga98051331efc7fbe841adfaa6e359a26a">ANSI_CLEAR_LINE</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2K&quot;</td></tr>
+<tr class="memdesc:ga98051331efc7fbe841adfaa6e359a26a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear entire current line (2K).  <br /></td></tr>
+<tr class="memitem:ga54bbc18dc1f760f32f69ac714dc6ff88" id="r_ga54bbc18dc1f760f32f69ac714dc6ff88"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga54bbc18dc1f760f32f69ac714dc6ff88">ANSI_CLEAR_TO_END</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0J&quot;</td></tr>
+<tr class="memdesc:ga54bbc18dc1f760f32f69ac714dc6ff88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear screen from cursor to end (0J).  <br /></td></tr>
+<tr class="memitem:ga3fbfdf975c74d2b68aa534773fbc6fdb" id="r_ga3fbfdf975c74d2b68aa534773fbc6fdb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga3fbfdf975c74d2b68aa534773fbc6fdb">ANSI_CLEAR_TO_START</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1J&quot;</td></tr>
+<tr class="memdesc:ga3fbfdf975c74d2b68aa534773fbc6fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear screen from cursor to beginning (1J).  <br /></td></tr>
+<tr class="memitem:gacd359c63f629d1116e87e02a4beb8a94" id="r_gacd359c63f629d1116e87e02a4beb8a94"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gacd359c63f629d1116e87e02a4beb8a94">ANSI_CLEAR_LINE_END</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0K&quot;</td></tr>
+<tr class="memdesc:gacd359c63f629d1116e87e02a4beb8a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear line from cursor to end (0K).  <br /></td></tr>
+<tr class="memitem:ga20ff44a95ee60b15fb3fffbcca078e0f" id="r_ga20ff44a95ee60b15fb3fffbcca078e0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga20ff44a95ee60b15fb3fffbcca078e0f">ANSI_CLEAR_LINE_START</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1K&quot;</td></tr>
+<tr class="memdesc:ga20ff44a95ee60b15fb3fffbcca078e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear line from cursor to start (1K).  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <p>Commands for clearing the terminal display. </p>
+<a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="ga98051331efc7fbe841adfaa6e359a26a" name="ga98051331efc7fbe841adfaa6e359a26a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga98051331efc7fbe841adfaa6e359a26a">&#9670;&#160;</a></span>ANSI_CLEAR_LINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_LINE&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2K&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear entire current line (2K). </p>
+
+</div>
+</div>
+<a id="gacd359c63f629d1116e87e02a4beb8a94" name="gacd359c63f629d1116e87e02a4beb8a94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacd359c63f629d1116e87e02a4beb8a94">&#9670;&#160;</a></span>ANSI_CLEAR_LINE_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_LINE_END&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0K&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear line from cursor to end (0K). </p>
+
+</div>
+</div>
+<a id="ga20ff44a95ee60b15fb3fffbcca078e0f" name="ga20ff44a95ee60b15fb3fffbcca078e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga20ff44a95ee60b15fb3fffbcca078e0f">&#9670;&#160;</a></span>ANSI_CLEAR_LINE_START</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_LINE_START&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1K&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear line from cursor to start (1K). </p>
+
+</div>
+</div>
+<a id="ga4bda262c39a1cce7632b62644fdee97b" name="ga4bda262c39a1cce7632b62644fdee97b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4bda262c39a1cce7632b62644fdee97b">&#9670;&#160;</a></span>ANSI_CLEAR_SCREEN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_SCREEN&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;2J&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear entire screen (2J). </p>
+
+</div>
+</div>
+<a id="ga54bbc18dc1f760f32f69ac714dc6ff88" name="ga54bbc18dc1f760f32f69ac714dc6ff88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga54bbc18dc1f760f32f69ac714dc6ff88">&#9670;&#160;</a></span>ANSI_CLEAR_TO_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_TO_END&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;0J&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear screen from cursor to end (0J). </p>
+
+</div>
+</div>
+<a id="ga3fbfdf975c74d2b68aa534773fbc6fdb" name="ga3fbfdf975c74d2b68aa534773fbc6fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3fbfdf975c74d2b68aa534773fbc6fdb">&#9670;&#160;</a></span>ANSI_CLEAR_TO_START</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_CLEAR_TO_START&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;1J&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clear screen from cursor to beginning (1J). </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['helpers_0',['Abort / Exit Helpers',['../de/d40/group__blop__abort.html',1,'']]],
-  ['helpers_1',['helpers',['../da/d20/group__ansi__colors.html',1,'Color and style helpers'],['../d5/dba/group__ansi__screen.html',1,'Screen/line clearing helpers']]]
+  ['screen_20line_20clearing_0',['Screen/line clearing',['../d5/dba/group__ansi__screen.html',1,'']]],
+  ['standard_20colors_1',['Standard Colors',['../da/d20/group__ansi__colors.html',1,'']]],
+  ['styles_2',['Text Styles',['../d5/d0f/group__ansi__styles.html',1,'']]]
 ];

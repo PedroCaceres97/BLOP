@@ -2,456 +2,451 @@
 \hypertarget{list_8h_source}{}\label{list_8h_source}\mbox{\hyperlink{list_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00043\ }
-\DoxyCodeLine{00044\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
-\DoxyCodeLine{00053\ }
-\DoxyCodeLine{00065\ }
-\DoxyCodeLine{00077\ }
-\DoxyCodeLine{00091\ \ \textcolor{comment}{/*\ end\ of\ blop\_list\_config\ */}}
-\DoxyCodeLine{00103\ }
-\DoxyCodeLine{00104\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
-\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blop_8h}{blop/blop.h}}>}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#ifndef\ BLOP\_LIST\_NAME}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_LIST\_NAME\ listb}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_NAME\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#ifndef\ BLOP\_LIST\_DATA\_TYPE}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_LIST\_DATA\_TYPE\ uint8\_t}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_DATA\_TYPE\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#define\ blopt\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_LIST\_NAME}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#define\ blopt\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_node)}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#define\ blops\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT3(\_,\ blopt\_list,\ \_t)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#define\ blops\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT3(\_,\ blopt\_list,\ \_node\_t)}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ blopfn\_list\_create\ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_create)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ blopfn\_list\_destroy\ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_destroy)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_front\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_front)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_back\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_back)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_size\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_size)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_node\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_node)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ blopfn\_list\_clear\ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_clear)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#define\ blopfn\_list\_erase\ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_erase)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#define\ blopfn\_list\_pop\_back\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_pop\_back)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ blopfn\_list\_pop\_front\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_pop\_front)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ blopfn\_list\_push\_back\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_push\_back)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#define\ blopfn\_list\_push\_front\ \ BLOP\_CONCAT2(blopt\_list,\ \_push\_front)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#define\ blopfn\_list\_insert\_next\ BLOP\_CONCAT2(blopt\_list,\ \_insert\_next)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ blopfn\_list\_insert\_prev\ BLOP\_CONCAT2(blopt\_list,\ \_insert\_prev)}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#define\ blopfn\_node\_create\ \ \ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_create)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#define\ blopfn\_node\_duplicate\ \ \ BLOP\_CONCAT2(blopt\_node,\ \_duplicate)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#define\ blopfn\_node\_destroy\ \ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_destroy)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\#define\ blopfn\_node\_set\_data\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_set\_data)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_data\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_data)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_next\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_next)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_prev\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_prev)}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00077\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}*\ \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}};}
+\DoxyCodeLine{00090\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}*\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a4b5e7c122782caf8ef0f1785dd509f24}{blopfn\_list\_create}}\ \ \ \ \ \ ();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ab082e35a21b4fa338acdb8ab0de89aa0}{blopfn\_list\_destroy}}\ \ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00118\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a3b2f829f4b231aa88ef77b7551c6653d}{blopfn\_list\_get\_front}}\ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
 \DoxyCodeLine{00119\ }
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00129\ }
-\DoxyCodeLine{00134\ \ \textcolor{comment}{/*\ end\ internal\ */}}
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00164\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
+\DoxyCodeLine{00125\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_aaa37bd3879f10358fb5e5bf156edcc3e}{blopfn\_list\_get\_back}}\ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a5eb8a97ba6980dac7f43c6438e482e46}{blopfn\_list\_get\_size}}\ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00140\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a8858fb1adc27922954be7f6ee37a67a2}{blopfn\_list\_get\_node}}\ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00148\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a0bb2bdf6dcf8da55fd33ad326ff0adbd}{blopfn\_list\_clear}}\ \ \ \ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00156\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ad9f3d27852db6090cd54f42f1f6789db}{blopfn\_list\_erase}}\ \ \ \ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \textcolor{keywordtype}{int}\ deallocate);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00163\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ab956d1bb229292467b5a40015ae7a92c}{blopfn\_list\_pop\_back}}\ \ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00170\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9005d843d2e3c8fdaa4dbdc999f3c35e}{blopfn\_list\_pop\_front}}\ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
 \DoxyCodeLine{00171\ }
-\DoxyCodeLine{00175\ }
-\DoxyCodeLine{00179\ \ \textcolor{comment}{/*\ end\ of\ blop\_list\_api\_list\ */}}
-\DoxyCodeLine{00181\ }
-\DoxyCodeLine{00182\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}\ \textcolor{comment}{/*\ end\ of\ blop\_list\_api\_node\ */}}
-\DoxyCodeLine{00190\ }
-\DoxyCodeLine{00191\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}}
-\DoxyCodeLine{00200\ }
-\DoxyCodeLine{00215\ \ \textcolor{comment}{/*\ end\ impl\ */}}
-\DoxyCodeLine{00227\ }
-\DoxyCodeLine{00228\ \textcolor{comment}{/*\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ */}\ \textcolor{comment}{/*\ end\ cleanup\ */}}
-\DoxyCodeLine{00238\ }
-\DoxyCodeLine{00239\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blop_8h}{blop/blop.h}}>}}
-\DoxyCodeLine{00240\ }
-\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#ifndef\ BLOP\_LIST\_NAME}}
-\DoxyCodeLine{00242\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_LIST\_NAME\ listb}}
-\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_NAME\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00244\ }
-\DoxyCodeLine{00245\ \textcolor{preprocessor}{\#ifndef\ BLOP\_LIST\_DATA\_TYPE}}
-\DoxyCodeLine{00246\ \textcolor{preprocessor}{\ \ \ \ \#define\ BLOP\_LIST\_DATA\_TYPE\ uint8\_t}}
-\DoxyCodeLine{00247\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_DATA\_TYPE\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00248\ }
-\DoxyCodeLine{00249\ \textcolor{preprocessor}{\#define\ blopt\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_LIST\_NAME}}
-\DoxyCodeLine{00250\ \textcolor{preprocessor}{\#define\ blopt\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_node)}}
-\DoxyCodeLine{00251\ }
-\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#define\ blops\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT3(\_,\ blopt\_list,\ \_t)}}
-\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#define\ blops\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ BLOP\_CONCAT3(\_,\ blopt\_list,\ \_node\_t)}}
-\DoxyCodeLine{00254\ }
-\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#define\ blopfn\_list\_create\ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_create)}}
-\DoxyCodeLine{00256\ \textcolor{preprocessor}{\#define\ blopfn\_list\_destroy\ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_destroy)}}
-\DoxyCodeLine{00257\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_front\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_front)}}
-\DoxyCodeLine{00258\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_back\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_back)}}
-\DoxyCodeLine{00259\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_size\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_size)}}
-\DoxyCodeLine{00260\ \textcolor{preprocessor}{\#define\ blopfn\_list\_get\_node\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_get\_node)}}
-\DoxyCodeLine{00261\ \textcolor{preprocessor}{\#define\ blopfn\_list\_clear\ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_clear)}}
-\DoxyCodeLine{00262\ \textcolor{preprocessor}{\#define\ blopfn\_list\_erase\ \ \ \ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_erase)}}
-\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#define\ blopfn\_list\_pop\_back\ \ \ \ BLOP\_CONCAT2(blopt\_list,\ \_pop\_back)}}
-\DoxyCodeLine{00264\ \textcolor{preprocessor}{\#define\ blopfn\_list\_pop\_front\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_pop\_front)}}
-\DoxyCodeLine{00265\ \textcolor{preprocessor}{\#define\ blopfn\_list\_push\_back\ \ \ BLOP\_CONCAT2(blopt\_list,\ \_push\_back)}}
-\DoxyCodeLine{00266\ \textcolor{preprocessor}{\#define\ blopfn\_list\_push\_front\ \ BLOP\_CONCAT2(blopt\_list,\ \_push\_front)}}
-\DoxyCodeLine{00267\ \textcolor{preprocessor}{\#define\ blopfn\_list\_insert\_next\ BLOP\_CONCAT2(blopt\_list,\ \_insert\_next)}}
-\DoxyCodeLine{00268\ \textcolor{preprocessor}{\#define\ blopfn\_list\_insert\_prev\ BLOP\_CONCAT2(blopt\_list,\ \_insert\_prev)}}
-\DoxyCodeLine{00269\ }
-\DoxyCodeLine{00270\ \textcolor{preprocessor}{\#define\ blopfn\_node\_create\ \ \ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_create)}}
-\DoxyCodeLine{00271\ \textcolor{preprocessor}{\#define\ blopfn\_node\_duplicate\ \ \ BLOP\_CONCAT2(blopt\_node,\ \_duplicate)}}
-\DoxyCodeLine{00272\ \textcolor{preprocessor}{\#define\ blopfn\_node\_destroy\ \ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_destroy)}}
-\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#define\ blopfn\_node\_set\_data\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_set\_data)}}
-\DoxyCodeLine{00274\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_data\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_data)}}
-\DoxyCodeLine{00275\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_next\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_next)}}
-\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#define\ blopfn\_node\_get\_prev\ \ \ \ BLOP\_CONCAT2(blopt\_node,\ \_get\_prev)}}
-\DoxyCodeLine{00277\ }
-\DoxyCodeLine{00278\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00279\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
-\DoxyCodeLine{00280\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00281\ }
-\DoxyCodeLine{00282\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{group__blop__list__internal_ga1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}*\ \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}};}
-\DoxyCodeLine{00283\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{group__blop__list__internal_gaf2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}*\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}};}
-\DoxyCodeLine{00284\ }
-\DoxyCodeLine{00285\ \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_create\ \ \ \ \ \ ();}
-\DoxyCodeLine{00286\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_destroy\ \ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
-\DoxyCodeLine{00287\ }
-\DoxyCodeLine{00288\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_front\ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
-\DoxyCodeLine{00289\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_back\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
-\DoxyCodeLine{00290\ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_size\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list);}
-\DoxyCodeLine{00291\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_node\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{size\_t}\ index);}
-\DoxyCodeLine{00292\ }
-\DoxyCodeLine{00293\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_clear\ \ \ \ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
-\DoxyCodeLine{00294\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_erase\ \ \ \ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \textcolor{keywordtype}{int}\ deallocate);}
-\DoxyCodeLine{00295\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_pop\_back\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
-\DoxyCodeLine{00296\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_pop\_front\ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate);}
-\DoxyCodeLine{00297\ }
-\DoxyCodeLine{00298\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_push\_back\ \ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00299\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_push\_front\ \ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00300\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_insert\_next\ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00301\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_insert\_prev\ (\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00302\ }
-\DoxyCodeLine{00303\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_create\ \ \ \ \ \ ();}
-\DoxyCodeLine{00304\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_duplicate\ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00305\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_node\_destroy\ \ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00306\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_set\_data\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data);}
-\DoxyCodeLine{00307\ \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ blopfn\_node\_get\_data\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00308\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_get\_next\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00309\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_get\_prev\ \ \ \ (\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
-\DoxyCodeLine{00310\ }
-\DoxyCodeLine{00311\ \textcolor{preprocessor}{\#ifdef\ BLOP\_LIST\_IMPLEMENTATION}}
-\DoxyCodeLine{00312\ }
-\DoxyCodeLine{00313\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{group__blop__list__internal_gaf2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}\ \{}
-\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data;}
-\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ next;}
-\DoxyCodeLine{00316\ \ \ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ prev;}
-\DoxyCodeLine{00317\ \ \ \ \ \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ list;}
-\DoxyCodeLine{00318\ \};}
-\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00320\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{group__blop__list__internal_ga1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}\ \{}
-\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__list__impl_ga2cb6e44474d476813d39b6f62bda1c3c}{size}};}
-\DoxyCodeLine{00322\ \ \ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ front;}
-\DoxyCodeLine{00323\ \ \ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ back;}
-\DoxyCodeLine{00324\ \};}
-\DoxyCodeLine{00325\ }
-\DoxyCodeLine{00326\ \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_create()\ \{}
-\DoxyCodeLine{00327\ \ \ \mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{group__blop__list__internal_ga1a7e19f41d72b4576222bf113ac07f30}{blops\_list}},\ 1);}
-\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordflow}{if}\ (!list)\ \{}
-\DoxyCodeLine{00329\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\ structure"{}});}
-\DoxyCodeLine{00330\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
-\DoxyCodeLine{00331\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
-\DoxyCodeLine{00332\ \ \ \ \ \}}
-\DoxyCodeLine{00333\ }
-\DoxyCodeLine{00334\ }
-\DoxyCodeLine{00335\ \ \ memset(list,\ 0,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{group__blop__list__internal_ga1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}));}
-\DoxyCodeLine{00336\ \ \ \textcolor{keywordflow}{return}\ list;}
-\DoxyCodeLine{00337\ \}}
-\DoxyCodeLine{00338\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_destroy(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
-\DoxyCodeLine{00339\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00340\ }
-\DoxyCodeLine{00341\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(list-\/>size\ ==\ 0,\ \textcolor{stringliteral}{"{}A\ non\ empty\ list\ can\ not\ be\ destroyed,\ clear\ the\ list\ first"{}});}
-\DoxyCodeLine{00342\ \ \ free(list);}
-\DoxyCodeLine{00343\ \}}
-\DoxyCodeLine{00344\ }
-\DoxyCodeLine{00345\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_front(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
-\DoxyCodeLine{00346\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
-\DoxyCodeLine{00347\ \ \ \textcolor{keywordflow}{return}\ list-\/>front;}
-\DoxyCodeLine{00348\ \}}
-\DoxyCodeLine{00349\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_back(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
-\DoxyCodeLine{00350\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
-\DoxyCodeLine{00351\ \ \ \textcolor{keywordflow}{return}\ list-\/>back;}
-\DoxyCodeLine{00352\ \}}
-\DoxyCodeLine{00353\ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_size(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
-\DoxyCodeLine{00354\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ 0);}
-\DoxyCodeLine{00355\ \ \ \textcolor{keywordflow}{return}\ list-\/>size;}
-\DoxyCodeLine{00356\ \}}
-\DoxyCodeLine{00357\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_list\_get\_node(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{size\_t}\ idx)\ \{}
-\DoxyCodeLine{00358\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
-\DoxyCodeLine{00359\ }
-\DoxyCodeLine{00360\ \ \ \mbox{\hyperlink{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1}{BLOP\_ASSERT\_BONDS}}(idx,\ list-\/>size,\ NULL);}
-\DoxyCodeLine{00361\ }
-\DoxyCodeLine{00362\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ current\ =\ NULL;}
-\DoxyCodeLine{00363\ \ \ \textcolor{keywordflow}{if}\ (idx\ <\ list-\/>\mbox{\hyperlink{group__blop__list__impl_ga2cb6e44474d476813d39b6f62bda1c3c}{size}}\ /\ 2)\ \{}
-\DoxyCodeLine{00364\ \ \ \ \ \ \ current\ =\ list-\/>front;}
-\DoxyCodeLine{00365\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ idx;\ i++)\ \{}
-\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>next;}
-\DoxyCodeLine{00367\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00368\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00369\ \ \ \ \ \ \ current\ =\ list-\/>back;}
-\DoxyCodeLine{00370\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ list-\/>size\ -\/\ 1;\ i\ >\ idx;\ i-\/-\/)\ \{}
-\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>prev;}
-\DoxyCodeLine{00372\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00373\ \ \ \}}
-\DoxyCodeLine{00374\ \ \ \textcolor{keywordflow}{return}\ current;}
-\DoxyCodeLine{00375\ \}}
-\DoxyCodeLine{00376\ }
-\DoxyCodeLine{00377\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_clear(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
-\DoxyCodeLine{00378\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00379\ }
-\DoxyCodeLine{00380\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
-\DoxyCodeLine{00381\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00382\ \ \ \}}
-\DoxyCodeLine{00383\ }
-\DoxyCodeLine{00384\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ current\ =\ list-\/>front;}
-\DoxyCodeLine{00385\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ next\ =\ NULL;}
-\DoxyCodeLine{00386\ \ \ \textcolor{keywordflow}{while}\ (current)\ \{}
-\DoxyCodeLine{00387\ \ \ \ \ \ \ next\ =\ current-\/>next;}
-\DoxyCodeLine{00388\ \ \ \ \ \ \ current-\/>list\ =\ NULL;}
-\DoxyCodeLine{00389\ \ \ \ \ \ \ current-\/>next\ =\ NULL;}
-\DoxyCodeLine{00390\ \ \ \ \ \ \ current-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00391\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
-\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ blopfn\_node\_destroy(current);}
-\DoxyCodeLine{00393\ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00394\ \ \ \ \ \ \ current\ =\ next;}
-\DoxyCodeLine{00395\ \ \ \}}
-\DoxyCodeLine{00396\ }
-\DoxyCodeLine{00397\ \ \ list-\/>size\ =\ 0;}
-\DoxyCodeLine{00398\ \ \ list-\/>front\ =\ NULL;}
-\DoxyCodeLine{00399\ \ \ list-\/>back\ =\ NULL;}
-\DoxyCodeLine{00400\ \}}
-\DoxyCodeLine{00401\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_erase(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
-\DoxyCodeLine{00402\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00403\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
-\DoxyCodeLine{00404\ }
-\DoxyCodeLine{00405\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ node\ does\ not\ belong\ to\ this\ list"{}});}
-\DoxyCodeLine{00406\ }
-\DoxyCodeLine{00407\ \ \ \textcolor{keywordflow}{if}\ (node-\/>prev)\ \{}
-\DoxyCodeLine{00408\ \ \ \ \ \ \ node-\/>prev-\/>next\ =\ node-\/>next;}
-\DoxyCodeLine{00409\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00410\ \ \ \ \ \ \ list-\/>front\ =\ node-\/>next;}
-\DoxyCodeLine{00411\ \ \ \}}
-\DoxyCodeLine{00412\ }
-\DoxyCodeLine{00413\ \ \ \textcolor{keywordflow}{if}\ (node-\/>next)\ \{}
-\DoxyCodeLine{00414\ \ \ \ \ \ \ node-\/>next-\/>prev\ =\ node-\/>prev;}
-\DoxyCodeLine{00415\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00416\ \ \ \ \ \ \ list-\/>back\ =\ node-\/>prev;}
-\DoxyCodeLine{00417\ \ \ \}}
-\DoxyCodeLine{00418\ }
-\DoxyCodeLine{00419\ \ \ list-\/>size-\/-\/;}
-\DoxyCodeLine{00420\ }
-\DoxyCodeLine{00421\ \ \ node-\/>list\ =\ NULL;}
-\DoxyCodeLine{00422\ \ \ node-\/>next\ =\ NULL;}
-\DoxyCodeLine{00423\ \ \ node-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00424\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
-\DoxyCodeLine{00425\ \ \ \ \ \ \ blopfn\_node\_destroy(node);}
-\DoxyCodeLine{00426\ \ \ \}}
-\DoxyCodeLine{00427\ \}}
-\DoxyCodeLine{00428\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_pop\_back(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
-\DoxyCodeLine{00429\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00430\ }
-\DoxyCodeLine{00431\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
-\DoxyCodeLine{00432\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__popping_ga05f0374365a2317f59b0c3fc80813a86}{BLOP\_EMPTY\_POPPING}}(\textcolor{stringliteral}{"{}To\ enable\ empty\ popping\ and\ avoid\ this\ error\ define\ BLOP\_VALID\_EMPTY\_POPPING"{}});}
-\DoxyCodeLine{00433\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00434\ \ \ \}}
-\DoxyCodeLine{00435\ }
-\DoxyCodeLine{00436\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ back\ =\ list-\/>back;}
-\DoxyCodeLine{00437\ }
-\DoxyCodeLine{00438\ \ \ \textcolor{keywordflow}{if}\ (list-\/>back-\/>prev)\ \{}
-\DoxyCodeLine{00439\ \ \ \ \ \ \ list-\/>back-\/>prev-\/>next\ =\ NULL;}
-\DoxyCodeLine{00440\ \ \ \ \ \ \ list-\/>back\ =\ list-\/>back-\/>prev;}
-\DoxyCodeLine{00441\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00442\ \ \ \ \ \ \ list-\/>front\ =\ NULL;}
-\DoxyCodeLine{00443\ \ \ \ \ \ \ list-\/>back\ =\ NULL;}
-\DoxyCodeLine{00444\ \ \ \}}
-\DoxyCodeLine{00445\ }
-\DoxyCodeLine{00446\ \ \ list-\/>size-\/-\/;}
-\DoxyCodeLine{00447\ }
-\DoxyCodeLine{00448\ \ \ back-\/>list\ =\ NULL;}
-\DoxyCodeLine{00449\ \ \ back-\/>next\ =\ NULL;}
-\DoxyCodeLine{00450\ \ \ back-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00451\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
-\DoxyCodeLine{00452\ \ \ \ \ \ \ blopfn\_node\_destroy(back);}
-\DoxyCodeLine{00453\ \ \ \}}
-\DoxyCodeLine{00454\ \}}
-\DoxyCodeLine{00455\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_pop\_front(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
-\DoxyCodeLine{00456\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00457\ }
-\DoxyCodeLine{00458\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
-\DoxyCodeLine{00459\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__popping_ga05f0374365a2317f59b0c3fc80813a86}{BLOP\_EMPTY\_POPPING}}(\textcolor{stringliteral}{"{}To\ enable\ empty\ popping\ and\ avoid\ this\ error\ define\ BLOP\_VALID\_EMPTY\_POPPING"{}});}
-\DoxyCodeLine{00460\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00461\ \ \ \}}
-\DoxyCodeLine{00462\ }
-\DoxyCodeLine{00463\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ front\ =\ list-\/>front;}
-\DoxyCodeLine{00464\ }
-\DoxyCodeLine{00465\ \ \ \textcolor{keywordflow}{if}\ (list-\/>front-\/>next)\ \{}
-\DoxyCodeLine{00466\ \ \ \ \ \ \ list-\/>front-\/>next-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00467\ \ \ \ \ \ \ list-\/>front\ =\ list-\/>front-\/>next;}
-\DoxyCodeLine{00468\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00469\ \ \ \ \ \ \ list-\/>front\ =\ NULL;}
-\DoxyCodeLine{00470\ \ \ \ \ \ \ list-\/>back\ =\ NULL;}
-\DoxyCodeLine{00471\ \ \ \}}
+\DoxyCodeLine{00177\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a7830d16e114e2b6f804119c788784d59}{blopfn\_list\_push\_back}}\ \ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a045bc3e11414d470eabffb7d880c4d04}{blopfn\_list\_push\_front}}\ \ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00192\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a1395085ce9e61fc2c96b0ccf85c87875}{blopfn\_list\_insert\_next}}\ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00200\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a293cfcf81640a0b49b360333fa01e682}{blopfn\_list\_insert\_prev}}\ (\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00201\ \ \textcolor{comment}{/*\ end\ List\ API\ */}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00213\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a2563d497b25fb82b055094bbdebc3022}{blopfn\_node\_create}}\ \ \ \ \ \ ();}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00220\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_aac9cf6ddedede3f7b96e8eea2c3dbcc2}{blopfn\_node\_duplicate}}\ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00230\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}\ \ \ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00238\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9c858a355a35ff4a801df3a35f11d15e}{blopfn\_node\_set\_data}}\ \ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data);}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00245\ \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ \mbox{\hyperlink{list_8h_ad3aed8f452d480b84cc053103e819fcc}{blopfn\_node\_get\_data}}\ \ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00252\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a46d339eb39d0396405fa1f758c04760b}{blopfn\_node\_get\_next}}\ \ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00259\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_af95f9f03d73e88c8f0dab743b82f68eb}{blopfn\_node\_get\_prev}}\ \ \ \ (\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node);}
+\DoxyCodeLine{00260\ \ \textcolor{comment}{/*\ end\ Node\ API\ */}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \textcolor{preprocessor}{\#ifdef\ BLOP\_LIST\_IMPLEMENTATION}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00269\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}\ \{}
+\DoxyCodeLine{00270\ \ \ \ \ \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data;\ \ }
+\DoxyCodeLine{00271\ \ \ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ next;\ \ }
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ prev;\ \ }
+\DoxyCodeLine{00273\ \ \ \ \ \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ list;\ \ }
+\DoxyCodeLine{00274\ \};}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00280\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}\ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ size;\ \ \ }
+\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ front;\ \ }
+\DoxyCodeLine{00283\ \ \ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ back;\ \ \ }
+\DoxyCodeLine{00284\ \};}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a4b5e7c122782caf8ef0f1785dd509f24}{blopfn\_list\_create}}()\ \{}
+\DoxyCodeLine{00287\ \ \ \mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\_list}},\ 1);}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordflow}{if}\ (!list)\ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\ structure"{}});}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00292\ \ \ \ \ \}}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ memset(list,\ 0,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{list_8h_a1a7e19f41d72b4576222bf113ac07f30}{blops\_list}}));}
+\DoxyCodeLine{00296\ \ \ \textcolor{keywordflow}{return}\ list;}
+\DoxyCodeLine{00297\ \}}
+\DoxyCodeLine{00298\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ab082e35a21b4fa338acdb8ab0de89aa0}{blopfn\_list\_destroy}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
+\DoxyCodeLine{00299\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(list-\/>size\ ==\ 0,\ \textcolor{stringliteral}{"{}A\ non\ empty\ list\ can\ not\ be\ destroyed,\ clear\ the\ list\ first"{}});}
+\DoxyCodeLine{00302\ \ \ free(list);}
+\DoxyCodeLine{00303\ \}}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a3b2f829f4b231aa88ef77b7551c6653d}{blopfn\_list\_get\_front}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
+\DoxyCodeLine{00306\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
+\DoxyCodeLine{00307\ \ \ \textcolor{keywordflow}{return}\ list-\/>front;}
+\DoxyCodeLine{00308\ \}}
+\DoxyCodeLine{00309\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_aaa37bd3879f10358fb5e5bf156edcc3e}{blopfn\_list\_get\_back}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
+\DoxyCodeLine{00310\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
+\DoxyCodeLine{00311\ \ \ \textcolor{keywordflow}{return}\ list-\/>back;}
+\DoxyCodeLine{00312\ \}}
+\DoxyCodeLine{00313\ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a5eb8a97ba6980dac7f43c6438e482e46}{blopfn\_list\_get\_size}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list)\ \{}
+\DoxyCodeLine{00314\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ 0);}
+\DoxyCodeLine{00315\ \ \ \textcolor{keywordflow}{return}\ list-\/>size;}
+\DoxyCodeLine{00316\ \}}
+\DoxyCodeLine{00317\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a8858fb1adc27922954be7f6ee37a67a2}{blopfn\_list\_get\_node}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{size\_t}\ idx)\ \{}
+\DoxyCodeLine{00318\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(list,\ NULL);}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00320\ \ \ \mbox{\hyperlink{group__blop__assert_ga1f0437b979f8e4ae1b59871f875750f1}{BLOP\_ASSERT\_BONDS}}(idx,\ list-\/>size,\ NULL);}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ current\ =\ NULL;}
+\DoxyCodeLine{00323\ \ \ \textcolor{keywordflow}{if}\ (idx\ <\ list-\/>size\ /\ 2)\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ current\ =\ list-\/>front;}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ idx;\ i++)\ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>next;}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00328\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ current\ =\ list-\/>back;}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ list-\/>size\ -\/\ 1;\ i\ >\ idx;\ i-\/-\/)\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ current\ =\ current-\/>prev;}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00333\ \ \ \}}
+\DoxyCodeLine{00334\ \ \ \textcolor{keywordflow}{return}\ current;}
+\DoxyCodeLine{00335\ \}}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a0bb2bdf6dcf8da55fd33ad326ff0adbd}{blopfn\_list\_clear}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
+\DoxyCodeLine{00338\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00342\ \ \ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ current\ =\ list-\/>front;}
+\DoxyCodeLine{00345\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ next\ =\ NULL;}
+\DoxyCodeLine{00346\ \ \ \textcolor{keywordflow}{while}\ (current)\ \{}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ next\ =\ current-\/>next;}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ current-\/>list\ =\ NULL;}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ current-\/>next\ =\ NULL;}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ current-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}(current);}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ current\ =\ next;}
+\DoxyCodeLine{00355\ \ \ \}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00357\ \ \ list-\/>size\ =\ 0;}
+\DoxyCodeLine{00358\ \ \ list-\/>front\ =\ NULL;}
+\DoxyCodeLine{00359\ \ \ list-\/>back\ =\ NULL;}
+\DoxyCodeLine{00360\ \}}
+\DoxyCodeLine{00361\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ad9f3d27852db6090cd54f42f1f6789db}{blopfn\_list\_erase}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
+\DoxyCodeLine{00362\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00363\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ node\ does\ not\ belong\ to\ this\ list"{}});}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00367\ \ \ \textcolor{keywordflow}{if}\ (node-\/>prev)\ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ node-\/>prev-\/>next\ =\ node-\/>next;}
+\DoxyCodeLine{00369\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ list-\/>front\ =\ node-\/>next;}
+\DoxyCodeLine{00371\ \ \ \}}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \ \ \textcolor{keywordflow}{if}\ (node-\/>next)\ \{}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ node-\/>next-\/>prev\ =\ node-\/>prev;}
+\DoxyCodeLine{00375\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ list-\/>back\ =\ node-\/>prev;}
+\DoxyCodeLine{00377\ \ \ \}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ list-\/>size-\/-\/;}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \ \ node-\/>list\ =\ NULL;}
+\DoxyCodeLine{00382\ \ \ node-\/>next\ =\ NULL;}
+\DoxyCodeLine{00383\ \ \ node-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00384\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}(node);}
+\DoxyCodeLine{00386\ \ \ \}}
+\DoxyCodeLine{00387\ \}}
+\DoxyCodeLine{00388\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_ab956d1bb229292467b5a40015ae7a92c}{blopfn\_list\_pop\_back}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
+\DoxyCodeLine{00389\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__assert_gacb60246d9090d31ff5826981f4f3c6ba}{BLOP\_EMPTY\_POPPING}}(\textcolor{stringliteral}{"{}To\ enable\ empty\ popping\ and\ avoid\ this\ error\ define\ BLOP\_VALID\_EMPTY\_POPPING"{}});}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00394\ \ \ \}}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00396\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ back\ =\ list-\/>back;}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \textcolor{keywordflow}{if}\ (list-\/>back-\/>prev)\ \{}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ list-\/>back-\/>prev-\/>next\ =\ NULL;}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ list-\/>back\ =\ list-\/>back-\/>prev;}
+\DoxyCodeLine{00401\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ list-\/>front\ =\ NULL;}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ list-\/>back\ =\ NULL;}
+\DoxyCodeLine{00404\ \ \ \}}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ list-\/>size-\/-\/;}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ back-\/>list\ =\ NULL;}
+\DoxyCodeLine{00409\ \ \ back-\/>next\ =\ NULL;}
+\DoxyCodeLine{00410\ \ \ back-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}(back);}
+\DoxyCodeLine{00413\ \ \ \}}
+\DoxyCodeLine{00414\ \}}
+\DoxyCodeLine{00415\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9005d843d2e3c8fdaa4dbdc999f3c35e}{blopfn\_list\_pop\_front}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \textcolor{keywordtype}{int}\ deallocate)\ \{}
+\DoxyCodeLine{00416\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \ \ \textcolor{keywordflow}{if}\ (list-\/>size\ ==\ 0)\ \{}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \mbox{\hyperlink{group__blop__assert_gacb60246d9090d31ff5826981f4f3c6ba}{BLOP\_EMPTY\_POPPING}}(\textcolor{stringliteral}{"{}To\ enable\ empty\ popping\ and\ avoid\ this\ error\ define\ BLOP\_VALID\_EMPTY\_POPPING"{}});}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00421\ \ \ \}}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00423\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ front\ =\ list-\/>front;}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \textcolor{keywordflow}{if}\ (list-\/>front-\/>next)\ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ list-\/>front-\/>next-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ list-\/>front\ =\ list-\/>front-\/>next;}
+\DoxyCodeLine{00428\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ list-\/>front\ =\ NULL;}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ list-\/>back\ =\ NULL;}
+\DoxyCodeLine{00431\ \ \ \}}
+\DoxyCodeLine{00432\ }
+\DoxyCodeLine{00433\ \ \ list-\/>size-\/-\/;}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \ \ front-\/>list\ =\ NULL;}
+\DoxyCodeLine{00436\ \ \ front-\/>next\ =\ NULL;}
+\DoxyCodeLine{00437\ \ \ front-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00438\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}(front);}
+\DoxyCodeLine{00440\ \ \ \}}
+\DoxyCodeLine{00441\ \}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a7830d16e114e2b6f804119c788784d59}{blopfn\_list\_push\_back}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00444\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00445\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00449\ \ \ node-\/>list\ =\ list;}
+\DoxyCodeLine{00450\ \ \ node-\/>next\ =\ NULL;}
+\DoxyCodeLine{00451\ \ \ node-\/>prev\ =\ list-\/>back;}
+\DoxyCodeLine{00452\ }
+\DoxyCodeLine{00453\ \ \ \textcolor{keywordflow}{if}\ (list-\/>back)\ \{}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ list-\/>back-\/>next\ =\ node;}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ list-\/>back\ =\ node;}
+\DoxyCodeLine{00456\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ list-\/>front\ =\ node;}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ list-\/>back\ =\ node;}
+\DoxyCodeLine{00459\ \ \ \}}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \ list-\/>size++;}
+\DoxyCodeLine{00462\ \}}
+\DoxyCodeLine{00463\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a045bc3e11414d470eabffb7d880c4d04}{blopfn\_list\_push\_front}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00464\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00465\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00466\ }
+\DoxyCodeLine{00467\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \ \ node-\/>list\ =\ list;}
+\DoxyCodeLine{00470\ \ \ node-\/>next\ =\ list-\/>front;}
+\DoxyCodeLine{00471\ \ \ node-\/>prev\ =\ NULL;}
 \DoxyCodeLine{00472\ }
-\DoxyCodeLine{00473\ \ \ list-\/>size-\/-\/;}
-\DoxyCodeLine{00474\ }
-\DoxyCodeLine{00475\ \ \ front-\/>list\ =\ NULL;}
-\DoxyCodeLine{00476\ \ \ front-\/>next\ =\ NULL;}
-\DoxyCodeLine{00477\ \ \ front-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00478\ \ \ \textcolor{keywordflow}{if}\ (deallocate)\ \{}
-\DoxyCodeLine{00479\ \ \ \ \ \ \ blopfn\_node\_destroy(front);}
-\DoxyCodeLine{00480\ \ \ \}}
-\DoxyCodeLine{00481\ \}}
-\DoxyCodeLine{00482\ }
-\DoxyCodeLine{00483\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_push\_back(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00473\ \ \ \textcolor{keywordflow}{if}\ (list-\/>front)\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ list-\/>front-\/>prev\ =\ node;}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ list-\/>front\ =\ node;}
+\DoxyCodeLine{00476\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ list-\/>front\ =\ node;}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ list-\/>back\ =\ node;}
+\DoxyCodeLine{00479\ \ \ \}}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00481\ \ \ list-\/>size++;}
+\DoxyCodeLine{00482\ \}}
+\DoxyCodeLine{00483\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a1395085ce9e61fc2c96b0ccf85c87875}{blopfn\_list\_insert\_next}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
 \DoxyCodeLine{00484\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00485\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
-\DoxyCodeLine{00486\ }
-\DoxyCodeLine{00487\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
-\DoxyCodeLine{00488\ }
-\DoxyCodeLine{00489\ \ \ node-\/>list\ =\ list;}
-\DoxyCodeLine{00490\ \ \ node-\/>next\ =\ NULL;}
-\DoxyCodeLine{00491\ \ \ node-\/>prev\ =\ list-\/>back;}
-\DoxyCodeLine{00492\ }
-\DoxyCodeLine{00493\ \ \ \textcolor{keywordflow}{if}\ (list-\/>back)\ \{}
-\DoxyCodeLine{00494\ \ \ \ \ \ \ list-\/>back-\/>next\ =\ node;}
-\DoxyCodeLine{00495\ \ \ \ \ \ \ list-\/>back\ =\ node;}
-\DoxyCodeLine{00496\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00497\ \ \ \ \ \ \ list-\/>front\ =\ node;}
-\DoxyCodeLine{00498\ \ \ \ \ \ \ list-\/>back\ =\ node;}
-\DoxyCodeLine{00499\ \ \ \}}
-\DoxyCodeLine{00500\ }
-\DoxyCodeLine{00501\ \ \ list-\/>size++;}
-\DoxyCodeLine{00502\ \}}
-\DoxyCodeLine{00503\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_push\_front(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00504\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00505\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
-\DoxyCodeLine{00506\ }
-\DoxyCodeLine{00507\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
-\DoxyCodeLine{00508\ }
-\DoxyCodeLine{00509\ \ \ node-\/>list\ =\ list;}
-\DoxyCodeLine{00510\ \ \ node-\/>next\ =\ list-\/>front;}
-\DoxyCodeLine{00511\ \ \ node-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00485\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(pivot);}
+\DoxyCodeLine{00486\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
+\DoxyCodeLine{00489\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(pivot-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ pivot\ does\ not\ belong\ to\ this\ list"{}});}
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00491\ \ \ \textcolor{keywordflow}{if}\ (pivot\ ==\ list-\/>back)\ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a7830d16e114e2b6f804119c788784d59}{blopfn\_list\_push\_back}}(list,\ node);}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00494\ \ \ \}}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00496\ \ \ node-\/>list\ =\ list;}
+\DoxyCodeLine{00497\ \ \ node-\/>prev\ =\ pivot;}
+\DoxyCodeLine{00498\ \ \ node-\/>next\ =\ pivot-\/>next;}
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ \ \ pivot-\/>next-\/>prev\ =\ node;}
+\DoxyCodeLine{00501\ \ \ pivot-\/>next\ =\ node;}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ list-\/>size++;}
+\DoxyCodeLine{00504\ \}}
+\DoxyCodeLine{00505\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a293cfcf81640a0b49b360333fa01e682}{blopfn\_list\_insert\_prev}}(\mbox{\hyperlink{list_8h_ae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00506\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
+\DoxyCodeLine{00507\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(pivot);}
+\DoxyCodeLine{00508\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00509\ }
+\DoxyCodeLine{00510\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
+\DoxyCodeLine{00511\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(pivot-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ pivot\ does\ not\ belong\ to\ this\ list"{}});}
 \DoxyCodeLine{00512\ }
-\DoxyCodeLine{00513\ \ \ \textcolor{keywordflow}{if}\ (list-\/>front)\ \{}
-\DoxyCodeLine{00514\ \ \ \ \ \ \ list-\/>front-\/>prev\ =\ node;}
-\DoxyCodeLine{00515\ \ \ \ \ \ \ list-\/>front\ =\ node;}
-\DoxyCodeLine{00516\ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00517\ \ \ \ \ \ \ list-\/>front\ =\ node;}
-\DoxyCodeLine{00518\ \ \ \ \ \ \ list-\/>back\ =\ node;}
-\DoxyCodeLine{00519\ \ \ \}}
-\DoxyCodeLine{00520\ }
-\DoxyCodeLine{00521\ \ \ list-\/>size++;}
-\DoxyCodeLine{00522\ \}}
-\DoxyCodeLine{00523\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_insert\_next(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00524\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00525\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(pivot);}
-\DoxyCodeLine{00526\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00513\ \ \ \textcolor{keywordflow}{if}\ (pivot\ ==\ list-\/>front)\ \{}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a045bc3e11414d470eabffb7d880c4d04}{blopfn\_list\_push\_front}}(list,\ node);}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00516\ \ \ \}}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \ \ node-\/>list\ =\ list;}
+\DoxyCodeLine{00519\ \ \ node-\/>next\ =\ pivot;}
+\DoxyCodeLine{00520\ \ \ node-\/>prev\ =\ pivot-\/>prev;}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ pivot-\/>prev-\/>next\ =\ node;}
+\DoxyCodeLine{00523\ \ \ pivot-\/>prev\ =\ node;}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \ \ list-\/>size++;}
+\DoxyCodeLine{00526\ \}}
 \DoxyCodeLine{00527\ }
-\DoxyCodeLine{00528\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
-\DoxyCodeLine{00529\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(pivot-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ pivot\ does\ not\ belong\ to\ this\ list"{}});}
-\DoxyCodeLine{00530\ }
-\DoxyCodeLine{00531\ \ \ \textcolor{keywordflow}{if}\ (pivot\ ==\ list-\/>back)\ \{}
-\DoxyCodeLine{00532\ \ \ \ \ \ \ blopfn\_list\_push\_back(list,\ node);}
-\DoxyCodeLine{00533\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00528\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a2563d497b25fb82b055094bbdebc3022}{blopfn\_node\_create}}()\ \{}
+\DoxyCodeLine{00529\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\_node}},\ 1);}
+\DoxyCodeLine{00530\ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
+\DoxyCodeLine{00531\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\_node\ structure"{}});}
+\DoxyCodeLine{00532\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
+\DoxyCodeLine{00533\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
 \DoxyCodeLine{00534\ \ \ \}}
 \DoxyCodeLine{00535\ }
-\DoxyCodeLine{00536\ \ \ node-\/>list\ =\ list;}
-\DoxyCodeLine{00537\ \ \ node-\/>prev\ =\ pivot;}
-\DoxyCodeLine{00538\ \ \ node-\/>next\ =\ pivot-\/>next;}
-\DoxyCodeLine{00539\ }
-\DoxyCodeLine{00540\ \ \ pivot-\/>next-\/>prev\ =\ node;}
-\DoxyCodeLine{00541\ \ \ pivot-\/>next\ =\ node;}
-\DoxyCodeLine{00542\ }
-\DoxyCodeLine{00543\ \ \ list-\/>size++;}
-\DoxyCodeLine{00544\ \}}
-\DoxyCodeLine{00545\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_list\_insert\_prev(\mbox{\hyperlink{group__blop__list__internal_gae9fec7a631b2d0776c5acdfd7120f67e}{blopt\_list}}\ list,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ pivot,\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00546\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(list);}
-\DoxyCodeLine{00547\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(pivot);}
-\DoxyCodeLine{00548\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
-\DoxyCodeLine{00549\ }
-\DoxyCodeLine{00550\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ already\ belongs\ to\ a\ list,\ duplicate\ the\ node\ to\ obtain\ same\ data\ without\ belonging\ to\ a\ list\ or\ erase\ it\ from\ the\ belonging\ list."{}});}
-\DoxyCodeLine{00551\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(pivot-\/>list\ ==\ list,\ \textcolor{stringliteral}{"{}The\ pivot\ does\ not\ belong\ to\ this\ list"{}});}
-\DoxyCodeLine{00552\ }
-\DoxyCodeLine{00553\ \ \ \textcolor{keywordflow}{if}\ (pivot\ ==\ list-\/>front)\ \{}
-\DoxyCodeLine{00554\ \ \ \ \ \ \ blopfn\_list\_push\_front(list,\ node);}
-\DoxyCodeLine{00555\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{00556\ \ \ \}}
+\DoxyCodeLine{00536\ \ \ memset(node,\ 0,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}));}
+\DoxyCodeLine{00537\ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{00538\ \}}
+\DoxyCodeLine{00539\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_aac9cf6ddedede3f7b96e8eea2c3dbcc2}{blopfn\_node\_duplicate}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00540\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ dupnode\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{list_8h_af2e5e1800ee7b46291546e13e9ba396c}{blops\_node}},\ 1);}
+\DoxyCodeLine{00543\ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
+\DoxyCodeLine{00544\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\_node\ structure"{}});}
+\DoxyCodeLine{00545\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
+\DoxyCodeLine{00546\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00547\ \ \ \}}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ dupnode-\/>next\ =\ NULL;}
+\DoxyCodeLine{00550\ \ \ dupnode-\/>prev\ =\ NULL;}
+\DoxyCodeLine{00551\ \ \ dupnode-\/>list\ =\ NULL;}
+\DoxyCodeLine{00552\ \ \ dupnode-\/>data\ =\ node-\/>data;}
+\DoxyCodeLine{00553\ \ \ \textcolor{keywordflow}{return}\ dupnode;}
+\DoxyCodeLine{00554\ \}}
+\DoxyCodeLine{00555\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9fba92ded89de0da3476001e1f05ddab}{blopfn\_node\_destroy}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00556\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
 \DoxyCodeLine{00557\ }
-\DoxyCodeLine{00558\ \ \ node-\/>list\ =\ list;}
-\DoxyCodeLine{00559\ \ \ node-\/>next\ =\ pivot;}
-\DoxyCodeLine{00560\ \ \ node-\/>prev\ =\ pivot-\/>prev;}
-\DoxyCodeLine{00561\ }
-\DoxyCodeLine{00562\ \ \ pivot-\/>prev-\/>next\ =\ node;}
-\DoxyCodeLine{00563\ \ \ pivot-\/>prev\ =\ node;}
-\DoxyCodeLine{00564\ }
-\DoxyCodeLine{00565\ \ \ list-\/>size++;}
-\DoxyCodeLine{00566\ \}}
-\DoxyCodeLine{00567\ }
-\DoxyCodeLine{00568\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_create()\ \{}
-\DoxyCodeLine{00569\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{group__blop__list__internal_gaf2e5e1800ee7b46291546e13e9ba396c}{blops\_node}},\ 1);}
-\DoxyCodeLine{00570\ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
-\DoxyCodeLine{00571\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\_node\ structure"{}});}
-\DoxyCodeLine{00572\ \ \ \ \ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
-\DoxyCodeLine{00573\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
-\DoxyCodeLine{00574\ \ \ \}}
-\DoxyCodeLine{00575\ }
-\DoxyCodeLine{00576\ \ \ memset(node,\ 0,\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{group__blop__list__internal_gaf2e5e1800ee7b46291546e13e9ba396c}{blops\_node}}));}
-\DoxyCodeLine{00577\ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{00558\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ belongs\ to\ a\ list\ and\ it\ can\ not\ be\ destroyed,\ you\ can\ deallocate\ a\ node\ at\ erase\ time."{}});}
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00560\ \textcolor{preprocessor}{\ \ \#ifdef\ BLOP\_LIST\_DEALLOCATE\_DATA}}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ BLOP\_LIST\_DEALLOCATE\_DATA(node-\/>data);}
+\DoxyCodeLine{00562\ \textcolor{preprocessor}{\ \ \#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_DEALLOCATE\_DATA\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00563\ }
+\DoxyCodeLine{00564\ \ \ free(node);}
+\DoxyCodeLine{00565\ \}}
+\DoxyCodeLine{00566\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a9c858a355a35ff4a801df3a35f11d15e}{blopfn\_node\_set\_data}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data)\ \{}
+\DoxyCodeLine{00567\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
+\DoxyCodeLine{00568\ \ \ node-\/>data\ =\ data;}
+\DoxyCodeLine{00569\ \ \ \textcolor{keywordflow}{return}\ node;}
+\DoxyCodeLine{00570\ \}}
+\DoxyCodeLine{00571\ \mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ \mbox{\hyperlink{list_8h_ad3aed8f452d480b84cc053103e819fcc}{blopfn\_node\_get\_data}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00572\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ (\mbox{\hyperlink{list_8h_ac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}})0);}
+\DoxyCodeLine{00573\ \ \ \textcolor{keywordflow}{return}\ node-\/>data;}
+\DoxyCodeLine{00574\ \}}
+\DoxyCodeLine{00575\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_a46d339eb39d0396405fa1f758c04760b}{blopfn\_node\_get\_next}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00576\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
+\DoxyCodeLine{00577\ \ \ \textcolor{keywordflow}{return}\ node-\/>next;}
 \DoxyCodeLine{00578\ \}}
-\DoxyCodeLine{00579\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_duplicate(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
+\DoxyCodeLine{00579\ \mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{list_8h_af95f9f03d73e88c8f0dab743b82f68eb}{blopfn\_node\_get\_prev}}(\mbox{\hyperlink{list_8h_a9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
 \DoxyCodeLine{00580\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
-\DoxyCodeLine{00581\ }
-\DoxyCodeLine{00582\ \ \ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ dupnode\ =\ \mbox{\hyperlink{group__blop__util_ga47158b1bacbbf3921bf7399f639ef778}{BLOP\_MALLOC}}(\textcolor{keyword}{struct}\ \mbox{\hyperlink{group__blop__list__internal_gaf2e5e1800ee7b46291546e13e9ba396c}{blops\_node}},\ 1);}
-\DoxyCodeLine{00583\ \ \ \textcolor{keywordflow}{if}\ (!node)\ \{}
-\DoxyCodeLine{00584\ \ \ \ \ \mbox{\hyperlink{group__blop__logging_gab799fa16e9f3d02f86c1bca67494c543}{BLOP\_ERROR\_MESSAGE}}(\textcolor{stringliteral}{"{}Failed\ to\ allocate\ memory\ for\ list\_node\ structure"{}});}
-\DoxyCodeLine{00585\ \ \ \ \ \mbox{\hyperlink{group__blop__abort_ga882b9dd2ab9b367205d6877d1d35e015}{BLOP\_ABORT}}();}
-\DoxyCodeLine{00586\ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
-\DoxyCodeLine{00587\ \ \ \}}
-\DoxyCodeLine{00588\ }
-\DoxyCodeLine{00589\ \ \ dupnode-\/>next\ =\ NULL;}
-\DoxyCodeLine{00590\ \ \ dupnode-\/>prev\ =\ NULL;}
-\DoxyCodeLine{00591\ \ \ dupnode-\/>list\ =\ NULL;}
-\DoxyCodeLine{00592\ \ \ dupnode-\/>data\ =\ node-\/>data;}
-\DoxyCodeLine{00593\ \ \ \textcolor{keywordflow}{return}\ dupnode;}
-\DoxyCodeLine{00594\ \}}
-\DoxyCodeLine{00595\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ blopfn\_node\_destroy(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00596\ \ \ \mbox{\hyperlink{group__blop__assert_ga372af138f3a7714ef137de0e0d386d99}{BLOP\_ASSERT\_PTR\_VOID}}(node);}
+\DoxyCodeLine{00581\ \ \ \textcolor{keywordflow}{return}\ node-\/>prev;}
+\DoxyCodeLine{00582\ \}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_IMPLEMENTATION\ */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00586\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00587\ \}}
+\DoxyCodeLine{00588\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00589\ }
+\DoxyCodeLine{00590\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_NAME}}
+\DoxyCodeLine{00591\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_DATA\_TYPE}}
+\DoxyCodeLine{00592\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_DEALLOCATE\_DATA}}
+\DoxyCodeLine{00593\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_IMPLEMENTATION}}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \textcolor{preprocessor}{\#undef\ blopt\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00596\ \textcolor{preprocessor}{\#undef\ blopt\_node\ \ \ }}
 \DoxyCodeLine{00597\ }
-\DoxyCodeLine{00598\ \ \ \mbox{\hyperlink{group__blop__assert_gae610056ff78b8fe674968b371b2fb6ff}{BLOP\_ASSERT\_VOID}}(node-\/>list\ ==\ NULL,\ \textcolor{stringliteral}{"{}The\ node\ belongs\ to\ a\ list\ and\ it\ can\ not\ be\ destroyed,\ you\ can\ deallocate\ a\ node\ at\ erase\ time."{}});}
-\DoxyCodeLine{00599\ }
-\DoxyCodeLine{00600\ \textcolor{preprocessor}{\ \ \#ifdef\ BLOP\_LIST\_DEALLOCATE\_DATA}}
-\DoxyCodeLine{00601\ \ \ \ \ \ \ BLOP\_LIST\_DEALLOCATE\_DATA(node-\/>data);}
-\DoxyCodeLine{00602\ \textcolor{preprocessor}{\ \ \#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_DEALLOCATE\_DATA\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00603\ }
-\DoxyCodeLine{00604\ \ \ free(node);}
-\DoxyCodeLine{00605\ \}}
-\DoxyCodeLine{00606\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_set\_data(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node,\ \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ data)\ \{}
-\DoxyCodeLine{00607\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
-\DoxyCodeLine{00608\ \ \ node-\/>data\ =\ data;}
-\DoxyCodeLine{00609\ \ \ \textcolor{keywordflow}{return}\ node;}
-\DoxyCodeLine{00610\ \}}
-\DoxyCodeLine{00611\ \mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}}\ blopfn\_node\_get\_data(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00612\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ (\mbox{\hyperlink{group__blop__list__config_gac29a4e355a2da73568a5cd0f0de27e26}{BLOP\_LIST\_DATA\_TYPE}})0);}
-\DoxyCodeLine{00613\ \ \ \textcolor{keywordflow}{return}\ node-\/>data;}
-\DoxyCodeLine{00614\ \}}
-\DoxyCodeLine{00615\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_get\_next(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00616\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
-\DoxyCodeLine{00617\ \ \ \textcolor{keywordflow}{return}\ node-\/>next;}
-\DoxyCodeLine{00618\ \}}
-\DoxyCodeLine{00619\ \mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ \ \ \ \ \ \ \ \ \ blopfn\_node\_get\_prev(\mbox{\hyperlink{group__blop__list__internal_ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4}{blopt\_node}}\ node)\ \{}
-\DoxyCodeLine{00620\ \ \ \mbox{\hyperlink{group__blop__assert_gad4dda6e86a3e4454ac66465daf8576f7}{BLOP\_ASSERT\_PTR}}(node,\ NULL);}
-\DoxyCodeLine{00621\ \ \ \textcolor{keywordflow}{return}\ node-\/>prev;}
-\DoxyCodeLine{00622\ \}}
-\DoxyCodeLine{00623\ }
-\DoxyCodeLine{00624\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ BLOP\_LIST\_IMPLEMENTATION\ */}\textcolor{preprocessor}{}}
-\DoxyCodeLine{00625\ }
-\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
-\DoxyCodeLine{00627\ \}}
-\DoxyCodeLine{00628\ \textcolor{preprocessor}{\#endif}}
-\DoxyCodeLine{00629\ }
-\DoxyCodeLine{00630\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_NAME}}
-\DoxyCodeLine{00631\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_DATA\_TYPE}}
-\DoxyCodeLine{00632\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_DEALLOCATE\_DATA}}
-\DoxyCodeLine{00633\ \textcolor{preprocessor}{\#undef\ BLOP\_LIST\_IMPLEMENTATION}}
-\DoxyCodeLine{00634\ }
-\DoxyCodeLine{00635\ \textcolor{preprocessor}{\#undef\ blopt\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00636\ \textcolor{preprocessor}{\#undef\ blopt\_node\ \ \ }}
-\DoxyCodeLine{00637\ }
-\DoxyCodeLine{00638\ \textcolor{preprocessor}{\#undef\ blops\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00639\ \textcolor{preprocessor}{\#undef\ blops\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00640\ }
-\DoxyCodeLine{00641\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_create\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00642\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_destroy\ \ \ \ \ \ \ }}
-\DoxyCodeLine{00643\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_front\ \ \ \ \ }}
-\DoxyCodeLine{00644\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_back\ \ \ \ \ \ }}
-\DoxyCodeLine{00645\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_size\ \ \ \ \ \ }}
-\DoxyCodeLine{00646\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_node\ \ \ \ \ \ }}
-\DoxyCodeLine{00647\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_clear\ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00648\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_erase\ \ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00649\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_pop\_back\ \ \ \ \ \ }}
-\DoxyCodeLine{00650\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_pop\_front\ \ \ \ \ }}
-\DoxyCodeLine{00651\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_push\_back\ \ \ \ \ }}
-\DoxyCodeLine{00652\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_push\_front\ \ \ \ }}
-\DoxyCodeLine{00653\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_insert\_next\ \ \ }}
-\DoxyCodeLine{00654\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_insert\_prev\ \ \ }}
-\DoxyCodeLine{00655\ }
-\DoxyCodeLine{00656\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_create\ \ \ \ \ \ \ \ }}
-\DoxyCodeLine{00657\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_duplicate\ \ \ \ \ }}
-\DoxyCodeLine{00658\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_destroy\ \ \ \ \ \ \ }}
-\DoxyCodeLine{00659\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_set\_data\ \ \ \ \ \ }}
-\DoxyCodeLine{00660\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_data\ \ \ \ \ \ }}
-\DoxyCodeLine{00661\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_next\ \ \ \ \ \ }}
-\DoxyCodeLine{00662\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_prev\ \ \ \ \ \ }}
+\DoxyCodeLine{00598\ \textcolor{preprocessor}{\#undef\ blops\_list\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00599\ \textcolor{preprocessor}{\#undef\ blops\_node\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00601\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_create\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00602\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_destroy\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00603\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_front\ \ \ \ \ }}
+\DoxyCodeLine{00604\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_back\ \ \ \ \ \ }}
+\DoxyCodeLine{00605\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_size\ \ \ \ \ \ }}
+\DoxyCodeLine{00606\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_get\_node\ \ \ \ \ \ }}
+\DoxyCodeLine{00607\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_clear\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00608\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_erase\ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00609\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_pop\_back\ \ \ \ \ \ }}
+\DoxyCodeLine{00610\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_pop\_front\ \ \ \ \ }}
+\DoxyCodeLine{00611\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_push\_back\ \ \ \ \ }}
+\DoxyCodeLine{00612\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_push\_front\ \ \ \ }}
+\DoxyCodeLine{00613\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_insert\_next\ \ \ }}
+\DoxyCodeLine{00614\ \textcolor{preprocessor}{\#undef\ blopfn\_list\_insert\_prev\ \ \ }}
+\DoxyCodeLine{00615\ }
+\DoxyCodeLine{00616\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_create\ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00617\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_duplicate\ \ \ \ \ }}
+\DoxyCodeLine{00618\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_destroy\ \ \ \ \ \ \ }}
+\DoxyCodeLine{00619\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_set\_data\ \ \ \ \ \ }}
+\DoxyCodeLine{00620\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_data\ \ \ \ \ \ }}
+\DoxyCodeLine{00621\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_next\ \ \ \ \ \ }}
+\DoxyCodeLine{00622\ \textcolor{preprocessor}{\#undef\ blopfn\_node\_get\_prev\ \ \ \ \ \ }}
 
 \end{DoxyCode}

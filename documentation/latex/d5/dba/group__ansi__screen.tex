@@ -1,33 +1,92 @@
-\doxysection{Screen/line clearing helpers }
-\hypertarget{group__ansi__screen}{}\label{group__ansi__screen}\index{Screen/line clearing helpers@{Screen/line clearing helpers}}
+\doxysubsection{Screen/line clearing }
+\hypertarget{group__ansi__screen}{}\label{group__ansi__screen}\index{Screen/line clearing@{Screen/line clearing}}
 
 
 Commands for clearing the terminal display.  
 
 
-\doxysubsubsection*{Macros}
-\begin{DoxyCompactItemize}
+\doxysubsubsubsection*{Screen/line clearing}
+Commands for clearing the terminal display. \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{group__ansi__screen_ga4bda262c39a1cce7632b62644fdee97b}\label{group__ansi__screen_ga4bda262c39a1cce7632b62644fdee97b} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+SCREEN}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2J"{}
+\#define \mbox{\hyperlink{group__ansi__screen_ga4bda262c39a1cce7632b62644fdee97b}{ANSI\+\_\+\+CLEAR\+\_\+\+SCREEN}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2J"{}
 \begin{DoxyCompactList}\small\item\em Clear entire screen (2J). \end{DoxyCompactList}\item 
-\Hypertarget{group__ansi__screen_ga98051331efc7fbe841adfaa6e359a26a}\label{group__ansi__screen_ga98051331efc7fbe841adfaa6e359a26a} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2K"{}
+\#define \mbox{\hyperlink{group__ansi__screen_ga98051331efc7fbe841adfaa6e359a26a}{ANSI\+\_\+\+CLEAR\+\_\+\+LINE}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2K"{}
 \begin{DoxyCompactList}\small\item\em Clear entire current line (2K). \end{DoxyCompactList}\item 
-\Hypertarget{group__ansi__screen_ga54bbc18dc1f760f32f69ac714dc6ff88}\label{group__ansi__screen_ga54bbc18dc1f760f32f69ac714dc6ff88} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+END}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+J"{}
+\#define \mbox{\hyperlink{group__ansi__screen_ga54bbc18dc1f760f32f69ac714dc6ff88}{ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+END}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+J"{}
 \begin{DoxyCompactList}\small\item\em Clear screen from cursor to end (0J). \end{DoxyCompactList}\item 
-\Hypertarget{group__ansi__screen_ga3fbfdf975c74d2b68aa534773fbc6fdb}\label{group__ansi__screen_ga3fbfdf975c74d2b68aa534773fbc6fdb} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+START}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1J"{}
+\#define \mbox{\hyperlink{group__ansi__screen_ga3fbfdf975c74d2b68aa534773fbc6fdb}{ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+START}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1J"{}
 \begin{DoxyCompactList}\small\item\em Clear screen from cursor to beginning (1J). \end{DoxyCompactList}\item 
-\Hypertarget{group__ansi__screen_gacd359c63f629d1116e87e02a4beb8a94}\label{group__ansi__screen_gacd359c63f629d1116e87e02a4beb8a94} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+END}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+K"{}
+\#define \mbox{\hyperlink{group__ansi__screen_gacd359c63f629d1116e87e02a4beb8a94}{ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+END}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+K"{}
 \begin{DoxyCompactList}\small\item\em Clear line from cursor to end (0K). \end{DoxyCompactList}\item 
-\Hypertarget{group__ansi__screen_ga20ff44a95ee60b15fb3fffbcca078e0f}\label{group__ansi__screen_ga20ff44a95ee60b15fb3fffbcca078e0f} 
-\#define {\bfseries ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+START}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1K"{}
+\#define \mbox{\hyperlink{group__ansi__screen_ga20ff44a95ee60b15fb3fffbcca078e0f}{ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+START}}~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1K"{}
 \begin{DoxyCompactList}\small\item\em Clear line from cursor to start (1K). \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\doxysubsubsection{Detailed Description}
 Commands for clearing the terminal display. 
+
+
+
+\label{doc-define-members}
+\Hypertarget{group__ansi__screen_doc-define-members}
+\doxysubsubsection{Macro Definition Documentation}
+\Hypertarget{group__ansi__screen_ga98051331efc7fbe841adfaa6e359a26a}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_LINE@{ANSI\_CLEAR\_LINE}}
+\index{ANSI\_CLEAR\_LINE@{ANSI\_CLEAR\_LINE}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_LINE}{ANSI\_CLEAR\_LINE}}
+{\footnotesize\ttfamily \label{group__ansi__screen_ga98051331efc7fbe841adfaa6e359a26a} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+LINE~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2K"{}}
+
+
+
+Clear entire current line (2K). 
+
+\Hypertarget{group__ansi__screen_gacd359c63f629d1116e87e02a4beb8a94}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_LINE\_END@{ANSI\_CLEAR\_LINE\_END}}
+\index{ANSI\_CLEAR\_LINE\_END@{ANSI\_CLEAR\_LINE\_END}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_LINE\_END}{ANSI\_CLEAR\_LINE\_END}}
+{\footnotesize\ttfamily \label{group__ansi__screen_gacd359c63f629d1116e87e02a4beb8a94} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+END~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+K"{}}
+
+
+
+Clear line from cursor to end (0K). 
+
+\Hypertarget{group__ansi__screen_ga20ff44a95ee60b15fb3fffbcca078e0f}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_LINE\_START@{ANSI\_CLEAR\_LINE\_START}}
+\index{ANSI\_CLEAR\_LINE\_START@{ANSI\_CLEAR\_LINE\_START}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_LINE\_START}{ANSI\_CLEAR\_LINE\_START}}
+{\footnotesize\ttfamily \label{group__ansi__screen_ga20ff44a95ee60b15fb3fffbcca078e0f} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+LINE\+\_\+\+START~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1K"{}}
+
+
+
+Clear line from cursor to start (1K). 
+
+\Hypertarget{group__ansi__screen_ga4bda262c39a1cce7632b62644fdee97b}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_SCREEN@{ANSI\_CLEAR\_SCREEN}}
+\index{ANSI\_CLEAR\_SCREEN@{ANSI\_CLEAR\_SCREEN}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_SCREEN}{ANSI\_CLEAR\_SCREEN}}
+{\footnotesize\ttfamily \label{group__ansi__screen_ga4bda262c39a1cce7632b62644fdee97b} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+SCREEN~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}2J"{}}
+
+
+
+Clear entire screen (2J). 
+
+\Hypertarget{group__ansi__screen_ga54bbc18dc1f760f32f69ac714dc6ff88}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_TO\_END@{ANSI\_CLEAR\_TO\_END}}
+\index{ANSI\_CLEAR\_TO\_END@{ANSI\_CLEAR\_TO\_END}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_TO\_END}{ANSI\_CLEAR\_TO\_END}}
+{\footnotesize\ttfamily \label{group__ansi__screen_ga54bbc18dc1f760f32f69ac714dc6ff88} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+END~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}0\+J"{}}
+
+
+
+Clear screen from cursor to end (0J). 
+
+\Hypertarget{group__ansi__screen_ga3fbfdf975c74d2b68aa534773fbc6fdb}\index{Screen/line clearing@{Screen/line clearing}!ANSI\_CLEAR\_TO\_START@{ANSI\_CLEAR\_TO\_START}}
+\index{ANSI\_CLEAR\_TO\_START@{ANSI\_CLEAR\_TO\_START}!Screen/line clearing@{Screen/line clearing}}
+\doxysubsubsubsection{\texorpdfstring{ANSI\_CLEAR\_TO\_START}{ANSI\_CLEAR\_TO\_START}}
+{\footnotesize\ttfamily \label{group__ansi__screen_ga3fbfdf975c74d2b68aa534773fbc6fdb} 
+\#define ANSI\+\_\+\+CLEAR\+\_\+\+TO\+\_\+\+START~\mbox{\hyperlink{group__ansi__core_gab259b9d579e8f6337efbb2c541d071d3}{ANSI\+\_\+\+ESC}} "{}1J"{}}
+
+
+
+Clear screen from cursor to beginning (1J). 
 

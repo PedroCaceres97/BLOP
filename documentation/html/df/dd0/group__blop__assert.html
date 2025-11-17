@@ -88,23 +88,27 @@ $(function(){initNavTree('df/dd0/group__blop__assert.html','../../',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Assertions and Bounds Checking </div></div>
+  <div class="headertitle"><div class="title">Assertions and Bounds Checking <div class="ingroups"><a class="el" href="../../d6/d90/group__blop__global.html">BLOP Global</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Runtime parameter and bounds validation helpers.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Assertion and Bounds Checking Macros</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Macros for runtime parameter and bounds validation. </p>
+</td></tr>
+<tr class="memitem:gacb60246d9090d31ff5826981f4f3c6ba" id="r_gacb60246d9090d31ff5826981f4f3c6ba"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gacb60246d9090d31ff5826981f4f3c6ba">BLOP_EMPTY_POPPING</a>()</td></tr>
+<tr class="memdesc:gacb60246d9090d31ff5826981f4f3c6ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Behavior when attempting to pop from an empty container.  <br /></td></tr>
 <tr class="memitem:ga47676b7a24ab75b0bcad3234b836a337" id="r_ga47676b7a24ab75b0bcad3234b836a337"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga47676b7a24ab75b0bcad3234b836a337">BLOP_ASSERT</a>(cnd,  rtn,  msg)</td></tr>
 <tr class="memdesc:ga47676b7a24ab75b0bcad3234b836a337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert a condition and return a value on failure.  <br /></td></tr>
 <tr class="memitem:gae610056ff78b8fe674968b371b2fb6ff" id="r_gae610056ff78b8fe674968b371b2fb6ff"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gae610056ff78b8fe674968b371b2fb6ff">BLOP_ASSERT_VOID</a>(cnd,  msg)</td></tr>
-<tr class="memdesc:gae610056ff78b8fe674968b371b2fb6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert a condition and return from a <span class="tt">void</span> function on failure.  <br /></td></tr>
+<tr class="memdesc:gae610056ff78b8fe674968b371b2fb6ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void-returning version of <a class="el" href="#ga47676b7a24ab75b0bcad3234b836a337" title="Assert a condition and return a value on failure.">BLOP_ASSERT</a>.  <br /></td></tr>
 <tr class="memitem:ga1f0437b979f8e4ae1b59871f875750f1" id="r_ga1f0437b979f8e4ae1b59871f875750f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga1f0437b979f8e4ae1b59871f875750f1">BLOP_ASSERT_BONDS</a>(idx,  bond,  rtn)</td></tr>
-<tr class="memdesc:ga1f0437b979f8e4ae1b59871f875750f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure that an index is within bounds.  <br /></td></tr>
+<tr class="memdesc:ga1f0437b979f8e4ae1b59871f875750f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure that an index is within bounds (idx &gt;= bond).  <br /></td></tr>
 <tr class="memitem:ga157247c2569cf4be67d3e164e7c8b503" id="r_ga157247c2569cf4be67d3e164e7c8b503"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga157247c2569cf4be67d3e164e7c8b503">BLOP_ASSERT_BONDS_VOID</a>(idx,  bond)</td></tr>
-<tr class="memdesc:ga157247c2569cf4be67d3e164e7c8b503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void-returning version of <a class="el" href="#ga1f0437b979f8e4ae1b59871f875750f1" title="Ensure that an index is within bounds.">BLOP_ASSERT_BONDS</a>.  <br /></td></tr>
+<tr class="memdesc:ga157247c2569cf4be67d3e164e7c8b503"><td class="mdescLeft">&#160;</td><td class="mdescRight">Void-returning version of <a class="el" href="#ga1f0437b979f8e4ae1b59871f875750f1" title="Ensure that an index is within bounds (idx &gt;= bond).">BLOP_ASSERT_BONDS</a>.  <br /></td></tr>
 <tr class="memitem:gad4dda6e86a3e4454ac66465daf8576f7" id="r_gad4dda6e86a3e4454ac66465daf8576f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gad4dda6e86a3e4454ac66465daf8576f7">BLOP_ASSERT_PTR</a>(ptr,  rtn)</td></tr>
 <tr class="memdesc:gad4dda6e86a3e4454ac66465daf8576f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assert that a pointer parameter is not NULL.  <br /></td></tr>
 <tr class="memitem:ga372af138f3a7714ef137de0e0d386d99" id="r_ga372af138f3a7714ef137de0e0d386d99"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga372af138f3a7714ef137de0e0d386d99">BLOP_ASSERT_PTR_VOID</a>(ptr)</td></tr>
@@ -136,17 +140,17 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">if</span> (!(cnd)) { <a class="code hl_define" href="../../d6/d39/group__blop__logging.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(msg); <a class="code hl_define" href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span> rtn; }</div>
-<div class="ttc" id="agroup__blop__abort_html_ga882b9dd2ab9b367205d6877d1d35e015"><div class="ttname"><a href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a></div><div class="ttdeci">#define BLOP_ABORT()</div><div class="ttdoc">Abort or exit depending on compile-time configuration.</div><div class="ttdef"><b>Definition</b> blop.h:156</div></div>
-<div class="ttc" id="agroup__blop__logging_html_gab799fa16e9f3d02f86c1bca67494c543"><div class="ttname"><a href="../../d6/d39/group__blop__logging.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a></div><div class="ttdeci">#define BLOP_ERROR_MESSAGE(msg)</div><div class="ttdoc">Print a generic error message including file and function context.</div><div class="ttdef"><b>Definition</b> blop.h:106</div></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(cnd)) { <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(msg); <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span> rtn; }</div>
+<div class="ttc" id="agroup__blop__reporting_html_ga882b9dd2ab9b367205d6877d1d35e015"><div class="ttname"><a href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a></div><div class="ttdeci">#define BLOP_ABORT()</div><div class="ttdoc">Abort or exit depending on compile-time configuration.</div><div class="ttdef"><b>Definition</b> blop.h:436</div></div>
+<div class="ttc" id="agroup__blop__reporting_html_gab799fa16e9f3d02f86c1bca67494c543"><div class="ttname"><a href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a></div><div class="ttdeci">#define BLOP_ERROR_MESSAGE(msg)</div><div class="ttdoc">Print a generic error message including file and function context.</div><div class="ttdef"><b>Definition</b> blop.h:430</div></div>
 </div><!-- fragment -->
 <p>Assert a condition and return a value on failure. </p>
 <p>If the assertion fails:</p><ul>
-<li>Prints the provided message via <a class="el" href="../../d6/d39/group__blop__logging.html#gab799fa16e9f3d02f86c1bca67494c543" title="Print a generic error message including file and function context.">BLOP_ERROR_MESSAGE</a>.</li>
-<li>Calls <a class="el" href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015" title="Abort or exit depending on compile-time configuration.">BLOP_ABORT</a> (unless disabled).</li>
+<li>Prints the provided message via <a class="el" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543" title="Print a generic error message including file and function context.">BLOP_ERROR_MESSAGE</a>.</li>
+<li>Calls <a class="el" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015" title="Abort or exit depending on compile-time configuration.">BLOP_ABORT</a> (unless disabled).</li>
 <li>Returns <span class="tt">rtn</span>.</li>
 </ul>
-<p>Disabled when <span class="tt">BLOP_I_DONT_WANT_TO_CRASH_ON_ERROR_I_KNOW_WHAT_I_AM_DOING</span> is defined.</p>
+<p>Disabled when <span class="tt"><a class="el" href="../../df/d0b/group__blop__config.html#ga8126419529944b54118f782a7873a8d5" title="ONLY USE IF YOU KNOW WHAT YOU ARE DOING, Disables all kind of BLOP_ASSERT_* to improve every inch of ...">BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING</a> is defined</span>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cnd</td><td>Condition to validate. </td></tr>
@@ -181,11 +185,16 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">if</span> ((idx) &gt;= (bond)) { <a class="code hl_define" href="../../d6/d39/group__blop__logging.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a>(idx, bond); <a class="code hl_define" href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span> rtn; }</div>
-<div class="ttc" id="agroup__blop__logging_html_ga930106573f19165a0f4565daab64d281"><div class="ttname"><a href="../../d6/d39/group__blop__logging.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a></div><div class="ttdeci">#define BLOP_OUT_OF_BONDS_MESSAGE(idx, bond)</div><div class="ttdoc">Print an &quot;index out of bounds&quot; diagnostic message.</div><div class="ttdef"><b>Definition</b> blop.h:116</div></div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> ((idx) &gt;= (bond)) { <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a>(idx, bond); <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span> rtn; }</div>
+<div class="ttc" id="agroup__blop__reporting_html_ga930106573f19165a0f4565daab64d281"><div class="ttname"><a href="../../d7/d5d/group__blop__reporting.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a></div><div class="ttdeci">#define BLOP_OUT_OF_BONDS_MESSAGE(idx, bond)</div><div class="ttdoc">Print an &quot;index out of bounds&quot; diagnostic message.</div><div class="ttdef"><b>Definition</b> blop.h:431</div></div>
 </div><!-- fragment -->
-<p>Ensure that an index is within bounds. </p>
-<p>Fails when <span class="tt">idx &gt;= bond</span>.</p>
+<p>Ensure that an index is within bounds (idx &gt;= bond). </p>
+<p>If the assertion fails:</p><ul>
+<li>Prints the provided message via <a class="el" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543" title="Print a generic error message including file and function context.">BLOP_ERROR_MESSAGE</a>.</li>
+<li>Calls <a class="el" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015" title="Abort or exit depending on compile-time configuration.">BLOP_ABORT</a> (unless disabled).</li>
+<li>Returns <span class="tt">rtn</span>.</li>
+</ul>
+<p>Disabled when <a class="el" href="../../df/d0b/group__blop__config.html#ga8126419529944b54118f782a7873a8d5" title="ONLY USE IF YOU KNOW WHAT YOU ARE DOING, Disables all kind of BLOP_ASSERT_* to improve every inch of ...">BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING</a> is defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">idx</td><td>Index being accessed. </td></tr>
@@ -215,9 +224,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">if</span> ((idx) &gt;= (bond)) { <a class="code hl_define" href="../../d6/d39/group__blop__logging.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a>(idx, bond); <a class="code hl_define" href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span>; }</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> ((idx) &gt;= (bond)) { <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a>(idx, bond); <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span>; }</div>
 </div><!-- fragment -->
-<p>Void-returning version of <a class="el" href="#ga1f0437b979f8e4ae1b59871f875750f1" title="Ensure that an index is within bounds.">BLOP_ASSERT_BONDS</a>. </p>
+<p>Void-returning version of <a class="el" href="#ga1f0437b979f8e4ae1b59871f875750f1" title="Ensure that an index is within bounds (idx &gt;= bond).">BLOP_ASSERT_BONDS</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">idx</td><td>Index being accessed. </td></tr>
@@ -249,7 +258,7 @@ Macros</h2></td></tr>
 <b>Value:</b><div class="fragment"><div class="line">((void)0)</div>
 </div><!-- fragment -->
 <p>Assert that a pointer parameter is not NULL. </p>
-<p>Enabled only when <span class="tt">BLOP_SAFE_MODE</span> is defined.</p>
+<p>Enabled only when <a class="el" href="../../df/d0b/group__blop__config.html#ga6031064c8263fa054f0226a5517b96f6" title="Enables safe mode validation.">BLOP_SAFE_MODE</a> is defined. Disabled when <a class="el" href="../../df/d0b/group__blop__config.html#ga8126419529944b54118f782a7873a8d5" title="ONLY USE IF YOU KNOW WHAT YOU ARE DOING, Disables all kind of BLOP_ASSERT_* to improve every inch of ...">BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING</a> is defined.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ptr</td><td>Pointer to validate. </td></tr>
@@ -304,9 +313,9 @@ Macros</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line">        <span class="keywordflow">if</span> (!(cnd)) { <a class="code hl_define" href="../../d6/d39/group__blop__logging.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(msg); <a class="code hl_define" href="../../de/d40/group__blop__abort.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span>; }</div>
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!(cnd)) { <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(msg); <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>(); <span class="keywordflow">return</span>; }</div>
 </div><!-- fragment -->
-<p>Assert a condition and return from a <span class="tt">void</span> function on failure. </p>
+<p>Void-returning version of <a class="el" href="#ga47676b7a24ab75b0bcad3234b836a337" title="Assert a condition and return a value on failure.">BLOP_ASSERT</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cnd</td><td>Condition to validate. </td></tr>
@@ -314,6 +323,31 @@ Macros</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="gacb60246d9090d31ff5826981f4f3c6ba" name="gacb60246d9090d31ff5826981f4f3c6ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacb60246d9090d31ff5826981f4f3c6ba">&#9670;&#160;</a></span>BLOP_EMPTY_POPPING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLOP_EMPTY_POPPING</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(<span class="stringliteral">&quot;To enable empty popping and avoid this error define BLOP_VALID_EMPTY_POPPING&quot;</span>); <a class="code hl_define" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>();</div>
+</div><!-- fragment -->
+<p>Behavior when attempting to pop from an empty container. </p>
+<p>By default, popping from an empty container produces:</p><ul>
+<li>Call <a class="el" href="../../d7/d5d/group__blop__reporting.html#gab799fa16e9f3d02f86c1bca67494c543" title="Print a generic error message including file and function context.">BLOP_ERROR_MESSAGE</a>.</li>
+<li>Call <a class="el" href="../../d7/d5d/group__blop__reporting.html#ga882b9dd2ab9b367205d6877d1d35e015" title="Abort or exit depending on compile-time configuration.">BLOP_ABORT</a>.</li>
+</ul>
+<p>Disabled when <a class="el" href="../../df/d0b/group__blop__config.html#ga1649f2d8055d480fad46354e1a49a6d6" title="Enables the feature of popping from empty containers.">BLOP_VALID_EMPTY_POPPING</a> is defined, this mean that you can pop from an empty container and the program wont crash. </p>
 
 </div>
 </div>

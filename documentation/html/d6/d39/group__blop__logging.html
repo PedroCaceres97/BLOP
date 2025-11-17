@@ -88,15 +88,19 @@ $(function(){initNavTree('d6/d39/group__blop__logging.html','../../',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Logging &amp; Error Reporting </div></div>
+  <div class="headertitle"><div class="title">Logging &amp; Error Reporting <div class="ingroups"><a class="el" href="../../d6/d90/group__blop__global.html">BLOP Global Macros and Utilities</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Macros for printing diagnostic messages.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Logging &amp; Error Reporting Macros</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Macros for printing diagnostic messages. </p>
+</td></tr>
+<tr class="memitem:ga882b9dd2ab9b367205d6877d1d35e015" id="r_ga882b9dd2ab9b367205d6877d1d35e015"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga882b9dd2ab9b367205d6877d1d35e015">BLOP_ABORT</a>()</td></tr>
+<tr class="memdesc:ga882b9dd2ab9b367205d6877d1d35e015"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abort or exit depending on compile-time configuration.  <br /></td></tr>
 <tr class="memitem:gab799fa16e9f3d02f86c1bca67494c543" id="r_gab799fa16e9f3d02f86c1bca67494c543"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab799fa16e9f3d02f86c1bca67494c543">BLOP_ERROR_MESSAGE</a>(msg)</td></tr>
 <tr class="memdesc:gab799fa16e9f3d02f86c1bca67494c543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a generic error message including file and function context.  <br /></td></tr>
 <tr class="memitem:ga930106573f19165a0f4565daab64d281" id="r_ga930106573f19165a0f4565daab64d281"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga930106573f19165a0f4565daab64d281">BLOP_OUT_OF_BONDS_MESSAGE</a>(idx,  bond)</td></tr>
@@ -105,6 +109,37 @@ Macros</h2></td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <p>Macros for printing diagnostic messages. </p>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="ga882b9dd2ab9b367205d6877d1d35e015" name="ga882b9dd2ab9b367205d6877d1d35e015"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga882b9dd2ab9b367205d6877d1d35e015">&#9670;&#160;</a></span>BLOP_ABORT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BLOP_ABORT</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">exit(-1)</div>
+</div><!-- fragment -->
+<p>Abort or exit depending on compile-time configuration. </p>
+<p>Behavior:</p><ul>
+<li>If <span class="tt">BLOP_I_DONT_WANT_TO_CRASH_ON_ERROR_I_KNOW_WHAT_I_AM_DOING</span> is defined:<ul>
+<li><a class="el" href="#ga882b9dd2ab9b367205d6877d1d35e015" title="Abort or exit depending on compile-time configuration.">BLOP_ABORT</a> becomes a no-op.</li>
+</ul>
+</li>
+<li>Otherwise:<ul>
+<li>If ::BLOP_ABORT_ON_ERROR is defined → calls <span class="tt">abort()</span>.</li>
+<li>Else → calls <span class="tt">exit(-1)</span>. </li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
 <a id="gab799fa16e9f3d02f86c1bca67494c543" name="gab799fa16e9f3d02f86c1bca67494c543"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab799fa16e9f3d02f86c1bca67494c543">&#9670;&#160;</a></span>BLOP_ERROR_MESSAGE</h2>
 

@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['line_20clearing_20helpers_0',['Screen/line clearing helpers',['../d5/dba/group__ansi__screen.html',1,'']]],
-  ['list_20api_1',['List API',['../de/d41/group__blop__list__api__list.html',1,'']]],
-  ['list_20configuration_20macros_2',['List Configuration Macros',['../d5/d2e/group__blop__list__config.html',1,'']]],
-  ['logging_20error_20reporting_3',['Logging &amp;amp; Error Reporting',['../d6/d39/group__blop__logging.html',1,'']]]
+  ['utilities_0',['Utilities',['../d3/d3a/group__blop__util.html',1,'']]]
 ];

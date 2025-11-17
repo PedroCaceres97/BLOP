@@ -1,6 +1,6 @@
 var ansi_8h =
 [
-    [ "ANSI_BG_256", "d5/d1e/group__ansi__extended.html#ga89e3db045f49473e4d2863a21245a726", null ],
+    [ "ANSI_BG_256", "d7/dae/ansi_8h.html#a89e3db045f49473e4d2863a21245a726", null ],
     [ "ANSI_BG_BLACK", "da/d20/group__ansi__colors.html#ga042aa75ade32832822047c31f3c82784", null ],
     [ "ANSI_BG_BLUE", "da/d20/group__ansi__colors.html#gac2fc1a686a710db7c510808bc5d11245", null ],
     [ "ANSI_BG_CYAN", "da/d20/group__ansi__colors.html#ga82b95d2844098f3c5972bf2491eb9b3e", null ],
@@ -18,8 +18,7 @@ var ansi_8h =
     [ "ANSI_CLEAR_SCREEN", "d5/dba/group__ansi__screen.html#ga4bda262c39a1cce7632b62644fdee97b", null ],
     [ "ANSI_CLEAR_TO_END", "d5/dba/group__ansi__screen.html#ga54bbc18dc1f760f32f69ac714dc6ff88", null ],
     [ "ANSI_CLEAR_TO_START", "d5/dba/group__ansi__screen.html#ga3fbfdf975c74d2b68aa534773fbc6fdb", null ],
-    [ "ANSI_COLOR_SET", "da/d20/group__ansi__colors.html#ga4290716150f11ffa0d453520e79c5116", null ],
-    [ "ANSI_COLOR_TEXT", "da/d20/group__ansi__colors.html#gaf3df0ee321bb6ba4fb17c4b02618cc78", null ],
+    [ "ANSI_COLOR", "da/d20/group__ansi__colors.html#gab330a207f0ac79e46fbba66e3bdde19f", null ],
     [ "ANSI_CURSOR_BACK", "d7/d0c/group__ansi__cursor.html#ga9d81c1b0675c737f4ce013f3c2e70ae1", null ],
     [ "ANSI_CURSOR_DOWN", "d7/d0c/group__ansi__cursor.html#ga70e5df7169f9b02882e5f22473682d6d", null ],
     [ "ANSI_CURSOR_FORWARD", "d7/d0c/group__ansi__cursor.html#ga749c2591682125075b62d19f7a942ba9", null ],

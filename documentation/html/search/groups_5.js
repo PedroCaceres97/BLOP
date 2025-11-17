@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['flags_0',['BLOP Global Configuration Flags',['../df/d0b/group__blop__config.html',1,'']]]
+  ['line_20clearing_0',['Screen/line clearing',['../d5/dba/group__ansi__screen.html',1,'']]]
 ];

@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['visibility_0',['Cursor movement &amp;amp; visibility',['../d7/d0c/group__ansi__cursor.html',1,'']]]
+  ['uninstallation_0',['Uninstallation',['../index.html#autotoc_md7',1,'']]],
+  ['unique_20symbols_1',['Unique Symbols',['../d8/d13/group__list__macros.html',1,'']]],
+  ['usage_2',['Usage',['../index.html#autotoc_md6',1,'']]],
+  ['utilities_3',['Utilities',['../df/d54/group__global__util.html',1,'']]]
 ];

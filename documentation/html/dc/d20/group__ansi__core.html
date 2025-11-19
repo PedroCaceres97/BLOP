@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>BLOP: Core tokens</title>
+<title>BLOP: Core</title>
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
@@ -88,24 +88,59 @@ $(function(){initNavTree('dc/d20/group__ansi__core.html','../../',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Core tokens <div class="ingroups"><a class="el" href="../../d2/dd1/group__blop__ansi.html">BLOP Ansi</a></div></div></div>
+  <div class="headertitle"><div class="title">Core <div class="ingroups"><a class="el" href="../../d2/dd1/group__blop__ansi.html">Ansi</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Base constants used internally by other ANSI macros.  
+<p>Core components of <a class="el" href="../../d7/dae/ansi_8h.html" title="ANSI escape sequence helper macros.">ansi.h</a>.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Core Tokens</h2></td></tr>
-<tr><td class="ititle" colspan="2"><p>Base constants used internally by other ANSI macros. </p>
+Core</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p>Core components of <a class="el" href="../../d7/dae/ansi_8h.html" title="ANSI escape sequence helper macros.">ansi.h</a> </p>
 </td></tr>
 <tr class="memitem:gab259b9d579e8f6337efbb2c541d071d3" id="r_gab259b9d579e8f6337efbb2c541d071d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a>&#160;&#160;&#160;&quot;\x1b[&quot;</td></tr>
 <tr class="memdesc:gab259b9d579e8f6337efbb2c541d071d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control Sequence Introducer (CSI). <br  />
  Most ANSI sequences begin with this prefix.  <br /></td></tr>
+<tr class="memitem:gab330a207f0ac79e46fbba66e3bdde19f" id="r_gab330a207f0ac79e46fbba66e3bdde19f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gab330a207f0ac79e46fbba66e3bdde19f">ANSI_COLOR</a>(color,  text)</td></tr>
+<tr class="memdesc:gab330a207f0ac79e46fbba66e3bdde19f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand to color + text + reset.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<p>Base constants used internally by other ANSI macros. </p>
+<p>Core components of <a class="el" href="../../d7/dae/ansi_8h.html" title="ANSI escape sequence helper macros.">ansi.h</a>. </p>
 <a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
+<a id="gab330a207f0ac79e46fbba66e3bdde19f" name="gab330a207f0ac79e46fbba66e3bdde19f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab330a207f0ac79e46fbba66e3bdde19f">&#9670;&#160;</a></span>ANSI_COLOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANSI_COLOR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>color</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>text</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Value:</b><div class="fragment"><div class="line">color text <a class="code hl_define" href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a></div>
+<div class="ttc" id="agroup__ansi__styles_html_gaf77a445894f2f750d43cf2182cd29e55"><div class="ttname"><a href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a></div><div class="ttdeci">#define ANSI_RESET</div><div class="ttdoc">Reset all graphics attributes (SGR 0).</div><div class="ttdef"><b>Definition</b> ansi.h:420</div></div>
+</div><!-- fragment -->
+<p>Expand to color + text + reset. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">color</td><td>Any combination of ANSI color/style macro, may be standard or extended colors. </td></tr>
+    <tr><td class="paramname">text</td><td>Null-terminated string to colorize. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>Warning</dt><dd>Some consoles/terminals may need to enable color features (Such as Windows cmd) </dd></dl>
+
+</div>
+</div>
 <a id="gab259b9d579e8f6337efbb2c541d071d3" name="gab259b9d579e8f6337efbb2c541d071d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gab259b9d579e8f6337efbb2c541d071d3">&#9670;&#160;</a></span>ANSI_ESC</h2>
 

@@ -18,6 +18,7 @@
  * - Many macros use the # operator and require compile-time literal numbers.
  * - These macros produce raw escape sequences (no validation is performed).
  *
+ * @version 1.0.0
  * @author Pedro Caceres
  * @date November 2025
  */
@@ -25,18 +26,18 @@
 #ifndef __BLOP_ANSI_H__
 #define __BLOP_ANSI_H__
 
-/** @defgroup blop_ansi BLOP Ansi*/
+/** @defgroup blop_ansi Ansi*/
 
 /**
- * @defgroup ansi_core Core tokens
+ * @defgroup ansi_core Core
  * @ingroup blop_ansi
- * @brief Base constants used internally by other ANSI macros.
+ * @brief Core components of ansi.h
  * @{
  */
 
 /**
- * @name Core Tokens
- * @brief Base constants used internally by other ANSI macros.
+ * @name Core
+ * @brief Core components of ansi.h
  * @{
  */
 
@@ -44,6 +45,14 @@
  * @def ANSI_ESC
  * @brief Control Sequence Introducer (CSI).  
  * Most ANSI sequences begin with this prefix.
+ */
+
+/**
+ * @def ANSI_COLOR(color, text)
+ * @brief Expand to color + text + reset.
+ * @param color Any combination of ANSI color/style macro, may be standard or extended colors.
+ * @param text Null-terminated string to colorize.
+ * @warning Some consoles/terminals may need to enable color features (Such as Windows cmd)
  */
 
 /** @} */ /* end of ansi_core (name) */
@@ -61,13 +70,6 @@
  * @name Standard Colors
  * @brief Predefined standard ANSI 16-color foreground/background macros.
  * @{
- */
-
-/**
- * @def ANSI_COLOR(color, text)
- * @brief Expand to color + text + reset.
- * @param color Any ANSI color/style macro.
- * @param text Null-terminated string to colorize.
  */
 
 /** 

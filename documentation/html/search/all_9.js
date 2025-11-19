@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['screen_20line_20clearing_0',['Screen/line clearing',['../d5/dba/group__ansi__screen.html',1,'']]],
-  ['standard_20colors_1',['Standard Colors',['../da/d20/group__ansi__colors.html',1,'']]],
-  ['styles_2',['Text Styles',['../d5/d0f/group__ansi__styles.html',1,'']]]
+  ['next_0',['next',['../d7/df5/group__list__structures.html#gaa2eb01138573e2d92123615dfa16864d',1,'blops_node']]],
+  ['node_20api_1',['Node API',['../d3/d00/group__list__node__api.html',1,'']]]
 ];

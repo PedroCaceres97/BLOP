@@ -18,7 +18,7 @@ var ansi_8h =
     [ "ANSI_CLEAR_SCREEN", "d5/dba/group__ansi__screen.html#ga4bda262c39a1cce7632b62644fdee97b", null ],
     [ "ANSI_CLEAR_TO_END", "d5/dba/group__ansi__screen.html#ga54bbc18dc1f760f32f69ac714dc6ff88", null ],
     [ "ANSI_CLEAR_TO_START", "d5/dba/group__ansi__screen.html#ga3fbfdf975c74d2b68aa534773fbc6fdb", null ],
-    [ "ANSI_COLOR", "da/d20/group__ansi__colors.html#gab330a207f0ac79e46fbba66e3bdde19f", null ],
+    [ "ANSI_COLOR", "dc/d20/group__ansi__core.html#gab330a207f0ac79e46fbba66e3bdde19f", null ],
     [ "ANSI_CURSOR_BACK", "d7/d0c/group__ansi__cursor.html#ga9d81c1b0675c737f4ce013f3c2e70ae1", null ],
     [ "ANSI_CURSOR_DOWN", "d7/d0c/group__ansi__cursor.html#ga70e5df7169f9b02882e5f22473682d6d", null ],
     [ "ANSI_CURSOR_FORWARD", "d7/d0c/group__ansi__cursor.html#ga749c2591682125075b62d19f7a942ba9", null ],

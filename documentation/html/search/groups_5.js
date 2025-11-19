@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['line_20clearing_0',['Screen/line clearing',['../d5/dba/group__ansi__screen.html',1,'']]]
+  ['node_20api_0',['Node API',['../d3/d00/group__list__node__api.html',1,'']]]
 ];

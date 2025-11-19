@@ -1,6 +1,6 @@
 var group__blop__ansi =
 [
-    [ "Core tokens", "dc/d20/group__ansi__core.html", "dc/d20/group__ansi__core" ],
+    [ "Core", "dc/d20/group__ansi__core.html", "dc/d20/group__ansi__core" ],
     [ "Standard Colors", "da/d20/group__ansi__colors.html", "da/d20/group__ansi__colors" ],
     [ "Text Styles", "d5/d0f/group__ansi__styles.html", "d5/d0f/group__ansi__styles" ],
     [ "Extended colors", "d5/d1e/group__ansi__extended.html", "d5/d1e/group__ansi__extended" ],

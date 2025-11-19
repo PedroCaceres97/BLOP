@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['text_20styles_0',['Text Styles',['../d5/d0f/group__ansi__styles.html',1,'']]],
-  ['tokens_1',['Core tokens',['../dc/d20/group__ansi__core.html',1,'']]]
+  ['prev_0',['prev',['../d7/df5/group__list__structures.html#gacf263cf68767440d613595232e495d92',1,'blops_node']]],
+  ['principles_1',['Core Principles',['../index.html#autotoc_md3',1,'']]],
+  ['purpose_2',['Purpose',['../index.html#autotoc_md2',1,'']]]
 ];

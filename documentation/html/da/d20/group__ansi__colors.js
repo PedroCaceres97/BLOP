@@ -8,7 +8,6 @@ var group__ansi__colors =
     [ "ANSI_BG_RED", "da/d20/group__ansi__colors.html#ga2e08776af362510270e8bf63a7a3ba3e", null ],
     [ "ANSI_BG_WHITE", "da/d20/group__ansi__colors.html#gac4a402a3b4ad9177cc17a63412eac8df", null ],
     [ "ANSI_BG_YELLOW", "da/d20/group__ansi__colors.html#ga8ca9e4fe4a0c3eea20d0440427f18183", null ],
-    [ "ANSI_COLOR", "da/d20/group__ansi__colors.html#gab330a207f0ac79e46fbba66e3bdde19f", null ],
     [ "ANSI_FG_BLACK", "da/d20/group__ansi__colors.html#ga5b3bdab68552174965a97f8a5337b531", null ],
     [ "ANSI_FG_BLUE", "da/d20/group__ansi__colors.html#ga1343f7d739bb3a83b3c05be867763de2", null ],
     [ "ANSI_FG_CYAN", "da/d20/group__ansi__colors.html#gaa77c9ef7d47c598534b86e04d53bbca4", null ],

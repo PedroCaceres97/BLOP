@@ -100,17 +100,17 @@ $(function(){initNavTree('d7/dae/ansi_8h.html','../../',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a89e3db045f49473e4d2863a21245a726" id="r_a89e3db045f49473e4d2863a21245a726"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89e3db045f49473e4d2863a21245a726">ANSI_BG_256</a>(n)</td></tr>
-<tr id="define-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Core Tokens</div></td></tr>
-<tr><td colspan="2" class="ititle"><div class="groupText"><p>Base constants used internally by other ANSI macros. </p>
+<tr id="define-members-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Core</div></td></tr>
+<tr><td colspan="2" class="ititle"><div class="groupText"><p>Core components of <a class="el" href="../../d7/dae/ansi_8h.html" title="ANSI escape sequence helper macros.">ansi.h</a> </p>
 </div></td></tr>
 <tr class="memitem:gab259b9d579e8f6337efbb2c541d071d3" id="r_gab259b9d579e8f6337efbb2c541d071d3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a>&#160;&#160;&#160;&quot;\x1b[&quot;</td></tr>
 <tr class="memdesc:gab259b9d579e8f6337efbb2c541d071d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Control Sequence Introducer (CSI). <br  />
  Most ANSI sequences begin with this prefix.  <br /></td></tr>
+<tr class="memitem:gab330a207f0ac79e46fbba66e3bdde19f" id="r_gab330a207f0ac79e46fbba66e3bdde19f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d20/group__ansi__core.html#gab330a207f0ac79e46fbba66e3bdde19f">ANSI_COLOR</a>(color,  text)</td></tr>
+<tr class="memdesc:gab330a207f0ac79e46fbba66e3bdde19f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand to color + text + reset.  <br /></td></tr>
 <tr id="define-members-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Standard Colors</div></td></tr>
 <tr><td colspan="2" class="ititle"><div class="groupText"><p>Predefined standard ANSI 16-color foreground/background macros. </p>
 </div></td></tr>
-<tr class="memitem:gab330a207f0ac79e46fbba66e3bdde19f" id="r_gab330a207f0ac79e46fbba66e3bdde19f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d20/group__ansi__colors.html#gab330a207f0ac79e46fbba66e3bdde19f">ANSI_COLOR</a>(color,  text)</td></tr>
-<tr class="memdesc:gab330a207f0ac79e46fbba66e3bdde19f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Expand to color + text + reset.  <br /></td></tr>
 <tr class="memitem:ga5b3bdab68552174965a97f8a5337b531" id="r_ga5b3bdab68552174965a97f8a5337b531"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d20/group__ansi__colors.html#ga5b3bdab68552174965a97f8a5337b531">ANSI_FG_BLACK</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;30m&quot;</td></tr>
 <tr class="memdesc:ga5b3bdab68552174965a97f8a5337b531"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set foreground to black (30).  <br /></td></tr>
 <tr class="memitem:ga4b82ce02685b3d7ebc5e8da4eaefae53" id="r_ga4b82ce02685b3d7ebc5e8da4eaefae53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/d20/group__ansi__colors.html#ga4b82ce02685b3d7ebc5e8da4eaefae53">ANSI_FG_RED</a>&#160;&#160;&#160;<a class="el" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> &quot;31m&quot;</td></tr>
@@ -222,14 +222,15 @@ Macros</h2></td></tr>
 <p>Usage examples: </p><div class="fragment"><div class="line">printf(<a class="code hl_define" href="../../da/d20/group__ansi__colors.html#ga4b82ce02685b3d7ebc5e8da4eaefae53">ANSI_FG_RED</a> <span class="stringliteral">&quot;Error!&quot;</span> <a class="code hl_define" href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a>);</div>
 <div class="line">printf(<a class="code hl_define" href="../../d5/d1e/group__ansi__extended.html#ga83224b1892feed6a11a38ab803351222">ANSI_FG_256</a>(42) <span class="stringliteral">&quot;Hello&quot;</span> <a class="code hl_define" href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a>);</div>
 <div class="line">printf(<a class="code hl_define" href="../../d7/d0c/group__ansi__cursor.html#gae9745d57d25f85d93b779d06631aff26">ANSI_CURSOR_POS</a>(10, 5));</div>
-<div class="ttc" id="agroup__ansi__colors_html_ga4b82ce02685b3d7ebc5e8da4eaefae53"><div class="ttname"><a href="../../da/d20/group__ansi__colors.html#ga4b82ce02685b3d7ebc5e8da4eaefae53">ANSI_FG_RED</a></div><div class="ttdeci">#define ANSI_FG_RED</div><div class="ttdoc">Set foreground to red (31).</div><div class="ttdef"><b>Definition</b> ansi.h:400</div></div>
-<div class="ttc" id="agroup__ansi__cursor_html_gae9745d57d25f85d93b779d06631aff26"><div class="ttname"><a href="../../d7/d0c/group__ansi__cursor.html#gae9745d57d25f85d93b779d06631aff26">ANSI_CURSOR_POS</a></div><div class="ttdeci">#define ANSI_CURSOR_POS(x, y)</div><div class="ttdoc">Absolute cursor positioning (x column, y row).</div><div class="ttdef"><b>Definition</b> ansi.h:439</div></div>
-<div class="ttc" id="agroup__ansi__extended_html_ga83224b1892feed6a11a38ab803351222"><div class="ttname"><a href="../../d5/d1e/group__ansi__extended.html#ga83224b1892feed6a11a38ab803351222">ANSI_FG_256</a></div><div class="ttdeci">#define ANSI_FG_256(n)</div><div class="ttdoc">Foreground 256-color mode.</div><div class="ttdef"><b>Definition</b> ansi.h:430</div></div>
-<div class="ttc" id="agroup__ansi__styles_html_gaf77a445894f2f750d43cf2182cd29e55"><div class="ttname"><a href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a></div><div class="ttdeci">#define ANSI_RESET</div><div class="ttdoc">Reset all graphics attributes (SGR 0).</div><div class="ttdef"><b>Definition</b> ansi.h:418</div></div>
+<div class="ttc" id="agroup__ansi__colors_html_ga4b82ce02685b3d7ebc5e8da4eaefae53"><div class="ttname"><a href="../../da/d20/group__ansi__colors.html#ga4b82ce02685b3d7ebc5e8da4eaefae53">ANSI_FG_RED</a></div><div class="ttdeci">#define ANSI_FG_RED</div><div class="ttdoc">Set foreground to red (31).</div><div class="ttdef"><b>Definition</b> ansi.h:402</div></div>
+<div class="ttc" id="agroup__ansi__cursor_html_gae9745d57d25f85d93b779d06631aff26"><div class="ttname"><a href="../../d7/d0c/group__ansi__cursor.html#gae9745d57d25f85d93b779d06631aff26">ANSI_CURSOR_POS</a></div><div class="ttdeci">#define ANSI_CURSOR_POS(x, y)</div><div class="ttdoc">Absolute cursor positioning (x column, y row).</div><div class="ttdef"><b>Definition</b> ansi.h:441</div></div>
+<div class="ttc" id="agroup__ansi__extended_html_ga83224b1892feed6a11a38ab803351222"><div class="ttname"><a href="../../d5/d1e/group__ansi__extended.html#ga83224b1892feed6a11a38ab803351222">ANSI_FG_256</a></div><div class="ttdeci">#define ANSI_FG_256(n)</div><div class="ttdoc">Foreground 256-color mode.</div><div class="ttdef"><b>Definition</b> ansi.h:432</div></div>
+<div class="ttc" id="agroup__ansi__styles_html_gaf77a445894f2f750d43cf2182cd29e55"><div class="ttname"><a href="../../d5/d0f/group__ansi__styles.html#gaf77a445894f2f750d43cf2182cd29e55">ANSI_RESET</a></div><div class="ttdeci">#define ANSI_RESET</div><div class="ttdoc">Reset all graphics attributes (SGR 0).</div><div class="ttdef"><b>Definition</b> ansi.h:420</div></div>
 </div><!-- fragment --><p>Important:</p><ul>
 <li>Many macros use the # operator and require compile-time literal numbers.</li>
 <li>These macros produce raw escape sequences (no validation is performed).</li>
 </ul>
+<dl class="section version"><dt>Version</dt><dd>1.0.0 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Pedro Caceres </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>November 2025 </dd></dl>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">Macro Definition Documentation</h2>
@@ -248,7 +249,7 @@ Macros</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><a class="code hl_define" href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a> <span class="stringliteral">&quot;48;5;&quot;</span> #n <span class="stringliteral">&quot;m&quot;</span></div>
-<div class="ttc" id="agroup__ansi__core_html_gab259b9d579e8f6337efbb2c541d071d3"><div class="ttname"><a href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a></div><div class="ttdeci">#define ANSI_ESC</div><div class="ttdoc">Control Sequence Introducer (CSI).   Most ANSI sequences begin with this prefix.</div><div class="ttdef"><b>Definition</b> ansi.h:395</div></div>
+<div class="ttc" id="agroup__ansi__core_html_gab259b9d579e8f6337efbb2c541d071d3"><div class="ttname"><a href="../../dc/d20/group__ansi__core.html#gab259b9d579e8f6337efbb2c541d071d3">ANSI_ESC</a></div><div class="ttdeci">#define ANSI_ESC</div><div class="ttdoc">Control Sequence Introducer (CSI).   Most ANSI sequences begin with this prefix.</div><div class="ttdef"><b>Definition</b> ansi.h:397</div></div>
 </div><!-- fragment -->
 </div>
 </div>

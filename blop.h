@@ -6,119 +6,142 @@
  * abort/exit handling, pointer validation, memory allocation, and miscellaneous
  * arithmetic utilities. All modules in BLOP rely on these common primitives.
  *
+ * @version 1.0.0
  * @author Pedro Caceres
  * @date November 2025
  */
 
-#ifndef __BLOP_H__
-#define __BLOP_H__
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-#include <stdbool.h>
-
 /**
- * @defgroup blop_global BLOP Global
+ * @defgroup blop_global Global
  */
 
+/* -------------------------------------------------------------------------- */
+/*                               CONFIGURATION                                */
+/* -------------------------------------------------------------------------- */
+
 /**
- * @defgroup blop_configuration Configuration
+ * @defgroup global_cofiguration Configuration
  * @ingroup blop_global
  * @brief Optional compile-time macro flags that modify BLOP's behavior.
  * @{
  */
 
 /**
+ * @name Configuration
+ * @brief Optional compile-time macro flags that modify BLOP's behavior.
+ */
+
+/**
  * @def BLOP_SAFE_MODE
- * @brief Enables safe mode validation
+ * @brief Enables additional runtime validation.
  *
- * Enables:
+ * When defined, BLOP activates extra pointer assertions:
  * - ::BLOP_ASSERT_PTR
  * - ::BLOP_ASSERT_PTR_VOID
+ *
+ * @note This mode is recommended during development and debugging.
  */
 
 /**
  * @def BLOP_ABORT_ON_ERROR
- * @brief When defined ::BLOP_ABORT calls `abort()` instead of `exit(-1)`
+ * @brief Causes ::BLOP_ABORT to call `abort()` instead of `exit(-1)`.
+ *
+ * Useful for generating core dumps during debugging.
  */
 
 /**
  * @def BLOP_VALID_EMPTY_POPPING
- * @brief Enables the feature of popping from empty containers.
- * 
- * When defined ::BLOP_EMPTY_POPPING becomes no-op
- *  
- * By default when calling pop in any form in any container
- * produces an error, defining this macro avoid this error.
- * The functions are coded so nothing happens on popping from any container.
+ * @brief Allows popping from empty containers without error.
+ *
+ * If defined:
+ * - ::BLOP_EMPTY_POPPING becomes a no-op.
+ * - Container pop operations become safe when empty.
+ *
+ * @remarks  
+ * By default, empty popping is considered an error and terminates the program.
  */
 
 /**
  * @def BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
- * @brief ONLY USE IF YOU KNOW WHAT YOU ARE DOING, Disables all kind of BLOP_ASSERT_* to improve every inch of performance
- * 
- * When defined prevents blop from asserting almost everything
- * More properly explained it turns all of ::BLOP_ASSERT macro family into no-op
- * 
- * There are very few functions that make asserts even when
- * this is defined, specifically those functions who allocate memory.
+ * @brief Disables the entire BLOP assertion system.
+ *
+ * When defined:
+ * - All ::BLOP_ASSERT* macros become no-op.
+ * - Only a very small number of internal checks remain (e.g., memory allocation).
+ *
+ * @warning  
+ * ONLY use this if you understand the risks.  
+ * Asserts are not just debugging helpers — BLOP relies on them for safety.
  */
 
-/** @} */ /* end of blop_configuration */
+/** @} */ /* end of global_cofiguration (Name) */
+
+/** @} */ /* end of global_cofiguration */
+
+
+/* -------------------------------------------------------------------------- */
+/*                               ERROR REPORTING                              */
+/* -------------------------------------------------------------------------- */
 
 /**
- * @defgroup blop_reporting Error Reporting
+ * @defgroup global_reporting Error Reporting
  * @ingroup blop_global
- * @brief Macros for printing diagnostic messages.
+ * @brief Macros responsible for printing diagnostic messages.
  * @{
  */
 
 /** 
  * @name Error Reporting
- * @brief Macros for printing diagnostic messages.
+ * @brief Macros responsible for printing diagnostic messages.
  */
 
 /**
  * @def BLOP_ABORT()
- * @brief Abort or exit depending on compile-time configuration.
+ * @brief Terminate the program according to configuration.
  *
- * When any kind of error is detected ::BLOP_ABORT is called to exit program.
- * By default it uses `exit(-1)` to allow the use of `atexit()` function.
- * If ::BLOP_ABORT_ON_EXIT is defined the it will use `abort()` to core dump.
+ * Behavior:
+ * - By default uses `exit(-1)` to allow cleanup via `atexit()`.
+ * - If ::BLOP_ABORT_ON_ERROR is defined, uses `abort()` to trigger a core dump.
  *
- * ::BLOP_ABORT is called almost entirily by ::BLOP_ASSERT and family of macros
+ * @remarks  
+ * Primarily invoked by ::BLOP_ASSERT and related macros.
  */
 
 /**
  * @def BLOP_ERROR_MESSAGE(msg)
- * @brief Print a generic error message including file and function context.
+ * @brief Print a generic error message with context.
  *
  * Example output:
  * ```
- * [BLOP -> file.c{my_function} ]: Something went wrong
+ * [BLOP -> file.c{my_function}]: Something went wrong
  * ```
  *
- * @param msg Null-terminated message string to print.
+ * @param msg Null-terminated string describing the error.
  */
 
 /**
  * @def BLOP_OUT_OF_BONDS_MESSAGE(idx, bond)
- * @brief Print an "index out of bounds" diagnostic message.
+ * @brief Print an "index out of bounds" error message with context.
  *
- * The message includes the attempted index and the valid bound.
+ * Example output:
+ * ```
+ * [BLOP -> file.c{my_function} idx = 10 while bond = 5]: Index out of bonds
+ * ```
  *
- * @param idx  The index that was attempted.
- * @param bond The upper bound (array/list size).
+ * @param idx  The attempted index.
+ * @param bond The valid upper bound.
  */
 
-/** @} */ /* end of blop_reporting (name) */
+/** @} */ /* end of global_reporting (name) */
 
-/** @} */ /* end of blop_reporting */
+/** @} */ /* end of global_reporting */
+
+/* -------------------------------------------------------------------------- */
+/*                                 ASSERTIONS                                 */
+/* -------------------------------------------------------------------------- */
 
 /**
- * @defgroup blop_assertions Assertions
+ * @defgroup global_assertions Assertions
  * @ingroup blop_global
  * @brief Runtime parameter and bounds validation helpers.
  * @{
@@ -131,96 +154,96 @@
 
 /**
  * @def BLOP_EMPTY_POPPING()
- * @brief Behavior when attempting to pop from an empty container.
+ * @brief Behavior when popping from an empty container.
  *
- * By default, popping from an empty container produces:
- * - Call ::BLOP_ERROR_MESSAGE.
- * - Call ::BLOP_ABORT.
+ * Default behavior:
+ * - Prints error message via ::BLOP_ERROR_MESSAGE.
+ * - Invokes ::BLOP_ABORT.
  *
- * Disabled when ::BLOP_VALID_EMPTY_POPPING is defined, this mean that you can
- * pop from an empty container and the program wont crash.
+ * Disabled when ::BLOP_VALID_EMPTY_POPPING is defined.
  */
 
 /**
  * @def BLOP_ASSERT(cnd, rtn, msg)
- * @brief Assert a condition and return a value on failure.
+ * @brief Assert condition `cnd`, abort on failure, and return `rtn`.
  *
- * If the assertion fails:
- * - Prints the provided message via ::BLOP_ERROR_MESSAGE.
- * - Calls ::BLOP_ABORT (unless disabled).
+ * Failure behavior:
+ * - Prints error via ::BLOP_ERROR_MESSAGE.
+ * - Calls ::BLOP_ABORT.
  * - Returns `rtn`.
  *
- * Disabled when `BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING is defined`.
- *
  * @param cnd Condition to validate.
- * @param rtn Return value when the condition fails.
- * @param msg Error message printed on failure.
+ * @param rtn Return value when assertion fails.
+ * @param msg Error message.
+ *
+ * @remarks  
+ * Disabled entirely if ::BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING is defined.
  */
 
-/**
+ /**
  * @def BLOP_ASSERT_VOID(cnd, msg)
  * @brief Void-returning version of ::BLOP_ASSERT.
  *
  * @param cnd Condition to validate.
- * @param msg Error message printed on failure.
+ * @param msg Error message.
  */
 
-/**
+ /**
  * @def BLOP_ASSERT_BONDS(idx, bond, rtn)
- * @brief Ensure that an index is within bounds (idx >= bond).
- *
- * If the assertion fails:
- * - Prints the provided message via ::BLOP_ERROR_MESSAGE.
- * - Calls ::BLOP_ABORT (unless disabled).
- * - Returns `rtn`.
- *
- * Disabled when ::BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING is defined. 
+ * @brief Validate that an index is within bounds.
  *
  * @param idx  Index being accessed.
  * @param bond Exclusive upper bound.
- * @param rtn  Return value when out of bounds.
+ * @param rtn  Return value on error.
+ *
+ * @note Equivalent to checking `(idx < bond)`.
+ *
+ * @remarks  
+ * Disabled entirely if ::BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING is defined.
  */
 
-/**
+ /**
  * @def BLOP_ASSERT_BONDS_VOID(idx, bond)
  * @brief Void-returning version of ::BLOP_ASSERT_BONDS.
- *
- * @param idx  Index being accessed.
- * @param bond Exclusive upper bound.
  */
- 
-/**
+
+ /**
  * @def BLOP_ASSERT_PTR(ptr, rtn)
- * @brief Assert that a pointer parameter is not NULL.
+ * @brief Assert that a pointer is not NULL.
  *
- * Enabled only when ::BLOP_SAFE_MODE is defined.
- * Disabled when ::BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING is defined. 
+ * Only enabled when ::BLOP_SAFE_MODE is defined.
  *
  * @param ptr Pointer to validate.
- * @param rtn Return value when the pointer is NULL.
+ * @param rtn Return value on NULL pointer.
  */
 
-/**
+ /**
  * @def BLOP_ASSERT_PTR_VOID(ptr)
- * @brief Void-returning version of ::BLOP_ASSERT_PTR.
+ * @brief Void-returning pointer assertion.
  *
  * @param ptr Pointer to validate.
  */
 
-/** @} */ /* end of blop_assertions (name) */
+/** @} */ /* end of global_assertions (name) */
 
-/** @} */ /* end of blop_assertions */
+/** @} */ /* end of global_assertions */
+
+/* -------------------------------------------------------------------------- */
+/*                                  UTILITIES                                 */
+/* -------------------------------------------------------------------------- */
 
 /**
- * @defgroup blop_util Utilities
+ * @defgroup global_util Utilities
  * @ingroup blop_global
- * @brief Token concatenation, memory helpers, casting helpers and arithmetic utilities.
+ * @brief Token manipulation, memory helpers, casts, and arithmetic utilities.
  * @{
  */
 
+/* ----------------------- Token Concatenation ------------------------ */
+
 /**
  * @name Unique Symbol Generation
- * @brief Macros for generating unique symbol names.
+ * @brief Token concatenation utilities for macro metaprogramming (unique symbols generation).
  * @{
  */
 
@@ -261,214 +284,187 @@
 /**
  * @} */ /* end of unique symbol generation */
 
+/* -------------------------- Memory Helpers -------------------------- */
+
 /**
  * @name Memory Helpers
- * @brief Macros for malloc, calloc, realloc, and free.
+ * @brief Wrapper macros for malloc, calloc, realloc, and free.
  * @{
  */
 
 /**
  * @def BLOP_FREE(ptr)
- * @brief Free a previously allocated pointer.
- * 
- * Intended to use in integration with ::BLOP_ALLOC, ::BLOP_MALLOC, ::BLOP_CALLOC, and ::BLOP_REALLOC.
+ * @brief Free an allocated pointer.
  *
- * @param ptr Pointer to free.
+ * @param ptr Pointer previously allocated by BLOP allocation macros.
+ * @note Should be used in integration of the other BLOP Wrappers
  */
 
-/**
+ /**
  * @def BLOP_ALLOC(cast, bytes)
- * @brief Allocate raw memory and cast the result.
- * 
- * This would be equivalent to `(cast*)malloc(bytes)`. 
- * Intended to use in integration with ::BLOP_FREE, ::BLOP_MALLOC, ::BLOP_CALLOC, and ::BLOP_REALLOC.
+ * @brief Allocate `bytes` of raw memory and cast the result.
  *
- * @param cast  Pointer type (e.g., `int`).
+ * Equivalent to `(cast*)malloc(bytes)`.
+ *
+ * @param cast  Target pointer type (without `*`).
  * @param bytes Number of bytes to allocate.
- * @return Pointer of type `(cast*)`.
+ * @note Should be used in integration of the other BLOP Wrappers
  */
 
-/**
+ /**
  * @def BLOP_MALLOC(type, count)
- * @brief Allocate an array of a given type.
- * 
- * This would be equivalent to a normal calloc() call but using malloc().
- * Intended to use in integration with ::BLOP_FREE, ::BLOP_ALLOC, ::BLOP_CALLOC, and ::BLOP_REALLOC.
- *
- * @param type  Type of each element.
- * @param count Number of elements.
- * @return Allocated pointer.
- */
-
-/**
- * @def BLOP_CALLOC(type, count)
- * @brief Allocate and zero-initialize an array.
- * 
- * Intended to use in integration with ::BLOP_FREE, ::BLOP_ALLOC, ::BLOP_MALLOC, and ::BLOP_REALLOC.
+ * @brief Allocate an array of `count` elements of `type`.
  *
  * @param type  Element type.
  * @param count Number of elements.
+ * @note Should be used in integration of the other BLOP Wrappers
  */
 
-/**
+ /**
+ * @def BLOP_CALLOC(type, count)
+ * @brief Allocate and zero-initialize an array.
+ *
+ * @param type  Element type.
+ * @param count Number of elements.
+ * @note Should be used in integration of the other BLOP Wrappers
+ */
+
+ /**
  * @def BLOP_REALLOC(cast, ptr, size)
  * @brief Reallocate memory and cast the returned pointer.
- * 
- * Intended to use in integration with ::BLOP_FREE, ::BLOP_ALLOC, ::BLOP_MALLOC, and ::BLOP_CALLOC.
  *
- * @param cast Pointer type.
- * @param ptr  Pointer to reallocate.
+ * @param cast Target pointer type.
+ * @param ptr  Previously allocated pointer.
  * @param size New size in bytes.
+ * @note Should be used in integration of the other BLOP Wrappers
  */
 
 /** @} */ /* end of memory helpers */
 
+/* --------------------------- C Syntax Helpers --------------------------- */
+
 /**
  * @name C Sintax Simplifiers
- * @brief Macros that provides functionality of native C sintaxis.
+ * @brief Shorthand wrappers for common C syntax.
  * @{
  */
 
-/**
+ /**
  * @def BLOP_CAST(type, tocast)
  * @brief Cast a value to another type.
  *
  * @param type   Target type.
- * @param tocast Expression or value to cast.
- * @return Value cast to `type`, (type)tocast.
+ * @param tocast Value or expression to cast.
  */
 
-/**
+ /**
  * @def BLOP_TERNARY(cnd, x, y)
- * @brief Ternary operator helper macro.
- * @param cnd Condition to evaluate.
- * @param x   Value if condition is true.
- * @param y   Value if condition is false.
- * @return `x` if `cnd` is true, else `y`.
+ * @brief Simple ternary operator wrapper.
  */
 
 /** @} */ /* end of c sintax simplifiers */
 
+/* -------------------------- Arithmetic Utilities -------------------------- */
+
 /** 
  * @name Arithmetic Utilities
- * @brief Macros for common arithmetic operations.
+ * @brief Helpers for common math operations.
  * @{
  */
 
-/**
+ /**
  * @def BLOP_MIN(x, y)
- * @brief Compute the minimum two values.
- *
- * @param x First value.
- * @param y Second value.
- * @return The smaller of x and y.
+ * @brief Return the smaller of two values.
  */
 
-/**
+ /**
  * @def BLOP_MAX(x, y)
- * @brief Compute the maximum two values.
- *
- * @param x First value.
- * @param y Second value.
- * @return The larger of x and y.
+ * @brief Return the larger of two values.
  */
 
-/**
+ /**
  * @def BLOP_DISTANCE(x, y)
- * @brief Compute absolute difference between two values.
- *
- * @param x First value.
- * @param y Second value.
- * @return Absolute difference |x - y|.
+ * @brief Compute the absolute difference |x - y|.
  */
 
-/**
+ /**
  * @def BLOP_DIFFERENCE(x, y)
- * @brief Compute signed difference between two values.
- *
- * @param x First value.
- * @param y Second value.
- * @return Signed difference (x - y).
+ * @brief Compute the signed difference (x - y).
  */
 
 /** @} */ /* end of arithmetic utilities */
 
+/* -------------------------- Pointer Arithmetic -------------------------- */
+
 /**
  * @name Pointer Arithmetic
- * @brief Macros for byte-accurate pointer arithmetic.
+ * @brief Byte-accurate pointer manipulation.
  * @{
  */
 
 /**
  * @def BLOP_PADD(ptr, value)
- * @brief Perform byte-accurate pointer arithmetic.
- *
- * These macros convert the pointer to `uint8_t*` internally.
- *
- * @param ptr   Base pointer.
- * @param value Byte offset forwards.
- * @return Adjusted pointer as `void*`.
+ * @brief Add a byte offset to a pointer.
  */
 
-/**
+ /**
  * @def BLOP_PSUB(ptr, value)
- * @brief Perform byte-accurate pointer arithmetic.
- *
- * These macros convert the pointer to `uint8_t*` internally.
- *
- * @param ptr   Base pointer.
- * @param value Byte offset backwards.
- * @return Adjusted pointer as `void*`.
+ * @brief Subtract a byte offset from a pointer.
  */
 
 /** @} */ /* end of pointer arithmetic */
 
-/** @} */ /* end of blop_util */
+/** @} */ /* end of global_util */
 
-#define BLOP_ERROR_MESSAGE(msg)                 printf("[BLOP -> %s{%s} ]: %s\n", __FILE__, __FUNCTION__, msg)
-#define BLOP_OUT_OF_BONDS_MESSAGE(idx, bond)    printf("[BLOP -> %s{%s} idx = %zu while bond = %zu]: Index out of bonds\n", __FILE__, __FUNCTION__, idx, bond);
+#ifndef __BLOP_H__
+#define __BLOP_H__
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define BLOP_ERROR_MESSAGE(msg)               printf("[BLOP -> %s{%s} ]: %s\n", __FILE__, __FUNCTION__, msg)
+#define BLOP_OUT_OF_BONDS_MESSAGE(idx, bond)  printf("[BLOP -> %s{%s} idx = %zu while bond = %zu]: Index out of bonds\n", __FILE__, __FUNCTION__, idx, bond);
 
 #ifdef BLOP_ABORT_ON_ERROR
-    #define BLOP_ABORT() abort()
+  #define BLOP_ABORT() abort()
 #else
-    #define BLOP_ABORT() exit(-1)
+  #define BLOP_ABORT() exit(-1)
 #endif /* BLOP_ABORT_ON_ERROR */
 
 #ifndef BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
 
-    #ifndef BLOP_VALID_EMPTY_POPPING
-        #define BLOP_EMPTY_POPPING() BLOP_ERROR_MESSAGE("To enable empty popping and avoid this error define BLOP_VALID_EMPTY_POPPING"); BLOP_ABORT();
-    #else
-        #define BLOP_EMPTY_POPPING(msg) ((void)0)
-    #endif /* BLOP_VALID_EMPTY_POPPING */
+  #ifndef BLOP_VALID_EMPTY_POPPING
+    #define BLOP_EMPTY_POPPING() BLOP_ERROR_MESSAGE("To enable empty popping and avoid this error define BLOP_VALID_EMPTY_POPPING"); BLOP_ABORT();
+  #else
+    #define BLOP_EMPTY_POPPING(msg) ((void)0)
+  #endif /* BLOP_VALID_EMPTY_POPPING */
 
-    #define BLOP_ASSERT(cnd, rtn, msg) if (!(cnd)) { BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return rtn; }
-    #define BLOP_ASSERT_VOID(cnd, msg) if (!(cnd)) { BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return; }
+  #define BLOP_ASSERT(cnd, rtn, msg)        if (!(cnd)) { BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return rtn; }
+  #define BLOP_ASSERT_VOID(cnd, msg)        if (!(cnd)) { BLOP_ERROR_MESSAGE(msg); BLOP_ABORT(); return; }
 
-    #define BLOP_ASSERT_BONDS(idx, bond, rtn) if ((idx) >= (bond)) { BLOP_OUT_OF_BONDS_MESSAGE(idx, bond); BLOP_ABORT(); return rtn; }
-    #define BLOP_ASSERT_BONDS_VOID(idx, bond) if ((idx) >= (bond)) { BLOP_OUT_OF_BONDS_MESSAGE(idx, bond); BLOP_ABORT(); return; }
+  #define BLOP_ASSERT_BONDS(idx, bond, rtn) if ((idx) >= (bond)) { BLOP_OUT_OF_BONDS_MESSAGE(idx, bond); BLOP_ABORT(); return rtn; }
+  #define BLOP_ASSERT_BONDS_VOID(idx, bond) if ((idx) >= (bond)) { BLOP_OUT_OF_BONDS_MESSAGE(idx, bond); BLOP_ABORT(); return; }
 
-    #ifdef BLOP_SAFE_MODE
-
-        #define BLOP_ASSERT_PTR(ptr, rtn) if ((ptr) == NULL) { BLOP_ERROR_MESSAGE(#ptr " parameter is NULL"); BLOP_ABORT(); return rtn; }
-        #define BLOP_ASSERT_PTR_VOID(ptr) if ((ptr) == NULL) { BLOP_ERROR_MESSAGE(#ptr " parameter is NULL"); BLOP_ABORT(); return; }
-
-    #else
-
-        #define BLOP_ASSERT_PTR(ptr, rtn)  ((void)0)
-        #define BLOP_ASSERT_PTR_VOID(ptr)  ((void)0)
-
-    #endif /* BLOP_SAFE_MODE */
+  #ifdef BLOP_SAFE_MODE
+    #define BLOP_ASSERT_PTR(ptr, rtn)       if ((ptr) == NULL) { BLOP_ERROR_MESSAGE(#ptr " parameter is NULL"); BLOP_ABORT(); return rtn; }
+    #define BLOP_ASSERT_PTR_VOID(ptr)       if ((ptr) == NULL) { BLOP_ERROR_MESSAGE(#ptr " parameter is NULL"); BLOP_ABORT(); return; }
+  #else
+    #define BLOP_ASSERT_PTR(ptr, rtn) ((void)0)
+    #define BLOP_ASSERT_PTR_VOID(ptr) ((void)0)
+  #endif /* BLOP_SAFE_MODE */
 
 #else
 
-    #define BLOP_EMPTY_POPPING(msg) ((void)0)
-    #define BLOP_ASSERT(cnd, rtn, msg)          ((void)0)
-    #define BLOP_ASSERT_VOID(cnd, msg)          ((void)0)
-    #define BLOP_ASSERT_BONDS(idx, bond, rtn)   ((void)0)
-    #define BLOP_ASSERT_BONDS_VOID(idx, bond)   ((void)0)
-    #define BLOP_ASSERT_PTR(ptr, rtn)           ((void)0)
-    #define BLOP_ASSERT_PTR_VOID(ptr)           ((void)0)
+  #define BLOP_EMPTY_POPPING(msg)             ((void)0)
+  #define BLOP_ASSERT(cnd, rtn, msg)          ((void)0)
+  #define BLOP_ASSERT_VOID(cnd, msg)          ((void)0)
+  #define BLOP_ASSERT_BONDS(idx, bond, rtn)   ((void)0)
+  #define BLOP_ASSERT_BONDS_VOID(idx, bond)   ((void)0)
+  #define BLOP_ASSERT_PTR(ptr, rtn)           ((void)0)
+  #define BLOP_ASSERT_PTR_VOID(ptr)           ((void)0)
 
 #endif /* BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING */
 
@@ -496,17 +492,15 @@
 #define BLOP_PSUB(ptr, value) ((void*)((uint8_t*)(ptr) - (value)))
 
 #ifdef _DOXYGEN_
+  #define BLOP_SAFE_MODE
+  #define BLOP_ABORT_ON_ERROR
+  #define BLOP_VALID_EMPTY_POPPING
+  #define BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
 
-#define BLOP_SAFE_MODE
-#define BLOP_ABORT_ON_ERROR
-#define BLOP_VALID_EMPTY_POPPING
-#define BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
-
-#undef  BLOP_SAFE_MODE
-#undef  BLOP_ABORT_ON_ERROR
-#undef  BLOP_VALID_EMPTY_POPPING
-#undef  BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
-
+  #undef  BLOP_SAFE_MODE
+  #undef  BLOP_ABORT_ON_ERROR
+  #undef  BLOP_VALID_EMPTY_POPPING
+  #undef  BLOP_I_DONT_WANT_TO_ASSERT_ANYTHING_I_KNOW_WHAT_I_AM_DOING
 #endif
 
 #endif /* __BLOP_H__ */

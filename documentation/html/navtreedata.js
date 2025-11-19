@@ -27,10 +27,20 @@ var NAVTREE =
   [ "BLOP", "index.html", [
     [ "Introduction", "index.html", "index" ],
     [ "Topics", "topics.html", "topics" ],
+    [ "Data Structures", "annotated.html", [
+      [ "Data Structures", "annotated.html", "annotated_dup" ],
+      [ "Data Structure Index", "classes.html", null ],
+      [ "Data Fields", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -39,7 +49,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"d0/d6e/group__blop__configuration.html"
+"annotated.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['global_0',['BLOP Global',['../d6/d90/group__blop__global.html',1,'']]]
+  ['error_20reporting_0',['Error Reporting',['../df/ddc/group__global__reporting.html',1,'']]],
+  ['extended_20colors_1',['Extended colors',['../d5/d1e/group__ansi__extended.html',1,'']]]
 ];

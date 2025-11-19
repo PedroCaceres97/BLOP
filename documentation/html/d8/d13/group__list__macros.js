@@ -1,0 +1,28 @@
+var group__list__macros =
+[
+    [ "blopfn_list_clear", "d8/d13/group__list__macros.html#ga0bb2bdf6dcf8da55fd33ad326ff0adbd", null ],
+    [ "blopfn_list_create", "d8/d13/group__list__macros.html#gadebd29ad1643bbb6ed0aedbc0ca6a329", null ],
+    [ "blopfn_list_destroy", "d8/d13/group__list__macros.html#gab082e35a21b4fa338acdb8ab0de89aa0", null ],
+    [ "blopfn_list_erase", "d8/d13/group__list__macros.html#gad9f3d27852db6090cd54f42f1f6789db", null ],
+    [ "blopfn_list_get_back", "d8/d13/group__list__macros.html#gaaa37bd3879f10358fb5e5bf156edcc3e", null ],
+    [ "blopfn_list_get_front", "d8/d13/group__list__macros.html#ga3b2f829f4b231aa88ef77b7551c6653d", null ],
+    [ "blopfn_list_get_node", "d8/d13/group__list__macros.html#ga8858fb1adc27922954be7f6ee37a67a2", null ],
+    [ "blopfn_list_get_size", "d8/d13/group__list__macros.html#ga5eb8a97ba6980dac7f43c6438e482e46", null ],
+    [ "blopfn_list_insert_next", "d8/d13/group__list__macros.html#ga1395085ce9e61fc2c96b0ccf85c87875", null ],
+    [ "blopfn_list_insert_prev", "d8/d13/group__list__macros.html#ga293cfcf81640a0b49b360333fa01e682", null ],
+    [ "blopfn_list_pop_back", "d8/d13/group__list__macros.html#gab956d1bb229292467b5a40015ae7a92c", null ],
+    [ "blopfn_list_pop_front", "d8/d13/group__list__macros.html#ga9005d843d2e3c8fdaa4dbdc999f3c35e", null ],
+    [ "blopfn_list_push_back", "d8/d13/group__list__macros.html#ga7830d16e114e2b6f804119c788784d59", null ],
+    [ "blopfn_list_push_front", "d8/d13/group__list__macros.html#ga045bc3e11414d470eabffb7d880c4d04", null ],
+    [ "blopfn_node_create", "d8/d13/group__list__macros.html#gad6a55e37a48319fa1855d0521557d8ed", null ],
+    [ "blopfn_node_destroy", "d8/d13/group__list__macros.html#ga9fba92ded89de0da3476001e1f05ddab", null ],
+    [ "blopfn_node_duplicate", "d8/d13/group__list__macros.html#gaac9cf6ddedede3f7b96e8eea2c3dbcc2", null ],
+    [ "blopfn_node_get_data", "d8/d13/group__list__macros.html#gad3aed8f452d480b84cc053103e819fcc", null ],
+    [ "blopfn_node_get_next", "d8/d13/group__list__macros.html#ga46d339eb39d0396405fa1f758c04760b", null ],
+    [ "blopfn_node_get_prev", "d8/d13/group__list__macros.html#gaf95f9f03d73e88c8f0dab743b82f68eb", null ],
+    [ "blopfn_node_set_data", "d8/d13/group__list__macros.html#ga9c858a355a35ff4a801df3a35f11d15e", null ],
+    [ "blops_list", "d8/d13/group__list__macros.html#ga1a7e19f41d72b4576222bf113ac07f30", null ],
+    [ "blops_node", "d8/d13/group__list__macros.html#gaf2e5e1800ee7b46291546e13e9ba396c", null ],
+    [ "blopt_list", "d8/d13/group__list__macros.html#gae9fec7a631b2d0776c5acdfd7120f67e", null ],
+    [ "blopt_node", "d8/d13/group__list__macros.html#ga9f0fa2863e7cc3ef5ca5a2e80a2ff9e4", null ]
+];

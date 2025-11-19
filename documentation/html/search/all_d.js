@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['uninstallation_0',['Uninstallation',['../index.html#autotoc_md7',1,'']]],
-  ['usage_1',['Usage',['../index.html#autotoc_md6',1,'']]],
-  ['utilities_2',['Utilities',['../d3/d3a/group__blop__util.html',1,'']]]
+  ['text_20styles_0',['Text Styles',['../d5/d0f/group__ansi__styles.html',1,'']]],
+  ['typedefs_1',['Structures and Typedefs',['../d7/df5/group__list__structures.html',1,'']]]
 ];

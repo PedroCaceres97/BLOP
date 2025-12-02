@@ -1,6 +1,3 @@
-#ifndef __BLOP_POOL_H__
-#define __BLOP_POOL_H__
-
 #include <blop/blop.h>
 
 #ifndef BLOP_POOL_NAME
@@ -50,212 +47,198 @@ size_t      blopfn_pool_get_count   (blopt_pool pool);
 
 #ifdef BLOP_POOL_IMPLEMENTATION
 
-#define blopt_pool_list                 BLOP_CONCAT2(blopt_pool, _ptrs)
-#define blopt_pool_list_node            BLOP_CONCAT2(blopt_pool_list, _node)
+#define blopt_plist               BLOP_CONCAT2(blopt_pool, _ptrs)
+#define blopt_pnode               BLOP_CONCAT2(blopt_plist, _node)
 
-#define blops_pool_list                 BLOP_CONCAT3(_, blopt_pool_list, _t)
-#define blops_pool_list_node            BLOP_CONCAT3(_, blopt_pool_list_node, _t)
+#define blops_plist               BLOP_CONCAT3(_, blopt_plist, _t)
+#define blops_pnode               BLOP_CONCAT3(_, blopt_pnode, _t)
 
-#define blopfn_pool_list_get_front      BLOP_CONCAT2(blopt_pool_list, _get_front)
+#define blopfn_plist_create       BLOP_CONCAT2(blopt_plist, _create)
+#define blopfn_plist_destroy      BLOP_CONCAT2(blopt_plist, _destroy)
 
-#define blopfn_pool_list_erase          BLOP_CONCAT2(blopt_pool_list, _erase)
-#define blopfn_pool_list_pop_front      BLOP_CONCAT2(blopt_pool_list, _pop_front)
+#define blopfn_plist_get_front    BLOP_CONCAT2(blopt_plist, _get_front)
 
-#define blopfn_pool_list_push_back      BLOP_CONCAT2(blopt_pool_list, _push_back)
-#define blopfn_pool_list_insert_next    BLOP_CONCAT2(blopt_pool_list, _insert_next)
+#define blopfn_plist_erase        BLOP_CONCAT2(blopt_plist, _erase)
+#define blopfn_plist_pop_front    BLOP_CONCAT2(blopt_plist, _pop_front)
 
-#define BLOP_LIST_NAME              blopt_pool_list
-#define BLOP_LIST_DATA_TYPE         void*
+#define blopfn_plist_push_back    BLOP_CONCAT2(blopt_plist, _push_back)
+#define blopfn_plist_insert_next  BLOP_CONCAT2(blopt_plist, _insert_next)
+
+#define blopfn_pnode_create       BLOP_CONCAT2(blopt_pnode, _create)
+#define blopfn_pnode_destroy      BLOP_CONCAT2(blopt_pnode, _destroy)
+
+#define BLOP_LIST_NAME            blopt_plist
+#define BLOP_LIST_DATA_TYPE       blopt_ptrhdr
 #define BLOP_LIST_IMPLEMENTATION
 #include <blop/list.h>
 
 struct blops_ptrhdr {
-    size_t                      size;
-    blopt_pool                  pool;
-    struct blops_pool_list_node node;
+    size_t                  size;
+    blopt_pool              pool;
+    blopt_pnode    node;
 };
 struct blops_pool {
     size_t                  bytes;
-    struct blops_pool_list  ptrs;
+    blopt_plist         ptrs;
 };
 
 blopt_pool  blopfn_pool_create() {
-    blopt_pool pool = BLOP_MALLOC(struct blops_pool, 1);
-    if (!pool) {
-        BLOP_ERROR_MESSAGE("Failed to allocate memory for pool");
-        BLOP_ABORT();
-        return NULL;
-    }
+  blopt_pool pool = BLOP_MALLOC(struct blops_pool, 1);
+  BLOP_ASSERT_FORCED(pool != NULL, NULL, "Failed to allocate memory for pool");
 
-    memset(pool, 0, sizeof(struct blops_pool));
-    return pool;
+  pool->bytes = 0;
+  pool->ptrs  = blopfn_plist_create();
+
+  return pool;
 }
 void        blopfn_pool_destroy(blopt_pool pool) {
-    BLOP_ASSERT_PTR_VOID(pool);
+  BLOP_ASSERT_PTR_VOID(pool);
 
-    if (pool->ptrs.size > 0) {
-        BLOP_ERROR_MESSAGE("The pool is not empty, you must free all allocated memory before destroying the pool");
-        BLOP_ABORT();
-        return;
-    }
+  BLOP_ASSERT_VOID(pool->ptrs->size > 0, "Destroying non empty pool (HINT: Call free all)");
 
-    free(pool);
+  blopfn_plist_destroy(pool->ptrs);
+  BLOP_FREE(pool);
 }
 
 void        blopfn_pool_free(blopt_pool pool, void* ptr) {
-    BLOP_ASSERT_PTR_VOID(pool);
-    BLOP_ASSERT_PTR_VOID(ptr);
+  BLOP_ASSERT_PTR_VOID(pool);
+  BLOP_ASSERT_PTR_VOID(ptr);
 
-    blopt_ptrhdr hdr = (blopt_ptrhdr)BLOP_PSUB(ptr, sizeof(struct blops_ptrhdr));
-    BLOP_ASSERT_VOID(hdr->pool == pool, "The pointer does not belong to this pool");
+  blopt_ptrhdr hdr = (blopt_ptrhdr)BLOP_PTR_SUB(ptr, sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT_VOID(hdr->pool == pool, "Freeing a foreign ptr");
 
-    blopfn_pool_list_erase(&pool->ptrs, &hdr->node, false);
-    pool->bytes -= hdr->size;
-    free(hdr);
+  blopfn_plist_erase(pool->ptrs, hdr->node, true);
+  pool->bytes -= hdr->size;
+
+  BLOP_FREE(hdr);
 }
 void        blopfn_pool_free_all(blopt_pool pool) {
-    BLOP_ASSERT_PTR_VOID(pool);
+  BLOP_ASSERT_PTR_VOID(pool);
 
-    blopt_pool_list_node current = blopfn_pool_list_get_front(&pool->ptrs);
-    while (current != NULL) {
-        blopfn_pool_list_pop_front(&pool->ptrs, false);
-        blopt_ptrhdr hdr = (blopt_ptrhdr)current->data;
-        pool->bytes -= hdr->size;
-        free(hdr);
-        current = blopfn_pool_list_get_front(&pool->ptrs);
-    }
+  blopt_pnode current = blopfn_plist_get_front(pool->ptrs);
+  while (current != NULL) {
+    blopfn_plist_pop_front(pool->ptrs, true);
+    blopt_ptrhdr hdr = current->data;
+    pool->bytes -= hdr->size;
+    BLOP_FREE(hdr);
+    current = blopfn_plist_get_front(pool->ptrs);
+  }
 }
 void*       blopfn_pool_malloc(blopt_pool pool, size_t size) {
-    BLOP_ASSERT_PTR(pool, NULL);
+  BLOP_ASSERT_PTR(pool, NULL);
 
-    BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
+  BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
 
-    blopt_ptrhdr hdr = BLOP_ALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
-    if (!hdr) {
-        BLOP_ERROR_MESSAGE("Failed to allocate memory for pointer header");
-        BLOP_ABORT();
-        return NULL;
-    }
+  blopt_ptrhdr hdr = BLOP_MALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT_FORCED(hdr != NULL, NULL, "Failed to allocate memory for pointer header");
 
-    memset(hdr, 0, size + sizeof(struct blops_ptrhdr));
-    hdr->size = size;
-    hdr->pool = pool;
-    hdr->node.data = hdr;
-    
-    blopfn_pool_list_push_back(&pool->ptrs, &hdr->node);
-    
-    pool->bytes += size;
-    void*  ptr   = BLOP_PADD(hdr, sizeof(struct blops_ptrhdr));
-    return ptr;
+  memset(hdr, 0, size + sizeof(struct blops_ptrhdr));
+  hdr->size = size;
+  hdr->pool = pool;
+  hdr->node = blopfn_pnode_create();
+  hdr->node->data = hdr;
+
+  blopfn_plist_push_back(pool->ptrs, hdr->node);
+
+  pool->bytes += size;
+  void*  ptr   = BLOP_PTR_ADD(hdr, sizeof(struct blops_ptrhdr));
+  return ptr;
 }
 void*       blopfn_pool_calloc(blopt_pool pool, size_t count, size_t size) {
-    BLOP_ASSERT_PTR(pool, NULL);
+  BLOP_ASSERT_PTR(pool, NULL);
 
-    BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
+  BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
 
-    size *= count;
-    blopt_ptrhdr hdr = BLOP_ALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
-    if (!hdr) {
-        BLOP_ERROR_MESSAGE("Failed to allocate memory for pointer header");
-        BLOP_ABORT();
-        return NULL;
-    }
+  size *= count;
+  blopt_ptrhdr hdr = BLOP_MALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT_FORCED(hdr != NULL, NULL, "Failed to allocate memory for pointer header");
 
-    memset(hdr, 0, size + sizeof(struct blops_ptrhdr));
-    hdr->size = size;
-    hdr->pool = pool;
-    hdr->node.data = hdr;
-    
-    blopfn_pool_list_push_back(&pool->ptrs, &hdr->node);
-    
-    pool->bytes += size;
-    void*  ptr   = BLOP_PADD(hdr, sizeof(struct blops_ptrhdr));
-    return ptr;
+  memset(hdr, 0, size + sizeof(struct blops_ptrhdr));
+  hdr->size = size;
+  hdr->pool = pool;
+  hdr->node = blopfn_pnode_create();
+  hdr->node->data = hdr;
+
+  blopfn_plist_push_back(pool->ptrs, hdr->node);
+
+  pool->bytes += size;
+  void*  ptr   = BLOP_PTR_ADD(hdr, sizeof(struct blops_ptrhdr));
+  return ptr;
 }
 void*       blopfn_pool_realloc(blopt_pool pool, void* ptr, size_t size) {
-    BLOP_ASSERT_PTR(pool, NULL);
-    BLOP_ASSERT_PTR(ptr, NULL);
+  BLOP_ASSERT_PTR(pool, NULL);
+  BLOP_ASSERT_PTR(ptr, NULL);
 
-    BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
+  BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
 
-    blopt_ptrhdr srchdr = (blopt_ptrhdr)BLOP_PSUB(ptr, sizeof(struct blops_ptrhdr));
-    BLOP_ASSERT(srchdr->pool != pool, NULL, "The pointer does not belong to this pool");
+  blopt_ptrhdr srchdr = (blopt_ptrhdr)BLOP_PTR_SUB(ptr, sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT(srchdr->pool != pool, NULL, "Reallocating a foreign ptr");
 
-    blopt_ptrhdr newhdr = BLOP_ALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
-    if (!newhdr) {
-        BLOP_ERROR_MESSAGE("Failed to allocate memory for pointer header");
-        BLOP_ABORT();
-        return NULL;
-    }
+  blopt_ptrhdr newhdr = BLOP_MALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT_FORCED(newhdr != NULL, NULL, "Failed to allocate memory for pointer");
 
-    newhdr->size = size;
-    newhdr->pool = pool;
-    newhdr->node.data = newhdr;
-    
-    blopfn_pool_list_insert_next(&pool->ptrs, &srchdr->node, &newhdr->node);
-    
-    pool->bytes += size;
-    void*  newptr = BLOP_PADD(newhdr, sizeof(struct blops_ptrhdr));
-    memcpy(newptr, ptr, BLOP_MIN(size, srchdr->size));
-    
-    if (size > srchdr->size) {
-        memset(BLOP_PADD(newptr, srchdr->size), 0, size - srchdr->size);
-    }
+  newhdr->size = size;
+  newhdr->pool = pool;
+  newhdr->node = blopfn_pnode_create();
+  newhdr->node->data = newhdr;
+  
+  blopfn_plist_insert_next(pool->ptrs, srchdr->node, newhdr->node);
+  
+  pool->bytes += size;
+  void*  newptr = BLOP_PTR_ADD(newhdr, sizeof(struct blops_ptrhdr));
+  memcpy(newptr, ptr, BLOP_MIN(size, srchdr->size));
+  
+  if (size > srchdr->size) {
+      memset(BLOP_PTR_ADD(newptr, srchdr->size), 0, size - srchdr->size);
+  }
 
-    blopfn_pool_list_erase(&pool->ptrs, &srchdr->node, false);
-    pool->bytes -= srchdr->size;
-    free(srchdr);
-    
-    return newptr;
+  blopfn_plist_erase(pool->ptrs, srchdr->node, true);
+  pool->bytes -= srchdr->size;
+  BLOP_FREE(srchdr);
+
+  return newptr;
 }
 void*       blopfn_pool_duplicate(blopt_pool pool, void* ptr, size_t size) {
-    BLOP_ASSERT_PTR(pool, NULL);
-    BLOP_ASSERT_PTR(ptr, NULL);
+  BLOP_ASSERT_PTR(pool, NULL);
+  BLOP_ASSERT_PTR(ptr, NULL);
 
-    BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
+  BLOP_ASSERT(size != 0, NULL, "Requested allocation size is 0");
 
-    blopt_ptrhdr srchdr = (blopt_ptrhdr)BLOP_PSUB(ptr, sizeof(struct blops_ptrhdr));
-    if (srchdr->pool != pool) {
-        BLOP_ERROR_MESSAGE("The pointer does not belong to this pool");
-        BLOP_ABORT();
-        return NULL;
-    }
+  blopt_ptrhdr srchdr = (blopt_ptrhdr)BLOP_PTR_SUB(ptr, sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT(srchdr->pool != pool, NULL, "Reallocating a foreign ptr");
 
-    blopt_ptrhdr newhdr = BLOP_ALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
-    if (!newhdr) {
-        BLOP_ERROR_MESSAGE("Failed to allocate memory for pointer header");
-        BLOP_ABORT();
-        return NULL;
-    }
+  blopt_ptrhdr newhdr = BLOP_MALLOC(struct blops_ptrhdr, size + sizeof(struct blops_ptrhdr));
+  BLOP_ASSERT_FORCED(newhdr != NULL, NULL, "Failed to allocate memory for pointer");
 
-    memset(newhdr, 0, size + sizeof(struct blops_ptrhdr));
-    newhdr->size = size;
-    newhdr->pool = pool;
-    newhdr->node.data = newhdr;
-    
-    blopfn_pool_list_insert_next(&pool->ptrs, &srchdr->node, &newhdr->node);
-    
-    pool->bytes += size;
-    void*  newptr = BLOP_PADD(newhdr, sizeof(struct blops_ptrhdr));
-    memcpy(newptr, ptr, BLOP_MIN(size, srchdr->size));
-    return newptr;
+  memset(newhdr, 0, size + sizeof(struct blops_ptrhdr));
+  newhdr->size = size;
+  newhdr->pool = pool;
+  newhdr->node = blopfn_pnode_create();
+  newhdr->node->data = newhdr;
+
+  blopfn_plist_insert_next(pool->ptrs, srchdr->node, newhdr->node);
+
+  pool->bytes += size;
+  void*  newptr = BLOP_PTR_ADD(newhdr, sizeof(struct blops_ptrhdr));
+  memcpy(newptr, ptr, BLOP_MIN(size, srchdr->size));
+  return newptr;
 }
 
 void        blopfn_pool_print(blopt_pool pool) {
-    BLOP_ASSERT_PTR_VOID(pool);
+  BLOP_ASSERT_PTR_VOID(pool);
 
-    printf("Pool at %p\n", (void*)pool);
-    printf("  Total bytes allocated: %zu\n", pool->bytes);
-    printf("  Allocated pointers (%zu):\n", pool->ptrs.size);
+  printf("Pool at %p\n", (void*)pool);
+  printf("  Total bytes allocated: %zu\n", pool->bytes);
+  printf("  Allocated pointers (%zu):\n", pool->ptrs->size);
 
-    blopt_pool_list_node current = blopfn_pool_list_get_front(&pool->ptrs);
-    size_t index = 0;
-    while (current != NULL) {
-        blopt_ptrhdr hdr = (blopt_ptrhdr)current->data;
-        printf("    [%zu] Pointer at %p - Size: %zu bytes\n", index, BLOP_PADD(hdr, sizeof(struct blops_ptrhdr)), hdr->size);
-        current = current->next;
-        index++;
-    }
+  blopt_pnode current = blopfn_plist_get_front(pool->ptrs);
+  size_t index = 0;
+  while (current != NULL) {
+    blopt_ptrhdr hdr = current->data;
+    printf("    [%zu] Pointer at %p - Size: %zu bytes\n", index, BLOP_PTR_ADD(hdr, sizeof(struct blops_ptrhdr)), hdr->size);
+    current = current->next;
+    index++;
+  }
 }
 
 size_t      blopfn_pool_get_bytes(blopt_pool pool) {
@@ -264,7 +247,7 @@ size_t      blopfn_pool_get_bytes(blopt_pool pool) {
 }
 size_t      blopfn_pool_get_count(blopt_pool pool) {
     BLOP_ASSERT_PTR(pool, 0);
-    return pool->ptrs.size;
+    return pool->ptrs->size;
 }
 
 #endif /* BLOP_POOL_IMPLEMENTATION */
@@ -273,4 +256,45 @@ size_t      blopfn_pool_get_count(blopt_pool pool) {
 }
 #endif
 
-#endif // __BLOP_POOL_H__
+#undef BLOP_POOL_NAME
+#undef BLOP_POOL_IMPLEMENTATION
+
+#undef blopt_pool
+#undef blopt_ptrhdr
+
+#undef blops_pool
+#undef blops_ptrhdr
+
+#undef blopfn_pool_create
+#undef blopfn_pool_destroy
+
+#undef blopfn_pool_free
+#undef blopfn_pool_free_all  
+#undef blopfn_pool_malloc    
+#undef blopfn_pool_calloc    
+#undef blopfn_pool_realloc   
+#undef blopfn_pool_duplicate 
+
+#undef blopfn_pool_print     
+#undef blopfn_pool_get_bytes 
+#undef blopfn_pool_get_count 
+
+#undef blopt_plist              
+#undef blopt_pnode              
+
+#undef blops_plist              
+#undef blops_pnode              
+
+#undef blopfn_plist_create      
+#undef blopfn_plist_destroy     
+
+#undef blopfn_plist_get_front   
+
+#undef blopfn_plist_erase       
+#undef blopfn_plist_pop_front   
+
+#undef blopfn_plist_push_back   
+#undef blopfn_plist_insert_next 
+
+#undef blopfn_pnode_create      
+#undef blopfn_pnode_destroy     

@@ -1,0 +1,484 @@
+/**
+ * @file vector.h
+ * @brief Dynamic resizable array (vector) — header-only, macro-configurable.
+ *
+ * This documentation describes the public contract and internal configuration
+ * knobs for the header-only implementation in vector.h. The implementation is
+ * designed to be re-included with different macro configurations to produce
+ * distinct vector types at compile time.
+ *
+ * ## Key Features
+ * - **Header-only, single-translation-unit implementation**: define
+ *   ::BLOP_VECTOR_IMPLEMENTATION exactly once to generate the function bodies.
+ * - **Configurable element type**: ::BLOP_VECTOR_DATA_TYPE sets the stored type
+ *   to avoid void* casts and preserve type-safety.
+ * - **Configurable allocator / resize policy**: growth factor (::BLOP_VECTOR_SCALATOR)
+ *   and initial capacity (::BLOP_VECTOR_INITIAL_COUNT) are compile-time tunables.
+ * - **Optional element deallocation callback**: ::BLOP_VECTOR_DEALLOCATE_DATA(ptr)
+ *   is invoked for each element when clearing/removing if provided.
+ *
+ * @warning ## Thread Safety
+ * **This vector implementation is *NOT* thread-safe.**
+ * - Concurrent access from multiple threads requires external synchronization.
+ * - No internal locking or atomic operations are performed.
+ *
+ * @version 1.0.0
+ * @author Pedro Caceres
+ * @date November 2025
+ */
+
+/* -------------------------------------------------------------------------- */
+/*                                CONFIGURATION                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup vector_configuration Configuration
+ * @ingroup blop_vector
+ * @brief Compile-time flags controlling vector behavior and symbol generation.
+ * @{
+ */
+
+/**
+ * @name Configuration
+ * @brief Compile-time flags controlling vector behavior and symbol generation.
+ * @{
+ */
+
+/**
+ * @def BLOP_VECTOR_NAME
+ * @brief Unique tag used to generate all vector-related symbols.
+ *
+ * Determines the names of:
+ * - typedefs (`blopt_vector`)
+ * - concrete structure name `struct blops_<name>_t`
+ * - all generated functions prefixed with <name>_*
+ *
+ * @note Default: `vectorb`
+ * @remark Choose a different name to declare multiple independent vector types
+ *         in the same program.
+ */
+
+/**
+ * @def BLOP_VECTOR_DATA_TYPE
+ * @brief Data type stored inside the vector.
+ *
+ * Allows storing any type without casting via void*.
+ *
+ * @remark If storing heap-allocated objects, consider defining
+ * ::BLOP_VECTOR_DEALLOCATE_DATA so elements are properly freed when removed.
+ *
+ * @note Default: `uint8_t`
+ */
+
+/**
+ * @def BLOP_VECTOR_DEALLOCATE_DATA(ptr)
+ * @brief Callback invoked to deallocate an element during erase/clear operations.
+ *
+ * Typical signature:
+ * @code{.c}
+ * void my_deallocator(BLOP_VECTOR_DATA_TYPE* ptr);
+ * @endcode
+ *
+ * @remark If undefined, no data deallocation is performed.
+ */
+
+/**
+ * @def BLOP_VECTOR_SCALATOR
+ * @brief Growth factor used when expanding capacity.
+ *
+ * The implementation multiplies capacity by this constant when the vector
+ * needs to grow. Must be >= 2 to guarantee amortized O(1) push_back.
+ *
+ * @note Default: 2
+ * @warning It is intended to be an integer
+ */
+
+/**
+ * @def BLOP_VECTOR_INITIAL_COUNT
+ * @brief Initial capacity when a vector is created or reset.
+ *
+ * Must be > 0. It determines the initial memory footprint and the first
+ * reallocation threshold.
+ *
+ * @note Default: 10
+ */
+
+/**
+ * @def BLOP_VECTOR_IMPLEMENTATION
+ * @brief Enable implementation of vector functions in this compilation unit.
+ *
+ * Must be defined **exactly once** per unique ::BLOP_VECTOR_NAME.
+ */
+
+/** @} */ /* end of name Configuration */
+
+/** @} */ /* end of vector_configuration */
+
+/* -------------------------------------------------------------------------- */
+/*                          STRUCTURES / TYPEDEFS                              */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup vector_structures Structures and Typedefs
+ * @ingroup blop_vector
+ * @brief Opaque handles and concrete structure layout.
+ * @{
+ */
+
+/**
+ * @typedef blopt_vector
+ * @brief Opaque pointer to the vector structure.
+ *
+ * User code manipulates vectors using this handle only.
+ */
+
+/**
+ * @struct blops_vector
+ * @brief Concrete vector structure
+ * @warning Visible only when ::BLOP_VECTOR_IMPLEMENTATION is defined.
+ */
+
+/**
+ * @var BLOP_VECTOR_DATA_TYPE* blops_vector::data
+ * @brief pointer to contiguous element storage.
+ */
+
+/**
+ * @var size_t blops_vector::count
+ * @brief number of valid elements stored (logical size).
+ */
+
+/**
+ * @var size_t blops_vector::capacity
+ * @brief allocated capacity (physical size).
+ */
+
+/** @} */ /* end of vector_structures */
+
+/* -------------------------------------------------------------------------- */
+/*                                   API                                      */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup vector_api Vector API
+ * @ingroup blop_vector
+ * @brief Main operations for creation, insertion, deletion, and traversal.
+ *
+ * @warning **Thread Safety**  
+ * None of the functions are thread-safe. Caller must provide synchronization
+ * when using from multiple threads.
+ *
+ * @{
+ */
+
+/**
+ * @name Vector API
+ * @brief Main operations for creation, insertion, deletion, and traversal.
+ * @{
+ */
+
+/**
+ * @fn blopt_vector blopfn_vector_create()
+ * @brief Create and initialize a new empty vector.
+ *
+ * **Ownership:**  
+ * Caller owns the returned vector and must destroy it with
+ * ::blopfn_vector_destroy.
+ *
+ * **Complexity:** O(1)
+ *
+ * @return Valid vector handle, or NULL on allocation failure.
+ * @remark The returned vector has capacity ::BLOP_VECTOR_INITIAL_COUNT and
+ *         count == 0.
+ */
+
+/**
+ * @fn void blopfn_vector_destroy(blopt_vector vec)
+ * @brief Destroy a vector previously created with ::blopfn_vector_create.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to destroy.
+ *
+ * @warning **Precondition:** The list must be empty (`size == 0`).
+ * @warning **Ownership:** Frees the vector structure itself and vector->data. Does *not* free individual data.
+ * @remark Use ::blopfn_vector_clear to remove elements first (and optionally
+ *         deallocate elements via ::BLOP_VECTOR_DEALLOCATE_DATA).
+ */
+
+/**
+ * @fn void blopfn_vector_set(blopt_vector vec, size_t idx, BLOP_VECTOR_DATA_TYPE value)
+ * @brief Set element at index `idx` to `value`.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to modify.
+ * @param idx Zero-based index (0..count-1).
+ * @param value Value to store.
+ */
+
+/**
+ * @fn BLOP_VECTOR_DATA_TYPE blopfn_vector_get(blopt_vector vec, size_t idx)
+ * @brief Get element at index `idx`.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to query.
+ * @param idx Zero-based index (0..count-1).
+ * @return Stored value, or a zero-casted value if vec is NULL.
+ */
+
+/**
+ * @fn void blopfn_vector_insert(blopt_vector vec, size_t idx, BLOP_VECTOR_DATA_TYPE value)
+ * @brief Insert `value` at position `idx`, shifting subsequent elements to the right.
+ *
+ * Real time complexity is `n - idx` if no resizing is needed
+ * **Complexity:** O(n)
+ *
+ * @param vec Vector to modify.
+ * @param idx Insertion index (0..count). Inserting at count is equivalent to push_back.
+ *
+ * @remark It is valid to insert at count index, altough it may look like out of bounds it 
+ *         perfectly makes if you consider push_back() where no subsequent elements
+ *         gets shifted to the right
+ *
+ * @note The implementation optimizes boundary cases (push_front / push_back).
+ */
+
+/**
+ * @fn void blopfn_vector_push_back(blopt_vector vec, BLOP_VECTOR_DATA_TYPE value)
+ * @brief Insert `value` at the end of the vector.
+ *
+ * **Complexity:** Ω(1) O(n)
+ *
+ * @param vec Vector to modify.
+ * @param value Value to append.
+ */
+
+/**
+ * @fn void blopfn_vector_push_front(blopt_vector vec, BLOP_VECTOR_DATA_TYPE value)
+ * @brief Insert `value` at the start of the vector.
+ *
+ * **Complexity:** Ω(n) O(n).
+ *
+ * @param vec Vector to modify.
+ * @param value Value to insert.
+ */
+
+/**
+ * @fn void blopfn_vector_clear(blopt_vector vec)
+ * @brief Remove all elements from the vector.
+ *
+ * **Complexity:**
+ * - O(n) if ::BLOP_VECTOR_DEALLOCATE_DATA is defined (deallocation per element)
+ * - O(1) otherwise
+ *
+ * **Ownership rules:**  
+ * - If ::BLOP_VECTOR_DEALLOCATE_DATA is defined, the macro is called for each
+ *   element before freeing storage.
+ *
+ * @param vec Vector to clear.
+ */
+
+/**
+ * @fn void blopfn_vector_erase(blopt_vector vec, size_t idx)
+ * @brief Remove element at `idx`, shifting the following elements left.
+ *
+ * Real time complexity is `n - idx` if no shrinking is needed
+ * **Complexity:** O(n)
+ *
+ * **Ownership rules:**  
+ * - If ::BLOP_VECTOR_DEALLOCATE_DATA is defined, it's invoked on the removed element.
+ *
+ * @param vec Vector to modify.
+ * @param idx Index of the element to remove (0..count-1).
+ */
+
+/**
+ * @fn void blopfn_vector_pop_back(blopt_vector vec)
+ * @brief Remove the last element.
+ *
+ * **Complexity:** Ω(1) O(n)
+ *
+ * **Ownership rules:**  
+ * - If ::BLOP_VECTOR_DEALLOCATE_DATA is defined, it's invoked on the removed element.
+ *
+ * @param vec Vector to modify.
+ * @warning Popping from an empty container will result in an error.
+ * @see ::BLOP_VALID_EMPTY_POPPING
+ */
+
+/**
+ * @fn void blopfn_vector_pop_front(blopt_vector vec)
+ * @brief Remove the first element, shifting the remainder left.
+ *
+ * **Complexity:** Ω(n) O(n)
+ *
+ * **Ownership rules:**  
+ * - If ::BLOP_VECTOR_DEALLOCATE_DATA is defined, it's invoked on the removed element.
+ *
+ * @param vec Vector to modify.
+ * @warning Popping from an empty container will result in an error.
+ * @see ::BLOP_VALID_EMPTY_POPPING
+ */
+
+/**
+ * @fn void blopfn_vector_resize(blopt_vector vec, size_t count)
+ * @brief Resize the vector to `count`, initializing new slots with zeroed memory.
+ *
+ * **Complexity:** O(n)
+ * Best case scenario is a little more complex
+ * @code{.c}
+ * if (count >= vec->capacity / (BLOP_VECTOR_SCALATOR * 2)) { Ω(n) }
+ * else {
+ *   #ifdef BLOP_VECTOR_DEALLOC_DATA
+ *     Ω(n) 
+ *   #else  
+ *     Ω(1)
+ *   #endif
+ * }
+ * @endcode
+ *
+ * @param vec Vector to modify.
+ * @param count New logical size.
+ */
+
+/**
+ * @fn void blopfn_vector_shrink(blopt_vector vec)
+ * @brief Internal helper that reduces capacity if vector is significantly under-utilized.
+ *
+ * **Complexity:** O(n)
+ *
+ * @param vec Vector to examine/shrink.
+ *
+ * @note The shrink policy in the header reduces capacity when:
+ *       count < capacity / (BLOP_VECTOR_SCALATOR * 2) && count > BLOP_VECTOR_INITIAL_COUNT.
+ */
+
+/**
+ * @fn void blopfn_vector_memcpy(blopt_vector vec, size_t idx, const BLOP_VECTOR_DATA_TYPE* src, size_t count)
+ * @brief Copy `count` elements from `src` into the vector starting at `idx`.
+ *
+ * **Complexity:** O(count)
+ *
+ * @param vec Destination vector.
+ * @param idx Destination index (idx + count <= vec->count).
+ * @param src Source buffer pointer.
+ * @param count Number of elements to copy.
+ *
+ * @warning No resizing is performed; caller must ensure src bounds.
+ */
+
+/**
+ * @fn void blopfn_vector_memset(blopt_vector vec, size_t idx, BLOP_VECTOR_DATA_TYPE value, size_t count)
+ * @brief Fill `count` elements starting at `idx` with `value`.
+ *
+ * **Complexity:** O(count)
+ *
+ * @param vec Vector to modify.
+ * @param idx Start index (idx + count <= vec->count).
+ * @param value Value to write.
+ * @param count Number of elements to set.
+ */
+
+/**
+ * @fn BLOP_VECTOR_DATA_TYPE* blopfn_vector_get_data(blopt_vector vec)
+ * @brief Return pointer to the internal contiguous array (may be NULL).
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to query.
+ * @return Raw pointer to the underlying buffer. The pointer may be reallocated by
+ *         future operations that change capacity; do not store across mutating calls.
+ */
+
+/**
+ * @fn size_t blopfn_vector_get_count(blopt_vector vec)
+ * @brief Get the number of elements currently stored.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to query.
+ * @return Element count, or 0 if vec is NULL.
+ */
+
+/**
+ * @fn BLOP_VECTOR_DATA_TYPE blopfn_vector_get_back(blopt_vector vec)
+ * @brief Get the last element.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to query.
+ * @return Last element value;
+ * @remark Querying from an empty container will not result in an error
+ */
+
+/**
+ * @fn BLOP_VECTOR_DATA_TYPE blopfn_vector_get_front(blopt_vector vec)
+ * @brief Get the first element.
+ *
+ * **Complexity:** O(1)
+ *
+ * @param vec Vector to query.
+ * @return First element value;
+ * @remark Querying from an empty container will not result in an error
+ */
+
+/** @} */ /* end Vector API (name) */
+
+/** @} */ /* end Vector API */
+
+/* -------------------------------------------------------------------------- */
+/*                                   EXAMPLES                                  */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup vector_examples Examples
+ * @ingroup blop_vector
+ * @brief Usage examples and patterns.
+ *
+ * Example: instantiating a vector of int in one C file:
+ * @code{.c}
+ * #define BLOP_VECTOR_NAME intvec
+ * #define BLOP_VECTOR_DATA_TYPE int
+ * #define BLOP_VECTOR_IMPLEMENTATION
+ * #include "vector.h"
+ * @endcode
+ *
+ * Example: using from another translation unit:
+ * @code{.c}
+ * #define BLOP_VECTOR_NAME intvec
+ * #define BLOP_VECTOR_DATA_TYPE int
+ * #include "vector.h" // only declarations
+ *
+ * void foo(void) {
+ *     blopt_vector v = intvec_create();
+ *     intvec_push_back(v, 10);
+ *     int x = intvec_get(v, 0);
+ *     intvec_pop_back();
+ *     intvec_destroy(v);
+ * }
+ * @endcode
+ *
+ * Example: automatic element deallocation for pointer types:
+ * @code{.c}
+ * #define BLOP_VECTOR_NAME ptrvec
+ * #define BLOP_VECTOR_DATA_TYPE char*
+ * #define BLOP_VECTOR_DEALLOCATE_DATA(ptr) free((ptr))
+ * #define BLOP_VECTOR_IMPLEMENTATION
+ * #include "vector.h"
+ * @endcode
+ *
+ * In this configuration calling ptrvec_clear(vec) will free each char* element.
+ */
+
+/** @} */ /* end of vector_examples */
+
+/* -------------------------------------------------------------------------- */
+/*                             DOCUMENTATION FOOTER                           */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * @copyright
+ * This documentation is distributed under the same license as the project source.
+ */

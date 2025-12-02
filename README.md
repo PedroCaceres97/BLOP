@@ -54,7 +54,7 @@ None of them are officially supported.
 
 Clone the repository like any mortal would: 
 ```bash 
-git clone https://github.com/you/BLOP.git
+git clone https://github.com/PedroCaceres97/BLOP.git
 ``` 
 Then, include the header of your choosing and hope for the best.
 

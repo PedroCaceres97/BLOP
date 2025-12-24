@@ -1,0 +1,118 @@
+/**
+ * @file
+ * @brief 
+ * 
+ * 
+ * 
+ * @copyright This documentation is distributed under the same license as the project source.
+ * @version 1.0.0
+ * @author Pedro Caceres
+ * @date
+ */
+
+/* --------------------------------------------------------------------------
+ * MACROS
+ * -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup MACROS MACROS
+ * @ingroup
+ * @brief Collection of public macros used for configuration, utilities,
+ * and general module operation.
+ * @{
+ */
+
+/**
+ * @name MACROS
+ * @brief Collection of public macros used for configuration, utilities,
+ * and general module operation.
+ * @{
+ */
+
+/**
+ * @def
+ * @brief
+ *
+ * 
+ * 
+ * @relates
+ * @remarks
+ * @warning
+ * @snippet
+ */
+
+/* @} */ /* @} */
+
+/* --------------------------------------------------------------------------
+ * STRUCTURES
+ * -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup STRUCTURES STRUCTURES
+ * @ingroup 
+ * @brief Core data types and structures used by this BLOP module.
+ * @{
+ */
+
+/**
+ * @name STRUCTURES
+ * @brief Core data types and structures used by this BLOP module.
+ * @{
+ */
+
+/**
+ * @struct
+ * @brief
+ * 
+ * 
+ * 
+ * @relates
+ */
+
+/**
+ * @var
+ * @brief
+ * 
+ * @relates
+ */
+
+/* @} */ /* @} */
+
+/* --------------------------------------------------------------------------
+ * FUNCTIONS
+ * -------------------------------------------------------------------------- */
+
+/**
+ * @defgroup FUNCTIONS FUNCTIONS
+ * @ingroup 
+ * @brief Public functions provided by this module for all operations
+ * and interactions with its data types.
+ * @{
+ */
+
+/**
+ * @name FUNCTIONS
+ * @brief Public functions provided by this module for all operations
+ * and interactions with its data types.
+ * @{
+ */
+
+/**
+ * @fn
+ * @brief
+ * 
+ * @param
+ * @return
+ * 
+ * 
+ * 
+ * **COMPLEXITY Ω(1) O(n)**
+ * 
+ * 
+ * @relates
+ * @remarks
+ * @warning
+ * @snippet
+ */
+
+/* @} */ /* @} */

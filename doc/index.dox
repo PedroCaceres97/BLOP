@@ -1,5 +1,15 @@
-/** @defgroup blop_global Global */
-/** @defgroup blop_ansi Ansi*/
-/** @defgroup blop_list List */
-/** @defgroup blop_vector Vector */
-/** @defgroup blop_pool Pool */
+/** @defgroup blop BLOP */
+
+/** @defgroup ansi Ansi*/
+
+/**
+ * @defgroup containers Containers 
+ * @{
+ */
+
+/** @defgroup list List */
+/** @defgroup vector Vector */
+
+/* @} */
+
+/** @defgroup pool Pool */

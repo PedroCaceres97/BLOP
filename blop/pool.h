@@ -1,7 +1,7 @@
 #include <blop/blop.h>
 
 #ifndef BLOP_POOL_NAME
-  #define BLOP_POOL_NAME poolb
+  #define BLOP_POOL_NAME blop_pool
 #endif /* BLOP_POOL_NAME */
 
 #define blopt_pool              BLOP_POOL_NAME

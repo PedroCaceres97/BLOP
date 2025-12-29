@@ -85,6 +85,10 @@
   #define BLOP_FILE_PATH __FILE__
 #endif
 
+/* --------------------------------------------------------------------------
+ * RWLOCK
+ * -------------------------------------------------------------------------- */
+
 //! Enable rwlocks
 #if defined(BLOP_ENABLE_RWLOCK) && !defined(BLOP_UNKNOWN_PLATFORM) 
   #ifdef BLOP_WINDOWS
@@ -120,10 +124,21 @@
 //! Enable rwlocks
 
 /* --------------------------------------------------------------------------
- * ANSI SYSTEM
+ * ANSI
  * -------------------------------------------------------------------------- */
 
 #define BLOP_ANSI_ESC  "\x1b["
+
+#ifdef BLOP_WINDOWS
+  void blop_impl_ansi_enable();
+  void blop_impl_ansi_disable();
+
+  #define BLOP_ANSI_ENABLE()  blop_impl_ansi_enable()
+  #define BLOP_ANSI_DISABLE() blop_impl_ansi_disable()
+#else
+  #define BLOP_ANSI_ENABLE()  ((void)0)
+  #define BLOP_ANSI_DISABLE() ((void)0)
+#endif
 
 #define BLOP_ANSI_COLOR(color, text)  color text BLOP_ANSI_RESET
 
@@ -170,57 +185,33 @@
 #define BLOP_ANSI_CURSOR_POS(x, y)    BLOP_ANSI_ESC #y ";" #x "H"
 #define BLOP_ANSI_CURSOR_HOME         BLOP_ANSI_ESC "H"
 
-static inline char* blop_ansi_fg_256(char* buffer, uint8_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "38;5;%hhum", n);
-  return buffer;
-}
-static inline char* blop_ansi_bg_256(char* buffer, uint8_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "48;5;%hhum", n);
-  return buffer;
-}
-static inline char* blop_ansi_fg_rgb(char* buffer, uint8_t r, uint8_t g, uint8_t b) {
-  sprintf(buffer, BLOP_ANSI_ESC "38;2;%hhu;%hhu;%hhum", r, g, b);
-  return buffer;
-}
-static inline char* blop_ansi_bg_rgb(char* buffer, uint8_t r, uint8_t g, uint8_t b) {
-  sprintf(buffer, BLOP_ANSI_ESC "48;2;%hhu;%hhu;%hhum", r, g, b);
-  return buffer;
-}
+char*   blop_ansi_fg_256        (char* buffer, uint8_t n);
+char*   blop_ansi_bg_256        (char* buffer, uint8_t n);
+char*   blop_ansi_fg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b);
+char*   blop_ansi_bg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b);
 
-static inline char* blop_ansi_cursor_up(char* buffer, uint16_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "%huA", n);
-  return buffer;
-}
-static inline char* blop_ansi_cursor_down(char* buffer, uint16_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "%huB", n);
-  return buffer;
-}
-static inline char* blop_ansi_cursor_forward(char* buffer, uint16_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "%huC", n);
-  return buffer;
-}
-static inline char* blop_ansi_cursor_back(char* buffer, uint16_t n) {
-  sprintf(buffer, BLOP_ANSI_ESC "%huD", n);
-  return buffer;
-}
-static inline char* blop_ansi_cursor_pos(char* buffer, uint16_t x, uint16_t y) {
-  sprintf(buffer, BLOP_ANSI_ESC "%hu;%huH", y, x);
-  return buffer;
-}
+char*   blop_ansi_cursor_up     (char* buffer, uint16_t n);
+char*   blop_ansi_cursor_down   (char* buffer, uint16_t n);
+char*   blop_ansi_cursor_forward(char* buffer, uint16_t n);
+char*   blop_ansi_cursor_back   (char* buffer, uint16_t n);
+char*   blop_ansi_cursor_pos    (char* buffer, uint16_t x, uint16_t y);
 
-#define BLOP_ANSI_CURSOR_SAVE        BLOP_ANSI_ESC "s"
-#define BLOP_ANSI_CURSOR_RESTORE     BLOP_ANSI_ESC "u"
-#define BLOP_ANSI_CURSOR_HIDE        BLOP_ANSI_ESC "?25l"
-#define BLOP_ANSI_CURSOR_SHOW        BLOP_ANSI_ESC "?25h"
+#define BLOP_ANSI_CURSOR_SAVE             BLOP_ANSI_ESC "s"
+#define BLOP_ANSI_CURSOR_RESTORE          BLOP_ANSI_ESC "u"
+#define BLOP_ANSI_CURSOR_HIDE             BLOP_ANSI_ESC "?25l"
+#define BLOP_ANSI_CURSOR_SHOW             BLOP_ANSI_ESC "?25h"
 
-#define BLOP_ANSI_CLEAR_SCREEN       BLOP_ANSI_ESC "2J"
-#define BLOP_ANSI_CLEAR_LINE         BLOP_ANSI_ESC "2K"
-#define BLOP_ANSI_CLEAR_TO_END       BLOP_ANSI_ESC "0J"
-#define BLOP_ANSI_CLEAR_TO_START     BLOP_ANSI_ESC "1J"
-#define BLOP_ANSI_CLEAR_LINE_END     BLOP_ANSI_ESC "0K"
-#define BLOP_ANSI_CLEAR_LINE_START   BLOP_ANSI_ESC "1K"
+#define BLOP_ANSI_CLEAR_SCREEN            BLOP_ANSI_ESC "2J"
+#define BLOP_ANSI_CLEAR_LINE              BLOP_ANSI_ESC "2K"
+#define BLOP_ANSI_CLEAR_TO_END            BLOP_ANSI_ESC "0J"
+#define BLOP_ANSI_CLEAR_TO_START          BLOP_ANSI_ESC "1J"
+#define BLOP_ANSI_CLEAR_LINE_END          BLOP_ANSI_ESC "0K"
+#define BLOP_ANSI_CLEAR_LINE_START        BLOP_ANSI_ESC "1K"
 
 #ifdef BLOP_ANSI_SHORT
+  #define ANSI_ENABLE()  BLOP_ANSI_ENABLE()
+  #define ANSI_DISABLE() BLOP_ANSI_DISABLE()
+
   #define ANSI_COLOR(color, text) BLOP_ANSI_COLOR(color, text)
 
   #define ANSI_FG_BLACK                   BLOP_ANSI_FG_BLACK          
@@ -277,17 +268,17 @@ static inline char* blop_ansi_cursor_pos(char* buffer, uint16_t x, uint16_t y) {
   #define ansi_cursor_back(buffer, n)     blop_ansi_cursor_back(buffer, n)
   #define ansi_cursor_pos(buffer, x, y)   blop_ansi_cursor_pos(buffer, x, y)
 
-  #define ANSI_CURSOR_SAVE        BLOP_ANSI_CURSOR_SAVE       
-  #define ANSI_CURSOR_RESTORE     BLOP_ANSI_CURSOR_RESTORE    
-  #define ANSI_CURSOR_HIDE        BLOP_ANSI_CURSOR_HIDE       
-  #define ANSI_CURSOR_SHOW        BLOP_ANSI_CURSOR_SHOW       
+  #define ANSI_CURSOR_SAVE                BLOP_ANSI_CURSOR_SAVE       
+  #define ANSI_CURSOR_RESTORE             BLOP_ANSI_CURSOR_RESTORE    
+  #define ANSI_CURSOR_HIDE                BLOP_ANSI_CURSOR_HIDE       
+  #define ANSI_CURSOR_SHOW                BLOP_ANSI_CURSOR_SHOW       
 
-  #define ANSI_CLEAR_SCREEN       BLOP_ANSI_CLEAR_SCREEN      
-  #define ANSI_CLEAR_LINE         BLOP_ANSI_CLEAR_LINE        
-  #define ANSI_CLEAR_TO_END       BLOP_ANSI_CLEAR_TO_END      
-  #define ANSI_CLEAR_TO_START     BLOP_ANSI_CLEAR_TO_START    
-  #define ANSI_CLEAR_LINE_END     BLOP_ANSI_CLEAR_LINE_END    
-  #define ANSI_CLEAR_LINE_START   BLOP_ANSI_CLEAR_LINE_START  
+  #define ANSI_CLEAR_SCREEN               BLOP_ANSI_CLEAR_SCREEN      
+  #define ANSI_CLEAR_LINE                 BLOP_ANSI_CLEAR_LINE        
+  #define ANSI_CLEAR_TO_END               BLOP_ANSI_CLEAR_TO_END      
+  #define ANSI_CLEAR_TO_START             BLOP_ANSI_CLEAR_TO_START    
+  #define ANSI_CLEAR_LINE_END             BLOP_ANSI_CLEAR_LINE_END    
+  #define ANSI_CLEAR_LINE_START           BLOP_ANSI_CLEAR_LINE_START  
 #endif /* BLOP_ANSI_SHORT */
 
 /* --------------------------------------------------------------------------
@@ -343,32 +334,26 @@ typedef struct blop_context {
 #endif
 
 #ifndef BLOP_LOG_LTITLE
-  #define BLOP_LOG_LTITLE "[LOG]"
-#endif
-
+  #define BLOP_LOG_LTITLE     "[LOG]"
+#endif /* BLOP_LOG_LTITLE */
 #ifndef BLOP_LOG_DTITLE
-  #define BLOP_LOG_DTITLE "[DEBUG]"
-#endif
-
+  #define BLOP_LOG_DTITLE     "[DEBUG]"
+#endif /* BLOP_LOG_DTITLE */
 #ifndef BLOP_LOG_STITLE
-  #define BLOP_LOG_STITLE "[SUCCESS]"
-#endif
-
+  #define BLOP_LOG_STITLE     "[SUCCESS]"
+#endif /* BLOP_LOG_STITLE */
 #ifndef BLOP_LOG_WTITLE
-  #define BLOP_LOG_WTITLE "[WARNING]"
-#endif
-
+  #define BLOP_LOG_WTITLE     "[WARNING]"
+#endif /* BLOP_LOG_WTITLE */
 #ifndef BLOP_LOG_ETITLE
-  #define BLOP_LOG_ETITLE "[ERROR]"
-#endif
-
+  #define BLOP_LOG_ETITLE     "[ERROR]"
+#endif /* BLOP_LOG_ETITLE */
 #ifndef BLOP_LOG_FTITLE
-  #define BLOP_LOG_FTITLE "[FATAL]"
-#endif
-
+  #define BLOP_LOG_FTITLE     "[FATAL]"
+#endif /* BLOP_LOG_FTITLE */
 #ifndef BLOP_LOG_BTITLE
-  #define BLOP_LOG_BTITLE "[BOUNDS]"
-#endif
+  #define BLOP_LOG_BTITLE     "[BOUNDS]"
+#endif /* BLOP_LOG_BTITLE */
 
 #define BLOP_LOG(msg)               do { BLOP_LOG_LEVEL1(BLOP_LOG_LCOLOR(BLOP_LOG_LTITLE) "\n Context: %s:%u (%s)\n Message: %s\n\n", BLOP_FILE_PATH, __LINE__, __func__, msg); } while (0)            
 #define BLOP_DEBUG(msg)             do { BLOP_LOG_LEVEL1(BLOP_LOG_DCOLOR(BLOP_LOG_DTITLE) "\n Context: %s:%u (%s)\n Message: %s\n\n", BLOP_FILE_PATH, __LINE__, __func__, msg); } while (0)      
@@ -499,41 +484,31 @@ typedef struct blop_context {
  * ASSERT SYSTEM
  * -------------------------------------------------------------------------- */
 
-//! Abort On Error 
-#ifndef BLOP_ABORT
-  static inline BLOP_NORETURN void BLOP_ABORT() {
-    #ifndef BLOP_ABORT_ON_ERROR
-      exit(-1);
-    #else
-      abort();
-    #endif
-  }
-#endif /* BLOP_ABORT */
-//! Abort On Error   
+BLOP_NORETURN void BLOP_ABORT();
 
 //! Enable Empty Popping
 #ifndef BLOP_ENABLE_EMPTY_POPPING
-  #define BLOP_EMPTY_POPPING()                  do { BLOP_INTERNAL_FATAL("To enable empty popping and avoid this error define BLOP_ENABLE_EMPTY_POPPING"); BLOP_ABORT(); } while(0)
+  #define BLOP_EMPTY_POPPING()                        do { BLOP_INTERNAL_FATAL("To enable empty popping and avoid this error define BLOP_ENABLE_EMPTY_POPPING");            BLOP_ABORT(); } while(0)
 #else
   #define BLOP_EMPTY_POPPING() ((void)0)
 #endif /* BLOP_ENABLE_EMPTY_POPPING */
 //! Enable Empty Popping
 
-#define BLOP_ASSERT(cnd, msg)                         do { if (!(cnd))            { BLOP_FATAL(msg);                   BLOP_ABORT(); } } while(0)
-#define BLOP_ASSERT_PTR(ptr)                          do { if ((ptr) == NULL)     { BLOP_FATAL(#ptr " is NULL");       BLOP_ABORT(); } } while(0)
-#define BLOP_ASSERT_BOUNDS(idx, bound)                do { if ((idx) >= (bound))  { BLOP_BOUNDS(idx, bound);           BLOP_ABORT(); } } while(0)
-#define BLOP_ASSERT_FORCED(cnd, msg)                  do { if (!(cnd))            { BLOP_FATAL(msg);                   BLOP_ABORT(); } } while(0)
-#define BLOP_ASSERT_MALLOC(ptr, type, size)           do { if (ptr == NULL)       { BLOP_FATAL("Malloc failed for " #ptr " of type " #type " and size " #size); } } while(0)
-#define BLOP_ASSERT_CALLOC(ptr, type, count)          do { if (ptr == NULL)       { BLOP_FATAL("Calloc failed for " #ptr " of type " #type " and count " #count); } } while(0)
-#define BLOP_ASSERT_REALLOC(ptr, type, size)          do { if (ptr == NULL)       { BLOP_FATAL("Realloc failed for " #ptr " of type " #type " and size " #size); } } while(0)
+#define BLOP_ASSERT(cnd, msg)                         do { if (!(cnd))            { BLOP_FATAL(msg);                                                                        BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_PTR(ptr)                          do { if ((ptr) == NULL)     { BLOP_FATAL(#ptr " is NULL");                                                            BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_BOUNDS(idx, bound)                do { if ((idx) >= (bound))  { BLOP_BOUNDS(idx, bound);                                                                BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_FORCED(cnd, msg)                  do { if (!(cnd))            { BLOP_FATAL(msg);                                                                        BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_MALLOC(ptr, type, size)           do { if (ptr == NULL)       { BLOP_FATAL("Malloc failed for "  #ptr " of type " #type " and size " #size);            BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_CALLOC(ptr, type, count)          do { if (ptr == NULL)       { BLOP_FATAL("Calloc failed for "  #ptr " of type " #type " and count " #count);          BLOP_ABORT(); } } while(0)
+#define BLOP_ASSERT_REALLOC(ptr, type, size)          do { if (ptr == NULL)       { BLOP_FATAL("Realloc failed for " #ptr " of type " #type " and size " #size);            BLOP_ABORT(); } } while(0)
 
-#define BLOP_INTERNAL_ASSERT(cnd, msg)                do { if (!(cnd))            { BLOP_INTERNAL_FATAL(msg);          BLOP_ABORT(); } } while(0)
-#define BLOP_INTERNAL_ASSERT_PTR(ptr)                 do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL(#ptr " parameter is NULL"); BLOP_ABORT(); } } while(0)
-#define BLOP_INTERNAL_ASSERT_BOUNDS(idx, bound)       do { if ((idx) >= (bound))  { BLOP_INTERNAL_BOUNDS(idx, bound);  BLOP_ABORT(); } } while(0)
-#define BLOP_INTERNAL_ASSERT_FORCED(cnd, msg)         do { if (!(cnd))            { BLOP_INTERNAL_FATAL(msg);          BLOP_ABORT(); } } while(0)
-#define BLOP_INTERNAL_ASSERT_MALLOC(ptr, type, size)  do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Malloc failed for " #ptr " of type " #type " and size " #size); } } while(0)
-#define BLOP_INTERNAL_ASSERT_CALLOC(ptr, type, count) do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Calloc failed for " #ptr " of type " #type " and count " #count); } } while(0)
-#define BLOP_INTERNAL_ASSERT_REALLOC(ptr, type, size) do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Realloc failed for " #ptr " of type " #type " and size " #size); } } while(0)
+#define BLOP_INTERNAL_ASSERT(cnd, msg)                do { if (!(cnd))            { BLOP_INTERNAL_FATAL(msg);                                                               BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_PTR(ptr)                 do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL(#ptr " parameter is NULL");                                         BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_BOUNDS(idx, bound)       do { if ((idx) >= (bound))  { BLOP_INTERNAL_BOUNDS(idx, bound);                                                       BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_FORCED(cnd, msg)         do { if (!(cnd))            { BLOP_INTERNAL_FATAL(msg);                                                               BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_MALLOC(ptr, type, size)  do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Malloc failed for "  #ptr " of type " #type " and size " #size);   BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_CALLOC(ptr, type, count) do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Calloc failed for "  #ptr " of type " #type " and count " #count); BLOP_ABORT(); } } while(0)
+#define BLOP_INTERNAL_ASSERT_REALLOC(ptr, type, size) do { if ((ptr) == NULL)     { BLOP_INTERNAL_FATAL("Realloc failed for " #ptr " of type " #type " and size " #size);   BLOP_ABORT(); } } while(0)
 
 #ifdef BLOP_DISABLE_ASSERTIONS
   #undef BLOP_INTERNAL_ASSERT
@@ -579,59 +554,6 @@ typedef struct blop_context {
  * WRAPPERS
  * -------------------------------------------------------------------------- */
 
-#if defined(BLOP_WINDOWS)
-  #include <windows.h>
-
-  static inline void BLOP_ANSI_ENABLE() {
-    HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    BLOP_INTERNAL_ASSERT_FORCED(err != INVALID_HANDLE_VALUE, "Failed to get stderr handle (windows.h)");
-    BLOP_INTERNAL_ASSERT_FORCED(out != INVALID_HANDLE_VALUE, "Failed to get stdout handle (windows.h)");
-
-    DWORD err_mode = 0;
-    DWORD out_mode = 0;
-    BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(err, &err_mode), "Failed to get console err_mode (windows.h)");
-    BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(out, &out_mode), "Failed to get console out_mode (windows.h)");
-
-    if (!(err_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
-      DWORD err_nmode = err_mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT;
-      BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(err, err_nmode) != 0, "Failed to set console err_mode (windows.h)");
-    }
-
-    if (!(out_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
-      DWORD out_nmode = out_mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT;
-      BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(out, out_nmode) != 0, "Failed to set console out_mode (windows.h)");
-    }
-  }
-  static inline void BLOP_ANSI_DISABLE() {
-    HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
-    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    BLOP_INTERNAL_ASSERT_FORCED(err != INVALID_HANDLE_VALUE, "Failed to get std handle (windows.h)");
-    BLOP_INTERNAL_ASSERT_FORCED(out != INVALID_HANDLE_VALUE, "Failed to get std handle (windows.h)");
-
-    DWORD err_mode = 0;
-    DWORD out_mode = 0;
-    BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(err, &err_mode), "Failed to get console mode (windows.h)");
-    BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(out, &out_mode), "Failed to get console mode (windows.h)");
-
-    DWORD err_nmode = err_mode & ~(ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT);
-    DWORD out_nmode = out_mode & ~(ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT);
-    
-    BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(err, err_nmode) != 0, "Failed to set console mode (windows.h)");
-    BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(out, out_nmode) != 0, "Failed to set console mode (windows.h)");
-  }
-#else
-  #define BLOP_ANSI_ENABLE()  ((void)0)
-  #define BLOP_ANSI_DISABLE() ((void)0)
-#endif
-
-#ifdef BLOP_ANSI_SHORT
-  #define ANSI_ENABLE() BLOP_ANSI_ENABLE()
-  #define ANSI_DISABLE() BLOP_ANSI_DISABLE()
-#endif /* BLOP_ANSI_SHORT */
-
 #define BLOP_CONCAT2_IMPL(a, b)     a##b
 #define BLOP_CONCAT3_IMPL(a, b, c)  a##b##c
 
@@ -670,6 +592,114 @@ typedef struct blop_context {
   #undef  BLOP_ENABLE_THREADSAFE
   #undef  BLOP_ENABLE_EMPTY_POPPING
   #undef  BLOP_DISABLE_ASSERTIONS
+#endif
+
+/* --------------------------------------------------------------------------
+ * IMPLEMENTATION
+ * -------------------------------------------------------------------------- */
+
+#ifdef BLOP_IMPLEMENTATION
+  
+/* --------------------------------------------------------------------------
+ * ANSI SYSTEM
+ * -------------------------------------------------------------------------- */
+
+#ifdef BLOP_WINDOWS
+#include <windows.h>
+
+void  blop_impl_ansi_enable() {
+  HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
+  HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  BLOP_INTERNAL_ASSERT_FORCED(err != INVALID_HANDLE_VALUE, "Failed to get stderr handle (windows.h)");
+  BLOP_INTERNAL_ASSERT_FORCED(out != INVALID_HANDLE_VALUE, "Failed to get stdout handle (windows.h)");
+
+  DWORD err_mode = 0;
+  DWORD out_mode = 0;
+  BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(err, &err_mode), "Failed to get console err_mode (windows.h)");
+  BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(out, &out_mode), "Failed to get console out_mode (windows.h)");
+
+  if (!(err_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+    DWORD err_nmode = err_mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT;
+    BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(err, err_nmode) != 0, "Failed to set console err_mode (windows.h)");
+  }
+
+  if (!(out_mode & ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+    DWORD out_nmode = out_mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT;
+    BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(out, out_nmode) != 0, "Failed to set console out_mode (windows.h)");
+  }
+}
+void  blop_impl_ansi_disable() {
+  HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
+  HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+  BLOP_INTERNAL_ASSERT_FORCED(err != INVALID_HANDLE_VALUE, "Failed to get std handle (windows.h)");
+  BLOP_INTERNAL_ASSERT_FORCED(out != INVALID_HANDLE_VALUE, "Failed to get std handle (windows.h)");
+
+  DWORD err_mode = 0;
+  DWORD out_mode = 0;
+  BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(err, &err_mode), "Failed to get console mode (windows.h)");
+  BLOP_INTERNAL_ASSERT_FORCED(GetConsoleMode(out, &out_mode), "Failed to get console mode (windows.h)");
+
+  DWORD err_nmode = err_mode & ~(ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT);
+  DWORD out_nmode = out_mode & ~(ENABLE_VIRTUAL_TERMINAL_PROCESSING | ENABLE_PROCESSED_OUTPUT);
+  
+  BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(err, err_nmode) != 0, "Failed to set console mode (windows.h)");
+  BLOP_INTERNAL_ASSERT_FORCED(SetConsoleMode(out, out_nmode) != 0, "Failed to set console mode (windows.h)");
+}
+
+#endif /* BLOP_WINDOWS */
+
+char* blop_ansi_fg_256        (char* buffer, uint8_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "38;5;%hhum", n);
+  return buffer;
+}
+char* blop_ansi_bg_256        (char* buffer, uint8_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "48;5;%hhum", n);
+  return buffer;
+}
+char* blop_ansi_fg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b) {
+  sprintf(buffer, BLOP_ANSI_ESC "38;2;%hhu;%hhu;%hhum", r, g, b);
+  return buffer;
+}
+char* blop_ansi_bg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b) {
+  sprintf(buffer, BLOP_ANSI_ESC "48;2;%hhu;%hhu;%hhum", r, g, b);
+  return buffer;
+}
+
+char* blop_ansi_cursor_up     (char* buffer, uint16_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "%huA", n);
+  return buffer;
+}
+char* blop_ansi_cursor_down   (char* buffer, uint16_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "%huB", n);
+  return buffer;
+}
+char* blop_ansi_cursor_forward(char* buffer, uint16_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "%huC", n);
+  return buffer;
+}
+char* blop_ansi_cursor_back   (char* buffer, uint16_t n) {
+  sprintf(buffer, BLOP_ANSI_ESC "%huD", n);
+  return buffer;
+}
+char* blop_ansi_cursor_pos    (char* buffer, uint16_t x, uint16_t y) {
+  sprintf(buffer, BLOP_ANSI_ESC "%hu;%huH", y, x);
+  return buffer;
+}
+
+/* --------------------------------------------------------------------------
+ * ASSERT SYSTEM
+ * -------------------------------------------------------------------------- */
+
+BLOP_NORETURN void BLOP_ABORT() {
+  #ifndef BLOP_ABORT_ON_ERROR
+    exit(-1);
+  #else
+    abort();
+  #endif
+}
+
 #endif
 
 #endif /* __BLOP_H__ */

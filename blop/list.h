@@ -1,7 +1,7 @@
 #include <blop/blop.h>
 
 #ifndef BLOP_LIST_NAME
-  #define BLOP_LIST_NAME listb
+  #define BLOP_LIST_NAME blop_list
 #endif /* BLOP_LIST_NAME */
 
 #ifndef BLOP_LIST_DATA_TYPE
@@ -14,8 +14,8 @@
 #define blopt_list              BLOP_LIST_NAME
 #define blopt_node              BLOP_CONCAT2(blopt_list, _node)
 
-#define blops_list              BLOP_CONCAT3(_, blopt_list, _t)
-#define blops_node              BLOP_CONCAT3(_, blopt_node, _t)
+#define blops_list              BLOP_CONCAT2(blopt_list, _t)
+#define blops_node              BLOP_CONCAT2(blopt_node, _t)
 
 #define blopfn_list_create      BLOP_CONCAT2(blopt_list, _create)
 #define blopfn_list_destroy     BLOP_CONCAT2(blopt_list, _destroy)

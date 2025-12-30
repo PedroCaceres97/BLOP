@@ -1,222 +1,226 @@
-#ifndef __BLOP_SRING_H__
-#define __BLOP_SRING_H__
+#ifndef __BLOP_STRING_H__
+#define __BLOP_STRING_H__
 
 #include <blop/blop.h>
 
-#ifndef BLOP_STRING_NAME
-  #define BLOP_STRING_NAME blop_string
-#endif /* BLOP_STRING_NAME */
+#ifndef STRING_NAME
+  #define STRING_NAME String
+#endif /* STRING_NAME */
 
-#ifndef BLOP_STRING_RESIZE_POLICIE
-  #define BLOP_STRING_RESIZE_POLICIE(size) (size * 2)
-#endif /* BLOP_STRING_RESIZE_POLICIE */
+#ifndef STRING_FN_PREFIX
+  #define STRING_FN_PREFIX STRING_NAME
+#endif /* STRING_FN_PREFIX */
 
-#ifndef BLOP_STRING_SHRINK_POLICIE
-  #define BLOP_STRING_SHRINK_POLICIE(capacity) (capacity / 4)
+#ifndef STRING_RESIZE_POLICIE
+  #define STRING_RESIZE_POLICIE(size) (size * 2)
+#endif /* STRING_RESIZE_POLICIE */
+
+#ifndef STRING_SHRINK_POLICIE
+  #define STRING_SHRINK_POLICIE(capacity) (capacity / 4)
 #endif
 
-#if !defined(BLOP_STRING_INITIAL_SIZE) || BLOP_STRING_INITIAL_SIZE <= 0
-  #define BLOP_STRING_INITIAL_SIZE 10
-#endif /* BLOP_STRING_INITIAL_SIZE */
+#if !defined(STRING_INITIAL_SIZE) || STRING_INITIAL_SIZE <= 0
+  #define STRING_INITIAL_SIZE 10
+#endif /* STRING_INITIAL_SIZE */
 
 /** @cond doxygen_ignore */
-#define blopt_string                BLOP_STRING_NAME
-#define blops_string                BLOP_CONCAT2(blopt_string, _t)
+#define struct_string         STRING_NAME
 
-#define blopfn_string_create        BLOP_CONCAT2(blopt_string, _create)
-#define blopfn_string_destroy       BLOP_CONCAT2(blopt_string, _destroy)
+#define fn_string_create      CONCAT2(STRING_FN_PREFIX, _create)
+#define fn_string_destroy     CONCAT2(STRING_FN_PREFIX, _destroy)
 
-#define blopfn_string_rdlock        BLOP_CONCAT2(blopt_string, _rdlock)
-#define blopfn_string_wrlock        BLOP_CONCAT2(blopt_string, _wrlock)
-#define blopfn_string_rdunlock      BLOP_CONCAT2(blopt_string, _rdunlock)
-#define blopfn_string_wrunlock      BLOP_CONCAT2(blopt_string, _wrunlock)
+#define fn_string_rdlock      CONCAT2(STRING_FN_PREFIX, _rdlock)
+#define fn_string_wrlock      CONCAT2(STRING_FN_PREFIX, _wrlock)
+#define fn_string_rdunlock    CONCAT2(STRING_FN_PREFIX, _rdunlock)
+#define fn_string_wrunlock    CONCAT2(STRING_FN_PREFIX, _wrunlock)
 
-#define blopfn_string_cstr          BLOP_CONCAT2(blopt_string, _cstr)
-#define blopfn_string_size          BLOP_CONCAT2(blopt_string, _size)
+#define fn_string_cstr        CONCAT2(STRING_FN_PREFIX, _cstr)
+#define fn_string_size        CONCAT2(STRING_FN_PREFIX, _size)
 
-#define blopfn_string_set           BLOP_CONCAT2(blopt_string, _set)
-#define blopfn_string_get           BLOP_CONCAT2(blopt_string, _get)
-#define blopfn_string_resize        BLOP_CONCAT2(blopt_string, _resize)
-#define blopfn_string_shrink        BLOP_CONCAT2(blopt_string, _shrink)
+#define fn_string_set         CONCAT2(STRING_FN_PREFIX, _set)
+#define fn_string_get         CONCAT2(STRING_FN_PREFIX, _get)
+#define fn_string_resize      CONCAT2(STRING_FN_PREFIX, _resize)
+#define fn_string_shrink      CONCAT2(STRING_FN_PREFIX, _shrink)
 
-#define blopfn_string_clear         BLOP_CONCAT2(blopt_string, _clear)
-#define blopfn_string_erase         BLOP_CONCAT2(blopt_string, _erase)
-#define blopfn_string_pop_back      BLOP_CONCAT2(blopt_string, _pop_back)
-#define blopfn_string_pop_front     BLOP_CONCAT2(blopt_string, _pop_front)
+#define fn_string_clear       CONCAT2(STRING_FN_PREFIX, _clear)
+#define fn_string_erase       CONCAT2(STRING_FN_PREFIX, _erase)
+#define fn_string_pop_back    CONCAT2(STRING_FN_PREFIX, _pop_back)
+#define fn_string_pop_front   CONCAT2(STRING_FN_PREFIX, _pop_front)
 
-#define blopfn_string_insert        BLOP_CONCAT2(blopt_string, _insert)
-#define blopfn_string_push_back     BLOP_CONCAT2(blopt_string, _push_back)
-#define blopfn_string_push_front    BLOP_CONCAT2(blopt_string, _push_front)
+#define fn_string_insert      CONCAT2(STRING_FN_PREFIX, _insert)
+#define fn_string_push_back   CONCAT2(STRING_FN_PREFIX, _push_back)
+#define fn_string_push_front  CONCAT2(STRING_FN_PREFIX, _push_front)
 
-#define blopfn_string_strcpy        BLOP_CONCAT2(blopt_string, _strcpy)
+#define fn_string_strcpy      CONCAT2(STRING_FN_PREFIX, _strcpy)
 /** @endcond */
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct blops_string* blopt_string;
+struct struct_string;
+typedef struct struct_string struct_string;
 
-blopt_string  blopfn_string_create     (blopt_string str);
-void          blopfn_string_destroy    (blopt_string str);
+struct_string*  fn_string_create     (struct_string* str);
+void            fn_string_destroy    (struct_string* str);
 
-void          blopfn_string_rdlock     (blopt_string str);
-void          blopfn_string_wrlock     (blopt_string str);
-void          blopfn_string_rdunlock   (blopt_string str);
-void          blopfn_string_wrunlock   (blopt_string str);
+void            fn_string_rdlock     (struct_string* str);
+void            fn_string_wrlock     (struct_string* str);
+void            fn_string_rdunlock   (struct_string* str);
+void            fn_string_wrunlock   (struct_string* str);
 
-char*         blopfn_string_cstr       (blopt_string str);
-size_t        blopfn_string_size       (blopt_string str);
+char*           fn_string_cstr       (struct_string* str);
+size_t          fn_string_size       (struct_string* str);
 
-void          blopfn_string_set        (blopt_string str, size_t idx, char c);
-char          blopfn_string_get        (blopt_string str, size_t idx);
-void          blopfn_string_resize     (blopt_string str, size_t size);
-void          blopfn_string_shrink     (blopt_string str);
+void            fn_string_set        (struct_string* str, size_t idx, char c);
+char            fn_string_get        (struct_string* str, size_t idx);
+void            fn_string_resize     (struct_string* str, size_t size);
+void            fn_string_shrink     (struct_string* str);
 
-void          blopfn_string_clear      (blopt_string str);
-void          blopfn_string_erase      (blopt_string str, size_t idx);
-void          blopfn_string_pop_back   (blopt_string str);
-void          blopfn_string_pop_front  (blopt_string str);
+void            fn_string_clear      (struct_string* str);
+void            fn_string_erase      (struct_string* str, size_t idx);
+void            fn_string_pop_back   (struct_string* str);
+void            fn_string_pop_front  (struct_string* str);
 
-void          blopfn_string_insert     (blopt_string str, size_t idx, char c);
-void          blopfn_string_push_back  (blopt_string str, char c);
-void          blopfn_string_push_front (blopt_string str, char c);
+void            fn_string_insert     (struct_string* str, size_t idx, char c);
+void            fn_string_push_back  (struct_string* str, char c);
+void            fn_string_push_front (struct_string* str, char c);
 
-void          blopfn_string_strcpy     (blopt_string str, size_t idx, const char* src, size_t count);
+void            fn_string_strcpy     (struct_string* str, size_t idx, const char* src, size_t count);
 
-#if (defined(BLOP_STRING_STRUCT) || defined(BLOP_STRING_IMPLEMENTATION)) && !defined(BLOP_STRING_NOT_STRUCT)
-typedef struct blops_string {
-  int               allocated;
-  char*             data;
-  size_t            size;
-  size_t            capacity;
-  BLOP_RWLOCK_TYPE  lock;
-} blops_string;
-#endif
+#if (defined(STRING_STRUCT) || defined(STRING_IMPLEMENTATION)) && !defined(STRING_NOT_STRUCT)
+  struct struct_string {
+    int               allocated;
+    char*             data;
+    size_t            size;
+    size_t            capacity;
+    RWLOCK_TYPE  lock;
+  };
+#endif /* (defined(STRING_STRUCT) || defined(STRING_IMPLEMENTATION)) && !defined(STRING_NOT_STRUCT) */
 
-#ifdef BLOP_STRING_IMPLEMENTATION
+#ifdef STRING_IMPLEMENTATION
 
-blopt_string  blopfn_string_create(blopt_string str) {
+struct_string*  fn_string_create(struct_string* str) {
   if (!str) {
-    BLOP_CALLOC(str, struct blops_string, 1);
+    CALLOC(str, struct struct_string, 1);
     str->allocated = true;
   } else {
     str->allocated = false;
   }
 
   str->size = 0;
-  str->capacity = BLOP_STRING_INITIAL_SIZE;
-  BLOP_RWLOCK_INIT(str->lock);
-  BLOP_CALLOC(str->data, char, str->capacity + 1);
+  str->capacity = STRING_INITIAL_SIZE;
+  RWLOCK_INIT(str->lock);
+  CALLOC(str->data, char, str->capacity + 1);
 
   return str;
 }
-void          blopfn_string_destroy(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_destroy(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
 
-  BLOP_FREE(str->data);
-  BLOP_RWLOCK_DESTROY(str->lock);
+  FREE(str->data);
+  RWLOCK_DESTROY(str->lock);
 
   if (str->allocated) {
-    BLOP_FREE(str);
+    FREE(str);
   }
 }
 
-void          blopfn_string_rdlock(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
-  BLOP_RWLOCK_RDLOCK(str->lock);
+void            fn_string_rdlock(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
+  RWLOCK_RDLOCK(str->lock);
 }
-void          blopfn_string_wrlock(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
-  BLOP_RWLOCK_WRLOCK(str->lock);
+void            fn_string_wrlock(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
+  RWLOCK_WRLOCK(str->lock);
 }
-void          blopfn_string_rdunlock(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
-  BLOP_RWLOCK_RDUNLOCK(str->lock);
+void            fn_string_rdunlock(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
+  RWLOCK_RDUNLOCK(str->lock);
 }
-void          blopfn_string_wrunlock(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
-  BLOP_RWLOCK_WRUNLOCK(str->lock);
+void            fn_string_wrunlock(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
+  RWLOCK_WRUNLOCK(str->lock);
 }
 
-char*         blopfn_string_cstr(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+char*           fn_string_cstr(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
   return str->data;
 }
-size_t        blopfn_string_size(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+size_t          fn_string_size(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
   return str->size;
 }
 
-void          blopfn_string_set(blopt_string str, size_t idx, char c) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_set(struct_string* str, size_t idx, char c) {
+  BLOP_ASSERT_PTR(str);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, str->size);
+  BLOP_ASSERT_BOUNDS(idx, str->size);
 
   str->data[idx] = c;
 }
-char          blopfn_string_get(blopt_string str, size_t idx) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+char            fn_string_get(struct_string* str, size_t idx) {
+  BLOP_ASSERT_PTR(str);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, str->size);
+  BLOP_ASSERT_BOUNDS(idx, str->size);
 
   return str->data[idx];
 }
-void          blopfn_string_resize(blopt_string str, size_t size) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_resize(struct_string* str, size_t size) {
+  BLOP_ASSERT_PTR(str);
 
   if (size == str->size) {
     return;
   }
 
   if (size == 0) {
-    blopfn_string_clear(str);
+    fn_string_clear(str);
     return;
   }
 
   str->capacity = TERNARY(
-    size < BLOP_STRING_INITIAL_SIZE,
-    BLOP_STRING_INITIAL_SIZE,
-    BLOP_STRING_RESIZE_POLICIE(size)
+    size < STRING_INITIAL_SIZE,
+    STRING_INITIAL_SIZE,
+    STRING_RESIZE_POLICIE(size)
   );
 
   char* data = NULL;
-  BLOP_CALLOC(data, char, str->capacity + 1);
+  CALLOC(data, char, str->capacity + 1);
   memcpy(data, str->data, MIN(str->size, size));
 
-  BLOP_FREE(str->data);
+  FREE(str->data);
   str->data = data;
   str->size = size;
   str->data[str->size] = '\0';
 }
-void          blopfn_string_shrink(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_shrink(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
 
-  if (str->size < BLOP_STRING_SHRINK_POLICIE(str->capacity) && str->size < BLOP_STRING_INITIAL_SIZE) {
-    str->capacity = BLOP_STRING_RESIZE_POLICIE(str->size);
+  if (str->size < STRING_SHRINK_POLICIE(str->capacity) && str->size < STRING_INITIAL_SIZE) {
+    str->capacity = STRING_RESIZE_POLICIE(str->size);
 
     char* data = NULL;
-    BLOP_CALLOC(data, char, str->capacity + 1);
+    CALLOC(data, char, str->capacity + 1);
     memcpy(data, str->data, str->size);
 
-    BLOP_FREE(str->data);
+    FREE(str->data);
     str->data = data;
     str->data[str->size] = '\0';
   }
 }
 
-void          blopfn_string_clear(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_clear(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
 
   str->size = 0;
-  str->capacity = BLOP_STRING_INITIAL_SIZE;
-  BLOP_FREE(str->data);
-  BLOP_CALLOC(str->data, char, str->capacity + 1);
+  str->capacity = STRING_INITIAL_SIZE;
+  FREE(str->data);
+  CALLOC(str->data, char, str->capacity + 1);
 }
-void          blopfn_string_erase(blopt_string str, size_t idx) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_erase(struct_string* str, size_t idx) {
+  BLOP_ASSERT_PTR(str);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, str->size);      
+  BLOP_ASSERT_BOUNDS(idx, str->size);      
 
   if (idx != str->size - 1) {
     memmove(&str->data[idx], &str->data[idx + 1], (str->size - idx - 1));
@@ -224,42 +228,42 @@ void          blopfn_string_erase(blopt_string str, size_t idx) {
   
   str->size--;
   str->data[str->size] = '\0';
-  blopfn_string_shrink(str);
+  fn_string_shrink(str);
 }
-void          blopfn_string_pop_back(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_pop_back(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
 
   if (str->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
-  blopfn_string_erase(str, str->size - 1);
+  fn_string_erase(str, str->size - 1);
 }
-void          blopfn_string_pop_front(blopt_string str) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_pop_front(struct_string* str) {
+  BLOP_ASSERT_PTR(str);
 
   if (str->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
-  blopfn_string_erase(str, 0);
+  fn_string_erase(str, 0);
 }
 
-void          blopfn_string_insert(blopt_string str, size_t idx, char c) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_insert(struct_string* str, size_t idx, char c) {
+  BLOP_ASSERT_PTR(str);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, str->size + 1);
+  BLOP_ASSERT_BOUNDS(idx, str->size + 1);
 
   if (str->size != str->capacity) {
     if (idx != str->size) {
       memmove(&str->data[idx + 1], &str->data[idx], (str->size - idx));
     }
   } else {
-    str->capacity = BLOP_STRING_RESIZE_POLICIE(str->size);
+    str->capacity = STRING_RESIZE_POLICIE(str->size);
     char* data = NULL;
-    BLOP_CALLOC(data, char, str->capacity + 1);
+    CALLOC(data, char, str->capacity + 1);
 
     if (idx != 0) {
       memcpy(data, str->data, idx);
@@ -269,7 +273,7 @@ void          blopfn_string_insert(blopt_string str, size_t idx, char c) {
       memcpy(&data[idx + 1], &str->data[idx], (str->size - idx));
     }
 
-    BLOP_FREE(str->data);
+    FREE(str->data);
     str->data = data;
   }
 
@@ -277,33 +281,33 @@ void          blopfn_string_insert(blopt_string str, size_t idx, char c) {
   str->data[idx] = c;
   str->data[str->size] = '\0';
 }
-void          blopfn_string_push_back(blopt_string str, char c) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_push_back(struct_string* str, char c) {
+  BLOP_ASSERT_PTR(str);
 
-  blopfn_string_insert(str, str->size, c);
+  fn_string_insert(str, str->size, c);
 }
-void          blopfn_string_push_front(blopt_string str, char c) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
+void            fn_string_push_front(struct_string* str, char c) {
+  BLOP_ASSERT_PTR(str);
 
-  blopfn_string_insert(str, 0, c);
+  fn_string_insert(str, 0, c);
 }
 
-void          blopfn_string_strcpy(blopt_string str, size_t idx, const char* src, size_t count) {
-  BLOP_INTERNAL_ASSERT_PTR(str);
-  BLOP_INTERNAL_ASSERT_PTR(src);
+void            fn_string_strcpy(struct_string* str, size_t idx, const char* src, size_t count) {
+  BLOP_ASSERT_PTR(str);
+  BLOP_ASSERT_PTR(src);
 
   if (count == 0) { return; }
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, str->size);
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx + count, str->size + 1);
+  BLOP_ASSERT_BOUNDS(idx, str->size);
+  BLOP_ASSERT_BOUNDS(idx + count, str->size + 1);
 
   memcpy(&str->data[idx], src, count);
 }
 
-#endif /* BLOP_STRING_IMPLEMENTATION */
+#endif /* STRING_IMPLEMENTATION */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __BLOP_SRING_H__ */
+#endif /* __BLOP_STRING_H__ */

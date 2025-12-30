@@ -1,53 +1,61 @@
 #include <blop/blop.h>
 
-#ifndef BLOP_LIST_NAME
-  #define BLOP_LIST_NAME blop_list
-#endif /* BLOP_LIST_NAME */
+#ifndef LIST_NAME
+  #define LIST_NAME List
+#endif /* LIST_NAME */
 
-#ifndef BLOP_LIST_DATA_TYPE
-  #define BLOP_LIST_DATA_TYPE uint8_t
-#endif /* BLOP_LIST_DATA_TYPE */
+#ifndef NODE_NAME
+  #define NODE_NAME Node
+#endif /* NODE_NAME */
 
-#define BLOP_TYPE BLOP_LIST_DATA_TYPE
+#ifndef LIST_FN_PREFIX
+  #define LIST_FN_PREFIX LIST_NAME
+#endif /* LIST_FN_PREFIX */
+
+#ifndef NODE_FN_PREFIX
+  #define NODE_FN_PREFIX NODE_NAME
+#endif /* NODE_FN_PREFIX */
+
+#ifndef LIST_DATA_TYPE
+  #define LIST_DATA_TYPE int
+#endif /* LIST_DATA_TYPE */
 
 /** @cond doxygen_ignore */
-#define blopt_list              BLOP_LIST_NAME
-#define blopt_node              BLOP_CONCAT2(blopt_list, _node)
+#define struct_list         LIST_NAME
+#define struct_node         NODE_NAME
 
-#define blops_list              BLOP_CONCAT2(blopt_list, _t)
-#define blops_node              BLOP_CONCAT2(blopt_node, _t)
+#define fn_list_create      CONCAT2(LIST_FN_PREFIX, _create)
+#define fn_list_destroy     CONCAT2(LIST_FN_PREFIX, _destroy)
 
-#define blopfn_list_create      BLOP_CONCAT2(blopt_list, _create)
-#define blopfn_list_destroy     BLOP_CONCAT2(blopt_list, _destroy)
+#define fn_list_rdlock      CONCAT2(LIST_FN_PREFIX, _rdlock)
+#define fn_list_wrlock      CONCAT2(LIST_FN_PREFIX, _wrlock)
+#define fn_list_rdunlock    CONCAT2(LIST_FN_PREFIX, _rdunlock)
+#define fn_list_wrunlock    CONCAT2(LIST_FN_PREFIX, _wrunlock)
 
-#define blopfn_list_rdlock      BLOP_CONCAT2(blopt_list, _rdlock)
-#define blopfn_list_wrlock      BLOP_CONCAT2(blopt_list, _wrlock)
-#define blopfn_list_rdunlock    BLOP_CONCAT2(blopt_list, _rdunlock)
-#define blopfn_list_wrunlock    BLOP_CONCAT2(blopt_list, _wrunlock)
+#define fn_list_get         CONCAT2(LIST_FN_PREFIX, _get)
+#define fn_list_size        CONCAT2(LIST_FN_PREFIX, _size)
+#define fn_list_back        CONCAT2(LIST_FN_PREFIX, _back)
+#define fn_list_front       CONCAT2(LIST_FN_PREFIX, _front)
 
-#define blopfn_list_get         BLOP_CONCAT2(blopt_list, _get)
-#define blopfn_list_size        BLOP_CONCAT2(blopt_list, _size)
-#define blopfn_list_back        BLOP_CONCAT2(blopt_list, _back)
-#define blopfn_list_front       BLOP_CONCAT2(blopt_list, _front)
+#define fn_list_clear       CONCAT2(LIST_FN_PREFIX, _clear)
+#define fn_list_erase       CONCAT2(LIST_FN_PREFIX, _erase)
+#define fn_list_pop_back    CONCAT2(LIST_FN_PREFIX, _pop_back)
+#define fn_list_pop_front   CONCAT2(LIST_FN_PREFIX, _pop_front)
 
-#define blopfn_list_clear       BLOP_CONCAT2(blopt_list, _clear)
-#define blopfn_list_erase       BLOP_CONCAT2(blopt_list, _erase)
-#define blopfn_list_pop_back    BLOP_CONCAT2(blopt_list, _pop_back)
-#define blopfn_list_pop_front   BLOP_CONCAT2(blopt_list, _pop_front)
+#define fn_list_push_back   CONCAT2(LIST_FN_PREFIX, _push_back)
+#define fn_list_push_front  CONCAT2(LIST_FN_PREFIX, _push_front)
+#define fn_list_insert_next CONCAT2(LIST_FN_PREFIX, _insert_next)
+#define fn_list_insert_prev CONCAT2(LIST_FN_PREFIX, _insert_prev)
 
-#define blopfn_list_push_back   BLOP_CONCAT2(blopt_list, _push_back)
-#define blopfn_list_push_front  BLOP_CONCAT2(blopt_list, _push_front)
-#define blopfn_list_insert_next BLOP_CONCAT2(blopt_list, _insert_next)
-#define blopfn_list_insert_prev BLOP_CONCAT2(blopt_list, _insert_prev)
+#define fn_node_create      CONCAT2(NODE_FN_PREFIX, _create)
+#define fn_node_duplicate   CONCAT2(NODE_FN_PREFIX, _duplicate)
+#define fn_node_destroy     CONCAT2(NODE_FN_PREFIX, _destroy)
 
-#define blopfn_node_create      BLOP_CONCAT2(blopt_node, _create)
-#define blopfn_node_duplicate   BLOP_CONCAT2(blopt_node, _duplicate)
-#define blopfn_node_destroy     BLOP_CONCAT2(blopt_node, _destroy)
-
-#define blopfn_node_data        BLOP_CONCAT2(blopt_node, _data)
-#define blopfn_node_next        BLOP_CONCAT2(blopt_node, _next)
-#define blopfn_node_prev        BLOP_CONCAT2(blopt_node, _prev)
-#define blopfn_node_list        BLOP_CONCAT2(blopt_node, _list)
+#define fn_node_set         CONCAT2(NODE_FN_PREFIX, _set)
+#define fn_node_get         CONCAT2(NODE_FN_PREFIX, _get)
+#define fn_node_next        CONCAT2(NODE_FN_PREFIX, _next)
+#define fn_node_prev        CONCAT2(NODE_FN_PREFIX, _prev)
+#define fn_node_list        CONCAT2(NODE_FN_PREFIX, _list)
 
 /** @endcond */
 
@@ -55,67 +63,68 @@
 extern "C" {
 #endif
 
-typedef struct blops_list  blops_list;
-typedef struct blops_node  blops_node;
+struct struct_node;
+struct struct_list;
 
-typedef struct blops_list* blopt_list;
-typedef struct blops_node* blopt_node;
+typedef struct struct_node struct_node;
+typedef struct struct_list struct_list;
 
-blopt_list          blopfn_list_create      (blopt_list list);
-void                blopfn_list_destroy     (blopt_list list);
+struct_list*    fn_list_create      (struct_list* list);
+void            fn_list_destroy     (struct_list* list);
 
-void                blopfn_list_rdlock      (blopt_list list);
-void                blopfn_list_wrlock      (blopt_list list);
-void                blopfn_list_rdunlock    (blopt_list list);
-void                blopfn_list_wrunlock    (blopt_list list);
+void            fn_list_rdlock      (struct_list* list);
+void            fn_list_wrlock      (struct_list* list);
+void            fn_list_rdunlock    (struct_list* list);
+void            fn_list_wrunlock    (struct_list* list);
 
-blopt_node          blopfn_list_get         (blopt_list list, size_t index);
-size_t              blopfn_list_size        (blopt_list list);
-blopt_node          blopfn_list_back        (blopt_list list);
-blopt_node          blopfn_list_front       (blopt_list list);
+struct_node*    fn_list_get         (struct_list* list, size_t index);
+size_t          fn_list_size        (struct_list* list);
+struct_node*    fn_list_back        (struct_list* list);
+struct_node*    fn_list_front       (struct_list* list);
 
-void                blopfn_list_clear       (blopt_list list, int deallocate);
-void                blopfn_list_erase       (blopt_list list, blopt_node node, int deallocate);
-void                blopfn_list_pop_back    (blopt_list list, int deallocate);
-void                blopfn_list_pop_front   (blopt_list list, int deallocate);
+void            fn_list_clear       (struct_list* list, int deallocate);
+void            fn_list_erase       (struct_list* list, struct_node* node, int deallocate);
+void            fn_list_pop_back    (struct_list* list, int deallocate);
+void            fn_list_pop_front   (struct_list* list, int deallocate);
 
-void                blopfn_list_push_back   (blopt_list list, blopt_node node);
-void                blopfn_list_push_front  (blopt_list list, blopt_node node);
-void                blopfn_list_insert_next (blopt_list list, blopt_node pivot, blopt_node node);
-void                blopfn_list_insert_prev (blopt_list list, blopt_node pivot, blopt_node node);
+void            fn_list_push_back   (struct_list* list, struct_node* node);
+void            fn_list_push_front  (struct_list* list, struct_node* node);
+void            fn_list_insert_next (struct_list* list, struct_node* pivot, struct_node* node);
+void            fn_list_insert_prev (struct_list* list, struct_node* pivot, struct_node* node);
 
-blopt_node          blopfn_node_create      (blopt_node node);
-blopt_node          blopfn_node_duplicate   (blopt_node src, blopt_node dst);
-void                blopfn_node_destroy     (blopt_node node);
+struct_node*    fn_node_create      (struct_node* node);
+struct_node*    fn_node_duplicate   (struct_node* src, struct_node* dst);
+void            fn_node_destroy     (struct_node* node);
 
-BLOP_TYPE           blopfn_node_data        (blopt_node node);
-blopt_node          blopfn_node_next        (blopt_node node);
-blopt_node          blopfn_node_prev        (blopt_node node);
-blopt_list          blopfn_node_list        (blopt_node node);
+void            fn_node_set         (struct_node* node, LIST_DATA_TYPE value);
+LIST_DATA_TYPE  fn_node_get         (struct_node* node);
+struct_node*    fn_node_next        (struct_node* node);
+struct_node*    fn_node_prev        (struct_node* node);
+struct_list*    fn_node_list        (struct_node* node);
 
-#if (defined(BLOP_LIST_STRUCT) || defined(BLOP_LIST_IMPLEMENTATION)) && !defined(BLOP_LIST_NOT_STRUCT)
-struct blops_node {
-  BLOP_TYPE         data;  
-  blopt_node        next;  
-  blopt_node        prev;  
-  blopt_list        list;
-  int               allocated;
-};
+#if (defined(LIST_STRUCT) || defined(LIST_IMPLEMENTATION)) && !defined(LIST_NOT_STRUCT)
+  struct struct_node {
+    LIST_DATA_TYPE  data;
+    struct_node*    next;
+    struct_node*    prev;
+    struct_list*    list;
+    int             allocated;
+  };
 
-struct blops_list {
-  size_t            size;
-  blopt_node        front;
-  blopt_node        back;
-  int               allocated;
-  BLOP_RWLOCK_TYPE  lock;
-};
-#endif
+  struct struct_list {
+    size_t          size;
+    struct_node*    front;
+    struct_node*    back;
+    int             allocated;
+    RWLOCK_TYPE     lock;
+  };
+#endif /* (defined(LIST_STRUCT) || defined(LIST_IMPLEMENTATION)) && !defined(LIST_NOT_STRUCT) */
 
-#ifdef BLOP_LIST_IMPLEMENTATION
+#ifdef LIST_IMPLEMENTATION
 
-blopt_list          blopfn_list_create(blopt_list list) {
+struct_list*        fn_list_create(struct_list* list) {
   if (!list) {
-    BLOP_CALLOC(list, struct blops_list, 1);
+    CALLOC(list, struct struct_list, 1);
     list->allocated = true;
   } else {
     list->allocated = false;
@@ -124,62 +133,62 @@ blopt_list          blopfn_list_create(blopt_list list) {
   list->size  = 0;
   list->front = NULL;
   list->back  = NULL;
-  BLOP_RWLOCK_INIT(list->lock);
+  RWLOCK_INIT(list->lock);
 
   return list;
 }
-void                blopfn_list_destroy(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_destroy(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_INTERNAL_ASSERT(list->size == 0, "Destroying non empty list (HINT: Clear the list)");
+  BLOP_ASSERT(list->size == 0, "Destroying non empty list (HINT: Clear the list)");
 
-  BLOP_RWLOCK_DESTROY(list->lock);
+  RWLOCK_DESTROY(list->lock);
 
   if (list->allocated) {
-    BLOP_FREE(list);
+    FREE(list);
   }
 }
 
-void                blopfn_list_rdlock(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_rdlock(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_RWLOCK_RDLOCK(list->lock);
+  RWLOCK_RDLOCK(list->lock);
 }
-void                blopfn_list_wrlock(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_wrlock(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_RWLOCK_WRLOCK(list->lock);
+  RWLOCK_WRLOCK(list->lock);
 }
-void                blopfn_list_rdunlock(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_rdunlock(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_RWLOCK_RDUNLOCK(list->lock);
+  RWLOCK_RDUNLOCK(list->lock);
 }
-void                blopfn_list_wrunlock(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_wrunlock(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_RWLOCK_WRUNLOCK(list->lock);
+  RWLOCK_WRUNLOCK(list->lock);
 }
 
-size_t              blopfn_list_size(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+size_t              fn_list_size(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
   return list->size;
 }
-blopt_node          blopfn_list_back(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+struct_node*        fn_list_back(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
   return list->back;
 }
-blopt_node          blopfn_list_front(blopt_list list) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+struct_node*        fn_list_front(struct_list* list) {
+  BLOP_ASSERT_PTR(list);
   return list->front;
 }
 
-blopt_node          blopfn_list_get(blopt_list list, size_t idx) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+struct_node*        fn_list_get(struct_list* list, size_t idx) {
+  BLOP_ASSERT_PTR(list);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, list->size);
+  BLOP_ASSERT_BOUNDS(idx, list->size);
 
-  blopt_node current = NULL;
+  struct_node* current = NULL;
   if (idx < list->size / 2) {
     current = list->front;
     for (size_t i = 0; i < idx; i++) {
@@ -194,22 +203,22 @@ blopt_node          blopfn_list_get(blopt_list list, size_t idx) {
   return current;
 }
 
-void                blopfn_list_clear(blopt_list list, int deallocate) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_clear(struct_list* list, int deallocate) {
+  BLOP_ASSERT_PTR(list);
 
   if (list->size == 0) {
     return;
   }
 
-  blopt_node current = list->front;
-  blopt_node next = NULL;
+  struct_node* current = list->front;
+  struct_node* next = NULL;
   while (current) {
     next = current->next;
     current->list = NULL;
     current->next = NULL;
     current->prev = NULL;
     if (deallocate) {
-      blopfn_node_destroy(current);
+      fn_node_destroy(current);
     }
     current = next;
   }
@@ -218,11 +227,11 @@ void                blopfn_list_clear(blopt_list list, int deallocate) {
   list->front = NULL;
   list->back = NULL;
 }
-void                blopfn_list_erase(blopt_list list, blopt_node node, int deallocate) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_list_erase(struct_list* list, struct_node* node, int deallocate) {
+  BLOP_ASSERT_PTR(list);
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == list, "Erasing a foreign node");
+  BLOP_ASSERT(node->list == list, "Erasing a foreign node");
 
   if (node->prev) {
     node->prev->next = node->next;
@@ -242,18 +251,18 @@ void                blopfn_list_erase(blopt_list list, blopt_node node, int deal
   node->prev = NULL;
 
   if (deallocate) {
-    blopfn_node_destroy(node);
+    fn_node_destroy(node);
   }
 }
-void                blopfn_list_pop_back(blopt_list list, int deallocate) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_pop_back(struct_list* list, int deallocate) {
+  BLOP_ASSERT_PTR(list);
 
   if (list->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
-  blopt_node back = list->back;
+  struct_node* back = list->back;
 
   if (list->back->prev) {
     list->back->prev->next = NULL;
@@ -269,18 +278,18 @@ void                blopfn_list_pop_back(blopt_list list, int deallocate) {
   back->next = NULL;
   back->prev = NULL;
   if (deallocate) {
-    blopfn_node_destroy(back);
+    fn_node_destroy(back);
   }
 }
-void                blopfn_list_pop_front(blopt_list list, int deallocate) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
+void                fn_list_pop_front(struct_list* list, int deallocate) {
+  BLOP_ASSERT_PTR(list);
 
   if (list->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
-  blopt_node front = list->front;
+  struct_node* front = list->front;
 
   if (list->front->next) {
     list->front->next->prev = NULL;
@@ -296,15 +305,15 @@ void                blopfn_list_pop_front(blopt_list list, int deallocate) {
   front->next = NULL;
   front->prev = NULL;
   if (deallocate) {
-    blopfn_node_destroy(front);
+    fn_node_destroy(front);
   }
 }
 
-void                blopfn_list_push_back(blopt_list list, blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_list_push_back(struct_list* list, struct_node* node) {
+  BLOP_ASSERT_PTR(list);
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == NULL, "Pushing a foreign node (HINT: Duplicate the node)");
+  BLOP_ASSERT(node->list == NULL, "Pushing a foreign node (HINT: Duplicate the node)");
 
   node->list = list;
   node->next = NULL;
@@ -320,11 +329,11 @@ void                blopfn_list_push_back(blopt_list list, blopt_node node) {
 
   list->size++;
 }
-void                blopfn_list_push_front(blopt_list list, blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_list_push_front(struct_list* list, struct_node* node) {
+  BLOP_ASSERT_PTR(list);
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == NULL, "Pushing a foreign node (HINT: Duplicate the node)");
+  BLOP_ASSERT(node->list == NULL, "Pushing a foreign node (HINT: Duplicate the node)");
 
   node->list = list;
   node->next = list->front;
@@ -340,16 +349,16 @@ void                blopfn_list_push_front(blopt_list list, blopt_node node) {
 
   list->size++;
 }
-void                blopfn_list_insert_next(blopt_list list, blopt_node pivot, blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
-  BLOP_INTERNAL_ASSERT_PTR(pivot);
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_list_insert_next(struct_list* list, struct_node* pivot, struct_node* node) {
+  BLOP_ASSERT_PTR(list);
+  BLOP_ASSERT_PTR(pivot);
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == NULL, "Inserting a foreign node (HINT: Duplicate the node)");
-  BLOP_INTERNAL_ASSERT(pivot->list == list, "The pivot is a foreign node");
+  BLOP_ASSERT(node->list == NULL, "Inserting a foreign node (HINT: Duplicate the node)");
+  BLOP_ASSERT(pivot->list == list, "The pivot is a foreign node");
 
   if (pivot == list->back) {
-    blopfn_list_push_back(list, node);
+    fn_list_push_back(list, node);
     return;
   }
 
@@ -362,16 +371,16 @@ void                blopfn_list_insert_next(blopt_list list, blopt_node pivot, b
 
   list->size++;
 }
-void                blopfn_list_insert_prev(blopt_list list, blopt_node pivot, blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(list);
-  BLOP_INTERNAL_ASSERT_PTR(pivot);
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_list_insert_prev(struct_list* list, struct_node* pivot, struct_node* node) {
+  BLOP_ASSERT_PTR(list);
+  BLOP_ASSERT_PTR(pivot);
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == NULL, "Inserting a foreign node (HINT: Duplicate the node)");
-  BLOP_INTERNAL_ASSERT(pivot->list == list, "The pivot is a foreign node");
+  BLOP_ASSERT(node->list == NULL, "Inserting a foreign node (HINT: Duplicate the node)");
+  BLOP_ASSERT(pivot->list == list, "The pivot is a foreign node");
 
   if (pivot == list->front) {
-    blopfn_list_push_front(list, node);
+    fn_list_push_front(list, node);
     return;
   }
 
@@ -385,119 +394,117 @@ void                blopfn_list_insert_prev(blopt_list list, blopt_node pivot, b
   list->size++;
 }
 
-blopt_node          blopfn_node_create(blopt_node node) {
+struct_node*        fn_node_create(struct_node* node) {
   if (!node) {
-    BLOP_CALLOC(node, struct blops_node, 1);
+    CALLOC(node, struct struct_node, 1);
     node->allocated = true;
   } else {
     node->allocated = false;
   }
 
 
-  node->data = (BLOP_TYPE)(0);
+  node->data = (LIST_DATA_TYPE)(0);
   node->next = NULL;
   node->prev = NULL;
   node->list = NULL;
-  BLOP_RWLOCK_INIT(node->lock);
+  RWLOCK_INIT(node->lock);
 
   return node;
 }
-blopt_node          blopfn_node_duplicate(blopt_node src, blopt_node dst) {
-  BLOP_INTERNAL_ASSERT_PTR(src);
+struct_node*        fn_node_duplicate(struct_node* src, struct_node* dst) {
+  BLOP_ASSERT_PTR(src);
 
-  dst = blopfn_node_create(dst);
+  dst = fn_node_create(dst);
   dst->data = src->data;
 
   return dst;
 }
-void                blopfn_node_destroy(blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_node_destroy(struct_node* node) {
+  BLOP_ASSERT_PTR(node);
 
-  BLOP_INTERNAL_ASSERT(node->list == NULL, "Destroying an unattached node (HINT: Set deallocate to true in any list erasing function)");
+  BLOP_ASSERT(node->list == NULL, "Destroying an unattached node (HINT: Set deallocate to true in any list erasing function)");
 
-  #ifdef BLOP_LIST_DEALLOCATE_DATA
-    BLOP_LIST_DEALLOCATE_DATA(node->data);
+  #ifdef LIST_DEALLOCATE_DATA
+    LIST_DEALLOCATE_DATA(node->data);
   #endif
-  BLOP_RWLOCK_DESTROY(node->lock);
+  RWLOCK_DESTROY(node->lock);
 
   if (node->allocated) {
-    BLOP_FREE(node);
+    FREE(node);
   }
 }
 
-BLOP_TYPE           blopfn_node_data(blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(node);
+void                fn_node_set(struct_node* node, LIST_DATA_TYPE value) {
+  BLOP_ASSERT_PTR(node);
+  node->data = value;
+}
+LIST_DATA_TYPE      fn_node_get(struct_node* node) {
+  BLOP_ASSERT_PTR(node);
   return node->data;
 }
-blopt_node          blopfn_node_next(blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(node);
+struct_node*        fn_node_next(struct_node* node) {
+  BLOP_ASSERT_PTR(node);
   return node->next;
 }
-blopt_node          blopfn_node_prev(blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(node);
+struct_node*        fn_node_prev(struct_node* node) {
+  BLOP_ASSERT_PTR(node);
   return node->prev;
 }
-blopt_list          blopfn_node_list(blopt_node node) {
-  BLOP_INTERNAL_ASSERT_PTR(node);
+struct_list*        fn_node_list(struct_node* node) {
+  BLOP_ASSERT_PTR(node);
   return node->list;
 }
 
-#endif /* BLOP_LIST_IMPLEMENTATION */
+#endif /* LIST_IMPLEMENTATION */
 
 #ifdef __cplusplus
 }
 #endif
 
-#ifdef _DOXYGEN_
-  #define BLOP_LIST_DEALLOCATE_DATA(data)
-  #define BLOP_LIST_IMPLEMENTATION
-    
-  #undef  BLOP_LIST_DEALLOCATE_DATA
-  #undef  BLOP_LIST_IMPLEMENTATION
-#endif
+#undef LIST_NAME
+#undef NODE_NAME
+#undef LIST_FN_PREFIX
+#undef NODE_FN_PREFIX
 
-#undef BLOP_TYPE
-#undef BLOP_LIST_NAME
-#undef BLOP_LIST_DATA_TYPE
-#undef BLOP_LIST_DEALLOCATE_DATA
+#undef LIST_DATA_TYPE
+#undef LIST_DEALLOCATE_DATA
 
-#undef BLOP_LIST_STRUCT
-#undef BLOP_LIST_NOT_STRUCT
-#undef BLOP_LIST_IMPLEMENTATION
+#undef LIST_STRUCT
+#undef LIST_NOT_STRUCT
+#undef LIST_IMPLEMENTATION
 
-#undef blopt_list             
-#undef blopt_node             
-#undef blops_list             
-#undef blops_node       
+#undef struct_list        
+#undef struct_node             
 
-#undef blopfn_list_create     
-#undef blopfn_list_destroy    
+#undef fn_list_create
+#undef fn_list_destroy
 
-#undef blopfn_list_rdlock     
-#undef blopfn_list_wrlock     
-#undef blopfn_list_rdunlock   
-#undef blopfn_list_wrunlock   
+#undef fn_list_rdlock
+#undef fn_list_wrlock
+#undef fn_list_rdunlock
+#undef fn_list_wrunlock
 
-#undef blopfn_list_get        
-#undef blopfn_list_size       
-#undef blopfn_list_back       
-#undef blopfn_list_front     
+#undef fn_list_get
+#undef fn_list_size
+#undef fn_list_back
+#undef fn_list_front
 
-#undef blopfn_list_clear      
-#undef blopfn_list_erase      
-#undef blopfn_list_pop_back   
-#undef blopfn_list_pop_front  
+#undef fn_list_clear
+#undef fn_list_erase
+#undef fn_list_pop_back
+#undef fn_list_pop_front
 
-#undef blopfn_list_push_back  
-#undef blopfn_list_push_front 
-#undef blopfn_list_insert_next
-#undef blopfn_list_insert_prev
+#undef fn_list_push_back
+#undef fn_list_push_front
+#undef fn_list_insert_next
+#undef fn_list_insert_prev
 
-#undef blopfn_node_create     
-#undef blopfn_node_duplicate  
-#undef blopfn_node_destroy    
+#undef fn_node_create
+#undef fn_node_duplicate
+#undef fn_node_destroy
 
-#undef blopfn_node_data       
-#undef blopfn_node_next       
-#undef blopfn_node_prev       
-#undef blopfn_node_list       
+#undef fn_node_set
+#undef fn_node_get
+#undef fn_node_next       
+#undef fn_node_prev       
+#undef fn_node_list       

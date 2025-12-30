@@ -1,7 +1,7 @@
 #include <blop/blop.h>
 
 #ifndef VECTOR_NAME
-  #define VECTOR_NAME vecint
+  #define VECTOR_NAME Vecint
 #endif /* VECTOR_NAME */
 
 #ifndef VECTOR_FN_PREFIX
@@ -10,7 +10,7 @@
 
 #ifndef VECTOR_DATA_TYPE
   #define VECTOR_DATA_TYPE int
-#endif /* BLOP_VECTOR_DATA_TYPE */
+#endif /* VECTOR_DATA_TYPE */
 
 #ifndef VECTOR_RESIZE_POLICIE
   #define VECTOR_RESIZE_POLICIE(size) (size * 2)
@@ -25,37 +25,37 @@
 #endif /* VECTOR_INITIAL_SIZE */
 
 /** @cond doxygen_ignore */
-#define struct_vector         BLOP_CONCAT2(VECTOR_NAME, _t)
+#define struct_vector         VECTOR_NAME
 
-#define fn_vector_create      BLOP_CONCAT2(VECTOR_FN_PREFIX, _create)
-#define fn_vector_destroy     BLOP_CONCAT2(VECTOR_FN_PREFIX, _destroy)
+#define fn_vector_create      CONCAT2(VECTOR_FN_PREFIX, _create)
+#define fn_vector_destroy     CONCAT2(VECTOR_FN_PREFIX, _destroy)
 
-#define fn_vector_rdlock      BLOP_CONCAT2(VECTOR_FN_PREFIX, _rdlock)
-#define fn_vector_wrlock      BLOP_CONCAT2(VECTOR_FN_PREFIX, _wrlock)
-#define fn_vector_rdunlock    BLOP_CONCAT2(VECTOR_FN_PREFIX, _rdunlock)
-#define fn_vector_wrunlock    BLOP_CONCAT2(VECTOR_FN_PREFIX, _wrunlock)
+#define fn_vector_rdlock      CONCAT2(VECTOR_FN_PREFIX, _rdlock)
+#define fn_vector_wrlock      CONCAT2(VECTOR_FN_PREFIX, _wrlock)
+#define fn_vector_rdunlock    CONCAT2(VECTOR_FN_PREFIX, _rdunlock)
+#define fn_vector_wrunlock    CONCAT2(VECTOR_FN_PREFIX, _wrunlock)
 
-#define fn_vector_data        BLOP_CONCAT2(VECTOR_FN_PREFIX, _data)
-#define fn_vector_size        BLOP_CONCAT2(VECTOR_FN_PREFIX, _size)
-#define fn_vector_back        BLOP_CONCAT2(VECTOR_FN_PREFIX, _back)
-#define fn_vector_front       BLOP_CONCAT2(VECTOR_FN_PREFIX, _front)
+#define fn_vector_data        CONCAT2(VECTOR_FN_PREFIX, _data)
+#define fn_vector_size        CONCAT2(VECTOR_FN_PREFIX, _size)
+#define fn_vector_back        CONCAT2(VECTOR_FN_PREFIX, _back)
+#define fn_vector_front       CONCAT2(VECTOR_FN_PREFIX, _front)
 
-#define fn_vector_set         BLOP_CONCAT2(VECTOR_FN_PREFIX, _set)
-#define fn_vector_get         BLOP_CONCAT2(VECTOR_FN_PREFIX, _get)
-#define fn_vector_resize      BLOP_CONCAT2(VECTOR_FN_PREFIX, _resize)
-#define fn_vector_shrink      BLOP_CONCAT2(VECTOR_FN_PREFIX, _shrink)
+#define fn_vector_set         CONCAT2(VECTOR_FN_PREFIX, _set)
+#define fn_vector_get         CONCAT2(VECTOR_FN_PREFIX, _get)
+#define fn_vector_resize      CONCAT2(VECTOR_FN_PREFIX, _resize)
+#define fn_vector_shrink      CONCAT2(VECTOR_FN_PREFIX, _shrink)
 
-#define fn_vector_clear       BLOP_CONCAT2(VECTOR_FN_PREFIX, _clear)
-#define fn_vector_erase       BLOP_CONCAT2(VECTOR_FN_PREFIX, _erase)
-#define fn_vector_pop_back    BLOP_CONCAT2(VECTOR_FN_PREFIX, _pop_back)
-#define fn_vector_pop_front   BLOP_CONCAT2(VECTOR_FN_PREFIX, _pop_front)
+#define fn_vector_clear       CONCAT2(VECTOR_FN_PREFIX, _clear)
+#define fn_vector_erase       CONCAT2(VECTOR_FN_PREFIX, _erase)
+#define fn_vector_pop_back    CONCAT2(VECTOR_FN_PREFIX, _pop_back)
+#define fn_vector_pop_front   CONCAT2(VECTOR_FN_PREFIX, _pop_front)
 
-#define fn_vector_insert      BLOP_CONCAT2(VECTOR_FN_PREFIX, _insert)
-#define fn_vector_push_back   BLOP_CONCAT2(VECTOR_FN_PREFIX, _push_back)
-#define fn_vector_push_front  BLOP_CONCAT2(VECTOR_FN_PREFIX, _push_front)
+#define fn_vector_insert      CONCAT2(VECTOR_FN_PREFIX, _insert)
+#define fn_vector_push_back   CONCAT2(VECTOR_FN_PREFIX, _push_back)
+#define fn_vector_push_front  CONCAT2(VECTOR_FN_PREFIX, _push_front)
 
-#define fn_vector_memcpy      BLOP_CONCAT2(VECTOR_FN_PREFIX, _memcpy)
-#define fn_vector_memset      BLOP_CONCAT2(VECTOR_FN_PREFIX, _memset)
+#define fn_vector_memcpy      CONCAT2(VECTOR_FN_PREFIX, _memcpy)
+#define fn_vector_memset      CONCAT2(VECTOR_FN_PREFIX, _memset)
 /** @endcond */
 
 #ifdef __cplusplus
@@ -95,21 +95,21 @@ void              fn_vector_push_front(struct_vector* vec,                    VE
 void              fn_vector_memcpy    (struct_vector* vec, size_t idx, const  VECTOR_DATA_TYPE* src,  size_t count);
 void              fn_vector_memset    (struct_vector* vec, size_t idx,        VECTOR_DATA_TYPE value, size_t count);
 
-#if (defined(BLOP_VECTOR_STRUCT) || defined(BLOP_VECTOR_IMPLEMENTATION)) && !defined(BLOP_VECTOR_NOT_STRUCT)
+#if (defined(VECTOR_STRUCT) || defined(VECTOR_IMPLEMENTATION)) && !defined(VECTOR_NOT_STRUCT)
   struct struct_vector {
     VECTOR_DATA_TYPE* data;
     size_t            size;
     size_t            capacity;
     int               allocated;
-    BLOP_RWLOCK_TYPE  lock;
+    RWLOCK_TYPE  lock;
   };
-#endif
+#endif /* (defined(VECTOR_STRUCT) || defined(VECTOR_IMPLEMENTATION)) && !defined(VECTOR_NOT_STRUCT) */
 
-#ifdef BLOP_VECTOR_IMPLEMENTATION
+#ifdef VECTOR_IMPLEMENTATION
 
 struct_vector*    fn_vector_create(struct_vector* vec) {
   if (!vec) {
-    BLOP_CALLOC(vec, struct struct_vector, 1);
+    CALLOC(vec, struct struct_vector, 1);
     vec->allocated = true;
   } else {
     vec->allocated = false;
@@ -117,76 +117,76 @@ struct_vector*    fn_vector_create(struct_vector* vec) {
 
   vec->size = 0;
   vec->capacity = VECTOR_INITIAL_SIZE;
-  BLOP_CALLOC(vec->data, VECTOR_DATA_TYPE, vec->capacity);
-  BLOP_RWLOCK_INIT(vec->lock);
+  CALLOC(vec->data, VECTOR_DATA_TYPE, vec->capacity);
+  RWLOCK_INIT(vec->lock);
 
   return vec;
 }
 void              fn_vector_destroy(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  BLOP_INTERNAL_ASSERT(vec->size == 0, "Destroying non empty vector (HINT: Clear the vector)");
+  BLOP_ASSERT(vec->size == 0, "Destroying non empty vector (HINT: Clear the vector)");
 
-  BLOP_RWLOCK_DESTROY(vec->lock);
-  BLOP_FREE(vec->data);
+  RWLOCK_DESTROY(vec->lock);
+  FREE(vec->data);
 
   if (vec->allocated) {
-    BLOP_FREE(vec);
+    FREE(vec);
   }
 }
 
 void              fn_vector_rdlock(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
-  BLOP_RWLOCK_RDLOCK(vec->lock);
+  BLOP_ASSERT_PTR(vec);
+  RWLOCK_RDLOCK(vec->lock);
 }
 void              fn_vector_wrlock(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
-  BLOP_RWLOCK_WRLOCK(vec->lock);
+  BLOP_ASSERT_PTR(vec);
+  RWLOCK_WRLOCK(vec->lock);
 }
 void              fn_vector_rdunlock(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
-  BLOP_RWLOCK_RDUNLOCK(vec->lock);
+  BLOP_ASSERT_PTR(vec);
+  RWLOCK_RDUNLOCK(vec->lock);
 }
 void              fn_vector_wrunlock(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
-  BLOP_RWLOCK_WRUNLOCK(vec->lock);
+  BLOP_ASSERT_PTR(vec);
+  RWLOCK_WRUNLOCK(vec->lock);
 }
 
 VECTOR_DATA_TYPE* fn_vector_data(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
   return vec->data;
 }
 size_t            fn_vector_size(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
   return vec->size;
 }
 VECTOR_DATA_TYPE  fn_vector_back(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
   
-  BLOP_INTERNAL_ASSERT_FORCED(vec->size != 0, "Vector has no back (size == 0)");
+  BLOP_ASSERT_FORCED(vec->size != 0, "Vector has no back (size == 0)");
   return vec->data[vec->size - 1];
 }
 VECTOR_DATA_TYPE  fn_vector_front(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
   
-  BLOP_INTERNAL_ASSERT_FORCED(vec->size != 0, "Vector has no front (size == 0)");
+  BLOP_ASSERT_FORCED(vec->size != 0, "Vector has no front (size == 0)");
   return vec->data[0];
 }
 
 void              fn_vector_set(struct_vector* vec, size_t idx, VECTOR_DATA_TYPE value) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size);
+  BLOP_ASSERT_BOUNDS(idx, vec->size);
   vec->data[idx] = value;
 }
 VECTOR_DATA_TYPE  fn_vector_get(struct_vector* vec, size_t idx) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size);
+  BLOP_ASSERT_BOUNDS(idx, vec->size);
   return vec->data[idx];
 }
 void              fn_vector_resize(struct_vector* vec, size_t size) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   if (size == vec->size) {
     return;
@@ -198,11 +198,11 @@ void              fn_vector_resize(struct_vector* vec, size_t size) {
   }
 
   if (size < vec->size) {
-    #ifdef BLOP_VECTOR_DEALLOCATE_DATA
+    #ifdef VECTOR_DEALLOCATE_DATA
       for (size_t i = size; i < vec->size; i++) {
-        BLOP_VECTOR_DEALLOCATE_DATA(vec->data[i]);
+        VECTOR_DEALLOCATE_DATA(vec->data[i]);
       }
-    #endif /* BLOP_VECTOR_DEALLOCATE_DATA */
+    #endif /* VECTOR_DEALLOCATE_DATA */
   }
 
   vec->capacity = TERNARY(
@@ -212,45 +212,45 @@ void              fn_vector_resize(struct_vector* vec, size_t size) {
   );
 
   VECTOR_DATA_TYPE* data = NULL;
-  BLOP_CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
+  CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
   memcpy(data, vec->data, MIN(vec->size, size) * sizeof(VECTOR_DATA_TYPE));
 
-  BLOP_FREE(vec->data);
+  FREE(vec->data);
   vec->data = data;
   vec->size = size;
 }
 void              fn_vector_shrink(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   if (vec->size < VECTOR_SHRINK_POLICIE(vec->capacity) && vec->size < VECTOR_INITIAL_SIZE) {
     vec->capacity = VECTOR_RESIZE_POLICIE(vec->size);
     VECTOR_DATA_TYPE* data = NULL;
-    BLOP_CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
+    CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
 
     memcpy(data, vec->data, vec->size * sizeof(VECTOR_DATA_TYPE));
-    BLOP_FREE(vec->data);
+    FREE(vec->data);
     vec->data = data;
   }
 }
 
 void              fn_vector_clear(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  #ifdef BLOP_VECTOR_DEALLOCATE_DATA
+  #ifdef VECTOR_DEALLOCATE_DATA
     for (size_t i = 0; i < vec->size; i++) {
-      BLOP_VECTOR_DEALLOCATE_DATA(vec->data[i]);
+      VECTOR_DEALLOCATE_DATA(vec->data[i]);
     }
-  #endif /* BLOP_VECTOR_DEALLOCATE_DATA */
+  #endif /* VECTOR_DEALLOCATE_DATA */
 
   vec->size = 0;
   vec->capacity = VECTOR_INITIAL_SIZE;
-  BLOP_FREE(vec->data);
-  BLOP_CALLOC(vec->data, VECTOR_DATA_TYPE, vec->capacity);
+  FREE(vec->data);
+  CALLOC(vec->data, VECTOR_DATA_TYPE, vec->capacity);
 }
 void              fn_vector_erase(struct_vector* vec, size_t idx) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size);
+  BLOP_ASSERT_BOUNDS(idx, vec->size);
 
   #ifdef VECTOR_DEALLOCATE_DATA
     VECTOR_DEALLOCATE_DATA(vec->data[idx]);
@@ -265,20 +265,20 @@ void              fn_vector_erase(struct_vector* vec, size_t idx) {
   fn_vector_shrink(vec);
 }
 void              fn_vector_pop_back(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   if (vec->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
   fn_vector_erase(vec, vec->size - 1);
 }
 void              fn_vector_pop_front(struct_vector* vec) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   if (vec->size == 0) {
-    BLOP_EMPTY_POPPING();
+    EMPTY_POPPING();
     return;
   }
 
@@ -286,9 +286,9 @@ void              fn_vector_pop_front(struct_vector* vec) {
 }
 
 void              fn_vector_insert(struct_vector* vec, size_t idx, VECTOR_DATA_TYPE value) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size + 1);
+  BLOP_ASSERT_BOUNDS(idx, vec->size + 1);
 
   if (vec->size != vec->capacity) {
     if (idx != vec->size) {
@@ -297,7 +297,7 @@ void              fn_vector_insert(struct_vector* vec, size_t idx, VECTOR_DATA_T
   } else {
     vec->capacity = VECTOR_RESIZE_POLICIE(vec->size);
     VECTOR_DATA_TYPE* data = NULL;
-    BLOP_CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
+    CALLOC(data, VECTOR_DATA_TYPE, vec->capacity);
 
     if (idx != 0) {
       memcpy(data, vec->data, idx * sizeof(VECTOR_DATA_TYPE));
@@ -307,7 +307,7 @@ void              fn_vector_insert(struct_vector* vec, size_t idx, VECTOR_DATA_T
       memcpy(&data[idx + 1], &vec->data[idx], (vec->size - idx) * sizeof(VECTOR_DATA_TYPE));
     }
 
-    BLOP_FREE(vec->data);
+    FREE(vec->data);
     vec->data = data;
   }
 
@@ -315,34 +315,34 @@ void              fn_vector_insert(struct_vector* vec, size_t idx, VECTOR_DATA_T
   vec->size++;
 }
 void              fn_vector_push_back(struct_vector* vec, VECTOR_DATA_TYPE value) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   fn_vector_insert(vec, vec->size, value);
 }
 void              fn_vector_push_front(struct_vector* vec, VECTOR_DATA_TYPE value) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   fn_vector_insert(vec, 0, value);
 }
 
 void              fn_vector_memcpy(struct_vector* vec, size_t idx, const VECTOR_DATA_TYPE* src, size_t count) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
-  BLOP_INTERNAL_ASSERT_PTR(src);
+  BLOP_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(src);
 
   if (count == 0) { return; }
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size);
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx + count, vec->size + 1);
+  BLOP_ASSERT_BOUNDS(idx, vec->size);
+  BLOP_ASSERT_BOUNDS(idx + count, vec->size + 1);
 
   memcpy(&vec->data[idx], src, count * sizeof(VECTOR_DATA_TYPE));
 }
 void              fn_vector_memset(struct_vector* vec, size_t idx, VECTOR_DATA_TYPE value, size_t count) {
-  BLOP_INTERNAL_ASSERT_PTR(vec);
+  BLOP_ASSERT_PTR(vec);
 
   if (count == 0) { return; }
 
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx, vec->size);
-  BLOP_INTERNAL_ASSERT_BOUNDS(idx + count, vec->size + 1);
+  BLOP_ASSERT_BOUNDS(idx, vec->size);
+  BLOP_ASSERT_BOUNDS(idx + count, vec->size + 1);
 
   for (size_t i = 0; i < count; i++) {
     vec->data[idx + i] = value;
@@ -356,6 +356,8 @@ void              fn_vector_memset(struct_vector* vec, size_t idx, VECTOR_DATA_T
 #endif
 
 #undef VECTOR_NAME
+#undef VECTOR_FN_PREFIX
+
 #undef VECTOR_DATA_TYPE
 #undef VECTOR_INITIAL_SIZE
 #undef VECTOR_SHRINK_POLICIE

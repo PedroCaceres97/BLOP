@@ -56,9 +56,9 @@ void*             fn_memtrack_alloc     (struct_memtrack* memtrack, Context cont
 void*             fn_memtrack_realloc   (struct_memtrack* memtrack, Context context, void* ptr, size_t size);
 void*             fn_memtrack_duplicate (struct_memtrack* memtrack, Context context, void* ptr, size_t size);
 
-void              fn_memtrack_print     (struct_memtrack* memtrack);
 size_t            fn_memtrack_bytes     (struct_memtrack* memtrack);
 size_t            fn_memtrack_count     (struct_memtrack* memtrack);
+void              fn_memtrack_print     (struct_memtrack* memtrack);
 
 #if (defined(MEMTRACK_STRUCT) || defined(MEMTRACK_IMPLEMENTATION)) && !defined(MEMTRACK_NOT_STRUCT)
   #define LIST_NAME           track_list
@@ -233,33 +233,6 @@ void*             fn_memtrack_duplicate(struct_memtrack* memtrack, Context conte
   return newptr;
 }
 
-void              fn_memtrack_print(struct_memtrack* memtrack) {
-  BLOP_ASSERT_PTR(memtrack);
-
-  printf("Memtrack Information:\n");
-  printf(" Alias: %s\n", memtrack->context.alias);
-  printf(" Origin context: %s:%u (%s)\n", memtrack->context.file, memtrack->context.line, memtrack->context.func);
-  printf(" Allocated pointers: %zu\n", memtrack->ptrs.size);
-  printf(" Total bytes allocated: %zu\n\n", memtrack->bytes);
-
-  if (memtrack->bytes == 0) {
-    return;
-  }
-  
-  track_node* current = memtrack->ptrs.front;
-  printf("Individual Pointer Information\n");
-  size_t index = 0;
-  while (current != NULL) {
-    struct_ptrhdr* hdr = current->data;
-    printf(" Pointer [%zu]\n", index);
-    printf("  Size: %zu bytes\n", hdr->size);
-    printf("  Alias: %s\n", hdr->context.alias);
-    printf("  Addres: %p\n", MEMTRACK_HDR_TO_PTR(hdr));
-    printf("  Origin context: %s:%u (%s)\n\n", hdr->context.file, hdr->context.line, hdr->context.func);
-    current = current->next;
-    index++;
-  }
-}
 size_t            fn_memtrack_bytes(struct_memtrack* memtrack) {
   BLOP_ASSERT_PTR(memtrack);
   return memtrack->bytes;
@@ -267,6 +240,33 @@ size_t            fn_memtrack_bytes(struct_memtrack* memtrack) {
 size_t            fn_memtrack_count(struct_memtrack* memtrack) {
   BLOP_ASSERT_PTR(memtrack);
   return memtrack->ptrs.size;
+}
+void              fn_memtrack_print(struct_memtrack* memtrack) {
+  BLOP_ASSERT_PTR(memtrack);
+
+  LOG_STDOUT("%s", "Memtrack Information:\n");
+  LOG_STDOUT(" Alias: %s\n", memtrack->context.alias);
+  LOG_STDOUT(" Origin context: %s:%u (%s)\n", memtrack->context.file, memtrack->context.line, memtrack->context.func);
+  LOG_STDOUT(" Allocated pointers: %zu\n", memtrack->ptrs.size);
+  LOG_STDOUT(" Total bytes allocated: %zu\n\n", memtrack->bytes);
+
+  if (memtrack->bytes == 0) {
+    return;
+  }
+  
+  track_node* current = memtrack->ptrs.front;
+  LOG_STDOUT("%s", "Individual Pointer Information\n");
+  size_t index = 0;
+  while (current != NULL) {
+    struct_ptrhdr* hdr = current->data;
+    LOG_STDOUT(" Pointer [%zu]\n", index);
+    LOG_STDOUT("  Size: %zu bytes\n", hdr->size);
+    LOG_STDOUT("  Alias: %s\n", hdr->context.alias);
+    LOG_STDOUT("  Addres: %p\n", MEMTRACK_HDR_TO_PTR(hdr));
+    LOG_STDOUT("  Origin context: %s:%u (%s)\n\n", hdr->context.file, hdr->context.line, hdr->context.func);
+    current = current->next;
+    index++;
+  }
 }
 
 #endif /* MEMTRACK_IMPLEMENTATION */

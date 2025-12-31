@@ -34,7 +34,9 @@
 #define fn_slab_clear     CONCAT2(SLAB_FN_PREFIX, _clear)
 #define fn_slab_free      CONCAT2(SLAB_FN_PREFIX, _free)
 #define fn_slab_alloc     CONCAT2(SLAB_FN_PREFIX, _alloc)
+
 #define fn_slab_size      CONCAT2(SLAB_FN_PREFIX, _size)
+#define fn_slab_print     CONCAT2(SLAB_FN_PREFIX, _print)
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,7 +61,9 @@ void            fn_slab_wrunlock(struct_slab* slab);
 void            fn_slab_clear   (struct_slab* slab);
 void            fn_slab_free    (struct_slab* slab, SLAB_DATA_TYPE* ptr);
 SLAB_DATA_TYPE* fn_slab_alloc   (struct_slab* slab);
+
 size_t          fn_slab_size    (struct_slab* slab);
+void            fn_slab_print   (struct_slab* slab);
 
 #if (defined(SLAB_STRUCT) || defined(SLAB_IMPLEMENTATION)) && !defined(SLAB_NOT_STRUCT)
   struct struct_block {
@@ -218,9 +222,14 @@ SLAB_DATA_TYPE* fn_slab_alloc(struct_slab* slab) {
 
   return NULL; /* Never reaching here */
 }
+
 size_t          fn_slab_size(struct_slab* slab) {
   BLOP_ASSERT_PTR(slab);
   return slab->total;
+}
+void            fn_slab_print(struct_slab* slab) {
+  BLOP_ASSERT_PTR(slab);
+  LOG_STDOUT("Slab Information:\n Allocated pointers: %zu\n Total bytes allocated: %zu\n\n", slab->total, slab->total * sizeof(SLAB_DATA_TYPE));
 }
 
 #endif /* SLAB_IMPLEMENTATION */

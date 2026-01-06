@@ -71,6 +71,16 @@
  * CROSSPLATFORM
  * -------------------------------------------------------------------------- */
 
+#if defined(OS_WINDOWS) || defined(__CYGWIN__)
+  #ifdef DLL_BUILD
+    #define DLL_EXPORT __declspec(dllexport)
+  #else
+    #define DLL_EXPORT __declspec(dllimport)
+  #endif
+#else
+  #define DLL_EXPORT
+#endif
+
 #if defined(COMPILER_GCC) || defined(COMPILER_CLANG)
   #define NORETURN __attribute__((noreturn))
 #elif defined(COMPILER_MSVC)
@@ -531,6 +541,9 @@ static inline NORETURN void ABORT() {
 /* --------------------------------------------------------------------------
  * WRAPPERS
  * -------------------------------------------------------------------------- */
+
+#define STR_IMPL(x) #x
+#define STR(x) STR_IMPL(x)
 
 #define CONCAT2_IMPL(a, b)     a##b
 #define CONCAT3_IMPL(a, b, c)  a##b##c

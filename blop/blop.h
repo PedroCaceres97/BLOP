@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdbool.h>
 
@@ -184,41 +185,137 @@
 #define ANSI_CURSOR_POS(x, y)   ANSI_ESC #y ";" #x "H"
 #define ANSI_CURSOR_HOME        ANSI_ESC "H"
 
+static inline char* ansi_u16_to_str    (char* buffer, uint16_t n) {
+  int i = 0;
+  char tmp[8];        // max 65535
+
+  do {
+    tmp[i++] = (char)('0' + (n % 10));
+    n /= 10;
+  } while (n);
+
+  while (i--) {
+    *buffer++ = tmp[i];
+  }
+
+  return buffer;
+}
+
 static inline char* ansi_fg_256        (char* buffer, uint8_t n) {
-  sprintf(buffer, ANSI_ESC "38;5;%hhum", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+  *buffer++ = '3';
+  *buffer++ = '8';
+  *buffer++ = ';';
+  *buffer++ = '5';
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'm';
   return buffer;
 }
 static inline char* ansi_bg_256        (char* buffer, uint8_t n) {
-  sprintf(buffer, ANSI_ESC "48;5;%hhum", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+  *buffer++ = '4';
+  *buffer++ = '8';
+  *buffer++ = ';';
+  *buffer++ = '5';
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'm';
   return buffer;
 }
 static inline char* ansi_fg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b) {
-  sprintf(buffer, ANSI_ESC "38;2;%hhu;%hhu;%hhum", r, g, b);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+  *buffer++ = '3';
+  *buffer++ = '8';
+  *buffer++ = ';';
+  *buffer++ = '2';
+  *buffer++ = ';';
+  
+  buffer = ansi_u16_to_str(buffer, r);
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, g);
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, b);
+
+  *buffer++ = 'm';
   return buffer;
 }
 static inline char* ansi_bg_rgb        (char* buffer, uint8_t r, uint8_t g, uint8_t b) {
-  sprintf(buffer, ANSI_ESC "48;2;%hhu;%hhu;%hhum", r, g, b);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+  *buffer++ = '4';
+  *buffer++ = '8';
+  *buffer++ = ';';
+  *buffer++ = '2';
+  *buffer++ = ';';
+  
+  buffer = ansi_u16_to_str(buffer, r);
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, g);
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, b);
+
+  *buffer++ = 'm';
   return buffer;
 }
 
 static inline char* ansi_cursor_up     (char* buffer, uint16_t n) {
-  sprintf(buffer, ANSI_ESC "%huA", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'A';
   return buffer;
 }
 static inline char* ansi_cursor_down   (char* buffer, uint16_t n) {
-  sprintf(buffer, ANSI_ESC "%huB", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'B';
   return buffer;
 }
 static inline char* ansi_cursor_forward(char* buffer, uint16_t n) {
-  sprintf(buffer, ANSI_ESC "%huC", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'C';
   return buffer;
 }
 static inline char* ansi_cursor_back   (char* buffer, uint16_t n) {
-  sprintf(buffer, ANSI_ESC "%huD", n);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+
+  buffer = ansi_u16_to_str(buffer, n);
+
+  *buffer++ = 'D';
   return buffer;
 }
 static inline char* ansi_cursor_pos    (char* buffer, uint16_t x, uint16_t y) {
-  sprintf(buffer, ANSI_ESC "%hu;%huH", y, x);
+  *buffer++ = '\x1b';
+  *buffer++ = '[';
+  
+  buffer = ansi_u16_to_str(buffer, y);
+  *buffer++ = ';';
+
+  buffer = ansi_u16_to_str(buffer, x);
+
+  *buffer++ = 'H';
   return buffer;
 }
 
@@ -308,30 +405,38 @@ typedef struct Context {
   #define LOG_BOUNDS_TITLE      "[BOUNDS]"
 #endif /* LOG_BOUNDS_TITLE */
 
-#define LOG(msg)                  do { LOG_STDOUT(LOG_COLOR(LOG_TITLE)                  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)            
-#define LOG_DEBUG(msg)            do { LOG_STDOUT(LOG_DEBUG_COLOR(LOG_DEBUG_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)      
-#define LOG_SUCCESS(msg)          do { LOG_STDOUT(LOG_SUCCESS_COLOR(LOG_SUCCESS_TITLE)  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-#define LOG_WARNING(msg)          do { LOG_STDERR(LOG_WARNING_COLOR(LOG_WARNING_TITLE)  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-#define LOG_ERROR(msg)            do { LOG_STDERR(LOG_ERROR_COLOR(LOG_ERROR_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-#define LOG_FATAL(msg)            do { LOG_STDERR(LOG_FATAL_COLOR(LOG_FATAL_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-#define LOG_BOUNDS(idx, bound)    do { LOG_STDERR(LOG_BOUNDS_COLOR(LOG_BOUNDS_TITLE)    "\n Context: %s:%u (%s)\n Message: Index (%zu) out of bounds (%zu)\n\n", FILE_PATH, __LINE__, __func__, idx, bound); } while (0)
+#define LOG(msg)                    do { LOG_STDOUT(LOG_COLOR(LOG_TITLE)                  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)            
+#define LOG_DEBUG(msg)              do { LOG_STDOUT(LOG_DEBUG_COLOR(LOG_DEBUG_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)      
+#define LOG_SUCCESS(msg)            do { LOG_STDOUT(LOG_SUCCESS_COLOR(LOG_SUCCESS_TITLE)  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+#define LOG_WARNING(msg)            do { LOG_STDERR(LOG_WARNING_COLOR(LOG_WARNING_TITLE)  "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+#define LOG_ERROR(msg)              do { LOG_STDERR(LOG_ERROR_COLOR(LOG_ERROR_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+#define LOG_FATAL(msg)              do { LOG_STDERR(LOG_FATAL_COLOR(LOG_FATAL_TITLE)      "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+#define LOG_BOUNDS(idx, bound)      do { LOG_STDERR(LOG_BOUNDS_COLOR(LOG_BOUNDS_TITLE)    "\n Context: %s:%u (%s)\n Message: Index (%zu) out of bounds (%zu)\n\n", FILE_PATH, __LINE__, __func__, idx, bound); } while (0)
 
 #define LOG_BUFFER_SIZE 1024
+#define LOG_TEMP_BUFFER char log_temp_buffer[LOG_BUFFER_SIZE] = {0}
 
-#define LOGF(format, ...)         do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG(log_temp_buffer);          } while (0)            
-#define LOG_DEBUGF(format, ...)   do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_DEBUG(log_temp_buffer);    } while (0)      
-#define LOG_SUCCESSF(format, ...) do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_SUCCESS(log_temp_buffer);  } while (0)
-#define LOG_WARNINGF(format, ...) do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_WARNING(log_temp_buffer);  } while (0)
-#define LOG_ERRORF(format, ...)   do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_ERROR(log_temp_buffer);    } while (0)
-#define LOG_FATALF(format, ...)   do { char log_temp_buffer[LOG_BUFFER_SIZE] = {0}; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_FATAL(log_temp_buffer);    } while (0)
+#define LOGF(format, ...)           do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG(log_temp_buffer);          } while (0)            
+#define LOGF_DEBUG(format, ...)     do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_DEBUG(log_temp_buffer);    } while (0)      
+#define LOGF_SUCCESS(format, ...)   do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_SUCCESS(log_temp_buffer);  } while (0)
+#define LOGF_WARNING(format, ...)   do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_WARNING(log_temp_buffer);  } while (0)
+#define LOGF_ERROR(format, ...)     do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_ERROR(log_temp_buffer);    } while (0)
+#define LOGF_FATAL(format, ...)     do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); LOG_FATAL(log_temp_buffer);    } while (0)
 
-#define BLOP_LOG(msg)             do { ((void)0) } while(0)            
-#define BLOP_DEBUG(msg)           do { ((void)0) } while(0)      
-#define BLOP_SUCCESS(msg)         do { ((void)0) } while(0)
-#define BLOP_WARNING(msg)         do { ((void)0) } while(0)
-#define BLOP_ERROR(msg)           do { ((void)0) } while(0)
-#define BLOP_FATAL(msg)           do { LOG_STDERR(LOG_FATAL_COLOR("[BLOP FATAL]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-#define BLOP_BOUNDS(idx, bound)   do { LOG_STDERR(LOG_FATAL_COLOR("[BLOP FATAL]")     "\n Context: %s:%u (%s)\n Message: Index (%zu) out of bounds (%zu)\n\n", FILE_PATH, __LINE__, __func__, idx, bound); } while (0)
+#define BLOP_LOG(msg)               do { ((void)0) } while(0)            
+#define BLOP_DEBUG(msg)             do { ((void)0) } while(0)      
+#define BLOP_SUCCESS(msg)           do { ((void)0) } while(0)
+#define BLOP_WARNING(msg)           do { ((void)0) } while(0)
+#define BLOP_ERROR(msg)             do { ((void)0) } while(0)
+#define BLOP_FATAL(msg)             do { LOG_STDERR(LOG_FATAL_COLOR("[BLOP FATAL]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+#define BLOP_BOUNDS(idx, bound)     do { LOG_STDERR(LOG_FATAL_COLOR("[BLOP FATAL]")     "\n Context: %s:%u (%s)\n Message: Index (%zu) out of bounds (%zu)\n\n", FILE_PATH, __LINE__, __func__, idx, bound); } while (0)
+
+#define BLOPF_LOG(format, ...)      do { ((void)0) } while(0)            
+#define BLOPF_DEBUG(format, ...)    do { ((void)0) } while(0)      
+#define BLOPF_SUCCESS(format, ...)  do { ((void)0) } while(0)
+#define BLOPF_WARNING(format, ...)  do { ((void)0) } while(0)
+#define BLOPF_ERROR(format, ...)    do { ((void)0) } while(0)
+#define BLOPF_FATAL(format, ...)    do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_FATAL(log_temp_buffer); } while (0)
 
 #ifdef ENABLE_BLOP_LOGS
   #undef  BLOP_LOG
@@ -340,83 +445,70 @@ typedef struct Context {
   #undef  BLOP_WARNING
   #undef  BLOP_ERROR
 
-  #define BLOP_LOG(msg)           do { LOG_STDOUT(LOG_COLOR("[BLOP LOG]")             "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)            
-  #define BLOP_DEBUG(msg)         do { LOG_STDOUT(LOG_DEBUG_COLOR("[BLOP DEBUG]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)      
-  #define BLOP_SUCCESS(msg)       do { LOG_STDOUT(LOG_SUCCESS_COLOR("[BLOP SUCCESS]") "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-  #define BLOP_WARNING(msg)       do { LOG_STDERR(LOG_WARNING_COLOR("[BLOP WARNING]") "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
-  #define BLOP_ERROR(msg)         do { LOG_STDERR(LOG_ERROR_COLOR("[BLOP ERROR]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+  #define BLOP_LOG(msg)               do { LOG_STDOUT(LOG_COLOR("[BLOP LOG]")             "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)            
+  #define BLOP_DEBUG(msg)             do { LOG_STDOUT(LOG_DEBUG_COLOR("[BLOP DEBUG]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)      
+  #define BLOP_SUCCESS(msg)           do { LOG_STDOUT(LOG_SUCCESS_COLOR("[BLOP SUCCESS]") "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+  #define BLOP_WARNING(msg)           do { LOG_STDERR(LOG_WARNING_COLOR("[BLOP WARNING]") "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+  #define BLOP_ERROR(msg)             do { LOG_STDERR(LOG_ERROR_COLOR("[BLOP ERROR]")     "\n Context: %s:%u (%s)\n Message: %s\n\n", FILE_PATH, __LINE__, __func__, msg); } while (0)
+
+  #undef  BLOPF_LOG
+  #undef  BLOPF_DEBUG
+  #undef  BLOPF_SUCCESS
+  #undef  BLOPF_WARNING
+  #undef  BLOPF_ERROR
+
+  #define BLOPF_LOG(format, ...)      do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_LOG(log_temp_buffer);     } while (0)            
+  #define BLOPF_DEBUG(format, ...)    do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_DEBUG(log_temp_buffer);   } while (0)      
+  #define BLOPF_SUCCESS(format, ...)  do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_SUCCESS(log_temp_buffer); } while (0)
+  #define BLOPF_WARNING(format, ...)  do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_WARNING(log_temp_buffer); } while (0)
+  #define BLOPF_ERROR(format, ...)    do { LOG_TEMP_BUFFER; snprintf(log_temp_buffer, LOG_BUFFER_SIZE, format, __VA_ARGS__); BLOP_ERROR(log_temp_buffer);   } while (0)
 #endif
 
-#ifdef LOG_DISABLE_ALL
-  #undef LOG       
-  #undef LOG_DEBUG     
-  #undef LOG_SUCCESS   
-  #undef LOG_WARNING   
-  #undef LOG_ERROR     
-  #undef LOG_FATAL     
-  #undef LOG_BOUNDS  
-  #undef LOGF       
-  #undef LOG_DEBUGF     
-  #undef LOG_SUCCESSF   
-  #undef LOG_WARNINGF   
-  #undef LOG_ERRORF     
-  #undef LOG_FATALF     
+#if defined(LOG_DISABLE_LOG) || defined(LOG_DISABLE_ALL) 
+  #undef  LOG
+  #undef  LOGF
+  #define LOG(msg)                  do { ((void)0) } while(0)
+  #define LOGF(format, ...)         do { ((void)0) } while(0)
+#endif
 
-  #define LOG(msg)                    do { ((void)0) } while(0)
-  #define LOG_DEBUG(msg)              do { ((void)0) } while(0)
-  #define LOG_SUCCESS(msg)            do { ((void)0) } while(0)
-  #define LOG_WARNING(msg)            do { ((void)0) } while(0)
-  #define LOG_ERROR(msg)              do { ((void)0) } while(0)
-  #define LOG_FATAL(msg)              do { ((void)0) } while(0)
-  #define LOG_BOUNDS(idx, bound)      do { ((void)0) } while(0)
-  #define LOGF(format, ...)           do { ((void)0) } while(0)
-  #define LOG_DEBUGF(format, ...)     do { ((void)0) } while(0)
-  #define LOG_SUCCESSF(format, ...)   do { ((void)0) } while(0)
-  #define LOG_WARNINGF(format, ...)   do { ((void)0) } while(0)
-  #define LOG_ERRORF(format, ...)     do { ((void)0) } while(0)
-  #define LOG_FATALF(format, ...)     do { ((void)0) } while(0)
+#if defined(LOG_DISABLE_DEBUG) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_DEBUG
+  #undef  LOGF_DEBUG
+  #define LOG_DEBUG(msg)            do { ((void)0) } while(0)
+  #define LOGF_DEBUG(format, ...)   do { ((void)0) } while(0)
+#endif
 
-#else
-  #ifdef LOG_DISABLE_LOG
-    #undef  LOG
-    #undef  LOGF
-    #define LOG(msg)                  do { ((void)0) } while(0)
-    #define LOGF(format, ...)         do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_DEBUG
-    #undef  LOG_DEBUG
-    #undef  LOG_DEBUGF
-    #define LOG_DEBUG(msg)            do { ((void)0) } while(0)
-    #define LOG_DEBUGF(format, ...)   do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_SUCCESS
-    #undef  LOG_SUCCESS
-    #undef  LOG_SUCCESSF
-    #define LOG_SUCCESS(msg)          do { ((void)0) } while(0)
-    #define LOG_SUCCESSF(format, ...) do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_WARNING
-    #undef  LOG_WARNING
-    #undef  LOG_WARNINGF
-    #define LOG_WARNING(msg)          do { ((void)0) } while(0)
-    #define LOG_WARNINGF(format, ...) do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_ERROR
-    #undef  LOG_ERROR
-    #undef  LOG_ERRORF
-    #define LOG_ERROR(msg)            do { ((void)0) } while(0)
-    #define LOG_ERRORF(format, ...)   do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_FATAL
-    #undef  LOG_FATAL
-    #undef  LOG_FATALF
-    #define LOG_FATAL(msg)            do { ((void)0) } while(0)
-    #define LOG_FATALF(format, ...)   do { ((void)0) } while(0)
-  #endif
-  #ifdef LOG_DISABLE_BOUNDS
-    #undef  LOG_BOUNDS
-    #define LOG_BOUNDS(idx, bound)    do { ((void)0) } while(0)
-  #endif
+#if defined(LOG_DISABLE_SUCCESS) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_SUCCESS
+  #undef  LOGF_SUCCESS
+  #define LOG_SUCCESS(msg)          do { ((void)0) } while(0)
+  #define LOGF_SUCCESS(format, ...) do { ((void)0) } while(0)
+#endif
+
+#if defined(LOG_DISABLE_WARNING) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_WARNING
+  #undef  LOGF_WARNING
+  #define LOG_WARNING(msg)          do { ((void)0) } while(0)
+  #define LOGF_WARNING(format, ...) do { ((void)0) } while(0)
+#endif
+
+#if defined(LOG_DISABLE_ERROR) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_ERROR
+  #undef  LOGF_ERROR
+  #define LOG_ERROR(msg)            do { ((void)0) } while(0)
+  #define LOGF_ERROR(format, ...)   do { ((void)0) } while(0)
+#endif
+
+#if defined(LOG_DISABLE_FATAL) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_FATAL
+  #undef  LOGF_FATAL
+  #define LOG_FATAL(msg)            do { ((void)0) } while(0)
+  #define LOGF_FATAL(format, ...)   do { ((void)0) } while(0)
+#endif
+
+#if defined(LOG_DISABLE_BOUNDS) || defined(LOG_DISABLE_ALL)
+  #undef  LOG_BOUNDS
+  #define LOG_BOUNDS(idx, bound)    do { ((void)0) } while(0)
 #endif
 
 /* --------------------------------------------------------------------------
@@ -439,51 +531,51 @@ static inline NORETURN void ABORT() {
 #endif /* ENABLE_EMPTY_POPPING */
 //! Enable Empty Popping
 
-#define ASSERT(cnd, msg)                do { if (!(cnd))            { LOG_FATAL(msg);                                                                 ABORT(); } } while(0)
-#define ASSERT_PTR(ptr)                 do { if ((ptr) == NULL)     { LOG_FATAL(#ptr " is NULL");                                                     ABORT(); } } while(0)
-#define ASSERT_BOUNDS(idx, bound)       do { if ((idx) >= (bound))  { LOG_BOUNDS(idx, bound);                                                         ABORT(); } } while(0)
-#define ASSERT_FORCED(cnd, msg)         do { if (!(cnd))            { LOG_FATAL(msg);                                                                 ABORT(); } } while(0)
-#define ASSERT_MALLOC(ptr, type, size)  do { if (ptr == NULL)       { LOG_FATAL("Malloc failed for "  #ptr " of type " #type " and size "  #size);    ABORT(); } } while(0)
-#define ASSERT_CALLOC(ptr, type, count) do { if (ptr == NULL)       { LOG_FATAL("Calloc failed for "  #ptr " of type " #type " and count " #count);   ABORT(); } } while(0)
-#define ASSERT_REALLOC(ptr, type, size) do { if (ptr == NULL)       { LOG_FATAL("Realloc failed for " #ptr " of type " #type " and size "  #size);    ABORT(); } } while(0)
+#define ASSERT(cnd, msg)                      do { if (!(cnd))            { LOG_FATAL(msg);                                                                 ABORT(); } } while(0)
+#define ASSERT_PTR(ptr)                       do { if ((ptr) == NULL)     { LOG_FATAL("'"#ptr "' is NULL");                                                 ABORT(); } } while(0)
+#define ASSERT_BOUNDS(idx, bound)             do { if ((idx) >= (bound))  { LOG_BOUNDS(idx, bound);                                                         ABORT(); } } while(0)
+#define ASSERT_FORCED(cnd, msg)               do { if (!(cnd))            { LOG_FATAL(msg);                                                                 ABORT(); } } while(0)
+#define ASSERT_MALLOC(ptr, type, size)        do { if (ptr == NULL)       { LOG_FATAL("Malloc failed for "  #ptr " of type " #type " and size "  #size);    ABORT(); } } while(0)
+#define ASSERT_CALLOC(ptr, type, count)       do { if (ptr == NULL)       { LOG_FATAL("Calloc failed for "  #ptr " of type " #type " and count " #count);   ABORT(); } } while(0)
+#define ASSERT_REALLOC(ptr, type, size)       do { if (ptr == NULL)       { LOG_FATAL("Realloc failed for " #ptr " of type " #type " and size "  #size);    ABORT(); } } while(0)
 
-#define BLOP_ASSERT(cnd, msg)           do { if (!(cnd))            { BLOP_FATAL(msg);                                                            ABORT(); } } while(0)
-#define BLOP_ASSERT_PTR(ptr)            do { if ((ptr) == NULL)     { BLOP_FATAL(#ptr " parameter is NULL");                                      ABORT(); } } while(0)
-#define BLOP_ASSERT_BOUNDS(idx, bound)  do { if ((idx) >= (bound))  { BLOP_BOUNDS(idx, bound);                                                    ABORT(); } } while(0)
-#define BLOP_ASSERT_FORCED(cnd, msg)    do { if (!(cnd))            { BLOP_FATAL(msg);                                                            ABORT(); } } while(0)
+#define ASSERTF(cnd, format, ...)             do { if (!(cnd))            { LOGF_FATAL(format, __VA_ARGS__);                                                ABORT(); } } while(0) 
+#define ASSERTF_FORCED(cnd, format, ...)      do { if (!(cnd))            { LOGF_FATAL(format, __VA_ARGS__);                                                ABORT(); } } while(0) 
+
+#define BLOP_ASSERT(cnd, msg)                 do { if (!(cnd))            { BLOP_FATAL(msg);                                                                ABORT(); } } while(0)
+#define BLOP_ASSERT_PTR(ptr)                  do { if ((ptr) == NULL)     { BLOP_FATAL("'"#ptr "' is NULL");                                                ABORT(); } } while(0)
+#define BLOP_ASSERT_BOUNDS(idx, bound)        do { if ((idx) >= (bound))  { BLOP_BOUNDS(idx, bound);                                                        ABORT(); } } while(0)
+#define BLOP_ASSERT_FORCED(cnd, msg)          do { if (!(cnd))            { BLOP_FATAL(msg);                                                                ABORT(); } } while(0)
+
+#define BLOPF_ASSERT(cnd, format, ...)        do { if (!(cnd))            { BLOPF_FATAL(format, __VA_ARGS__);                                               ABORT(); } } while(0) 
+#define BLOPF_ASSERT_FORCED(cnd, format, ...) do { if (!(cnd))            { BLOPF_FATAL(format, __VA_ARGS__);                                               ABORT(); } } while(0) 
 
 #ifdef DISABLE_BLOP_ASSERTIONS
   #undef BLOP_ASSERT
   #undef BLOP_ASSERT_PTR
+  #undef BLOPF_ASSERT
 
-  #define BLOP_ASSERT(cnd, msg)         do { ((void)0) } while(0)
-  #define BLOP_ASSERT_PTR(ptr)          do { ((void)0) } while(0)
+  #define BLOP_ASSERT(cnd, msg)           do { ((void)0) } while(0)
+  #define BLOP_ASSERT_PTR(ptr)            do { ((void)0) } while(0)
+  #define BLOPF_ASSERT(cnd, format, ...)  do { ((void)0) } while(0)
 #endif /* DISABLE_BLOP_ASSERTIONS */
   
-//! Disable Assertions
-#ifdef ASSERT_DISABLE_ALL
+#if defined(ASSERT_DISABLE) || defined(ASSERT_DISABLE_ALL)
   #undef  ASSERT
-  #undef  ASSERT_PTR
-  #undef  ASSERT_BOUNDS
+  #undef  ASSERTF
+  #define ASSERT(cnd, msg)            do { ((void)0) } while(0)
+  #define ASSERTF(cnd, format, ...)   do { ((void)0) } while(0)
+#endif
 
-  #define ASSERT(cnd, msg)              do { ((void)0) } while(0)
-  #define ASSERT_PTR(ptr)               do { ((void)0) } while(0)
-  #define ASSERT_BOUNDS(idx, bond)      do { ((void)0) } while(0)
-#else 
-  #ifdef ASSERT_DISABLE
-    #undef  ASSERT
-    #define ASSERT(cnd, msg)            do { ((void)0) } while(0)
-  #endif
-  #ifdef ASSERT_DISABLE_PTR
-    #undef  ASSERT_PTR
-    #define ASSERT_PTR(ptr)             do { ((void)0) } while(0)
-  #endif
-  #ifdef ASSERT_DISABLE_BOUNDS
-    #undef  ASSERT_BOUNDS
-    #define ASSERT_BOUNDS(idx, bound)   do { ((void)0) } while(0)
-  #endif
-#endif /* ASSERT_DISABLE_ALL */
-//! Disable Assertions
+#if defined(ASSERT_DISABLE_PTR) || defined(ASSERT_DISABLE_ALL)
+  #undef  ASSERT_PTR
+  #define ASSERT_PTR(ptr)             do { ((void)0) } while(0)
+#endif
+
+#if defined(ASSERT_DISABLE_BOUNDS) || defined(ASSERT_DISABLE_ALL)
+  #undef  ASSERT_BOUNDS
+  #define ASSERT_BOUNDS(idx, bound)   do { ((void)0) } while(0)
+#endif
 
 /* --------------------------------------------------------------------------
  * This goes here for the only purpose to use the assertion system
@@ -551,7 +643,8 @@ static inline NORETURN void ABORT() {
 #define CONCAT2(a, b)          CONCAT2_IMPL(a, b)
 #define CONCAT3(a, b, c)       CONCAT3_IMPL(a, b, c)
 
-#define FREE(ptr)                   do { free((void*)(ptr)); ptr = NULL; } while(0)
+#define FREE(ptr)                   do { free((void*)(ptr)); (ptr) = NULL; } while(0)
+#define FREE_IF(ptr)                do { if ((ptr)) { FREE((ptr)); } } while(0)
 #define MALLOC(v, type, size)       do { (v) = (type*)malloc((size));                ASSERT_MALLOC((v), type, (size)); memset(v, 0, (size)); } while(0)
 #define CALLOC(v, type, count)      do { (v) = (type*)calloc((count), sizeof(type)); ASSERT_CALLOC((v), type, (count));                      } while(0)
 #define REALLOC(v, type, ptr, size) do { (v) = (type*)realloc((void*)(ptr), (size)); ASSERT_REALLOC((v), type, (size));                      } while(0)

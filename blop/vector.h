@@ -95,7 +95,7 @@ void              fn_vector_push_front(struct_vector* vec,                    VE
 void              fn_vector_memcpy    (struct_vector* vec, size_t idx, const  VECTOR_DATA_TYPE* src,  size_t count);
 void              fn_vector_memset    (struct_vector* vec, size_t idx,        VECTOR_DATA_TYPE value, size_t count);
 
-#if (defined(VECTOR_STRUCT) || defined(VECTOR_IMPLEMENTATION)) && !defined(VECTOR_NOT_STRUCT)
+#ifdef VECTOR_STRUCT
   struct struct_vector {
     VECTOR_DATA_TYPE* data;
     size_t            size;
@@ -103,7 +103,7 @@ void              fn_vector_memset    (struct_vector* vec, size_t idx,        VE
     int               allocated;
     RWLOCK_TYPE  lock;
   };
-#endif /* (defined(VECTOR_STRUCT) || defined(VECTOR_IMPLEMENTATION)) && !defined(VECTOR_NOT_STRUCT) */
+#endif /* VECTOR_STRUCT */
 
 #ifdef VECTOR_IMPLEMENTATION
 

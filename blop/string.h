@@ -88,7 +88,7 @@ void            fn_string_push_front (struct_string* str, char c);
 
 void            fn_string_strcpy     (struct_string* str, size_t idx, const char* src, size_t count);
 
-#if (defined(STRING_STRUCT) || defined(STRING_IMPLEMENTATION)) && !defined(STRING_NOT_STRUCT)
+#ifdef STRING_STRUCT
   struct struct_string {
     int               allocated;
     char*             data;
@@ -96,7 +96,7 @@ void            fn_string_strcpy     (struct_string* str, size_t idx, const char
     size_t            capacity;
     RWLOCK_TYPE  lock;
   };
-#endif /* (defined(STRING_STRUCT) || defined(STRING_IMPLEMENTATION)) && !defined(STRING_NOT_STRUCT) */
+#endif /* STRING_STRUCT */
 
 #ifdef STRING_IMPLEMENTATION
 

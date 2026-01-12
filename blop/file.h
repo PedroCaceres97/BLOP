@@ -1,7 +1,7 @@
 #ifndef __BLOP_FILE_H__
 #define __BLOP_FILE_H__
 
-#include <blop.h>
+#include <blop/blop.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -102,7 +102,7 @@ struct_node*    fn_node_next        (struct_node* node);
 struct_node*    fn_node_prev        (struct_node* node);
 struct_list*    fn_node_list        (struct_node* node);
 
-#if (defined(LIST_STRUCT) || defined(LIST_IMPLEMENTATION)) && !defined(LIST_NOT_STRUCT)
+#ifdef LIST_STRUCT
   struct struct_node {
     LIST_DATA_TYPE  data;
     struct_node*    next;
@@ -118,7 +118,7 @@ struct_list*    fn_node_list        (struct_node* node);
     int             allocated;
     RWLOCK_TYPE     lock;
   };
-#endif /* (defined(LIST_STRUCT) || defined(LIST_IMPLEMENTATION)) && !defined(LIST_NOT_STRUCT) */
+#endif /* LIST_STRUCT */
 
 #ifdef LIST_IMPLEMENTATION
 

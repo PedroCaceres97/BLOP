@@ -67,7 +67,7 @@ size_t          fn_slab_size      (struct_slab* slab);
 void            fn_slab_print_out (struct_slab* slab);
 void            fn_slab_print_err (struct_slab* slab);
 
-#if (defined(SLAB_STRUCT) || defined(SLAB_IMPLEMENTATION)) && !defined(SLAB_NOT_STRUCT)
+#ifdef SLAB_STRUCT
   struct struct_block {
     int                   allocated;
     SLAB_DATA_TYPE        mem[SLAB_OBJECTS_COUNT];
@@ -83,7 +83,7 @@ void            fn_slab_print_err (struct_slab* slab);
     size_t                total;
     RWLOCK_TYPE           lock;
   };
-#endif /* (defined(SLAB_STRUCT) || defined(SLAB_IMPLEMENTATION)) && !defined(SLAB_NOT_STRUCT) */
+#endif /* SLAB_STRUCT */
 
 #ifdef SLAB_IMPLEMENTATION
 
